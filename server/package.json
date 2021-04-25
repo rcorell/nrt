@@ -1,0 +1,19 @@
+{
+	"name": "nrt-server",
+	"version": "0.0.1",
+	"description": "Server template",
+	"main": "dist/index.js",
+	"author": "Rob Corell",
+	"license": "ISC",
+	"dependencies": {
+		"apollo-server": "2.23.0",
+		"graphql": "15.5.0"
+	},
+	"devDependencies": {
+		"typescript": "^4.2.4"
+	},
+	"scripts": {
+		"start": "node .",
+		"test": "test"
+	}
+}
