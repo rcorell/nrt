@@ -29,7 +29,6 @@
 		"build": "npx tsc && cp src/schema.graphql dist",
 		"lint": "npx eslint '{src,tests}/**/*.{ts,tsx}'",
 		"lintfix": "npm run lint -- --fix",
-		"start": "node .",
-		"test": "test"
+		"start": "node ."
 	}
 }
