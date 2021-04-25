@@ -5,6 +5,7 @@
 	"main": "dist/index.js",
 	"author": "Rob Corell",
 	"license": "ISC",
+	"repository": "https://github.com/rcorell/nrt.git",
 	"dependencies": {
 		"@prisma/client": "2.21.2",
 		"apollo-server": "2.23.0",
