@@ -13,6 +13,7 @@
 		"typescript": "^4.2.4"
 	},
 	"scripts": {
+		"build": "npx tsc && cp src/schema.graphql dist",
 		"start": "node .",
 		"test": "test"
 	}
