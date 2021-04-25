@@ -11,12 +11,23 @@
 		"graphql": "15.5.0"
 	},
 	"devDependencies": {
-		"@types/graphql": "^14.5.0",
+		"@types/graphql": "14.5.0",
+		"@typescript-eslint/eslint-plugin": "4.22.0",
+		"@typescript-eslint/parser": "4.22.0",
+		"eslint": "7.25.0",
+		"eslint-config-prettier": "8.3.0",
+		"eslint-import-resolver-typescript": "2.4.0",
+		"eslint-plugin-import": "2.22.1",
+		"eslint-plugin-prettier": "3.4.0",
+		"eslint-plugin-sort-keys-fix": "1.1.1",
+		"prettier": "2.2.1",
 		"prisma": "2.21.2",
 		"typescript": "4.2.4"
 	},
 	"scripts": {
 		"build": "npx tsc && cp src/schema.graphql dist",
+		"lint": "npx eslint '{src,tests}/**/*.{ts,tsx}'",
+		"lintfix": "npm run lint -- --fix",
 		"start": "node .",
 		"test": "test"
 	}

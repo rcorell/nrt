@@ -1,45 +1,37 @@
+import { PrismaClient } from '@prisma/client';
+import { ApolloServer } from 'apollo-server';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { ApolloServer } from 'apollo-server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 const resolvers = {
-	Query: {
-		info: () => `This is the API of a Hackernews Clone`,
-		feed: async (parent, args, context) => {
-			return context.prisma.link.findMany()
-		}
-	},
-	Mutation: {
-		post: (parent, args, context, info) => {
-			const newLink = context.prisma.link.create({
-				data: {
-					url: args.url,
-			  		description: args.description
-				}
-		  	});
+    Mutation: {
+        post: (_parent, args, context) => {
+            const newLink = context.prisma.link.create({
+                data: {
+                    description: args.description,
+                    url: args.url
+                }
+            });
 
-			return newLink
-		}
-	}
-}
+            return newLink;
+        }
+    },
+    Query: {
+        feed: async (_parent, _args, context) => {
+            return context.prisma.link.findMany();
+        },
+        info: () => `This is the API of a Hackernews Clone`
+    }
+};
 
 const server = new ApolloServer({
-	context: {
-		prisma
-	},	
-	resolvers,
-	typeDefs: fs.readFileSync(
-		path.join(__dirname, 'schema.graphql'),
-		'utf8'
-	),
-})
+    context: {
+        prisma
+    },
+    resolvers,
+    typeDefs: fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8')
+});
 
-server
-	.listen()
-	.then((response) =>
-		console.log(`Server is running on ${response.url}`)
-	);
+server.listen().then((response) => console.log(`Server is running on ${response.url}`));
