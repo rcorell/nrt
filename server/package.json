@@ -9,7 +9,9 @@
 	"dependencies": {
 		"@prisma/client": "2.21.2",
 		"apollo-server": "2.23.0",
-		"graphql": "15.5.0"
+		"bcryptjs": "2.4.3",
+		"graphql": "15.5.0",
+		"jsonwebtoken": "8.5.1"
 	},
 	"devDependencies": {
 		"@types/graphql": "14.5.0",
@@ -27,6 +29,7 @@
 	},
 	"scripts": {
 		"build": "npx tsc && cp src/schema.graphql dist",
+		"generatePrismaClient": "npx prisma generate",
 		"lint": "npx eslint '{src,tests}/**/*.{ts,tsx}'",
 		"lintfix": "npm run lint -- --fix",
 		"start": "node ."

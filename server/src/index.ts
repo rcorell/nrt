@@ -3,32 +3,28 @@ import { ApolloServer } from 'apollo-server';
 import * as fs from 'fs';
 import * as path from 'path';
 
+import * as Link from './resolvers/link';
+import * as Mutation from './resolvers/mutations';
+import * as Query from './resolvers/queries';
+import * as User from './resolvers/user';
+import { getUserId } from './utils';
+
 const prisma = new PrismaClient();
 
 const resolvers = {
-    Mutation: {
-        post: (_parent, args, context) => {
-            const newLink = context.prisma.link.create({
-                data: {
-                    description: args.description,
-                    url: args.url
-                }
-            });
-
-            return newLink;
-        }
-    },
-    Query: {
-        feed: async (_parent, _args, context) => {
-            return context.prisma.link.findMany();
-        },
-        info: () => `This is the API of a Hackernews Clone`
-    }
+    Link,
+    Mutation,
+    Query,
+    User
 };
 
 const server = new ApolloServer({
-    context: {
-        prisma
+    context: ({ req }) => {
+        return {
+            ...req,
+            prisma,
+            userId: req && req.headers.authorization ? getUserId(req) : null
+        };
     },
     resolvers,
     typeDefs: fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8')
