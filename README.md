@@ -24,7 +24,7 @@ Service and Client Template - Node, Express and React
 1. Logging: winston, morgan
 1. Testing: ?
 1. Coverage: nyc
-1. Documentation: OpenAPI 3.0
+1. Documentation: ? 
 
 
 # Server 
