@@ -1,13 +1,15 @@
 type Query {
 	info: String!
-	feed: [Link!]!
+	topics: [Topic!]!
 }
 
 type Mutation {
-	post(url: String!, description: String!): Link!
+	createTopic(title: String!, description: String): Topic!
 	signup(email: String!, password: String!, name: String!): AuthPayload
 	login(email: String!, password: String!): AuthPayload	
 }
+
+scalar DateTime
 
 type AuthPayload {
 	token: String
@@ -18,12 +20,16 @@ type User {
 	id: ID!
 	name: String!
 	email: String!
-	links: [Link!]!
+	topics: [Topic!]!
+	createdAt: Int
+	updatedAt: Int
 }
 
-type Link {
+type Topic {
 	id: ID!
-	description: String!
-	url: String!
-	postedBy: User
+	title: String!
+	description: String
+	author: User
+	createdAt: Int
+	updatedAt: Int
 }

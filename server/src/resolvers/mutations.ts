@@ -33,14 +33,14 @@ export const login = async (_parent, args, context) => {
     };
 };
 
-export const post = async (_parent, args, context) => {
+export const createTopic = async (_parent, args, context) => {
     const { userId } = context;
 
-    return await context.prisma.link.create({
+    return await context.prisma.topic.create({
         data: {
+            author: { connect: { id: userId } },
             description: args.description,
-            postedBy: { connect: { id: userId } },
-            url: args.url
+            title: args.title
         }
     });
 };

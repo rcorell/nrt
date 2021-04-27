@@ -3,18 +3,19 @@ import { ApolloServer } from 'apollo-server';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import * as Link from './resolvers/link';
 import * as Mutation from './resolvers/mutations';
 import * as Query from './resolvers/queries';
+import * as Topic from './resolvers/topic';
 import * as User from './resolvers/user';
-import { getUserId } from './utils';
+import { DateTimeScalar, getUserId } from './utils';
 
 const prisma = new PrismaClient();
 
 const resolvers = {
-    Link,
+    DateTime: DateTimeScalar,
     Mutation,
     Query,
+    Topic,
     User
 };
 
@@ -30,4 +31,4 @@ const server = new ApolloServer({
     typeDefs: fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8')
 });
 
-server.listen().then((response) => console.log(`Server is running on ${response.url}`));
+server.listen().then((response) => console.log(`Server is running on ${response.url}\n`, JSON.stringify(response)));

@@ -1,5 +1,5 @@
-export const feed = async (_parent, _args, context) => {
-    return context.prisma.link.findMany();
+export const topics = async (_parent, _args, context) => {
+    return context.prisma.topic.findMany();
 };
 
 export const info = () => {
