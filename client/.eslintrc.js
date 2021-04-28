@@ -6,7 +6,13 @@ module.exports = {
         jest: true,
         node: true
     },
-    extends: ['react-app', 'eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended', 'prettier'],
+    extends: [
+        'react-app',
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recommended',
+        'prettier'
+    ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
@@ -42,7 +48,7 @@ module.exports = {
             }
         },
         react: {
-            version: "detect"
-          }
+            version: 'detect'
+        }
     }
 };
