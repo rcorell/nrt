@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
 import { getIsAuthenticated } from '../../redux/login/selectors';
-import { State } from '../../redux/state.types';
 import { Path } from '../../redux/navigation/types';
+import { State } from '../../redux/state.types';
 
 interface PrivateRouteStateProps {
     authenticated: boolean;

@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { State } from '../../redux/state.types';
 import * as signupActions from '../../redux/signup/actions';
-
-import { FormContainer, AuthError, AuthForm } from '../../styles';
+import { State } from '../../redux/state.types';
+import { AuthError, AuthForm, FormContainer } from '../../styles';
 
 interface SignupStateProps {
+    dummy: string;
 }
 
 interface SignupDispatchProps {
@@ -18,7 +18,7 @@ export type SignupComponentProps = SignupStateProps & SignupDispatchProps;
 
 interface SignupState {
     email: string;
-	name: string;
+    name: string;
     password: string;
 }
 
@@ -28,7 +28,7 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
 
         this.state = {
             email: '',
-			name: '',
+            name: '',
             password: ''
         };
     }
@@ -49,10 +49,10 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
                 newState.email = event.target.value;
                 break;
 
-			case 'name':
-				newState.name = event.target.value;
-				break;
-	
+            case 'name':
+                newState.name = event.target.value;
+                break;
+
             case 'password':
                 newState.password = event.target.value;
                 break;
@@ -82,7 +82,7 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
                             placeholder={'email'}
                         />
                     </Form.Group>
-                    
+
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
                         <Form.Control
@@ -112,14 +112,14 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
                         Sign Up
                     </Button>
                 </AuthForm>
-                <AuthError>
-                </AuthError>
+                <AuthError></AuthError>
             </FormContainer>
         );
     }
 }
 
 export const mapStateToProps: (state: State) => SignupStateProps = (state: State) => ({
+    dummy: 'dummy'
 });
 
 export const mapDispatchToProps = (dispatch: Function) => ({

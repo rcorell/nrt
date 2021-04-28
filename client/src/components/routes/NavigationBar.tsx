@@ -7,7 +7,6 @@ import { getIsAuthenticated } from '../../redux/login/selectors';
 import * as navigationActions from '../../redux/navigation/actions';
 import { Path } from '../../redux/navigation/types';
 import { State } from '../../redux/state.types';
-
 import { NavBar, NavBarLeft, NavBarRight } from './styles';
 
 interface NavigationBarStateProps {
@@ -28,37 +27,31 @@ export class NavigationBarComponent extends React.Component<NavigationBarCompone
         let rightNavBar;
 
         if (this.props.authenticated) {
-            leftNavBar =        
+            leftNavBar = (
                 <Link to="" onClick={() => this.props.home()}>
                     Home
-                </Link>;
-            rightNavBar =
+                </Link>
+            );
+            rightNavBar = (
                 <Link to="" onClick={() => this.props.logout()}>
                     Logout
-                </Link>;
-        }
-        else {
-            leftNavBar =        
+                </Link>
+            );
+        } else {
+            leftNavBar = (
                 <>
-                    <Link to={Path.LOGIN}>
-                        Log in
-                    </Link>
+                    <Link to={Path.LOGIN}>Log in</Link>
                     &nbsp;|&nbsp;
-                    <Link to={Path.SIGNUP}>
-                        Sign up
-                    </Link>
+                    <Link to={Path.SIGNUP}>Sign up</Link>
                 </>
+            );
         }
 
         return (
             <>
                 <NavBar>
-                    <NavBarLeft>
-                        {leftNavBar}
-                    </NavBarLeft>
-                    <NavBarRight>
-                        {rightNavBar}
-                    </NavBarRight>
+                    <NavBarLeft>{leftNavBar}</NavBarLeft>
+                    <NavBarRight>{rightNavBar}</NavBarRight>
                 </NavBar>
             </>
         );

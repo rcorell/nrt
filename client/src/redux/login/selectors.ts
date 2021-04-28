@@ -1,5 +1,4 @@
 import { State } from '../state.types';
-
 import { LoginAttemptStatus } from './types';
 
 export const getIsAuthenticated = (state: State): boolean => {

@@ -5,12 +5,10 @@ import { Route, Router, Switch } from 'react-router-dom';
 
 import { Home } from '../../components/home/Home';
 import { Login } from '../../components/login/Login';
-import { Path } from '../../redux/navigation/types';
 import { Signup } from '../../components/signup/Signup';
-
+import { Path } from '../../redux/navigation/types';
 import { NavigationBar } from './NavigationBar';
 import { PrivateRoute } from './PrivateRoute';
-
 
 const history = createBrowserHistory();
 export { history };

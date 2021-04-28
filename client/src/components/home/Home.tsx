@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { State } from '../../redux/state.types';
 
 interface HomeStateProps {
+    dummy: string;
 }
 
-interface HomeDispatchProps {
-}
+// interface HomeDispatchProps {}
 
-export type HomeComponentProps = HomeStateProps & HomeDispatchProps;
+export type HomeComponentProps = HomeStateProps; // & HomeDispatchProps;
 
 export class HomeComponent extends React.Component<HomeComponentProps> {
     public constructor(props: HomeComponentProps) {
@@ -17,20 +17,16 @@ export class HomeComponent extends React.Component<HomeComponentProps> {
     }
 
     componentDidMount() {
+        document.title = 'Home';
     }
 
     render() {
-
-        return (
-            <h1>Home</h1>
-        );
+        return <h1>Home</h1>;
     }
 }
 
-export const mapStateToProps = (state: State) => ({
-});
+export const mapStateToProps = (_state: State) => ({});
 
-export const mapDispatchToProps = (dispatch: Function) => ({
-});
+export const mapDispatchToProps = (_dispatch: Function) => ({});
 
 export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);

@@ -6,7 +6,6 @@ import * as loginActions from '../redux/login/actions';
 import * as navigationActions from '../redux/navigation/actions';
 import { Path } from '../redux/navigation/types';
 
-
 export function* watcher(): SagaIterator<void> {
     yield all([
         takeLatest([loginActions.authenticated, navigationActions.home], _goToHome),
@@ -22,7 +21,7 @@ export const _goToOutOfService = (): void => {
 
 export const _goToHome = (): void => {
     history.push(Path.HOME);
-}
+};
 
 export const _goToLogout = (): void => {
     window.localStorage.removeItem('email');
@@ -37,4 +36,3 @@ export const _goToSignup = (): void => {
     // no clue why this isn't working
     history.push(Path.SIGNUP);
 };
-

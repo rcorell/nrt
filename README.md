@@ -1,10 +1,25 @@
 Service and Client Template - Node, Express and React
 
+# Setup
+1. Clone repo
+1. Run server
+	1. cd <repo>/server
+	1. npm install
+	1. npm run build
+	1. npm start
+1. Run client
+	1. cd <repo>/client
+	1. npm install
+	1. npm start
+	1. This should open a browser to the site
+1. Click on "Sign Up" from navbar
+1. Fill out form, click "Sign Up"
+
 # Overview
 ## General
 1. Execution: Node
 1. Language: TypeScript
-1. Config: dotenv-flow
+1. Config: dotenv
 1. Formatting: prettier
 1. Linting: eslint
 1. Git: husky
@@ -14,20 +29,21 @@ Service and Client Template - Node, Express and React
 1. State: Redux
 1. Asynch: redux-saga
 1. CSS: styled-components
+1. GraphQL Client: graphql-request
 1. Linting: stylelint
 1. Testing/Coverage: Jest, enzyme
 
 ## Server
-1. Framework: Graph QL
+1. Framework: GraphQL
 1. Database: Postgres
 1. ORM: Prisma
 1. Logging: winston, morgan
 1. Testing: ?
 1. Coverage: nyc
-1. Documentation: ? 
+1. Documentation: ?
 
 
-# Server 
+# Server
 
 ## Setup
 1. npm install

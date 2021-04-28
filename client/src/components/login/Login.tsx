@@ -6,8 +6,7 @@ import * as loginActions from '../../redux/login/actions';
 import { getIsAuthenticated, getLoginAttemptStatus } from '../../redux/login/selectors';
 import { LoginAttemptStatus } from '../../redux/login/types';
 import { State } from '../../redux/state.types';
-
-import { FormContainer, AuthError, AuthForm } from '../../styles';
+import { AuthError, AuthForm, FormContainer } from '../../styles';
 
 interface LoginStateProps {
     authenticated: boolean;

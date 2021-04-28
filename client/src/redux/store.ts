@@ -6,7 +6,6 @@ import { getType } from 'typesafe-actions';
 import * as loginActions from '../redux/login/actions';
 import { loginReducer as login } from '../redux/login/reducer';
 import { rootSaga } from '../sagas/main';
-
 import { ReducerState } from './state.types';
 
 const reducers: ReducerState = {
