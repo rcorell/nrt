@@ -31,7 +31,7 @@ export class RoutesComponent extends React.Component<{}> {
                     {/* <Route exact path={Path.OUT_OF_SERVICE} component={OutOfService} />
                     <Route exact path={Path.WAITING} component={Waiting} /> */}
 
-                    {/* <PrivateRoute exact path={Path.HOME} component={Home} /> */}
+                    <PrivateRoute exact path={Path.HOME} component={Home} />
                 </Switch>
             </Router>
         );

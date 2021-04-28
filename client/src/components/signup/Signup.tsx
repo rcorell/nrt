@@ -68,7 +68,7 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
     render() {
         return (
             <FormContainer>
-                <h1>Signup</h1>
+                <h1>Sign Up</h1>
                 <AuthForm onSubmit={this.handleSubmit}>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
@@ -109,7 +109,7 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
                     </Form.Group>
 
                     <Button type="submit" disabled={this.isFormInvalid()}>
-                        Log In
+                        Sign Up
                     </Button>
                 </AuthForm>
                 <AuthError>

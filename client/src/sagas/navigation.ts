@@ -34,6 +34,7 @@ export const _goToWaiting = (): void => {
 };
 
 export const _goToSignup = (): void => {
-    history.push('/signup');
+    // no clue why this isn't working
+    history.push(Path.SIGNUP);
 };
 

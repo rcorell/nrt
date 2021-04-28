@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import * as loginActions from '../../redux/login/actions';
 import { getIsAuthenticated } from '../../redux/login/selectors';
 import * as navigationActions from '../../redux/navigation/actions';
+import { Path } from '../../redux/navigation/types';
 import { State } from '../../redux/state.types';
 
 import { NavBar, NavBarLeft, NavBarRight } from './styles';
@@ -38,9 +39,15 @@ export class NavigationBarComponent extends React.Component<NavigationBarCompone
         }
         else {
             leftNavBar =        
-                <Link to="" onClick={() => this.props.signup()}>
-                    Sign up
-                </Link>;
+                <>
+                    <Link to={Path.LOGIN}>
+                        Log in
+                    </Link>
+                    &nbsp;|&nbsp;
+                    <Link to={Path.SIGNUP}>
+                        Sign up
+                    </Link>
+                </>
         }
 
         return (
