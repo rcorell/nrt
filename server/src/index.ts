@@ -9,7 +9,9 @@ import * as Topic from './resolvers/topic';
 import * as User from './resolvers/user';
 import { DateTimeScalar, getUserId } from './utils';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+    log: ['query', 'info', 'warn', 'error']
+});
 
 const resolvers = {
     DateTime: DateTimeScalar,
