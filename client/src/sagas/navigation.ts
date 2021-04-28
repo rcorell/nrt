@@ -11,7 +11,8 @@ export function* watcher(): SagaIterator<void> {
     yield all([
         takeLatest([loginActions.authenticated, navigationActions.home], _goToHome),
         takeLatest(loginActions.logout, _goToLogout),
-        takeLatest(navigationActions.waiting, _goToWaiting)
+        takeLatest(navigationActions.waiting, _goToWaiting),
+        takeLatest(navigationActions.signup, _goToSignup)
     ]);
 }
 
@@ -31,3 +32,8 @@ export const _goToLogout = (): void => {
 export const _goToWaiting = (): void => {
     history.push(Path.WAITING);
 };
+
+export const _goToSignup = (): void => {
+    history.push('/signup');
+};
+

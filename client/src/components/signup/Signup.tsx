@@ -2,54 +2,57 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import * as loginActions from '../../redux/login/actions';
-import { getIsAuthenticated, getLoginAttemptStatus } from '../../redux/login/selectors';
-import { LoginAttemptStatus } from '../../redux/login/types';
 import { State } from '../../redux/state.types';
+import * as signupActions from '../../redux/signup/actions';
 
 import { FormContainer, AuthError, AuthForm } from '../../styles';
 
-interface LoginStateProps {
-    authenticated: boolean;
-    loginAttemptStatus: LoginAttemptStatus;
+interface SignupStateProps {
 }
 
-interface LoginDispatchProps {
-    login: (email: string, password: string) => void;
+interface SignupDispatchProps {
+    signup: (email: string, name: string, password: string) => void;
 }
 
-export type LoginComponentProps = LoginStateProps & LoginDispatchProps;
+export type SignupComponentProps = SignupStateProps & SignupDispatchProps;
 
-interface LoginState {
+interface SignupState {
     email: string;
+	name: string;
     password: string;
 }
 
-export class LoginComponent extends React.Component<LoginComponentProps, LoginState> {
-    public constructor(props: LoginComponentProps) {
+export class SignupComponent extends React.Component<SignupComponentProps, SignupState> {
+    public constructor(props: SignupComponentProps) {
         super(props);
+
         this.state = {
             email: '',
+			name: '',
             password: ''
         };
     }
 
     componentDidMount() {
-        document.title = 'Login';
+        document.title = 'Sign Up';
     }
 
     isFormInvalid = () => {
-        return this.state.email.length < '@fivestars.com'.length + 1 || this.state.password.length === 0;
+        return this.state.email.length < 7 || this.state.name.length === 0 || this.state.password.length === 0;
     };
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newState: LoginState = this.state;
+        const newState: SignupState = this.state;
 
         switch (event.target.id) {
             case 'email':
                 newState.email = event.target.value;
                 break;
 
+			case 'name':
+				newState.name = event.target.value;
+				break;
+	
             case 'password':
                 newState.password = event.target.value;
                 break;
@@ -59,13 +62,13 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
 
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        this.props.login(this.state.email, this.state.password);
+        this.props.signup(this.state.email, this.state.name, this.state.password);
     };
 
     render() {
         return (
             <FormContainer>
-                <h1>Login</h1>
+                <h1>Signup</h1>
                 <AuthForm onSubmit={this.handleSubmit}>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
@@ -77,6 +80,19 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
                             type="email"
                             value={this.state.email}
                             placeholder={'email'}
+                        />
+                    </Form.Group>
+                    
+                    <Form.Group>
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                            autoFocus
+                            id="name"
+                            onChange={this.handleChange}
+                            size="lg"
+                            type="name"
+                            value={this.state.name}
+                            placeholder={'name'}
                         />
                     </Form.Group>
 
@@ -97,20 +113,17 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
                     </Button>
                 </AuthForm>
                 <AuthError>
-                    {this.props.loginAttemptStatus === LoginAttemptStatus.FAILURE ? 'Login Failed' : ''}
                 </AuthError>
             </FormContainer>
         );
     }
 }
 
-export const mapStateToProps: (state: State) => LoginStateProps = (state: State) => ({
-    authenticated: getIsAuthenticated(state),
-    loginAttemptStatus: getLoginAttemptStatus(state)
+export const mapStateToProps: (state: State) => SignupStateProps = (state: State) => ({
 });
 
 export const mapDispatchToProps = (dispatch: Function) => ({
-    login: (email: string, password: string) => dispatch(loginActions.login(email, password))
+    signup: (email: string, name: string, password: string) => dispatch(signupActions.signup(email, name, password))
 });
 
-export const Login = connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export const Signup = connect(mapStateToProps, mapDispatchToProps)(SignupComponent);

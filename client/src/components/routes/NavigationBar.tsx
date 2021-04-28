@@ -16,28 +16,41 @@ interface NavigationBarStateProps {
 interface NavigationBarDispatchProps {
     logout: () => void;
     home: () => void;
+    signup: () => void;
 }
 
 export type NavigationBarComponentProps = NavigationBarStateProps & NavigationBarDispatchProps;
 
 export class NavigationBarComponent extends React.Component<NavigationBarComponentProps> {
     render() {
-        if (!this.props.authenticated) {
-            return null;
+        let leftNavBar;
+        let rightNavBar;
+
+        if (this.props.authenticated) {
+            leftNavBar =        
+                <Link to="" onClick={() => this.props.home()}>
+                    Home
+                </Link>;
+            rightNavBar =
+                <Link to="" onClick={() => this.props.logout()}>
+                    Logout
+                </Link>;
+        }
+        else {
+            leftNavBar =        
+                <Link to="" onClick={() => this.props.signup()}>
+                    Sign up
+                </Link>;
         }
 
         return (
             <>
                 <NavBar>
                     <NavBarLeft>
-                        <Link to="" onClick={() => this.props.home()}>
-                            Home
-                        </Link>
+                        {leftNavBar}
                     </NavBarLeft>
                     <NavBarRight>
-                        <Link to="" onClick={() => this.props.logout()}>
-                            Logout
-                        </Link>
+                        {rightNavBar}
                     </NavBarRight>
                 </NavBar>
             </>
@@ -51,7 +64,8 @@ export const mapStateToProps: (state: State) => NavigationBarStateProps = (state
 
 export const mapDispatchToProps = (dispatch: Function) => ({
     logout: () => dispatch(loginActions.logout()),
-    home: () => dispatch(navigationActions.home())
+    home: () => dispatch(navigationActions.home()),
+    signup: () => dispatch(navigationActions.signup())
 });
 
 export const NavigationBar = connect(mapStateToProps, mapDispatchToProps)(NavigationBarComponent);

@@ -6,6 +6,7 @@ import { Route, Router, Switch } from 'react-router-dom';
 import { Home } from '../../components/home/Home';
 import { Login } from '../../components/login/Login';
 import { Path } from '../../redux/navigation/types';
+import { Signup } from '../../components/signup/Signup';
 
 import { NavigationBar } from './NavigationBar';
 import { PrivateRoute } from './PrivateRoute';
@@ -26,10 +27,11 @@ export class RoutesComponent extends React.Component<{}> {
 
                 <Switch>
                     <Route exact path={Path.LOGIN} component={Login} />
+                    <Route exact path={Path.SIGNUP} component={Signup} />
                     {/* <Route exact path={Path.OUT_OF_SERVICE} component={OutOfService} />
                     <Route exact path={Path.WAITING} component={Waiting} /> */}
 
-                    <PrivateRoute exact path={Path.HOME} component={Home} />
+                    {/* <PrivateRoute exact path={Path.HOME} component={Home} /> */}
                 </Switch>
             </Router>
         );
