@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
+import * as signupActions from 'src/redux/signup/actions';
+import { State } from 'src/redux/state.types';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
-import * as signupActions from '@redux/signup/actions';
-import { State } from '@redux/state.types';
 
 interface SignupStateProps {
     dummy: string;
