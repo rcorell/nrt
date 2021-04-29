@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { AuthError, AuthForm, FormContainer } from '@app/styles';
+import { AuthError, AuthForm, FormContainer } from 'src/styles';
 import * as signupActions from '@redux/signup/actions';
 import { State } from '@redux/state.types';
 
