@@ -3,7 +3,7 @@ import { SagaIterator } from 'redux-saga';
 import { all, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 
-import * as signupActions from '../redux/signup/actions';
+import * as signupActions from 'src/redux/signup/actions';
 
 export function* watcher(): SagaIterator<void> {
     yield all([takeLatest(signupActions.signup, _signup)]);

@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Routes } from './components/routes/Routes';
-import { Store } from './redux/store';
-import { AppHeader, GlobalStyle } from './styles';
+
+import { Routes } from 'src/components/routes/Routes';
+import { Store } from 'src/redux/store';
+import { AppHeader, GlobalStyle } from 'src/styles';
 
 export class App extends React.Component {
     public render() {
