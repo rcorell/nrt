@@ -3,10 +3,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Route, Router, Switch } from 'react-router-dom';
 
-import { Home } from '../../components/home/Home';
-import { Login } from '../../components/login/Login';
-import { Signup } from '../../components/signup/Signup';
-import { Path } from '../../redux/navigation/types';
+import { AddTopic } from 'src/components/addTopic/AddTopic';
+import { Home } from 'src/components/home/Home';
+import { Login } from 'src/components/login/Login';
+import { Signup } from 'src/components/signup/Signup';
+import { Path } from 'src/redux/navigation/types';
+
 import { NavigationBar } from './NavigationBar';
 import { PrivateRoute } from './PrivateRoute';
 
@@ -26,6 +28,8 @@ export class RoutesComponent extends React.Component<{}> {
                 <Switch>
                     <Route exact path={Path.LOGIN} component={Login} />
                     <Route exact path={Path.SIGNUP} component={Signup} />
+                    <Route exact path={Path.ADD_TOPIC} component={AddTopic} />
+
                     {/* <Route exact path={Path.OUT_OF_SERVICE} component={OutOfService} />
                     <Route exact path={Path.WAITING} component={Waiting} /> */}
 

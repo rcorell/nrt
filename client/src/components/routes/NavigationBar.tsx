@@ -14,6 +14,7 @@ interface NavigationBarStateProps {
 }
 
 interface NavigationBarDispatchProps {
+    addTopic: () => void;
     logout: () => void;
     home: () => void;
     signup: () => void;
@@ -28,9 +29,15 @@ export class NavigationBarComponent extends React.Component<NavigationBarCompone
 
         if (this.props.authenticated) {
             leftNavBar = (
-                <Link to="" onClick={() => this.props.home()}>
-                    Home
-                </Link>
+                <>
+                    <Link to="" onClick={() => this.props.home()}>
+                        Home
+                    </Link>
+                    &nbsp;|&nbsp;
+                    <Link to="" onClick={() => this.props.addTopic()}>
+                        Add Topic
+                    </Link>
+                </>
             );
             rightNavBar = (
                 <Link to="" onClick={() => this.props.logout()}>
@@ -63,6 +70,7 @@ export const mapStateToProps: (state: State) => NavigationBarStateProps = (state
 });
 
 export const mapDispatchToProps = (dispatch: Function) => ({
+    addTopic: () => dispatch(navigationActions.addTopic()),
     logout: () => dispatch(loginActions.logout()),
     home: () => dispatch(navigationActions.home()),
     signup: () => dispatch(navigationActions.signup())

@@ -5,7 +5,6 @@ import { ActionType } from 'typesafe-actions';
 
 import * as loginActions from 'src/redux/login/actions';
 import * as signupActions from 'src/redux/signup/actions';
-import { sign } from 'crypto';
 import Cookies from 'js-cookie';
 
 export function* watcher(): SagaIterator<void> {
