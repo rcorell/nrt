@@ -3,18 +3,23 @@ import { SagaIterator } from 'redux-saga';
 import { all, put, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 
+import * as addTopicActions from 'src/redux/addTopic/actions';
 import * as loginActions from 'src/redux/login/actions';
 import * as signupActions from 'src/redux/signup/actions';
 import Cookies from 'js-cookie';
 
 export function* watcher(): SagaIterator<void> {
-    yield all([takeLatest(signupActions.signup, _signup)]);
+    yield all([takeLatest(signupActions.signup, _signup), takeLatest(addTopicActions.addTopic, _addTopic)]);
 }
 
 const graphQLClient = new GraphQLClient('http://localhost:4000');
 
 interface SignupResponse {
     token: string;
+}
+
+interface AddTopicResponse {
+    topic: string;
 }
 
 export function* _signup(action: ActionType<typeof signupActions.signup>) {
@@ -43,6 +48,40 @@ export function* _signup(action: ActionType<typeof signupActions.signup>) {
 
         Cookies.set('AUTH_TOKEN', signupResponse.token);
         yield put(loginActions.authenticated());
+    } catch (error: any) {
+        // catch all errors
+    }
+
+    // yield put(signupActions.failure());
+}
+
+export function* _addTopic(action: ActionType<typeof addTopicActions.addTopic>) {
+    const { topic } = action.payload;
+
+    const addTopicMutation = gql`
+        mutation CreateTopicMutation($title: String!, $description: String) {
+            createTopic(title: $title, description: $description) {
+                id
+                createdAt
+            }
+        }
+    `;
+
+    try {
+        const addTopicResponse: AddTopicResponse = yield graphQLClient.request<AddTopicResponse>(addTopicMutation, {
+            description: '',
+            title: topic
+        });
+
+        console.log(JSON.stringify(addTopicResponse));
+
+        const untypedResponse: any = addTopicResponse as any;
+
+        if (untypedResponse.errors) {
+            throw new Error(untypedResponse.errors);
+        }
+
+        // yield put(something);
     } catch (error: any) {
         // catch all errors
     }

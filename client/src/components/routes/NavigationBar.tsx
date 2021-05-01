@@ -30,11 +30,11 @@ export class NavigationBarComponent extends React.Component<NavigationBarCompone
         if (this.props.authenticated) {
             leftNavBar = (
                 <>
-                    <Link to="" onClick={() => this.props.home()}>
+                    <Link to={Path.HOME} onClick={() => this.props.home()}>
                         Home
                     </Link>
                     &nbsp;|&nbsp;
-                    <Link to="" onClick={() => this.props.addTopic()}>
+                    <Link to={Path.ADD_TOPIC} onClick={() => this.props.addTopic()}>
                         Add Topic
                     </Link>
                 </>
