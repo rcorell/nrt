@@ -6,10 +6,8 @@ type Query {
 type Mutation {
 	createTopic(title: String!, description: String): Topic!
 	signup(email: String!, password: String!, name: String!): AuthPayload
-	login(email: String!, password: String!): AuthPayload	
+	login(email: String!, password: String!): AuthPayload
 }
-
-scalar DateTime
 
 type AuthPayload {
 	token: String
@@ -21,8 +19,8 @@ type User {
 	name: String!
 	email: String!
 	topics: [Topic!]!
-	createdAt: Int
-	updatedAt: Int
+	createdAt: DateTime
+	updatedAt: DateTime
 }
 
 type Topic {
@@ -30,6 +28,6 @@ type Topic {
 	title: String!
 	description: String
 	author: User
-	createdAt: Int
-	updatedAt: Int
+	createdAt: DateTime
+	updatedAt: DateTime
 }
