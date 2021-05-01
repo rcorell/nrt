@@ -6,7 +6,6 @@ import { ActionType } from 'typesafe-actions';
 import * as addTopicActions from 'src/redux/addTopic/actions';
 import * as loginActions from 'src/redux/login/actions';
 import * as signupActions from 'src/redux/signup/actions';
-import Cookies from 'js-cookie';
 
 export function* watcher(): SagaIterator<void> {
     yield all([takeLatest(signupActions.signup, _signup), takeLatest(addTopicActions.addTopic, _addTopic)]);
@@ -15,7 +14,7 @@ export function* watcher(): SagaIterator<void> {
 const graphQLClient = new GraphQLClient('http://localhost:4000');
 
 interface SignupResponse {
-    token: string;
+    signup: { token: string };
 }
 
 interface AddTopicResponse {
@@ -46,7 +45,9 @@ export function* _signup(action: ActionType<typeof signupActions.signup>) {
             throw new Error(untypedResponse.errors);
         }
 
-        Cookies.set('AUTH_TOKEN', signupResponse.token);
+        const authValue = `Bearer ${signupResponse.signup.token}`;
+
+        graphQLClient.setHeader('Authorization', authValue);
         yield put(loginActions.authenticated());
     } catch (error: any) {
         // catch all errors
@@ -83,7 +84,7 @@ export function* _addTopic(action: ActionType<typeof addTopicActions.addTopic>) 
 
         // yield put(something);
     } catch (error: any) {
-        // catch all errors
+        console.log(error);
     }
 
     // yield put(signupActions.failure());
