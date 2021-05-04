@@ -1,6 +1,8 @@
-Service and Client Template - Node, Express and React
+# TypeScript Node Service and Client Template
+* Server: Apollo, GraphQL, Prisma
+* Client: React
 
-# Setup
+## Setup
 1. Clone repo
 1. Run server
 	1. cd <repo>/server
@@ -15,8 +17,8 @@ Service and Client Template - Node, Express and React
 1. Click on "Sign Up" from navbar
 1. Fill out form, click "Sign Up"
 
-# Overview
-## General
+## Overview
+### General
 1. Execution: Node
 1. Language: TypeScript
 1. Config: dotenv
@@ -24,7 +26,7 @@ Service and Client Template - Node, Express and React
 1. Linting: eslint
 1. Git: husky
 
-## Client
+### Client
 1. Framework: React
 1. State: Redux
 1. Asynch: redux-saga
@@ -33,7 +35,7 @@ Service and Client Template - Node, Express and React
 1. Linting: stylelint
 1. Testing/Coverage: Jest, enzyme
 
-## Server
+### Server
 1. Framework: GraphQL
 1. Database: Postgres
 1. ORM: Prisma
@@ -43,19 +45,22 @@ Service and Client Template - Node, Express and React
 1. Documentation: ?
 
 
-# Server
+## Server
 
-## Setup
+### Setup
 1. npm install
 1. install postgres
 1. set server/.env DATABASE_URL
 1. npx prisma generate
 
-## Build
+### Build
 1. npx run build
 
-## Run
+### Run
 1. npm start
 
-## Browse database
+### Browse database
+1. Go to htpp://localhost:4000
+
+### Browse database
 1. npx prisma studio
