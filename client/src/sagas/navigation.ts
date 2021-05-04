@@ -12,7 +12,8 @@ export function* watcher(): SagaIterator<void> {
         takeLatest(loginActions.logout, _goToLogout),
         takeLatest(navigationActions.waiting, _goToWaiting),
         takeLatest(navigationActions.signup, _goToSignup),
-        takeLatest(navigationActions.addTopic, _goToAddTopic)
+        takeLatest(navigationActions.addTopic, _goToAddTopic),
+        takeLatest(navigationActions.topics, _goToTopics)
     ]);
 }
 
@@ -34,11 +35,13 @@ export const _goToWaiting = (): void => {
 };
 
 export const _goToSignup = (): void => {
-    // no clue why this isn't working
     history.push(Path.SIGNUP);
 };
 
 export const _goToAddTopic = (): void => {
-    // no clue why this isn't working
     history.push(Path.ADD_TOPIC);
+};
+
+export const _goToTopics = (): void => {
+    history.push(Path.TOPICS);
 };

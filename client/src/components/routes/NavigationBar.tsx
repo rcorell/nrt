@@ -18,6 +18,7 @@ interface NavigationBarDispatchProps {
     logout: () => void;
     home: () => void;
     signup: () => void;
+    topics: () => void;
 }
 
 export type NavigationBarComponentProps = NavigationBarStateProps & NavigationBarDispatchProps;
@@ -32,6 +33,10 @@ export class NavigationBarComponent extends React.Component<NavigationBarCompone
                 <>
                     <Link to={Path.HOME} onClick={() => this.props.home()}>
                         Home
+                    </Link>
+                    &nbsp;|&nbsp;
+                    <Link to={Path.TOPICS} onClick={() => this.props.topics()}>
+                        Topics
                     </Link>
                     &nbsp;|&nbsp;
                     <Link to={Path.ADD_TOPIC} onClick={() => this.props.addTopic()}>
@@ -73,7 +78,8 @@ export const mapDispatchToProps = (dispatch: Function) => ({
     addTopic: () => dispatch(navigationActions.addTopic()),
     logout: () => dispatch(loginActions.logout()),
     home: () => dispatch(navigationActions.home()),
-    signup: () => dispatch(navigationActions.signup())
+    signup: () => dispatch(navigationActions.signup()),
+    topics: () => dispatch(navigationActions.topics())
 });
 
 export const NavigationBar = connect(mapStateToProps, mapDispatchToProps)(NavigationBarComponent);

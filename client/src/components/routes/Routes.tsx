@@ -6,8 +6,9 @@ import { Route, Router, Switch } from 'react-router-dom';
 import { AddTopic } from 'src/components/addTopic/AddTopic';
 import { Home } from 'src/components/home/Home';
 import { Login } from 'src/components/login/Login';
-import { Signup } from 'src/components/signup/Signup';
 import { Path } from 'src/redux/navigation/types';
+import { Signup } from 'src/components/signup/Signup';
+import { Topics } from 'src/components/topics/Topics';
 
 import { NavigationBar } from './NavigationBar';
 import { PrivateRoute } from './PrivateRoute';
@@ -29,6 +30,7 @@ export class RoutesComponent extends React.Component<{}> {
                     <Route exact path={Path.LOGIN} component={Login} />
                     <Route exact path={Path.SIGNUP} component={Signup} />
                     <Route exact path={Path.ADD_TOPIC} component={AddTopic} />
+                    <Route exact path={Path.TOPICS} component={Topics} />
 
                     {/* <Route exact path={Path.OUT_OF_SERVICE} component={OutOfService} />
                     <Route exact path={Path.WAITING} component={Waiting} /> */}
