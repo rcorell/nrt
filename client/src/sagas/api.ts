@@ -1,6 +1,6 @@
 import { gql, GraphQLClient } from 'graphql-request';
 import { SagaIterator } from 'redux-saga';
-import { all, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 
 import * as addTopicActions from 'src/redux/addTopic/actions';
@@ -104,7 +104,7 @@ export function* _addTopic(action: ActionType<typeof addTopicActions.addTopic>) 
     // yield put(signupActions.failure());
 }
 
-export function* _fetchTopics(action: ActionType<typeof topicsActions.fetchTopics>) {
+export const fetchTopics = async () => {
     const fetchTopicsQuery = gql`
         {
             topics {
@@ -115,7 +115,7 @@ export function* _fetchTopics(action: ActionType<typeof topicsActions.fetchTopic
     `;
 
     try {
-        const getTopicsResponse: FetchTopicsResponse = yield graphQLClient.request<FetchTopicsResponse>(
+        const getTopicsResponse: FetchTopicsResponse = await graphQLClient.request<FetchTopicsResponse>(
             fetchTopicsQuery
         );
 
@@ -128,10 +128,15 @@ export function* _fetchTopics(action: ActionType<typeof topicsActions.fetchTopic
         }
         console.log(untypedResponse);
 
-        yield put(topicsActions.setTopics(getTopicsResponse.topics));
+        return getTopicsResponse.topics as Topic[];
     } catch (error: any) {
         console.log(error);
     }
 
-    // yield put(signupActions.failure());
+    return [];
+};
+
+export function* _fetchTopics(action: ActionType<typeof topicsActions.fetchTopics>) {
+    const topics: Topic[] = yield call(fetchTopics);
+    yield put(topicsActions.setTopics(topics));
 }
