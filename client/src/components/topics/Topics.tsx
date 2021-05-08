@@ -1,7 +1,12 @@
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import MaterialTable from 'material-table';
 import React, { useEffect, useState } from 'react';
 import { Topic } from 'src/redux/topics/types';
 import { fetchTopics } from 'src/sagas/api';
+
+const COLUMN_DEFINITIONS = [
+    { title: 'Title', field: 'title' },
+    { title: 'Description', field: 'description' }
+];
 
 export const Topics = () => {
     const [topics, setTopics] = useState([] as Topic[]);
@@ -16,17 +21,7 @@ export const Topics = () => {
         fetchTopicsHook();
     }, []);
 
-    return (
-        <>
-            <h1>Topics</h1>
-            <BootstrapTable data={topics}>
-                <TableHeaderColumn dataField="title" isKey>
-                    Topic
-                </TableHeaderColumn>
-                <TableHeaderColumn dataField="description">Description</TableHeaderColumn>
-            </BootstrapTable>
-        </>
-    );
+    return <MaterialTable title="Topics" columns={COLUMN_DEFINITIONS} data={topics} />;
 };
 // interface TopicsProps {
 //     topics: Topic[];
