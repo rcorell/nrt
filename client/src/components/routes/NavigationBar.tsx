@@ -57,6 +57,7 @@ export class NavigationBarComponent extends React.Component<NavigationBarCompone
                     <Link to={Path.SIGNUP}>Sign up</Link>
                 </>
             );
+            rightNavBar = null;
         }
 
         return (

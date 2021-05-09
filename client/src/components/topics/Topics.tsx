@@ -8,7 +8,7 @@ const COLUMN_DEFINITIONS = [
     { title: 'Description', field: 'description' }
 ];
 
-export const Topics = () => {
+export const Topics: React.FC = () => {
     const [topics, setTopics] = useState([] as Topic[]);
 
     useEffect(() => {

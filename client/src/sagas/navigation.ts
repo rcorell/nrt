@@ -27,6 +27,7 @@ export const _goToHome = (): void => {
 
 export const _goToLogout = (): void => {
     window.localStorage.removeItem('email');
+    window.localStorage.removeItem('token');
     history.push(Path.LOGIN);
 };
 
