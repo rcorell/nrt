@@ -13,6 +13,8 @@ model Topic {
 	description	String?
 	author		User		@relation(fields: [authorId], references: [id])
 	authorId	Int
+	group		Group		@relation(fields: [groupId], references: [id])
+	groupId		Int
 	createdAt	DateTime	@default(now())
 	updatedAt	DateTime	@updatedAt
 }
@@ -23,6 +25,17 @@ model User {
 	email		String		@unique
 	password	String
 	topics		Topic[]
+	groups		Group[]
 	createdAt	DateTime	@default(now())
-	updatedAt	DateTime	@updatedAt	
+	updatedAt	DateTime	@updatedAt
+}
+
+model Group {
+	id			Int			@id @default(autoincrement())
+	name		String
+	description	String?
+	users		User[]
+	topics		Topic[]
+	createdAt	DateTime	@default(now())
+	updatedAt	DateTime	@updatedAt
 }

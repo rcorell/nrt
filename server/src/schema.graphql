@@ -1,6 +1,7 @@
 type Query {
 	info: String!
-	topics: [Topic!]!
+	topics: [Topic]!
+	groups: [Group]!
 }
 
 type Mutation {
@@ -18,7 +19,8 @@ type User {
 	id: ID!
 	name: String!
 	email: String!
-	topics: [Topic!]!
+	topics: [Topic]!
+	groups: [Group]!
 	createdAt: DateTime
 	updatedAt: DateTime
 }
@@ -26,8 +28,19 @@ type User {
 type Topic {
 	id: ID!
 	title: String!
-	description: String
-	author: User
+	description: String!
+	author: User!
+	group: Group!
+	createdAt: DateTime
+	updatedAt: DateTime
+}
+
+type Group {
+	id: ID!
+	name: String!
+	description: String!
+	users: [User]!
+	topics: [Topic]!
 	createdAt: DateTime
 	updatedAt: DateTime
 }
