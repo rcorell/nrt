@@ -52,7 +52,7 @@ export class AddTopicComponent extends React.Component<AddTopicDispatchProps, Ad
                 <h1>Add Topic</h1>
                 <AuthForm onSubmit={this.handleSubmit}>
                     <Form.Group>
-                        <Form.Label>Add Topic</Form.Label>
+                        <Form.Label>Topic</Form.Label>
                         <Form.Control
                             autoFocus
                             id="topic"
@@ -60,7 +60,6 @@ export class AddTopicComponent extends React.Component<AddTopicDispatchProps, Ad
                             size="lg"
                             type="topic"
                             value={this.state.topic}
-                            placeholder={'topic'}
                         />
                     </Form.Group>
 

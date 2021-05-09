@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const AppHeader = styled.div`
     align-items: center;
-    background-color: #6b20ce;
+    background-color: #c10c11;
     color: white;
     display: flex;
     font-size: 24pt;
