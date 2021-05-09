@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import * as loginActions from '../../redux/login/actions';
-import { getIsAuthenticated, getLoginAttemptStatus } from '../../redux/login/selectors';
-import { LoginAttemptStatus } from '../../redux/login/types';
-import { State } from '../../redux/state.types';
-import { AuthError, AuthForm, FormContainer } from '../../styles';
+import { setBrowserTitle } from 'src/components/utils';
+import * as loginActions from 'src/redux/login/actions';
+import { getIsAuthenticated, getLoginAttemptStatus } from 'src/redux/login/selectors';
+import { LoginAttemptStatus } from 'src/redux/login/types';
+import { State } from 'src/redux/state.types';
+import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
 interface LoginStateProps {
     authenticated: boolean;
@@ -34,7 +35,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
     }
 
     componentDidMount() {
-        document.title = 'Login';
+        setBrowserTitle('Login');
     }
 
     isFormInvalid = () => {

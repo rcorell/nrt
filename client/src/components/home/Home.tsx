@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { State } from '../../redux/state.types';
+import { setBrowserTitle } from 'src/components/utils';
+import { State } from 'src/redux/state.types';
 
 interface HomeStateProps {
     dummy: string;
@@ -17,7 +18,7 @@ export class HomeComponent extends React.Component<HomeComponentProps> {
     }
 
     componentDidMount() {
-        document.title = 'Home';
+        setBrowserTitle('Home');
     }
 
     render() {

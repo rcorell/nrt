@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { setBrowserTitle } from 'src/components/utils';
 import * as signupActions from 'src/redux/signup/actions';
 import { State } from 'src/redux/state.types';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
@@ -34,7 +35,7 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
     }
 
     componentDidMount() {
-        document.title = 'Sign Up';
+        setBrowserTitle('Sign Up');
     }
 
     isFormInvalid = () => {
