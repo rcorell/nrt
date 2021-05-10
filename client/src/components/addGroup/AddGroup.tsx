@@ -72,7 +72,6 @@ export class AddGroupComponent extends React.Component<AddGroupDispatchProps, Ad
                     <Form.Group>
                         <Form.Label>Description</Form.Label>
                         <Form.Control
-                            autoFocus
                             id="description"
                             onChange={this.handleChange}
                             size="lg"

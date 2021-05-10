@@ -7,18 +7,13 @@ import { history } from 'src/components/routes/Routes';
 import { setBrowserTitle } from 'src/components/utils';
 import { Path } from 'src/redux/navigation/types';
 import * as loginActions from 'src/redux/login/actions';
-import { State } from 'src/redux/state.types';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
-
-interface SignupStateProps {
-    dummy: string;
-}
 
 interface SignupDispatchProps {
     authenticated: () => void;
 }
 
-export type SignupComponentProps = SignupStateProps & SignupDispatchProps;
+export type SignupComponentProps = SignupDispatchProps;
 
 interface SignupState {
     email: string;
@@ -101,7 +96,6 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
                             id="name"
                             onChange={this.handleChange}
                             size="lg"
-                            type="name"
                             value={this.state.name}
                             placeholder={'name'}
                         />
@@ -129,12 +123,8 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
     }
 }
 
-export const mapStateToProps: (state: State) => SignupStateProps = (state: State) => ({
-    dummy: 'dummy'
-});
-
 export const mapDispatchToProps = (dispatch: Function) => ({
     authenticated: () => dispatch(loginActions.authenticated())
 });
 
-export const Signup = connect(mapStateToProps, mapDispatchToProps)(SignupComponent);
+export const Signup = connect(null, mapDispatchToProps)(SignupComponent);
