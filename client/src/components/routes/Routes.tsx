@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Route, Router, Switch } from 'react-router-dom';
 
+import { AddGroup } from 'src/components/addGroup/AddGroup';
 import { AddTopic } from 'src/components/addTopic/AddTopic';
 import { Home } from 'src/components/home/Home';
 import { Login } from 'src/components/login/Login';
@@ -32,6 +33,7 @@ export class RoutesComponent extends React.Component<{}> {
                     <Route exact path={Path.SIGNUP} component={Signup} />
                     <PrivateRoute exact path={Path.ADD_TOPIC} component={AddTopic} />
                     <PrivateRoute exact path={Path.TOPICS} component={Topics} />
+                    <PrivateRoute exact path={Path.ADD_GROUP} component={AddGroup} />
 
                     {/* <Route exact path={Path.OUT_OF_SERVICE} component={OutOfService} />
                     <Route exact path={Path.WAITING} component={Waiting} /> */}

@@ -1,4 +1,5 @@
 export enum Path {
+    ADD_GROUP = '/add-group',
     ADD_TOPIC = '/add-topic',
     HOME = '/',
     LOGIN = '/login',

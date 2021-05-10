@@ -1,5 +1,5 @@
 # TypeScript Node Service and Client Template
-* Server: Apollo, GraphQL, Prisma
+* Server: Apollo GraphQL, Prisma
 * Client: React
 
 ## Setup
@@ -59,8 +59,14 @@
 ### Run
 1. npm start
 
-### Browse database
+### Make queries
 1. Go to htpp://localhost:4000
 
 ### Browse database
 1. npx prisma studio
+
+### Generate migration
+1. npx prisma migrate dev --name `<NAME OF MIGRATION>`
+
+### Update client after migration
+1. npx prisma generate
