@@ -3,6 +3,7 @@ import { SagaIterator } from 'redux-saga';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 
+import { signup } from 'src/api/api';
 import * as addGroupActions from 'src/redux/addGroup/actions';
 import * as addTopicActions from 'src/redux/addTopic/actions';
 import * as loginActions from 'src/redux/login/actions';
@@ -23,9 +24,9 @@ export function* watcher(): SagaIterator<void> {
 
 const graphQLClient = new GraphQLClient('http://localhost:4000');
 
-interface SignupResponse {
-    signup: { token: string };
-}
+// interface SignupResponse {
+//     signup: { token: string };
+// }
 
 interface LoginResponse {
     login: { token: string };
@@ -57,38 +58,12 @@ interface FetchTopicsResponse {
 export function* _signup(action: ActionType<typeof signupActions.signup>) {
     const { email, name, password } = action.payload;
 
-    const signupMutation = gql`
-        mutation SignupMutation($email: String!, $name: String!, $password: String!) {
-            signup(email: $email, name: $name, password: $password) {
-                token
-            }
-        }
-    `;
-
     try {
-        const signupResponse: SignupResponse = yield graphQLClient.request<SignupResponse>(signupMutation, {
-            email,
-            name,
-            password
-        });
-
-        const untypedResponse: any = signupResponse as any;
-
-        if (untypedResponse.errors) {
-            throw new Error(untypedResponse.errors);
-        }
-
-        const authValue = `Bearer ${signupResponse.signup.token}`;
-
-        graphQLClient.setHeader('Authorization', authValue);
-        window.localStorage.setItem('email', action.payload.email);
-        window.localStorage.setItem('token', signupResponse.signup.token);
+        yield signup(email, name, password);
         yield put(loginActions.authenticated());
     } catch (error: any) {
-        // catch all errors
+        console.log(error);
     }
-
-    // yield put(signupActions.failure());
 }
 
 export function* _login(action: ActionType<typeof loginActions.login>) {

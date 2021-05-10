@@ -2,8 +2,11 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { signup } from 'src/api/api';
+import { history } from 'src/components/routes/Routes';
 import { setBrowserTitle } from 'src/components/utils';
-import * as signupActions from 'src/redux/signup/actions';
+import { Path } from 'src/redux/navigation/types';
+import * as loginActions from 'src/redux/login/actions';
 import { State } from 'src/redux/state.types';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
@@ -12,7 +15,7 @@ interface SignupStateProps {
 }
 
 interface SignupDispatchProps {
-    signup: (email: string, name: string, password: string) => void;
+    authenticated: () => void;
 }
 
 export type SignupComponentProps = SignupStateProps & SignupDispatchProps;
@@ -63,7 +66,14 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
 
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        this.props.signup(this.state.email, this.state.name, this.state.password);
+        signup(this.state.email, this.state.name, this.state.password)
+            .then(() => {
+                this.props.authenticated();
+                history.push(Path.HOME);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
 
     render() {
@@ -124,7 +134,7 @@ export const mapStateToProps: (state: State) => SignupStateProps = (state: State
 });
 
 export const mapDispatchToProps = (dispatch: Function) => ({
-    signup: (email: string, name: string, password: string) => dispatch(signupActions.signup(email, name, password))
+    authenticated: () => dispatch(loginActions.authenticated())
 });
 
 export const Signup = connect(mapStateToProps, mapDispatchToProps)(SignupComponent);
