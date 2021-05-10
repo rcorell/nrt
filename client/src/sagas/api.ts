@@ -3,6 +3,7 @@ import { SagaIterator } from 'redux-saga';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 
+import * as addGroupActions from 'src/redux/addGroup/actions';
 import * as addTopicActions from 'src/redux/addTopic/actions';
 import * as loginActions from 'src/redux/login/actions';
 import * as signupActions from 'src/redux/signup/actions';
@@ -14,6 +15,7 @@ export function* watcher(): SagaIterator<void> {
     yield all([
         takeLatest(signupActions.signup, _signup),
         takeLatest(loginActions.login, _login),
+        takeLatest(addGroupActions.addGroup, _addGroup),
         takeLatest(addTopicActions.addTopic, _addTopic),
         takeLatest(topicsActions.fetchTopics, _fetchTopics)
     ]);
@@ -29,6 +31,11 @@ interface LoginResponse {
     login: { token: string };
 }
 
+interface AddGroupResponse {
+    id: number;
+    createdAt: string;
+}
+
 interface AddTopicResponse {
     topic: string;
 }
@@ -41,6 +48,11 @@ type Topic = {
 interface FetchTopicsResponse {
     topics: Topic[];
 }
+
+// type Group = {
+//     description: string;
+//     name: string;
+// };
 
 export function* _signup(action: ActionType<typeof signupActions.signup>) {
     const { email, name, password } = action.payload;
@@ -152,6 +164,40 @@ export function* _addTopic(action: ActionType<typeof addTopicActions.addTopic>) 
         console.log(JSON.stringify(addTopicResponse));
 
         const untypedResponse: any = addTopicResponse as any;
+
+        if (untypedResponse.errors) {
+            throw new Error(untypedResponse.errors);
+        }
+
+        // yield put(something);
+    } catch (error: any) {
+        console.log(error);
+    }
+
+    // yield put(signupActions.failure());
+}
+
+export function* _addGroup(action: ActionType<typeof addGroupActions.addGroup>) {
+    const { description, name } = action.payload;
+
+    const addGroupMutation = gql`
+        mutation CreateGroupMutation($name: String!, $description: String) {
+            createGroup(name: $name, description: $description) {
+                id
+                createdAt
+            }
+        }
+    `;
+
+    try {
+        const addGroupResponse: AddGroupResponse = yield graphQLClient.request<AddGroupResponse>(addGroupMutation, {
+            description: description,
+            name: name
+        });
+
+        console.log(JSON.stringify(addGroupResponse));
+
+        const untypedResponse: any = addGroupResponse as any;
 
         if (untypedResponse.errors) {
             throw new Error(untypedResponse.errors);

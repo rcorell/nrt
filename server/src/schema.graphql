@@ -5,6 +5,7 @@ type Query {
 }
 
 type Mutation {
+	createGroup(name: String!, description: String): Topic!
 	createTopic(title: String!, description: String): Topic!
 	signup(email: String!, password: String!, name: String!): AuthPayload
 	login(email: String!, password: String!): AuthPayload
@@ -15,14 +16,15 @@ type AuthPayload {
 	user: User
 }
 
-type User {
+type Group {
 	id: ID!
 	name: String!
-	email: String!
+	description: String!
+	creator: User!
+	users: [User]!
 	topics: [Topic]!
-	groups: [Group]!
-	createdAt: DateTime
-	updatedAt: DateTime
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type Topic {
@@ -31,16 +33,19 @@ type Topic {
 	description: String!
 	author: User!
 	group: Group!
-	createdAt: DateTime
-	updatedAt: DateTime
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
-type Group {
+type User {
 	id: ID!
 	name: String!
-	description: String!
-	users: [User]!
+	email: String!
 	topics: [Topic]!
-	createdAt: DateTime
-	updatedAt: DateTime
+	groupsCreated: [Group]!
+	groups: [Group]!
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
+
+

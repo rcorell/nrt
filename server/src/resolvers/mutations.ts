@@ -44,3 +44,15 @@ export const createTopic = async (_parent, args, context) => {
         }
     });
 };
+
+export const createGroup = async (_parent, args, context) => {
+    const { userId } = context;
+
+    return await context.prisma.group.create({
+        data: {
+            creator: { connect: { id: userId } },
+            description: args.description,
+            name: args.name
+        }
+    });
+};
