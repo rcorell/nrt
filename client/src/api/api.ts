@@ -70,26 +70,22 @@ export const login = async (email: string, password: string) => {
         }
     `;
 
-    try {
-        const loginResponse: LoginResponse = await graphQLClient.request<LoginResponse>(loginMutation, {
-            email,
-            password
-        });
+    const loginResponse: LoginResponse = await graphQLClient.request<LoginResponse>(loginMutation, {
+        email,
+        password
+    });
 
-        const untypedResponse: any = loginResponse as any;
+    const untypedResponse: any = loginResponse as any;
 
-        if (untypedResponse.errors) {
-            throw new Error(untypedResponse.errors);
-        }
-
-        const authValue = `Bearer ${loginResponse.login.token}`;
-
-        graphQLClient.setHeader('Authorization', authValue);
-        window.localStorage.setItem('email', email);
-        window.localStorage.setItem('token', loginResponse.login.token);
-    } catch (error: any) {
-        console.log('Login error', error);
+    if (untypedResponse.errors) {
+        throw new Error(untypedResponse.errors);
     }
+
+    const authValue = `Bearer ${loginResponse.login.token}`;
+
+    graphQLClient.setHeader('Authorization', authValue);
+    window.localStorage.setItem('email', email);
+    window.localStorage.setItem('token', loginResponse.login.token);
 };
 
 // export function* _checkAuthenticated(): SagaIterator<void> {

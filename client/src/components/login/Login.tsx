@@ -2,27 +2,22 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { login } from 'src/api/api';
 import { setBrowserTitle } from 'src/components/utils';
 import * as loginActions from 'src/redux/login/actions';
-import { getIsAuthenticated, getLoginAttemptStatus } from 'src/redux/login/selectors';
 import { LoginAttemptStatus } from 'src/redux/login/types';
-import { State } from 'src/redux/state.types';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
-interface LoginStateProps {
-    authenticated: boolean;
-    loginAttemptStatus: LoginAttemptStatus;
-}
-
 interface LoginDispatchProps {
-    login: (email: string, password: string) => void;
+    authenticated: () => void;
 }
 
-export type LoginComponentProps = LoginStateProps & LoginDispatchProps;
+export type LoginComponentProps = LoginDispatchProps;
 
 interface LoginState {
     email: string;
     password: string;
+    loginAttemptStatus: LoginAttemptStatus;
 }
 
 export class LoginComponent extends React.Component<LoginComponentProps, LoginState> {
@@ -30,6 +25,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
         super(props);
         this.state = {
             email: '',
+            loginAttemptStatus: LoginAttemptStatus.NOT_ATTEMPTED,
             password: ''
         };
     }
@@ -39,7 +35,7 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
     }
 
     isFormInvalid = () => {
-        return this.state.email.length < '@fivestars.com'.length + 1 || this.state.password.length === 0;
+        return this.state.email.length < 7 || this.state.password.length === 0;
     };
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +55,26 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
 
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        this.props.login(this.state.email, this.state.password);
+        this.setState({ loginAttemptStatus: LoginAttemptStatus.IN_PROGRESS });
+        login(this.state.email, this.state.password)
+            .then(() => {
+                this.setState({ loginAttemptStatus: LoginAttemptStatus.SUCCESS });
+                this.props.authenticated();
+            })
+            .catch(() => {
+                this.setState({ loginAttemptStatus: LoginAttemptStatus.FAILURE });
+            });
+    };
+
+    authStatus = () => {
+        switch (this.state.loginAttemptStatus) {
+            case LoginAttemptStatus.IN_PROGRESS:
+                return 'Attempting login...';
+            case LoginAttemptStatus.FAILURE:
+                return 'Login failed';
+        }
+
+        return '';
     };
 
     render() {
@@ -96,21 +111,14 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
                         Log In
                     </Button>
                 </AuthForm>
-                <AuthError>
-                    {this.props.loginAttemptStatus === LoginAttemptStatus.FAILURE ? 'Login Failed' : ''}
-                </AuthError>
+                <AuthError>{this.authStatus()}</AuthError>
             </FormContainer>
         );
     }
 }
 
-export const mapStateToProps: (state: State) => LoginStateProps = (state: State) => ({
-    authenticated: getIsAuthenticated(state),
-    loginAttemptStatus: getLoginAttemptStatus(state)
-});
-
 export const mapDispatchToProps = (dispatch: Function) => ({
-    login: (email: string, password: string) => dispatch(loginActions.login(email, password))
+    authenticated: () => dispatch(loginActions.authenticated())
 });
 
-export const Login = connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export const Login = connect(null, mapDispatchToProps)(LoginComponent);
