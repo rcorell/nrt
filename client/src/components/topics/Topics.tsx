@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { setBrowserTitle } from 'src/components/utils';
 import { Topic } from 'src/redux/topics/types';
-import { fetchTopics } from 'src/sagas/api';
+import { fetchTopics } from 'src/api/api';
 
 const COLUMN_DEFINITIONS = [
     { title: 'Title', field: 'title' },

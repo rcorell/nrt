@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
+import { addTopic } from 'src/api/api';
 import { setBrowserTitle } from 'src/components/utils';
 import * as addTopicActions from 'src/redux/addTopic/actions';
 import { State } from 'src/redux/state.types';
@@ -44,7 +45,7 @@ export class AddTopicComponent extends React.Component<AddTopicDispatchProps, Ad
 
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        this.props.addTopic(this.state.topic);
+        addTopic(this.state.topic);
     };
 
     render() {

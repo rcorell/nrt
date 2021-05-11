@@ -15,18 +15,18 @@ interface AddGroupResponse {
     createdAt: string;
 }
 
-// interface AddTopicResponse {
-//     topic: string;
-// }
+interface AddTopicResponse {
+    topic: string;
+}
 
-// type Topic = {
-//     title: string;
-//     description: string;
-// };
+type Topic = {
+    title: string;
+    description: string;
+};
 
-// interface FetchTopicsResponse {
-//     topics: Topic[];
-// }
+interface FetchTopicsResponse {
+    topics: Topic[];
+}
 
 // type Group = {
 //     description: string;
@@ -100,39 +100,37 @@ export const checkAuthenticated = (): boolean => {
     return true;
 };
 
-// export function* _addTopic(action: ActionType<typeof addTopicActions.addTopic>) {
-//     const { topic } = action.payload;
+export const addTopic = async (topic: string) => {
+    const addTopicMutation = gql`
+        mutation CreateTopicMutation($title: String!, $description: String) {
+            createTopic(title: $title, description: $description) {
+                id
+                createdAt
+            }
+        }
+    `;
 
-//     const addTopicMutation = gql`
-//         mutation CreateTopicMutation($title: String!, $description: String) {
-//             createTopic(title: $title, description: $description) {
-//                 id
-//                 createdAt
-//             }
-//         }
-//     `;
+    try {
+        const addTopicResponse: AddTopicResponse = await graphQLClient.request<AddTopicResponse>(addTopicMutation, {
+            description: '',
+            title: topic
+        });
 
-//     try {
-//         const addTopicResponse: AddTopicResponse = yield graphQLClient.request<AddTopicResponse>(addTopicMutation, {
-//             description: '',
-//             title: topic
-//         });
+        console.log(JSON.stringify(addTopicResponse));
 
-//         console.log(JSON.stringify(addTopicResponse));
+        const untypedResponse: any = addTopicResponse as any;
 
-//         const untypedResponse: any = addTopicResponse as any;
+        if (untypedResponse.errors) {
+            throw new Error(untypedResponse.errors);
+        }
 
-//         if (untypedResponse.errors) {
-//             throw new Error(untypedResponse.errors);
-//         }
+        // yield put(something);
+    } catch (error: any) {
+        console.log(error);
+    }
 
-//         // yield put(something);
-//     } catch (error: any) {
-//         console.log(error);
-//     }
-
-//     // yield put(signupActions.failure());
-// }
+    // yield put(signupActions.failure());
+};
 
 export const addGroup = async (description: string, name: string) => {
     const addGroupMutation = gql`
@@ -158,39 +156,25 @@ export const addGroup = async (description: string, name: string) => {
     }
 };
 
-// export const fetchTopics = async () => {
-//     const fetchTopicsQuery = gql`
-//         {
-//             topics {
-//                 title
-//                 description
-//             }
-//         }
-//     `;
+export const fetchTopics = async () => {
+    const getTopicsResponse = await graphQLClient.request<FetchTopicsResponse>(
+        gql`
+            {
+                topics {
+                    title
+                    description
+                }
+            }
+        `
+    );
 
-//     try {
-//         const getTopicsResponse: FetchTopicsResponse = await graphQLClient.request<FetchTopicsResponse>(
-//             fetchTopicsQuery
-//         );
+    console.log(JSON.stringify(getTopicsResponse));
 
-//         console.log(JSON.stringify(getTopicsResponse));
+    const untypedResponse: any = getTopicsResponse as any;
 
-//         const untypedResponse: any = getTopicsResponse as any;
+    if (untypedResponse.errors) {
+        throw new Error(untypedResponse.errors);
+    }
 
-//         if (untypedResponse.errors) {
-//             throw new Error(untypedResponse.errors);
-//         }
-//         console.log(untypedResponse);
-
-//         return getTopicsResponse.topics as Topic[];
-//     } catch (error: any) {
-//         console.log(error);
-//     }
-
-//     return [];
-// };
-
-// export function* _fetchTopics(action: ActionType<typeof topicsActions.fetchTopics>) {
-//     const topics: Topic[] = yield call(fetchTopics);
-//     yield put(topicsActions.setTopics(topics));
-// }
+    return getTopicsResponse.topics;
+};
