@@ -2,22 +2,17 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
+import { addGroup } from 'src/api/api';
 import { setBrowserTitle } from 'src/components/utils';
-import * as addGroupActions from 'src/redux/addGroup/actions';
-import { State } from 'src/redux/state.types';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
-
-interface AddGroupDispatchProps {
-    addGroup: (name: string, description: string) => void;
-}
 
 interface AddGroupState {
     description: string;
     name: string;
 }
 
-export class AddGroupComponent extends React.Component<AddGroupDispatchProps, AddGroupState> {
-    public constructor(props: AddGroupDispatchProps) {
+export class AddGroupComponent extends React.Component<{}, AddGroupState> {
+    public constructor(props = {}) {
         super(props);
         this.state = {
             description: '',
@@ -50,7 +45,9 @@ export class AddGroupComponent extends React.Component<AddGroupDispatchProps, Ad
 
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        this.props.addGroup(this.state.name, this.state.description);
+        addGroup(this.state.name, this.state.description).then(() => {
+            console.log('Group added');
+        });
     };
 
     render() {
@@ -89,10 +86,4 @@ export class AddGroupComponent extends React.Component<AddGroupDispatchProps, Ad
     }
 }
 
-export const mapStateToProps = (_state: State) => ({});
-
-export const mapDispatchToProps = (dispatch: Function) => ({
-    addGroup: (name: string, description: string) => dispatch(addGroupActions.addGroup(name, description))
-});
-
-export const AddGroup = connect(mapStateToProps, mapDispatchToProps)(AddGroupComponent);
+export const AddGroup = connect()(AddGroupComponent);

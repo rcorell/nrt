@@ -3,10 +3,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Route, Router, Switch } from 'react-router-dom';
 
+import { checkAuthenticated } from 'src/api/api';
 import { AddGroup } from 'src/components/addGroup/AddGroup';
 import { AddTopic } from 'src/components/addTopic/AddTopic';
 import { Home } from 'src/components/home/Home';
 import { Login } from 'src/components/login/Login';
+import * as loginActions from 'src/redux/login/actions';
 import { NotFound } from 'src/components/notFound/NotFound';
 import { Path } from 'src/redux/navigation/types';
 import { Signup } from 'src/components/signup/Signup';
@@ -18,9 +20,19 @@ import { PrivateRoute } from './PrivateRoute';
 const history = createBrowserHistory();
 export { history };
 
-export class RoutesComponent extends React.Component<{}> {
+interface RoutesDispatchProps {
+    authenticated: () => void;
+}
+
+export class RoutesComponent extends React.Component<RoutesDispatchProps> {
     public constructor(props: any) {
         super(props);
+    }
+
+    componentDidMount() {
+        if (checkAuthenticated()) {
+            this.props.authenticated();
+        }
     }
 
     render() {
@@ -47,4 +59,8 @@ export class RoutesComponent extends React.Component<{}> {
     }
 }
 
-export const Routes = connect()(RoutesComponent);
+export const mapDispatchToProps = (dispatch: Function) => ({
+    authenticated: () => dispatch(loginActions.authenticated())
+});
+
+export const Routes = connect(null, mapDispatchToProps)(RoutesComponent);

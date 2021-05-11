@@ -10,10 +10,10 @@ interface LoginResponse {
     login: { token: string };
 }
 
-// interface AddGroupResponse {
-//     id: number;
-//     createdAt: string;
-// }
+interface AddGroupResponse {
+    id: number;
+    createdAt: string;
+}
 
 // interface AddTopicResponse {
 //     topic: string;
@@ -88,21 +88,17 @@ export const login = async (email: string, password: string) => {
     window.localStorage.setItem('token', loginResponse.login.token);
 };
 
-// export function* _checkAuthenticated(): SagaIterator<void> {
-//     const token = window.localStorage.getItem('token');
+export const checkAuthenticated = (): boolean => {
+    const token = window.localStorage.getItem('token');
 
-//     if (!token) {
-//         return;
-//     }
+    if (!token) {
+        return false;
+    }
 
-//     graphQLClient.setHeader('Authorization', `Bearer ${token}`);
+    graphQLClient.setHeader('Authorization', `Bearer ${token}`);
 
-//     try {
-//         yield put(loginActions.authenticated());
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+    return true;
+};
 
 // export function* _addTopic(action: ActionType<typeof addTopicActions.addTopic>) {
 //     const { topic } = action.payload;
@@ -138,39 +134,29 @@ export const login = async (email: string, password: string) => {
 //     // yield put(signupActions.failure());
 // }
 
-// export function* _addGroup(action: ActionType<typeof addGroupActions.addGroup>) {
-//     const { description, name } = action.payload;
+export const addGroup = async (description: string, name: string) => {
+    const addGroupMutation = gql`
+        mutation CreateGroupMutation($name: String!, $description: String) {
+            createGroup(name: $name, description: $description) {
+                id
+                createdAt
+            }
+        }
+    `;
 
-//     const addGroupMutation = gql`
-//         mutation CreateGroupMutation($name: String!, $description: String) {
-//             createGroup(name: $name, description: $description) {
-//                 id
-//                 createdAt
-//             }
-//         }
-//     `;
+    const addGroupResponse: AddGroupResponse = await graphQLClient.request<AddGroupResponse>(addGroupMutation, {
+        description: description,
+        name: name
+    });
 
-//     try {
-//         const addGroupResponse: AddGroupResponse = yield graphQLClient.request<AddGroupResponse>(addGroupMutation, {
-//             description: description,
-//             name: name
-//         });
+    console.log(JSON.stringify(addGroupResponse));
 
-//         console.log(JSON.stringify(addGroupResponse));
+    const untypedResponse: any = addGroupResponse as any;
 
-//         const untypedResponse: any = addGroupResponse as any;
-
-//         if (untypedResponse.errors) {
-//             throw new Error(untypedResponse.errors);
-//         }
-
-//         // yield put(something);
-//     } catch (error: any) {
-//         console.log(error);
-//     }
-
-//     // yield put(signupActions.failure());
-// }
+    if (untypedResponse.errors) {
+        throw new Error(untypedResponse.errors);
+    }
+};
 
 // export const fetchTopics = async () => {
 //     const fetchTopicsQuery = gql`
