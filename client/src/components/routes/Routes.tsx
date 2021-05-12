@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { Route, Router, Switch } from 'react-router-dom';
 
 import { checkAuthenticated } from 'src/api/api';
-import { AddGroup } from 'src/components/addGroup/AddGroup';
-import { AddTopic } from 'src/components/addTopic/AddTopic';
+import { AddGroup } from 'src/components/AddGroup';
+import { AddTopic } from 'src/components/AddTopic';
 import { Home } from 'src/components/home/Home';
 import { Login } from 'src/components/login/Login';
 import * as loginActions from 'src/redux/login/actions';
-import { NotFound } from 'src/components/notFound/NotFound';
+import { NotFound } from 'src/components/NotFound';
 import { Path } from 'src/redux/navigation/types';
-import { Signup } from 'src/components/signup/Signup';
-import { Topics } from 'src/components/topics/Topics';
+import { Signup } from 'src/components/Signup';
+import { Topics } from 'src/components/Topics';
 
 import { NavigationBar } from './NavigationBar';
 import { PrivateRoute } from './PrivateRoute';

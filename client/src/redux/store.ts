@@ -1,12 +1,9 @@
-import { applyMiddleware, combineReducers, createStore, Middleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import reduxSaga from 'redux-saga';
+import { combineReducers, createStore, Middleware } from 'redux';
 import { getType } from 'typesafe-actions';
 
 import * as loginActions from '../redux/login/actions';
 import { loginReducer as login } from '../redux/login/reducer';
 import { topicsReducer as topics } from 'src/redux/topics/reducer';
-import { rootSaga } from '../sagas/main';
 import { ReducerState } from './state.types';
 
 const reducers: ReducerState = {
@@ -24,12 +21,5 @@ export const logMiddleware: Middleware = () => next => (action: any): any => {
     return next(action);
 };
 
-const sagaMiddleware = reduxSaga();
-// exporting to support testing
 export const _combinedReducers = combineReducers(reducers);
-export const Store = createStore(
-    _combinedReducers,
-    composeWithDevTools(applyMiddleware(logMiddleware, sagaMiddleware))
-);
-
-sagaMiddleware.run(rootSaga);
+export const Store = createStore(_combinedReducers);
