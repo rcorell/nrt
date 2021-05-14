@@ -37,12 +37,8 @@ export class RoutesComponent extends React.Component<RoutesDispatchProps> {
                     <Route exact path={Path.LOGIN} component={Login} />
                     <Route exact path={Path.SIGNUP} component={Signup} />
                     <PrivateRoute exact path={Path.ADD_TOPIC} component={AddTopic} />
-                    <Route exact path={Path.TOPICS} component={Topics} />
+                    <PrivateRoute exact path={Path.TOPICS} component={Topics} />
                     <PrivateRoute exact path={Path.ADD_GROUP} component={AddGroup} />
-
-                    {/* <Route exact path={Path.OUT_OF_SERVICE} component={OutOfService} />
-                    <Route exact path={Path.WAITING} component={Waiting} /> */}
-
                     <PrivateRoute exact path={Path.HOME} component={Home} />
 
                     <Route component={NotFound} />

@@ -3,8 +3,8 @@ import { useQuery } from '@apollo/client';
 import MaterialTable from 'material-table';
 import React from 'react';
 
-import { FetchTopicsQuery } from 'src/api/api';
-import { fetchTopics } from 'src/api/__generated__/fetchTopics';
+import { fetchTopicsQueryString } from 'src/api/api';
+import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
 import { setBrowserTitle } from 'src/components/utils';
 
 const COLUMN_DEFINITIONS = [
@@ -15,7 +15,7 @@ const COLUMN_DEFINITIONS = [
 export const Topics: React.FC = () => {
     setBrowserTitle('Topics');
 
-    const { data, error, loading } = useQuery<fetchTopics>(FetchTopicsQuery);
+    const { data, error, loading } = useQuery<FetchTopicsQuery>(fetchTopicsQueryString);
 
     if (loading) {
         return <div>Loading...</div>;

@@ -1,123 +1,81 @@
-import * as React from 'react';
+import { useMutation } from '@apollo/client';
+import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
+import { loginMutationString } from 'src/api/api';
+import { history } from 'src/components/routes/Routes';
+import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
 import { setBrowserTitle } from 'src/components/utils';
-import * as loginActions from 'src/redux/login/actions';
-import { LoginAttemptStatus } from 'src/redux/login/types';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
-interface LoginDispatchProps {
-    authenticated: () => void;
-}
+export const Login: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-export type LoginComponentProps = LoginDispatchProps;
-
-interface LoginState {
-    email: string;
-    password: string;
-    loginAttemptStatus: LoginAttemptStatus;
-}
-
-export class LoginComponent extends React.Component<LoginComponentProps, LoginState> {
-    public constructor(props: LoginComponentProps) {
-        super(props);
-        this.state = {
-            email: '',
-            loginAttemptStatus: LoginAttemptStatus.NOT_ATTEMPTED,
-            password: ''
-        };
-    }
-
-    componentDidMount() {
-        setBrowserTitle('Login');
-    }
-
-    isFormInvalid = () => {
-        return this.state.email.length < 7 || this.state.password.length === 0;
-    };
-
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newState: LoginState = this.state;
-
-        switch (event.target.id) {
-            case 'email':
-                newState.email = event.target.value;
-                break;
-
-            case 'password':
-                newState.password = event.target.value;
-                break;
+    const [login, { error }] = useMutation<LoginMutation, LoginMutationVariables>(loginMutationString, {
+        variables: { email, password },
+        onCompleted: ({ login }) => {
+            if (login?.token) {
+                localStorage.setItem('token', login.token);
+                history.push('/');
+            }
         }
-        this.setState(newState);
+    });
+
+    setBrowserTitle('Login');
+
+    const isFormInvalid = () => {
+        return email.length < 7 || password.length === 0;
     };
 
-    handleSubmit = (event: React.FormEvent<FormControlProps>) => {
+    const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        this.setState({ loginAttemptStatus: LoginAttemptStatus.IN_PROGRESS });
-        // login(this.state.email, this.state.password)
-        //     .then(() => {
-        //         this.setState({ loginAttemptStatus: LoginAttemptStatus.SUCCESS });
-        //         this.props.authenticated();
-        //     })
-        //     .catch(() => {
-        //         this.setState({ loginAttemptStatus: LoginAttemptStatus.FAILURE });
-        //     });
+
+        login();
     };
 
-    authStatus = () => {
-        switch (this.state.loginAttemptStatus) {
-            case LoginAttemptStatus.IN_PROGRESS:
-                return 'Attempting login...';
-            case LoginAttemptStatus.FAILURE:
-                return 'Login failed';
+    const authStatus = () => {
+        if (error) {
+            return <AuthError>Error: {error.message}</AuthError>;
         }
 
-        return '';
+        return null;
     };
 
-    render() {
-        return (
-            <FormContainer>
-                <h1>Login</h1>
-                <AuthForm onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            id="email"
-                            onChange={this.handleChange}
-                            size="lg"
-                            type="email"
-                            value={this.state.email}
-                            placeholder={'email'}
-                        />
-                    </Form.Group>
+    return (
+        <FormContainer>
+            <h1>Login</h1>
+            <AuthForm onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        autoFocus
+                        id="email"
+                        onChange={e => setEmail(e.target.value)}
+                        size="lg"
+                        type="email"
+                        value={email}
+                        placeholder={'email'}
+                    />
+                </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            id="password"
-                            onChange={this.handleChange}
-                            size="lg"
-                            type="password"
-                            value={this.state.password}
-                            placeholder={'password'}
-                        />
-                    </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        id="password"
+                        onChange={e => setPassword(e.target.value)}
+                        size="lg"
+                        type="password"
+                        value={password}
+                        placeholder={'password'}
+                    />
+                </Form.Group>
 
-                    <Button type="submit" disabled={this.isFormInvalid()}>
-                        Log In
-                    </Button>
-                </AuthForm>
-                <AuthError>{this.authStatus()}</AuthError>
-            </FormContainer>
-        );
-    }
-}
-
-export const mapDispatchToProps = (dispatch: Function) => ({
-    authenticated: () => dispatch(loginActions.authenticated())
-});
-
-export const Login = connect(null, mapDispatchToProps)(LoginComponent);
+                <Button type="submit" disabled={isFormInvalid()}>
+                    Log In
+                </Button>
+            </AuthForm>
+            <AuthError>{authStatus()}</AuthError>
+        </FormContainer>
+    );
+};

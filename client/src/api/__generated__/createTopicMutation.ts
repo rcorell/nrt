@@ -4,20 +4,20 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: createTopicMutation
+// GraphQL mutation operation: CreateTopicMutation
 // ====================================================
 
-export interface createTopicMutation_createTopic {
+export interface CreateTopicMutation_createTopic {
   __typename: "Topic";
   id: string;
   createdAt: any;
 }
 
-export interface createTopicMutation {
-  createTopic: createTopicMutation_createTopic;
+export interface CreateTopicMutation {
+  createTopic: CreateTopicMutation_createTopic;
 }
 
-export interface createTopicMutationVariables {
+export interface CreateTopicMutationVariables {
   title: string;
   description?: string | null;
 }
