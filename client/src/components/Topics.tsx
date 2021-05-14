@@ -1,9 +1,11 @@
+import * as _ from 'lodash';
+import { useQuery } from '@apollo/client';
 import MaterialTable from 'material-table';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
+import { FetchTopicsQuery } from 'src/api/api';
+import { fetchTopics } from 'src/api/__generated__/fetchTopics';
 import { setBrowserTitle } from 'src/components/utils';
-import { Topic } from 'src/redux/topics/types';
-import { fetchTopics } from 'src/api/api';
 
 const COLUMN_DEFINITIONS = [
     { title: 'Title', field: 'title' },
@@ -11,28 +13,23 @@ const COLUMN_DEFINITIONS = [
 ];
 
 export const Topics: React.FC = () => {
-    const [topics, setTopics] = useState([] as Topic[]);
-    const componentIsMounted = useRef(true);
-
-    useEffect(() => {
-        return () => {
-            componentIsMounted.current = false;
-        };
-    }, []);
-
-    useEffect(() => {
-        const fetchTopicsHook = async () => {
-            const result = await fetchTopics();
-
-            if (componentIsMounted.current) {
-                setTopics(result);
-            }
-        };
-
-        fetchTopicsHook();
-    }, []);
-
     setBrowserTitle('Topics');
 
-    return <MaterialTable title="Topics" columns={COLUMN_DEFINITIONS} data={topics} />;
+    const { data, error, loading } = useQuery<fetchTopics>(FetchTopicsQuery);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {JSON.stringify(error)}</div>;
+    }
+
+    if (!data?.topics) {
+        return <div>No results</div>;
+    }
+
+    const mutableTopics = _.cloneDeep(data.topics);
+
+    return <MaterialTable title="Topics" columns={COLUMN_DEFINITIONS} data={mutableTopics} />;
 };

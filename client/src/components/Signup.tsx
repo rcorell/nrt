@@ -2,10 +2,7 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { signup } from 'src/api/api';
-import { history } from 'src/components/routes/Routes';
 import { setBrowserTitle } from 'src/components/utils';
-import { Path } from 'src/redux/navigation/types';
 import * as loginActions from 'src/redux/login/actions';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
@@ -61,14 +58,14 @@ export class SignupComponent extends React.Component<SignupComponentProps, Signu
 
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        signup(this.state.email, this.state.name, this.state.password)
-            .then(() => {
-                this.props.authenticated();
-                history.push(Path.HOME);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        // signup(this.state.email, this.state.name, this.state.password)
+        //     .then(() => {
+        //         this.props.authenticated();
+        //         history.push(Path.HOME);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
     };
 
     render() {

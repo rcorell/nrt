@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { addGroup } from 'src/api/api';
 import { setBrowserTitle } from 'src/components/utils';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
@@ -45,9 +44,9 @@ export class AddGroupComponent extends React.Component<{}, AddGroupState> {
 
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        addGroup(this.state.name, this.state.description).then(() => {
-            console.log('Group added');
-        });
+        // addGroup(this.state.name, this.state.description).then(() => {
+        //     console.log('Group added');
+        // });
     };
 
     render() {

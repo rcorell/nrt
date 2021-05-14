@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { login } from 'src/api/api';
 import { setBrowserTitle } from 'src/components/utils';
 import * as loginActions from 'src/redux/login/actions';
 import { LoginAttemptStatus } from 'src/redux/login/types';
@@ -56,14 +55,14 @@ export class LoginComponent extends React.Component<LoginComponentProps, LoginSt
     handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
         this.setState({ loginAttemptStatus: LoginAttemptStatus.IN_PROGRESS });
-        login(this.state.email, this.state.password)
-            .then(() => {
-                this.setState({ loginAttemptStatus: LoginAttemptStatus.SUCCESS });
-                this.props.authenticated();
-            })
-            .catch(() => {
-                this.setState({ loginAttemptStatus: LoginAttemptStatus.FAILURE });
-            });
+        // login(this.state.email, this.state.password)
+        //     .then(() => {
+        //         this.setState({ loginAttemptStatus: LoginAttemptStatus.SUCCESS });
+        //         this.props.authenticated();
+        //     })
+        //     .catch(() => {
+        //         this.setState({ loginAttemptStatus: LoginAttemptStatus.FAILURE });
+        //     });
     };
 
     authStatus = () => {
