@@ -1,127 +1,95 @@
-import * as React from 'react';
+import { useMutation } from '@apollo/client';
+import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
+import { signupMutationString } from 'src/api/api';
+import { history } from 'src/components/routes/Routes';
+import { SignupMutation, SignupMutationVariables } from 'src/api/__generated__/SignupMutation';
 import { setBrowserTitle } from 'src/components/utils';
-import * as loginActions from 'src/redux/login/actions';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
-interface SignupDispatchProps {
-    authenticated: () => void;
-}
+export const Signup: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
 
-export type SignupComponentProps = SignupDispatchProps;
-
-interface SignupState {
-    email: string;
-    name: string;
-    password: string;
-}
-
-export class SignupComponent extends React.Component<SignupComponentProps, SignupState> {
-    public constructor(props: SignupComponentProps) {
-        super(props);
-
-        this.state = {
-            email: '',
-            name: '',
-            password: ''
-        };
-    }
-
-    componentDidMount() {
-        setBrowserTitle('Sign Up');
-    }
-
-    isFormInvalid = () => {
-        return this.state.email.length < 7 || this.state.name.length === 0 || this.state.password.length === 0;
-    };
-
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newState: SignupState = this.state;
-
-        switch (event.target.id) {
-            case 'email':
-                newState.email = event.target.value;
-                break;
-
-            case 'name':
-                newState.name = event.target.value;
-                break;
-
-            case 'password':
-                newState.password = event.target.value;
-                break;
+    const [signup, { error }] = useMutation<SignupMutation, SignupMutationVariables>(signupMutationString, {
+        variables: { email, name, password },
+        onCompleted: ({ signup }) => {
+            if (signup?.token) {
+                console.log(signup);
+                localStorage.setItem('token', signup.token);
+                history.push('/');
+            }
         }
-        this.setState(newState);
+    });
+
+    setBrowserTitle('Sign Up');
+
+    const isFormInvalid = () => {
+        return email.length < 7 || name.length === 0 || password.length === 0;
     };
 
-    handleSubmit = (event: React.FormEvent<FormControlProps>) => {
+    const signupStatus = () => {
+        if (error) {
+            return <AuthError>Error: {error.message}</AuthError>;
+        }
+
+        return null;
+    };
+
+    const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        // signup(this.state.email, this.state.name, this.state.password)
-        //     .then(() => {
-        //         this.props.authenticated();
-        //         history.push(Path.HOME);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
+
+        signup();
     };
 
-    render() {
-        return (
-            <FormContainer>
-                <h1>Sign Up</h1>
-                <AuthForm onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            id="email"
-                            onChange={this.handleChange}
-                            size="lg"
-                            type="email"
-                            value={this.state.email}
-                            placeholder={'email'}
-                        />
-                    </Form.Group>
+    return (
+        <FormContainer>
+            <h1>Sign Up</h1>
+            <AuthForm onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        autoFocus
+                        id="email"
+                        onChange={e => setEmail(e.target.value)}
+                        size="lg"
+                        type="email"
+                        value={email}
+                        placeholder={'email'}
+                    />
+                </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            id="name"
-                            onChange={this.handleChange}
-                            size="lg"
-                            value={this.state.name}
-                            placeholder={'name'}
-                        />
-                    </Form.Group>
+                <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        autoFocus
+                        id="name"
+                        onChange={e => setName(e.target.value)}
+                        size="lg"
+                        value={name}
+                        placeholder={'name'}
+                    />
+                </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            id="password"
-                            onChange={this.handleChange}
-                            size="lg"
-                            type="password"
-                            value={this.state.password}
-                            placeholder={'password'}
-                        />
-                    </Form.Group>
+                <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        id="password"
+                        onChange={e => setPassword(e.target.value)}
+                        size="lg"
+                        type="password"
+                        value={password}
+                        placeholder={'password'}
+                    />
+                </Form.Group>
 
-                    <Button type="submit" disabled={this.isFormInvalid()}>
-                        Sign Up
-                    </Button>
-                </AuthForm>
-                <AuthError></AuthError>
-            </FormContainer>
-        );
-    }
-}
-
-export const mapDispatchToProps = (dispatch: Function) => ({
-    authenticated: () => dispatch(loginActions.authenticated())
-});
-
-export const Signup = connect(null, mapDispatchToProps)(SignupComponent);
+                <Button type="submit" disabled={isFormInvalid()}>
+                    Sign Up
+                </Button>
+            </AuthForm>
+            <AuthError>{signupStatus()}</AuthError>
+        </FormContainer>
+    );
+};

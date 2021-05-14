@@ -47,7 +47,7 @@ export const CreateGroupMutation = gql`
     }
 `;
 
-export const SignupMutation = gql`
+export const signupMutationString = gql`
     mutation SignupMutation($email: String!, $name: String!, $password: String!) {
         signup(email: $email, name: $name, password: $password) {
             token
