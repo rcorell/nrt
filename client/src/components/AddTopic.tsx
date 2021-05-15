@@ -5,7 +5,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
 import { createTopicMutationString } from 'src/api/api';
 
-import { AuthError, AuthForm, FormContainer } from 'src/styles/form';
+import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
 
 export const AddTopic: React.FC = () => {
@@ -46,7 +46,7 @@ export const AddTopic: React.FC = () => {
         <FormContainer>
             <h1>Add Topic</h1>
             {errorStatus}
-            <AuthForm onSubmit={handleSubmit}>
+            <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Topic</Form.Label>
                     <Form.Control
@@ -73,8 +73,8 @@ export const AddTopic: React.FC = () => {
                 <Button type="submit" disabled={isFormInvalid()}>
                     Submit Topic
                 </Button>
-            </AuthForm>
-            <AuthError></AuthError>
+            </AppForm>
+            <AppError></AppError>
         </FormContainer>
     );
 };

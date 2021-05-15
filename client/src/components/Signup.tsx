@@ -6,7 +6,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { signupMutationString } from 'src/api/api';
 import { SignupMutation, SignupMutationVariables } from 'src/api/__generated__/SignupMutation';
 import { setBrowserTitle } from 'src/utils';
-import { AuthError, AuthForm, FormContainer } from 'src/styles/form';
+import { AppError, AppForm, FormContainer } from 'src/styles/form';
 
 export const Signup: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -32,7 +32,7 @@ export const Signup: React.FC = () => {
 
     const signupStatus = () => {
         if (error) {
-            return <AuthError>Error: {error.message}</AuthError>;
+            return <AppError>Error: {error.message}</AppError>;
         }
 
         return null;
@@ -47,7 +47,7 @@ export const Signup: React.FC = () => {
     return (
         <FormContainer>
             <h1>Sign Up</h1>
-            <AuthForm onSubmit={handleSubmit}>
+            <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -88,8 +88,8 @@ export const Signup: React.FC = () => {
                 <Button type="submit" disabled={isFormInvalid()}>
                     Sign Up
                 </Button>
-            </AuthForm>
-            <AuthError>{signupStatus()}</AuthError>
+            </AppForm>
+            <AppError>{signupStatus()}</AppError>
         </FormContainer>
     );
 };

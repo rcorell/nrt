@@ -12,7 +12,7 @@ export const FormContainer = styled.div`
     }
 `;
 
-export const AuthForm = styled.form`
+export const AppForm = styled.form`
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -49,6 +49,6 @@ export const AuthForm = styled.form`
     }
 `;
 
-export const AuthError = styled.div`
+export const AppError = styled.div`
     color: red;
 `;

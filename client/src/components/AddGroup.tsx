@@ -5,7 +5,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { createGroupMutationString } from 'src/api/api';
 import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
 import { setBrowserTitle } from 'src/utils';
-import { AuthError, AuthForm, FormContainer } from 'src/styles/form';
+import { AppError, AppForm, FormContainer } from 'src/styles/form';
 
 export const AddGroup: React.FC = () => {
     const [description, setDescription] = useState('');
@@ -45,7 +45,7 @@ export const AddGroup: React.FC = () => {
         <FormContainer>
             <h1>Add Group</h1>
             {errorDisplay()}
-            <AuthForm onSubmit={handleSubmit}>
+            <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -70,8 +70,8 @@ export const AddGroup: React.FC = () => {
                 <Button type="submit" disabled={isFormInvalid()}>
                     Add Group
                 </Button>
-            </AuthForm>
-            <AuthError></AuthError>
+            </AppForm>
+            <AppError></AppError>
         </FormContainer>
     );
 };

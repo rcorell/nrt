@@ -7,7 +7,7 @@ import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { loginMutationString } from 'src/api/api';
 import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
 import { setBrowserTitle } from 'src/utils';
-import { AuthError, AuthForm, FormContainer } from 'src/styles/form';
+import { AppError, AppForm, FormContainer } from 'src/styles/form';
 
 export const Login: React.FC = () => {
     const { setAuthenticated } = useContext(GlobalContext);
@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
 
     const authStatus = () => {
         if (error) {
-            return <AuthError>Error: {error.message}</AuthError>;
+            return <AppError>Error: {error.message}</AppError>;
         }
 
         return null;
@@ -49,7 +49,7 @@ export const Login: React.FC = () => {
     return (
         <FormContainer>
             <h1>Login</h1>
-            <AuthForm onSubmit={handleSubmit}>
+            <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -78,8 +78,8 @@ export const Login: React.FC = () => {
                 <Button type="submit" disabled={isFormInvalid()}>
                     Log In
                 </Button>
-            </AuthForm>
-            <AuthError>{authStatus()}</AuthError>
+            </AppForm>
+            <AppError>{authStatus()}</AppError>
         </FormContainer>
     );
 };
