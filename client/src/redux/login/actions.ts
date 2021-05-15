@@ -2,7 +2,7 @@
 
 import { createAction } from 'typesafe-actions';
 
-export const login = createAction('LOGIN_LOGIN', resolve => (email: string, password: string) =>
+export const login = createAction('LOGIN_LOGIN', (resolve) => (email: string, password: string) =>
     resolve({ email, password })
 );
 export const authenticated = createAction('LOGIN_AUTHENTICATED');

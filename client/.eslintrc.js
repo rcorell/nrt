@@ -25,9 +25,11 @@ module.exports = {
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
-        'prettier/prettier': 2
+        'prettier/prettier': 2,
+        'react/prop-types': 'off'
     },
     settings: {
         react: {

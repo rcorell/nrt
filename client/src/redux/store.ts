@@ -13,7 +13,7 @@ const reducers: ReducerState = {
 
 const LOGIN_ACTION_TYPE = getType(loginActions.login);
 
-export const logMiddleware: Middleware = () => next => (action: any): any => {
+export const logMiddleware: Middleware = () => (next) => (action: any): any => {
     if (action.type !== LOGIN_ACTION_TYPE) {
         console.info('dispatching', action);
     }

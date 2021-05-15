@@ -2,4 +2,4 @@
 
 import { createAction } from 'typesafe-actions';
 
-export const addTopic = createAction('ADDTOPIC_ADD_TOPIC', resolve => (topic: string) => resolve({ topic }));
+export const addTopic = createAction('ADDTOPIC_ADD_TOPIC', (resolve) => (topic: string) => resolve({ topic }));

@@ -8,15 +8,15 @@
 // ====================================================
 
 export interface LoginMutation_login {
-  __typename: "AuthPayload";
-  token: string | null;
+    __typename: 'AuthPayload';
+    token: string | null;
 }
 
 export interface LoginMutation {
-  login: LoginMutation_login | null;
+    login: LoginMutation_login | null;
 }
 
 export interface LoginMutationVariables {
-  email: string;
-  password: string;
+    email: string;
+    password: string;
 }

@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import React, { useContext, useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { GlobalContext } from 'src/components/App';
+import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { loginMutationString } from 'src/api/api';
 import { history } from 'src/components/Routes';
 import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
@@ -55,7 +55,7 @@ export const Login: React.FC = () => {
                     <Form.Control
                         autoFocus
                         id="email"
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                         size="lg"
                         type="email"
                         value={email}
@@ -67,7 +67,7 @@ export const Login: React.FC = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         id="password"
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         size="lg"
                         type="password"
                         value={password}

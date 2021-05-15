@@ -2,6 +2,6 @@
 
 import { createAction } from 'typesafe-actions';
 
-export const signup = createAction('SIGNUP_SIGNUP', resolve => (email: string, name: string, password: string) =>
+export const signup = createAction('SIGNUP_SIGNUP', (resolve) => (email: string, name: string, password: string) =>
     resolve({ email, name, password })
 );

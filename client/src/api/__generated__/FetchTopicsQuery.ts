@@ -8,11 +8,11 @@
 // ====================================================
 
 export interface FetchTopicsQuery_topics {
-  __typename: "Topic";
-  title: string;
-  description: string;
+    __typename: 'Topic';
+    title: string;
+    description: string;
 }
 
 export interface FetchTopicsQuery {
-  topics: FetchTopicsQuery_topics[];
+    topics: FetchTopicsQuery_topics[];
 }

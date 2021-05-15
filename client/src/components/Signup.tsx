@@ -53,7 +53,7 @@ export const Signup: React.FC = () => {
                     <Form.Control
                         autoFocus
                         id="email"
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                         size="lg"
                         type="email"
                         value={email}
@@ -66,7 +66,7 @@ export const Signup: React.FC = () => {
                     <Form.Control
                         autoFocus
                         id="name"
-                        onChange={e => setName(e.target.value)}
+                        onChange={(e) => setName(e.target.value)}
                         size="lg"
                         value={name}
                         placeholder={'name'}
@@ -77,7 +77,7 @@ export const Signup: React.FC = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         id="password"
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         size="lg"
                         type="password"
                         value={password}

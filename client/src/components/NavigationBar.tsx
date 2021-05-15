@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { logout } from 'src/api/api';
-import { GlobalContext } from 'src/components/App';
+import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { history } from 'src/components/Routes';
 import { Path } from 'src/redux/navigation/types';
 

@@ -8,16 +8,16 @@
 // ====================================================
 
 export interface CreateTopicMutation_createTopic {
-  __typename: "Topic";
-  id: string;
-  createdAt: any;
+    __typename: 'Topic';
+    id: string;
+    createdAt: any;
 }
 
 export interface CreateTopicMutation {
-  createTopic: CreateTopicMutation_createTopic;
+    createTopic: CreateTopicMutation_createTopic;
 }
 
 export interface CreateTopicMutationVariables {
-  title: string;
-  description?: string | null;
+    title: string;
+    description?: string | null;
 }
