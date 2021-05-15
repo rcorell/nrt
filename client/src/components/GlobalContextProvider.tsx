@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { isAuthenticated } from 'src/api/api';
+
 type GlobalContextType = {
     authenticated: boolean;
     setAuthenticated: (authenticated: boolean) => void;
@@ -11,7 +13,7 @@ export const GlobalContext = React.createContext<GlobalContextType>({
 });
 
 export const GlobalContextProvider: React.FC = ({ children }) => {
-    const [authenticated, setAuthenticated] = useState(false);
+    const [authenticated, setAuthenticated] = useState(isAuthenticated());
 
     const contextFunctions = { authenticated, setAuthenticated };
 
