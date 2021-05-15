@@ -25,6 +25,10 @@ export const isAuthenticated = () => {
     return Boolean(localStorage.getItem(AUTHENTICATION_TOKEN_NAME));
 };
 
+export const logout = () => {
+    localStorage.setItem(AUTHENTICATION_TOKEN_NAME, '');
+};
+
 export const setAuthenticationToken = (token: string) => {
     localStorage.setItem(AUTHENTICATION_TOKEN_NAME, token);
 };

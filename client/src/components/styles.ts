@@ -52,3 +52,14 @@ export const LoginForm = styled.form`
 export const LoginError = styled.div`
     color: red;
 `;
+
+export const NavBar = styled.div`
+    background-color: #e2cccc;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+`;
+
+export const NavBarLeft = styled.div``;
+
+export const NavBarRight = styled.div``;

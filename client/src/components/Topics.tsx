@@ -5,7 +5,7 @@ import React from 'react';
 
 import { fetchTopicsQueryString } from 'src/api/api';
 import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
-import { setBrowserTitle } from 'src/components/utils';
+import { setBrowserTitle } from 'src/utils';
 
 const COLUMN_DEFINITIONS = [
     { title: 'Title', field: 'title' },

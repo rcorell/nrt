@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { setBrowserTitle } from 'src/components/utils';
+import { setBrowserTitle } from 'src/utils';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
 interface AddGroupState {
