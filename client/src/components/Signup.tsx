@@ -6,7 +6,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { signupMutationString } from 'src/api/api';
 import { SignupMutation, SignupMutationVariables } from 'src/api/__generated__/SignupMutation';
 import { setBrowserTitle } from 'src/utils';
-import { AuthError, AuthForm, FormContainer } from 'src/styles';
+import { AuthError, AuthForm, FormContainer } from 'src/styles/form';
 
 export const Signup: React.FC = () => {
     const [email, setEmail] = useState('');

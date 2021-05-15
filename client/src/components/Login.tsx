@@ -7,7 +7,7 @@ import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { loginMutationString } from 'src/api/api';
 import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
 import { setBrowserTitle } from 'src/utils';
-import { AuthError, AuthForm, FormContainer } from 'src/styles';
+import { AuthError, AuthForm, FormContainer } from 'src/styles/form';
 
 export const Login: React.FC = () => {
     const { setAuthenticated } = useContext(GlobalContext);

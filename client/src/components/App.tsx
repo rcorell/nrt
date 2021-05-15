@@ -6,7 +6,8 @@ import React from 'react';
 import { GlobalContextProvider } from 'src/components/GlobalContextProvider';
 import { apolloClient } from 'src/api/api';
 import { Routes } from 'src/components/Routes';
-import { AppHeader, GlobalStyle } from 'src/styles';
+
+import { AppHeader, GlobalStyle } from 'src/styles/app';
 
 export const App: React.FC = () => {
     return (

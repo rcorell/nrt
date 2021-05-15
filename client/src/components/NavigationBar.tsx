@@ -4,8 +4,7 @@ import React, { useContext } from 'react';
 import { logout } from 'src/api/api';
 import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { Path } from 'src/components/Routes';
-
-import { NavBar, NavBarLeft, NavBarRight } from './styles';
+import { NavBar, NavBarLeft, NavBarRight } from 'src/styles/navbar';
 
 export const NavigationBar: React.FC = () => {
     let leftNavBar;

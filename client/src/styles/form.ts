@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginContainer = styled.div`
+export const FormContainer = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@ export const LoginContainer = styled.div`
     }
 `;
 
-export const LoginForm = styled.form`
+export const AuthForm = styled.form`
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -49,17 +49,6 @@ export const LoginForm = styled.form`
     }
 `;
 
-export const LoginError = styled.div`
+export const AuthError = styled.div`
     color: red;
 `;
-
-export const NavBar = styled.div`
-    background-color: #e2cccc;
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-`;
-
-export const NavBarLeft = styled.div``;
-
-export const NavBarRight = styled.div``;

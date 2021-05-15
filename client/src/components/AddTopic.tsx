@@ -5,7 +5,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
 import { createTopicMutationString } from 'src/api/api';
 
-import { AuthError, AuthForm, FormContainer } from 'src/styles';
+import { AuthError, AuthForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
 
 export const AddTopic: React.FC = () => {
