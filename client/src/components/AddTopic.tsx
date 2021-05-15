@@ -1,83 +1,80 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+import { useMutation } from '@apollo/client';
+import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { setBrowserTitle } from 'src/utils';
-import * as addTopicActions from 'src/redux/addTopic/actions';
-import { State } from 'src/redux/state.types';
+import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
+import { createTopicMutationString } from 'src/api/api';
+
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
+import { setBrowserTitle } from 'src/utils';
 
-interface AddTopicDispatchProps {
-    addTopic: (topic: string) => void;
-}
+export const AddTopic: React.FC = () => {
+    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
 
-interface AddTopicState {
-    topic: string;
-}
+    setBrowserTitle('Add Topic');
 
-export class AddTopicComponent extends React.Component<AddTopicDispatchProps, AddTopicState> {
-    public constructor(props: AddTopicDispatchProps) {
-        super(props);
-        this.state = {
-            topic: ''
-        };
-    }
+    const isFormInvalid = () => {
+        return title.length < 1;
+    };
 
-    componentDidMount() {
-        setBrowserTitle('Add Topic');
-    }
-
-    isFormInvalid() {
-        return this.state.topic.length < 1;
-    }
-
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newState: AddTopicState = this.state;
-
-        switch (event.target.id) {
-            case 'topic':
-                newState.topic = event.target.value;
-                break;
+    const [createTopic, { error }] = useMutation<CreateTopicMutation, CreateTopicMutationVariables>(
+        createTopicMutationString,
+        {
+            variables: { title, description },
+            onCompleted: ({ createTopic }) => {
+                // do something
+            }
         }
-        this.setState(newState);
-    };
+    );
 
-    handleSubmit = (event: React.FormEvent<FormControlProps>) => {
+    const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        // addTopic(this.state.topic);
+
+        createTopic();
     };
 
-    render() {
-        return (
-            <FormContainer>
-                <h1>Add Topic</h1>
-                <AuthForm onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Topic</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            id="topic"
-                            onChange={this.handleChange}
-                            size="lg"
-                            type="topic"
-                            value={this.state.topic}
-                        />
-                    </Form.Group>
+    const errorStatus = () => {
+        if (error) {
+            return <div>Error: ${JSON.stringify(error)}</div>;
+        }
 
-                    <Button type="submit" disabled={this.isFormInvalid()}>
-                        Submit Topic
-                    </Button>
-                </AuthForm>
-                <AuthError></AuthError>
-            </FormContainer>
-        );
-    }
-}
+        return null;
+    };
 
-export const mapStateToProps = (_state: State) => ({});
+    return (
+        <FormContainer>
+            <h1>Add Topic</h1>
+            {errorStatus}
+            <AuthForm onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Topic</Form.Label>
+                    <Form.Control
+                        autoFocus
+                        id="topic"
+                        onChange={(e) => setTitle(e.target.value)}
+                        size="lg"
+                        type="topic"
+                        value={title}
+                    />
+                </Form.Group>
 
-export const mapDispatchToProps = (dispatch: Function) => ({
-    addTopic: (topic: string) => dispatch(addTopicActions.addTopic(topic))
-});
+                <Form.Group>
+                    <Form.Label>Decription</Form.Label>
+                    <Form.Control
+                        id="description"
+                        onChange={(e) => setDescription(e.target.value)}
+                        size="lg"
+                        type="topic"
+                        value={description}
+                    />
+                </Form.Group>
 
-export const AddTopic = connect(mapStateToProps, mapDispatchToProps)(AddTopicComponent);
+                <Button type="submit" disabled={isFormInvalid()}>
+                    Submit Topic
+                </Button>
+            </AuthForm>
+            <AuthError></AuthError>
+        </FormContainer>
+    );
+};
