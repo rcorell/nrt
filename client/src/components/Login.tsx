@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client';
+import { navigate } from 'hookrouter';
 import React, { useContext, useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { loginMutationString } from 'src/api/api';
-import { history } from 'src/components/Routes';
 import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
 import { setBrowserTitle } from 'src/utils';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
@@ -21,7 +21,7 @@ export const Login: React.FC = () => {
             if (login?.token) {
                 localStorage.setItem('token', login.token);
                 setAuthenticated(true);
-                history.push('/');
+                navigate('/');
             }
         }
     });

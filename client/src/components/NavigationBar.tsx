@@ -1,10 +1,9 @@
+import { A, navigate } from 'hookrouter';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 
 import { logout } from 'src/api/api';
 import { GlobalContext } from 'src/components/GlobalContextProvider';
-import { history } from 'src/components/Routes';
-import { Path } from 'src/redux/navigation/types';
+import { Path } from 'src/components/Routes';
 
 import { NavBar, NavBarLeft, NavBarRight } from './styles';
 
@@ -17,32 +16,32 @@ export const NavigationBar: React.FC = () => {
     const logoutAndGoToLoginPage = () => {
         logout();
         setAuthenticated(false);
-        history.push(Path.LOGIN);
+        navigate(Path.LOGIN);
     };
 
     if (authenticated) {
         leftNavBar = (
             <>
-                <Link to={Path.HOME}>Home</Link>
+                <A href={Path.HOME}>Home</A>
                 &nbsp;|&nbsp;
-                <Link to={Path.TOPICS}>Topics</Link>
+                <A href={Path.TOPICS}>Topics</A>
                 &nbsp;|&nbsp;
-                <Link to={Path.ADD_TOPIC}>Add Topic</Link>
+                <A href={Path.ADD_TOPIC}>Add Topic</A>
                 &nbsp;|&nbsp;
-                <Link to={Path.ADD_GROUP}>Add Group</Link>
+                <A href={Path.ADD_GROUP}>Add Group</A>
             </>
         );
         rightNavBar = (
-            <Link to="" onClick={logoutAndGoToLoginPage}>
+            <A href="" onClick={logoutAndGoToLoginPage}>
                 Logout
-            </Link>
+            </A>
         );
     } else {
         leftNavBar = (
             <>
-                <Link to={Path.LOGIN}>Log in</Link>
+                <A href={Path.LOGIN}>Log in</A>
                 &nbsp;|&nbsp;
-                <Link to={Path.SIGNUP}>Sign up</Link>
+                <A href={Path.SIGNUP}>Sign up</A>
             </>
         );
         rightNavBar = null;

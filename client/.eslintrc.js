@@ -29,6 +29,7 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
         'prettier/prettier': 2,
+        'react/display-name': 'off',
         'react/prop-types': 'off'
     },
     settings: {

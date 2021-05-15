@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
+import { navigate } from 'hookrouter';
 import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { signupMutationString } from 'src/api/api';
-import { history } from 'src/components/Routes';
 import { SignupMutation, SignupMutationVariables } from 'src/api/__generated__/SignupMutation';
 import { setBrowserTitle } from 'src/utils';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
@@ -19,7 +19,7 @@ export const Signup: React.FC = () => {
             if (signup?.token) {
                 console.log(signup);
                 localStorage.setItem('token', signup.token);
-                history.push('/');
+                navigate('/');
             }
         }
     });
