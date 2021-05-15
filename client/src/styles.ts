@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
     }
 `;
 

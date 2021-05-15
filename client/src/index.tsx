@@ -3,8 +3,6 @@ import { render } from 'react-dom';
 
 import { App } from 'src/components/App';
 
-import './index.css';
-
 render(
     <React.StrictMode>
         <App />
