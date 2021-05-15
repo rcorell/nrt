@@ -42,7 +42,7 @@ export const fetchTopicsQueryString = gql`
     }
 `;
 
-export const CreateGroupMutation = gql`
+export const createGroupMutationString = gql`
     mutation CreateGroupMutation($name: String!, $description: String) {
         createGroup(name: $name, description: $description) {
             id

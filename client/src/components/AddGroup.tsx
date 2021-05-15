@@ -1,88 +1,77 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+import { useMutation } from '@apollo/client';
+import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
+import { createGroupMutationString } from 'src/api/api';
+import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
 import { setBrowserTitle } from 'src/utils';
 import { AuthError, AuthForm, FormContainer } from 'src/styles';
 
-interface AddGroupState {
-    description: string;
-    name: string;
-}
+export const AddGroup: React.FC = () => {
+    const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
 
-export class AddGroupComponent extends React.Component<{}, AddGroupState> {
-    public constructor(props = {}) {
-        super(props);
-        this.state = {
-            description: '',
-            name: ''
-        };
-    }
+    setBrowserTitle('Add Group');
 
-    componentDidMount() {
-        setBrowserTitle('Add Group');
-    }
-
-    isFormInvalid() {
-        return this.state.name.length < 1;
-    }
-
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newState: AddGroupState = this.state;
-
-        switch (event.target.id) {
-            case 'name':
-                newState.name = event.target.value;
-                break;
-
-            case 'description':
-                newState.description = event.target.value;
-                break;
+    const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
+        createGroupMutationString,
+        {
+            variables: { description, name },
+            onCompleted: ({ createGroup }) => {
+                // do something
+            }
         }
-        this.setState(newState);
+    );
+
+    const isFormInvalid = () => {
+        return name.length < 1;
     };
 
-    handleSubmit = (event: React.FormEvent<FormControlProps>) => {
+    const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
-        // addGroup(this.state.name, this.state.description).then(() => {
-        //     console.log('Group added');
-        // });
+
+        createGroup();
     };
 
-    render() {
-        return (
-            <FormContainer>
-                <h1>Add Group</h1>
-                <AuthForm onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            id="name"
-                            onChange={this.handleChange}
-                            size="lg"
-                            value={this.state.name}
-                        />
-                    </Form.Group>
+    const errorDisplay = () => {
+        if (error) {
+            return <div>Error: {JSON.stringify(error)}</div>;
+        }
 
-                    <Form.Group>
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control
-                            id="description"
-                            onChange={this.handleChange}
-                            size="lg"
-                            value={this.state.description}
-                        />
-                    </Form.Group>
+        return null;
+    };
 
-                    <Button type="submit" disabled={this.isFormInvalid()}>
-                        Add Group
-                    </Button>
-                </AuthForm>
-                <AuthError></AuthError>
-            </FormContainer>
-        );
-    }
-}
+    return (
+        <FormContainer>
+            <h1>Add Group</h1>
+            {errorDisplay()}
+            <AuthForm onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        autoFocus
+                        id="name"
+                        onChange={(e) => setName(e.target.value)}
+                        size="lg"
+                        value={name}
+                    />
+                </Form.Group>
 
-export const AddGroup = connect()(AddGroupComponent);
+                <Form.Group>
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                        id="description"
+                        onChange={(e) => setDescription(e.target.value)}
+                        size="lg"
+                        value={description}
+                    />
+                </Form.Group>
+
+                <Button type="submit" disabled={isFormInvalid()}>
+                    Add Group
+                </Button>
+            </AuthForm>
+            <AuthError></AuthError>
+        </FormContainer>
+    );
+};
