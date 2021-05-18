@@ -1,0 +1,12 @@
+export { AggregateGroupArgs } from "./AggregateGroupArgs";
+export { CreateGroupArgs } from "./CreateGroupArgs";
+export { CreateManyGroupArgs } from "./CreateManyGroupArgs";
+export { DeleteGroupArgs } from "./DeleteGroupArgs";
+export { DeleteManyGroupArgs } from "./DeleteManyGroupArgs";
+export { FindFirstGroupArgs } from "./FindFirstGroupArgs";
+export { FindManyGroupArgs } from "./FindManyGroupArgs";
+export { FindUniqueGroupArgs } from "./FindUniqueGroupArgs";
+export { GroupByGroupArgs } from "./GroupByGroupArgs";
+export { UpdateGroupArgs } from "./UpdateGroupArgs";
+export { UpdateManyGroupArgs } from "./UpdateManyGroupArgs";
+export { UpsertGroupArgs } from "./UpsertGroupArgs";

@@ -7,16 +7,21 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../src/generated"
+}
+
 model Group {
-  id      			Int             @id @default(autoincrement())
+  id      			  Int         @id @default(autoincrement())
   name        		String
   description 		String
-  creator      		User            @relation(fields: [creatorId], references: [id])
+  creator      		User        @relation(fields: [creatorId], references: [id])
   creatorId    		Int
   users       		User[]			@relation(name: "GroupsToUsers")
   topics      		Topic[]
-  createdAt   		DateTime        @default(now())
-  updatedAt   		DateTime        @updatedAt
+  createdAt   		DateTime    @default(now())
+  updatedAt   		DateTime    @updatedAt
 }
 
 model Topic {
@@ -32,15 +37,15 @@ model Topic {
 }
 
 model User {
-  id        		Int             @id @default(autoincrement())
-  name      		String
-  email     		String          @unique
-  password  		String
-  topics    		Topic[]
-  groupsCreated	    Group[]
-  groups			Group[]			@relation(name: "GroupsToUsers")
-  createdAt 		DateTime        @default(now())
-  updatedAt 		DateTime        @updatedAt
+  id        		  Int         @id @default(autoincrement())
+  name      		  String
+  email     		  String      @unique
+  password  		  String
+  topics    		  Topic[]
+  groupsCreated	  Group[]
+  groups			    Group[]			@relation(name: "GroupsToUsers")
+  createdAt 		  DateTime    @default(now())
+  updatedAt 		  DateTime    @updatedAt
 }
 
 
