@@ -1,8 +1,9 @@
 import { ApolloClient, ApolloLink, gql, HttpLink, InMemoryCache } from '@apollo/client';
+import fetch from 'cross-fetch';
 
 const AUTHENTICATION_TOKEN_NAME = 'token';
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' });
+const httpLink = new HttpLink({ uri: 'http://localhost:4000', fetch });
 
 const authLink = new ApolloLink((operation, forward) => {
     const token = localStorage.getItem(AUTHENTICATION_TOKEN_NAME);
@@ -17,8 +18,8 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const apolloClient = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    link: authLink.concat(httpLink)
 });
 
 export const isAuthenticated = () => {

@@ -18,7 +18,7 @@ export const AddGroup: React.FC = () => {
         {
             variables: { description, name },
             onCompleted: ({ createGroup }) => {
-                // do something
+                createGroup.id += 0;
             }
         }
     );

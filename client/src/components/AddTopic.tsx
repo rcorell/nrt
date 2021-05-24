@@ -23,7 +23,7 @@ export const AddTopic: React.FC = () => {
         {
             variables: { title, description },
             onCompleted: ({ createTopic }) => {
-                // do something
+                createTopic.id += 0;
             }
         }
     );
@@ -45,7 +45,7 @@ export const AddTopic: React.FC = () => {
     return (
         <FormContainer>
             <h1>Add Topic</h1>
-            {errorStatus}
+            {errorStatus()}
             <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Topic</Form.Label>
