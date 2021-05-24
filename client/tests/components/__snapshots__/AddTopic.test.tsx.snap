@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddTopic matches snapshot 1`] = `
+<div
+  className="sc-bdvvaa hMSAon"
+>
+  <h1>
+    Add Topic
+  </h1>
+  <form
+    className="sc-gsDJrp idIFaR"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+      >
+        Topic
+      </label>
+      <input
+        autoFocus={true}
+        className="form-control form-control-lg"
+        id="topic"
+        onChange={[Function]}
+        type="topic"
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+      >
+        Decription
+      </label>
+      <input
+        className="form-control form-control-lg"
+        id="description"
+        onChange={[Function]}
+        type="topic"
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-primary"
+      disabled={true}
+      type="submit"
+    >
+      Submit Topic
+    </button>
+  </form>
+  <div
+    className="sc-dkPtyc cWQCqc"
+  />
+</div>
+`;

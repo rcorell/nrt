@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationBar matches snapshot 1`] = `
+<div
+  className="sc-hKwCoD jDkowu"
+>
+  <div
+    className="sc-eCImvq"
+  >
+    <a
+      href="/login"
+      onClick={[Function]}
+    >
+      Log in
+    </a>
+     | 
+    <a
+      href="/signup"
+      onClick={[Function]}
+    >
+      Sign up
+    </a>
+  </div>
+  <div
+    className="sc-jRQAMF"
+  />
+</div>
+`;

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddGroup matches snapshot 1`] = `
+<div
+  className="sc-bdvvaa hMSAon"
+>
+  <h1>
+    Add Group
+  </h1>
+  <form
+    className="sc-gsDJrp idIFaR"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+      >
+        Name
+      </label>
+      <input
+        autoFocus={true}
+        className="form-control form-control-lg"
+        id="name"
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+      >
+        Description
+      </label>
+      <input
+        className="form-control form-control-lg"
+        id="description"
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-primary"
+      disabled={true}
+      type="submit"
+    >
+      Add Group
+    </button>
+  </form>
+  <div
+    className="sc-dkPtyc cWQCqc"
+  />
+</div>
+`;

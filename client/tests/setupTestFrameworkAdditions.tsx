@@ -4,6 +4,7 @@
  *
  * Reference: https://jestjs.io/docs/en/configuration.html#setuptestframeworkscriptfile-string
  **/
+import { MockedProvider } from '@apollo/client/testing';
 import '@testing-library/jest-dom';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
@@ -69,7 +70,9 @@ global.expectWrappedComponentToMatchSnapshot = (
 
 global.getRender = (componentType: React.ComponentClass<any> | React.FC<any>, propOverrides: any = {}) => {
     return renderer.create(
-        <GlobalContextProvider>{global.getComponent(componentType, propOverrides)}</GlobalContextProvider>
+        <GlobalContextProvider>
+            <MockedProvider addTypename={false}>{global.getComponent(componentType, propOverrides)}</MockedProvider>
+        </GlobalContextProvider>
     );
 };
 
