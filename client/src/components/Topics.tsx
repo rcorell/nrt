@@ -25,11 +25,7 @@ export const Topics: React.FC = () => {
         return <div>Error: {JSON.stringify(error)}</div>;
     }
 
-    if (!data?.topics) {
-        return <div>No results</div>;
-    }
-
-    const mutableTopics = _.cloneDeep(data.topics);
+    const mutableTopics = _.cloneDeep(data!.topics);
 
     return <MaterialTable title="Topics" columns={COLUMN_DEFINITIONS} data={mutableTopics} />;
 };

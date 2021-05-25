@@ -58,14 +58,17 @@ describe('Topics', () => {
 
             await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
 
-            expect(screen.queryByText('Loading...')).toBeNull();
             expect(screen.queryByText('No results')).toBeNull();
 
             expect(topicsRender).toMatchSnapshot();
         });
 
-        // GraphQL Error
+        it('Malformed results', async () => {
+            const topicsRender = renderTopics({ data: null });
 
-        // "No results" (unlikely malformed response)
+            await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+
+            expect(topicsRender).toMatchSnapshot();
+        });
     });
 });
