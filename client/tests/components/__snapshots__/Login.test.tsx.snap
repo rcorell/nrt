@@ -1,66 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login snapshots fresh page load 1`] = `
-<div
-  className="sc-bdvvaa hMSAon"
->
-  <h1>
-    Login
-  </h1>
-  <form
-    className="sc-gsDJrp idIFaR"
-    onSubmit={[Function]}
-  >
-    <div
-      className="form-group"
-    >
-      <label
-        className="form-label"
-        id="emailLabel"
-      >
-        Email
-      </label>
-      <input
-        aria-labelledby="emailLabel"
-        autoFocus={true}
-        className="form-control form-control-lg"
-        id="email"
-        onChange={[Function]}
-        placeholder="email"
-        type="email"
-        value=""
-      />
-    </div>
-    <div
-      className="form-group"
-    >
-      <label
-        className="form-label"
-        id="passwordLabel"
-      >
-        Password
-      </label>
-      <input
-        aria-labelledby="passwordLabel"
-        className="form-control form-control-lg"
-        id="password"
-        onChange={[Function]}
-        placeholder="password"
-        type="password"
-        value=""
-      />
-    </div>
-    <button
-      className="btn btn-primary"
-      disabled={true}
-      type="submit"
-    >
-      Log In
-    </button>
-  </form>
+<div>
   <div
-    className="sc-dkPtyc cWQCqc"
-  />
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Login
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="emailLabel"
+        >
+          Email
+        </label>
+        <input
+          aria-labelledby="emailLabel"
+          class="form-control form-control-lg"
+          id="email"
+          placeholder="email"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="passwordLabel"
+        >
+          Password
+        </label>
+        <input
+          aria-labelledby="passwordLabel"
+          class="form-control form-control-lg"
+          id="password"
+          placeholder="password"
+          type="password"
+          value=""
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        disabled=""
+        type="submit"
+      >
+        Log In
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
 </div>
 `;
 
@@ -108,7 +106,7 @@ exports[`Login snapshots invalid parameters 1`] = `
           id="password"
           placeholder="password"
           type="password"
-          value="a"
+          value="qwerty1!"
         />
       </div>
       <button

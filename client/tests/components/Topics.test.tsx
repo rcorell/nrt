@@ -19,7 +19,7 @@ describe('Topics', () => {
                 topics: [{ __typename: 'Topic', description: 'test-description', title: 'test-title' }]
             };
 
-            renderComponent(Topics, fetchTopicsQueryString, { data });
+            renderComponent(Topics, fetchTopicsQueryString, {}, { data });
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -31,7 +31,7 @@ describe('Topics', () => {
         it('network error', async () => {
             const networkError = new Error('Network-error');
 
-            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, { error: networkError });
+            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, {}, { error: networkError });
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -41,7 +41,7 @@ describe('Topics', () => {
         });
 
         it('Malformed results', async () => {
-            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, { data: null });
+            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, {}, { data: null });
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 

@@ -23,7 +23,7 @@ export const apolloClient = new ApolloClient({
 });
 
 export const isAuthenticated = () => {
-    return Boolean(localStorage.getItem(AUTHENTICATION_TOKEN_NAME));
+    return Boolean(window.localStorage.getItem(AUTHENTICATION_TOKEN_NAME));
 };
 
 export const logout = () => {

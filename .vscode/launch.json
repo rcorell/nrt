@@ -5,6 +5,26 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"type": "node",
+			"name": "Client tests",
+			"request": "launch",
+			"program": "${workspaceFolder}/client/node_modules/.bin/jest",
+			"args": [
+				"--runInBand",
+				"--watchAll=false",
+				"--env=jsdom"
+			],
+			"cwd": "${workspaceFolder}/client",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"disableOptimisticBPs": true,
+			"windows": {
+				"program": "${workspaceFolder}/client/node_modules/jest/bin/jest"
+			},
+			"protocol": "inspector",
+			"env": { "CI": "true" }
+		},
+		{
 			"type": "pwa-node",
 			"request": "launch",
 			"name": "Server",
