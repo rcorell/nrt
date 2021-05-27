@@ -1,40 +1,17 @@
-import { MockedProvider, MockedResponse } from '@apollo/client/testing';
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import * as React from 'react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
 import { fetchTopicsQueryString } from 'src/api/api';
 import { Topics } from 'src/components/Topics';
 
+import { renderComponent } from 'tests/testHelpers';
+
 describe('Topics', () => {
-    const renderTopics = (results: any = null) => {
-        const mocks: MockedResponse[] = [
-            {
-                request: {
-                    query: fetchTopicsQueryString,
-                    variables: {}
-                }
-            }
-        ];
-
-        if (results?.data) {
-            mocks[0].result = {
-                data: results.data
-            };
-        } else if (results?.error) {
-            mocks[0].error = results.error;
-        }
-
-        return render(
-            <MockedProvider mocks={mocks} addTypename={false}>
-                <Topics />
-            </MockedProvider>
-        );
-    };
+    const LOADING_TEXT = 'Loading...';
 
     describe('snapshots', () => {
         it('loading', () => {
-            expect(renderTopics()).toMatchSnapshot();
+            expect(renderComponent(Topics)).toMatchSnapshot();
         });
 
         it('success', async () => {
@@ -42,9 +19,9 @@ describe('Topics', () => {
                 topics: [{ __typename: 'Topic', description: 'test-description', title: 'test-title' }]
             };
 
-            renderTopics({ data });
+            renderComponent(Topics, fetchTopicsQueryString, { data });
 
-            await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
             // Material UI devs literally hate snapshots
             expect(screen.queryByText('test-description')).toBeInTheDocument();
@@ -54,9 +31,9 @@ describe('Topics', () => {
         it('network error', async () => {
             const networkError = new Error('Network-error');
 
-            const topicsRender = renderTopics({ error: networkError });
+            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, { error: networkError });
 
-            await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
             expect(screen.queryByText('No results')).toBeNull();
 
@@ -64,9 +41,9 @@ describe('Topics', () => {
         });
 
         it('Malformed results', async () => {
-            const topicsRender = renderTopics({ data: null });
+            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, { data: null });
 
-            await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
             expect(topicsRender).toMatchSnapshot();
         });

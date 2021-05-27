@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { MockedProvider, MockedResponse } from '@apollo/client/testing';
-import { fireEvent, render, screen } from '@testing-library/react';
+// import * as React from 'react';
+// import { MockedProvider, MockedResponse } from '@apollo/client/testing';
+import { fireEvent, screen } from '@testing-library/react';
 
-import { loginMutationString } from 'src/api/api';
+// import { loginMutationString } from 'src/api/api';
 import { Login } from 'src/components/Login';
+
+import { renderComponent } from 'tests/testHelpers';
 
 describe('Login', () => {
     describe('snapshots', () => {
@@ -11,33 +13,12 @@ describe('Login', () => {
         let loginContainer: HTMLElement;
         let passwordInput: HTMLElement;
 
-        const renderLogin = (results: any = null) => {
-            const mocks: MockedResponse[] = [
-                {
-                    request: {
-                        query: loginMutationString,
-                        variables: {}
-                    }
-                }
-            ];
+        const renderLogin = () => {
+            const loginRender = renderComponent(Login);
 
-            if (results?.data) {
-                mocks[0].result = {
-                    data: results.data
-                };
-            } else if (results?.error) {
-                mocks[0].error = results.error;
-            }
-
-            const { container } = render(
-                <MockedProvider mocks={mocks} addTypename={false}>
-                    <Login />
-                </MockedProvider>
-            );
             emailInput = screen.getByLabelText('Email');
             passwordInput = screen.getByLabelText('Password');
-
-            loginContainer = container;
+            loginContainer = loginRender.container;
         };
 
         it('fresh page load', () => {
