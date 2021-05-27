@@ -67,7 +67,7 @@ describe('Login', () => {
         it('should set authenticated and navigate to the home page', async () => {
             localStorage.setItem('token', '');
             expect(getGlobalContext().authenticated).toBeFalsy();
-            lastNavigationPath = 'invalid path';
+            lastNavigationPath = 'initial path';
 
             renderComponent(
                 Login,
@@ -85,6 +85,32 @@ describe('Login', () => {
             expect(localStorage.getItem('token')).toEqual('tokenValue');
             expect(getGlobalContext().authenticated).toBeTruthy();
             expect(lastNavigationPath).toEqual('/');
+        });
+    });
+
+    describe('failure', () => {
+        it('failed login: should display error message', async () => {
+            localStorage.setItem('token', '');
+            expect(getGlobalContext().authenticated).toBeFalsy();
+            lastNavigationPath = 'initial path';
+
+            renderComponent(
+                Login,
+                loginMutationString,
+                { email: VALID_EMAIL, password: VALID_PASSWORD },
+                {
+                    error: new Error('Login failure')
+                }
+            );
+            setFields(VALID_EMAIL, VALID_PASSWORD);
+            const submitButton = screen.getByRole('button');
+            fireEvent.click(submitButton);
+            await oneTick();
+
+            expect(localStorage.getItem('token')).toEqual('');
+            expect(getGlobalContext().authenticated).toBeFalsy();
+            expect(lastNavigationPath).toEqual('initial path');
+            expect(screen.queryByText(/Login failure/)).toBeInTheDocument();
         });
     });
 });

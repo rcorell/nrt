@@ -36,13 +36,23 @@ export const renderComponent = (
             mocks[0].result = {
                 data: results.data
             };
-        } else if (results?.error) {
+        }
+
+        if (results?.error) {
             mocks[0].error = results.error;
         }
     }
 
     return render(
-        <MockedProvider mocks={mocks} addTypename={false}>
+        <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={{
+                mutate: {
+                    errorPolicy: 'all'
+                }
+            }}
+        >
             {React.createElement(component)}
         </MockedProvider>
     );

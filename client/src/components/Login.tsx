@@ -18,11 +18,12 @@ export const Login: React.FC = () => {
     const [login, { error }] = useMutation<LoginMutation, LoginMutationVariables>(loginMutationString, {
         variables: { email, password },
         onCompleted: ({ login }) => {
-            if (login?.token) {
-                localStorage.setItem('token', login.token);
-                setAuthenticated(true);
-                navigate('/');
-            }
+            localStorage.setItem('token', login!.token!);
+            setAuthenticated(true);
+            navigate('/');
+        },
+        onError: () => {
+            // https://github.com/apollographql/apollo-client/issues/7167
         }
     });
 
