@@ -5,6 +5,15 @@ import { act, render } from '@testing-library/react';
 
 import { GlobalContext, GlobalContextProvider } from 'src/components/GlobalContextProvider';
 
+
+
+
+export let lastNavigationPath = '';
+
+export const setLastNavigationPath = (path: string) => {
+    lastNavigationPath = path;
+};
+
 export interface ComponentParameters {
     query?: DocumentNode;
     results?: any;

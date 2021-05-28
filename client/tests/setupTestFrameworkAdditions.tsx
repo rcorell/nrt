@@ -12,7 +12,17 @@ import _ from 'lodash';
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 
+import { setLastNavigationPath } from 'tests/testHelpers';
 import { GlobalContextProvider } from 'src/components/GlobalContextProvider';
+
+jest.mock('hookrouter', () => {
+    return {
+        ...jest.requireActual('hookrouter'),
+        navigate: (path: string) => {
+            setLastNavigationPath(path);
+        }
+    };
+});
 
 expect.extend({
     toHaveBeenCalledExactlyOnceWith(func, ...args) {

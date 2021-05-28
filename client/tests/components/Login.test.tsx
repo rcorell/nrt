@@ -3,22 +3,16 @@ import { fireEvent, screen } from '@testing-library/react';
 import { loginMutationString } from 'src/api/api';
 import { Login } from 'src/components/Login';
 
-import { getGlobalContext, oneTick, renderComponent } from 'tests/testHelpers';
-
-let lastNavigationPath = '';
-jest.mock('hookrouter', () => {
-    return {
-        navigate: (path: string) => {
-            lastNavigationPath = path;
-        }
-    };
-});
+import { INVALID, VALID } from 'tests/fixtures';
+import {
+    getGlobalContext,
+    lastNavigationPath,
+    oneTick,
+    renderComponent,
+    setLastNavigationPath
+} from 'tests/testHelpers';
 
 describe('Login', () => {
-    const INVALID_EMAIL = 'a@a.a';
-    const VALID_EMAIL = 'totally@valid.email';
-    const VALID_PASSWORD = 'qwerty1!';
-
     let loginContainer: HTMLElement;
 
     const setFields = (email: string, password: string) => {
@@ -30,9 +24,7 @@ describe('Login', () => {
     };
 
     const renderLogin = () => {
-        const loginRender = renderComponent(Login);
-
-        loginContainer = loginRender.container;
+        loginContainer = renderComponent(Login).container;
     };
 
     describe('snapshots', () => {
@@ -45,13 +37,13 @@ describe('Login', () => {
         });
 
         it('invalid parameters', () => {
-            setFields(INVALID_EMAIL, VALID_PASSWORD);
+            setFields(INVALID.EMAIL, INVALID.PASSWORD);
 
             expect(loginContainer).toMatchSnapshot();
         });
 
         it('valid parameters', async () => {
-            setFields(VALID_EMAIL, VALID_PASSWORD);
+            setFields(VALID.EMAIL, VALID.PASSWORD);
 
             expect(loginContainer).toMatchSnapshot();
         });
@@ -67,17 +59,17 @@ describe('Login', () => {
         it('should set authenticated and navigate to the home page', async () => {
             localStorage.setItem('token', '');
             expect(getGlobalContext().authenticated).toBeFalsy();
-            lastNavigationPath = 'initial path';
+            setLastNavigationPath('initial path');
 
             renderComponent(
                 Login,
                 loginMutationString,
-                { email: VALID_EMAIL, password: VALID_PASSWORD },
+                { email: VALID.EMAIL, password: VALID.PASSWORD },
                 {
                     data: { login: { token: 'tokenValue' } }
                 }
             );
-            setFields(VALID_EMAIL, VALID_PASSWORD);
+            setFields(VALID.EMAIL, VALID.PASSWORD);
             const submitButton = screen.getByRole('button');
             fireEvent.click(submitButton);
             await oneTick();
@@ -92,17 +84,17 @@ describe('Login', () => {
         it('failed login: should display error message', async () => {
             localStorage.setItem('token', '');
             expect(getGlobalContext().authenticated).toBeFalsy();
-            lastNavigationPath = 'initial path';
+            setLastNavigationPath('initial path');
 
             renderComponent(
                 Login,
                 loginMutationString,
-                { email: VALID_EMAIL, password: VALID_PASSWORD },
+                { email: VALID.EMAIL, password: VALID.PASSWORD },
                 {
                     error: new Error('Login failure')
                 }
             );
-            setFields(VALID_EMAIL, VALID_PASSWORD);
+            setFields(VALID.EMAIL, VALID.PASSWORD);
             const submitButton = screen.getByRole('button');
             fireEvent.click(submitButton);
             await oneTick();

@@ -106,7 +106,7 @@ exports[`Login snapshots invalid parameters 1`] = `
           id="password"
           placeholder="password"
           type="password"
-          value="qwerty1!"
+          value=""
         />
       </div>
       <button

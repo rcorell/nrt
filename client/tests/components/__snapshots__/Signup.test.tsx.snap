@@ -1,78 +1,237 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signup matches snapshot 1`] = `
-<div
-  className="sc-bdvvaa hMSAon"
->
-  <h1>
-    Sign Up
-  </h1>
-  <form
-    className="sc-gsDJrp idIFaR"
-    onSubmit={[Function]}
-  >
-    <div
-      className="form-group"
-    >
-      <label
-        className="form-label"
-      >
-        Email
-      </label>
-      <input
-        autoFocus={true}
-        className="form-control form-control-lg"
-        id="email"
-        onChange={[Function]}
-        placeholder="email"
-        type="email"
-        value=""
-      />
-    </div>
-    <div
-      className="form-group"
-    >
-      <label
-        className="form-label"
-      >
-        Name
-      </label>
-      <input
-        autoFocus={true}
-        className="form-control form-control-lg"
-        id="name"
-        onChange={[Function]}
-        placeholder="name"
-        value=""
-      />
-    </div>
-    <div
-      className="form-group"
-    >
-      <label
-        className="form-label"
-      >
-        Password
-      </label>
-      <input
-        className="form-control form-control-lg"
-        id="password"
-        onChange={[Function]}
-        placeholder="password"
-        type="password"
-        value=""
-      />
-    </div>
-    <button
-      className="btn btn-primary"
-      disabled={true}
-      type="submit"
-    >
-      Sign Up
-    </button>
-  </form>
+exports[`Signup snapshots fresh load 1`] = `
+<div>
   <div
-    className="sc-dkPtyc cWQCqc"
-  />
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Sign Up
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="emailLabel"
+        >
+          Email
+        </label>
+        <input
+          aria-labelledby="emailLabel"
+          class="form-control form-control-lg"
+          id="email"
+          placeholder="email"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="nameLabel"
+        >
+          Name
+        </label>
+        <input
+          aria-labelledby="nameLabel"
+          class="form-control form-control-lg"
+          id="name"
+          placeholder="name"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="passwordLabel"
+        >
+          Password
+        </label>
+        <input
+          aria-labelledby="passwordLabel"
+          class="form-control form-control-lg"
+          id="password"
+          placeholder="password"
+          type="password"
+          value=""
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        disabled=""
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
+</div>
+`;
+
+exports[`Signup snapshots invalid parameters 1`] = `
+<div>
+  <div
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Sign Up
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="emailLabel"
+        >
+          Email
+        </label>
+        <input
+          aria-labelledby="emailLabel"
+          class="form-control form-control-lg"
+          id="email"
+          placeholder="email"
+          type="email"
+          value="a@a.a"
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="nameLabel"
+        >
+          Name
+        </label>
+        <input
+          aria-labelledby="nameLabel"
+          class="form-control form-control-lg"
+          id="name"
+          placeholder="name"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="passwordLabel"
+        >
+          Password
+        </label>
+        <input
+          aria-labelledby="passwordLabel"
+          class="form-control form-control-lg"
+          id="password"
+          placeholder="password"
+          type="password"
+          value=""
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        disabled=""
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
+</div>
+`;
+
+exports[`Signup snapshots valid parameters 1`] = `
+<div>
+  <div
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Sign Up
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="emailLabel"
+        >
+          Email
+        </label>
+        <input
+          aria-labelledby="emailLabel"
+          class="form-control form-control-lg"
+          id="email"
+          placeholder="email"
+          type="email"
+          value="totally@valid.email"
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="nameLabel"
+        >
+          Name
+        </label>
+        <input
+          aria-labelledby="nameLabel"
+          class="form-control form-control-lg"
+          id="name"
+          placeholder="name"
+          value="Buckaroo Banzai"
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="passwordLabel"
+        >
+          Password
+        </label>
+        <input
+          aria-labelledby="passwordLabel"
+          class="form-control form-control-lg"
+          id="password"
+          placeholder="password"
+          type="password"
+          value="qwerty1!"
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
 </div>
 `;

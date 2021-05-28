@@ -49,9 +49,10 @@ export const Signup: React.FC = () => {
             <h1>Sign Up</h1>
             <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label id="emailLabel">Email</Form.Label>
                     <Form.Control
                         autoFocus
+                        aria-labelledby="emailLabel"
                         id="email"
                         onChange={(e) => setEmail(e.target.value)}
                         size="lg"
@@ -62,9 +63,10 @@ export const Signup: React.FC = () => {
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label id="nameLabel">Name</Form.Label>
                     <Form.Control
                         autoFocus
+                        aria-labelledby="nameLabel"
                         id="name"
                         onChange={(e) => setName(e.target.value)}
                         size="lg"
@@ -74,9 +76,10 @@ export const Signup: React.FC = () => {
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label id="passwordLabel">Password</Form.Label>
                     <Form.Control
                         id="password"
+                        aria-labelledby="passwordLabel"
                         onChange={(e) => setPassword(e.target.value)}
                         size="lg"
                         type="password"
