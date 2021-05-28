@@ -1,14 +1,17 @@
 import { useMutation } from '@apollo/client';
 import { navigate } from 'hookrouter';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { signupMutationString } from 'src/api/api';
 import { SignupMutation, SignupMutationVariables } from 'src/api/__generated__/SignupMutation';
+import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { setBrowserTitle } from 'src/utils';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 
 export const Signup: React.FC = () => {
+    const { setAuthenticated } = useContext(GlobalContext);
+
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -16,11 +19,12 @@ export const Signup: React.FC = () => {
     const [signup, { error }] = useMutation<SignupMutation, SignupMutationVariables>(signupMutationString, {
         variables: { email, name, password },
         onCompleted: ({ signup }) => {
-            if (signup?.token) {
-                console.log(signup);
-                localStorage.setItem('token', signup.token);
-                navigate('/');
-            }
+            localStorage.setItem('token', signup!.token!);
+            setAuthenticated(true);
+            navigate('/');
+        },
+        onError: () => {
+            // RTL bug
         }
     });
 
