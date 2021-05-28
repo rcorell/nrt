@@ -63,16 +63,18 @@ export const renderComponent = (
 */
 let globalAuthenticated = false;
 
-const MockComponent: React.FC = () => {
+const MockComponent: React.FC = (): JSX.Element => {
     const { authenticated } = useContext(GlobalContext);
+
     globalAuthenticated = authenticated;
 
     return <></>;
 };
+
 export const getGlobalContext = () => {
     render(
         <GlobalContextProvider>
-            <MockComponent />
+            <MockComponent {...{}} />
         </GlobalContextProvider>
     );
 

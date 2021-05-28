@@ -1,6 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavigationBar matches snapshot 1`] = `
+exports[`NavigationBar snapshots authenticated 1`] = `
+<div>
+  <div
+    class="sc-hKwCoD jDkowu"
+  >
+    <div
+      class="sc-eCImvq"
+    >
+      <a
+        href="/"
+      >
+        Home
+      </a>
+       | 
+      <a
+        href="/topics"
+      >
+        Topics
+      </a>
+       | 
+      <a
+        href="/add-topic"
+      >
+        Add Topic
+      </a>
+       | 
+      <a
+        href="/add-group"
+      >
+        Add Group
+      </a>
+    </div>
+    <div
+      class="sc-jRQAMF"
+    >
+      <a
+        href=""
+      >
+        Logout
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NavigationBar snapshots unauthenticated 1`] = `
 <div
   className="sc-hKwCoD jDkowu"
 >
