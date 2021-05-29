@@ -1,16 +1,18 @@
 import { ApolloClient, ApolloLink, gql, HttpLink, InMemoryCache } from '@apollo/client';
 import fetch from 'cross-fetch';
 
-const AUTHENTICATION_TOKEN_NAME = 'token';
+export const AUTHENTICATION_TOKEN_NAME = 'token';
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000', fetch });
+
+export const authHeader = (token: string | null) => (token ? `Bearer ${token}` : '');
 
 const authLink = new ApolloLink((operation, forward) => {
     const token = localStorage.getItem(AUTHENTICATION_TOKEN_NAME);
 
     operation.setContext({
         headers: {
-            authorization: token ? `Bearer ${token}` : ''
+            authorization: authHeader(token)
         }
     });
 
