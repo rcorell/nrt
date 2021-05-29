@@ -11,14 +11,15 @@ export const AddGroup: React.FC = () => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
 
-    setBrowserTitle('Add Group');
-
     const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
         createGroupMutationString,
         {
             variables: { description, name },
             onCompleted: ({ createGroup }) => {
                 createGroup.id += 0;
+            },
+            onError: () => {
+                // RTL bug
             }
         }
     );
@@ -41,15 +42,18 @@ export const AddGroup: React.FC = () => {
         return null;
     };
 
+    setBrowserTitle('Add Group');
+
     return (
         <FormContainer>
             <h1>Add Group</h1>
             {errorDisplay()}
             <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label id="nameLabel">Name</Form.Label>
                     <Form.Control
                         autoFocus
+                        aria-labelledby="nameLabel"
                         id="name"
                         onChange={(e) => setName(e.target.value)}
                         size="lg"
@@ -58,9 +62,10 @@ export const AddGroup: React.FC = () => {
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Description</Form.Label>
+                    <Form.Label id="descriptionLabel">Description</Form.Label>
                     <Form.Control
                         id="description"
+                        aria-labelledby="descriptionLabel"
                         onChange={(e) => setDescription(e.target.value)}
                         size="lg"
                         value={description}

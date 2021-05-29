@@ -12,8 +12,6 @@ export const AddTopic: React.FC = () => {
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
 
-    setBrowserTitle('Add Topic');
-
     const isFormInvalid = () => {
         return title.length < 1;
     };
@@ -41,6 +39,8 @@ export const AddTopic: React.FC = () => {
 
         return null;
     };
+
+    setBrowserTitle('Add Topic');
 
     return (
         <FormContainer>

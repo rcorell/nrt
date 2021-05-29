@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
 import { DocumentNode } from '@apollo/client';
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
-import { act, render } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { GlobalContext, GlobalContextProvider } from 'src/components/GlobalContextProvider';
-
-
-
 
 export let lastNavigationPath = '';
 
@@ -90,4 +87,54 @@ export const getGlobalContext = () => {
     return {
         authenticated: globalAuthenticated
     };
+};
+
+export const setField = (label: string, value: string) => {
+    const input = screen.getByLabelText(label);
+    fireEvent.change(input, { target: { value } });
+};
+
+export type FieldEntry = {
+    invalidValue: string;
+    label: string;
+    validValue: string;
+};
+
+export type TestFormOptions = {
+    component: React.FC;
+    fields: FieldEntry[];
+    pageName: string;
+};
+
+export const testFormSnapshots = (options: TestFormOptions) => {
+    let container: HTMLElement;
+
+    describe('standard snapshots', () => {
+        beforeEach(() => {
+            container = renderComponent(options.component).container;
+        });
+
+        it('fresh load', () => {
+            expect(container).toMatchSnapshot();
+        });
+
+        it('invalid parameters', () => {
+            for (const field of options.fields) {
+                setField(field.label, field.invalidValue);
+            }
+            expect(container).toMatchSnapshot();
+        });
+
+        it('valid parameters', async () => {
+            for (const field of options.fields) {
+                setField(field.label, field.validValue);
+            }
+
+            expect(container).toMatchSnapshot();
+        });
+    });
+
+    it('should have the correct document title', () => {
+        expect(window.document.title).toEqual(`Top 5 Daily | ${options.pageName}`);
+    });
 };
