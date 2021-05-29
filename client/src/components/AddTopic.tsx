@@ -22,6 +22,9 @@ export const AddTopic: React.FC = () => {
             variables: { title, description },
             onCompleted: ({ createTopic }) => {
                 createTopic.id += 0;
+            },
+            onError: () => {
+                // RTL bug
             }
         }
     );
@@ -48,9 +51,10 @@ export const AddTopic: React.FC = () => {
             {errorStatus()}
             <AppForm onSubmit={handleSubmit}>
                 <Form.Group>
-                    <Form.Label>Topic</Form.Label>
+                    <Form.Label id="topicLabel">Topic</Form.Label>
                     <Form.Control
                         autoFocus
+                        aria-labelledby="topicLabel"
                         id="topic"
                         onChange={(e) => setTitle(e.target.value)}
                         size="lg"
@@ -60,9 +64,10 @@ export const AddTopic: React.FC = () => {
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Decription</Form.Label>
+                    <Form.Label id="descriptionLabel">Description</Form.Label>
                     <Form.Control
                         id="description"
+                        aria-labelledby="descriptionLabel"
                         onChange={(e) => setDescription(e.target.value)}
                         size="lg"
                         type="topic"

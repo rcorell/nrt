@@ -5,7 +5,11 @@ export const INVALID = {
         NAME: ''
     },
     NAME: '',
-    PASSWORD: ''
+    PASSWORD: '',
+    TOPIC: {
+        DESCRIPTION: '',
+        TITLE: ''
+    }
 };
 
 export const VALID = {
@@ -15,11 +19,21 @@ export const VALID = {
         NAME: 'Blue Blaze Irregulars'
     },
     NAME: 'Buckaroo Banzai',
-    PASSWORD: 'qwerty1!'
+    PASSWORD: 'qwerty1!',
+    TOPIC: {
+        DESCRIPTION: 'A really great topic description for a really great topic.',
+        TITLE: 'A Really Great Topic'
+    }
 };
 
 export const ADD_GROUP = {
     DESCRIPTION: 'Description',
     NAME: 'Name',
     PAGE_NAME: 'Add Group'
+};
+
+export const ADD_TOPIC = {
+    DESCRIPTION: 'Description',
+    PAGE_NAME: 'Add Topic',
+    TITLE: 'Topic'
 };

@@ -1,59 +1,180 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddTopic matches snapshot 1`] = `
-<div
-  className="sc-bdvvaa hMSAon"
->
-  <h1>
-    Add Topic
-  </h1>
-  <form
-    className="sc-gsDJrp idIFaR"
-    onSubmit={[Function]}
-  >
-    <div
-      className="form-group"
-    >
-      <label
-        className="form-label"
-      >
-        Topic
-      </label>
-      <input
-        autoFocus={true}
-        className="form-control form-control-lg"
-        id="topic"
-        onChange={[Function]}
-        type="topic"
-        value=""
-      />
-    </div>
-    <div
-      className="form-group"
-    >
-      <label
-        className="form-label"
-      >
-        Decription
-      </label>
-      <input
-        className="form-control form-control-lg"
-        id="description"
-        onChange={[Function]}
-        type="topic"
-        value=""
-      />
-    </div>
-    <button
-      className="btn btn-primary"
-      disabled={true}
-      type="submit"
-    >
-      Submit Topic
-    </button>
-  </form>
+exports[`AddGroup standard snapshots fresh load 1`] = `
+<div>
   <div
-    className="sc-dkPtyc cWQCqc"
-  />
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Add Topic
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="topicLabel"
+        >
+          Topic
+        </label>
+        <input
+          aria-labelledby="topicLabel"
+          class="form-control form-control-lg"
+          id="topic"
+          type="topic"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="descriptionLabel"
+        >
+          Description
+        </label>
+        <input
+          aria-labelledby="descriptionLabel"
+          class="form-control form-control-lg"
+          id="description"
+          type="topic"
+          value=""
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        disabled=""
+        type="submit"
+      >
+        Submit Topic
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
+</div>
+`;
+
+exports[`AddGroup standard snapshots invalid parameters 1`] = `
+<div>
+  <div
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Add Topic
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="topicLabel"
+        >
+          Topic
+        </label>
+        <input
+          aria-labelledby="topicLabel"
+          class="form-control form-control-lg"
+          id="topic"
+          type="topic"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="descriptionLabel"
+        >
+          Description
+        </label>
+        <input
+          aria-labelledby="descriptionLabel"
+          class="form-control form-control-lg"
+          id="description"
+          type="topic"
+          value=""
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        disabled=""
+        type="submit"
+      >
+        Submit Topic
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
+</div>
+`;
+
+exports[`AddGroup standard snapshots valid parameters 1`] = `
+<div>
+  <div
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Add Topic
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="topicLabel"
+        >
+          Topic
+        </label>
+        <input
+          aria-labelledby="topicLabel"
+          class="form-control form-control-lg"
+          id="topic"
+          type="topic"
+          value="A Really Great Topic"
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="descriptionLabel"
+        >
+          Description
+        </label>
+        <input
+          aria-labelledby="descriptionLabel"
+          class="form-control form-control-lg"
+          id="description"
+          type="topic"
+          value="Bucakroo Banzai's fiercely loyaly and dedicated support team."
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Submit Topic
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
 </div>
 `;
