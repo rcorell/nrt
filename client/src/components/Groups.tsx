@@ -34,7 +34,8 @@ export const Groups: React.FC = () => {
 
     const [joinGroup] = useMutation<JoinGroupMutation, JoinGroupMutationVariables>(joinGroupMutationString, {
         onCompleted: () => {
-            console.log('woo');
+            // console.log('woo');
+            userQuery.refetch();
         },
         onError: () => {
             // https://github.com/apollographql/apollo-client/issues/7167
@@ -46,7 +47,7 @@ export const Groups: React.FC = () => {
     }
 
     if (allGroups.error || userQuery.error) {
-        return <div>Error: {JSON.stringify(allGroups.error)}</div>;
+        return <div>Error: {JSON.stringify(allGroups.error) + JSON.stringify(userQuery.error)}</div>;
     }
 
     const userGroupIds = userQuery!.data!.user.groups.map((group) => {
@@ -64,5 +65,5 @@ export const Groups: React.FC = () => {
         };
     });
 
-    return <MaterialTable title="Topics" columns={COLUMN_DEFINITIONS} data={groups} />;
+    return <MaterialTable title="Groups" columns={COLUMN_DEFINITIONS} data={groups} />;
 };

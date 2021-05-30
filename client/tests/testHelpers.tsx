@@ -64,6 +64,22 @@ export const renderComponent = (
     );
 };
 
+export const renderComponentWithMocks = (component: React.FC, mocks: MockedResponse[]) => {
+    return render(
+        <MockedProvider
+            mocks={mocks}
+            addTypename={false}
+            defaultOptions={{
+                mutate: {
+                    errorPolicy: 'all'
+                }
+            }}
+        >
+            {React.createElement(component)}
+        </MockedProvider>
+    );
+};
+
 /*
     I sincerely hope there's a better way to do this.
 */

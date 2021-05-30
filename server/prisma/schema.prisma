@@ -1,46 +1,46 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+	provider = "postgresql"
+	url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+	provider = "prisma-client-js"
 }
 
 model Group {
-  id      			Int             @id @default(autoincrement())
-  name        		String
-  description 		String
-  creator      		User            @relation(fields: [creatorId], references: [id])
-  creatorId    		Int
-  users       		User[]			@relation(name: "GroupsToUsers")
-  topics      		Topic[]
-  createdAt   		DateTime        @default(now())
-  updatedAt   		DateTime        @updatedAt
+	id      			Int             @id @default(autoincrement())
+	name        		String
+	description 		String
+	creator      		User            @relation(fields: [creatorId], references: [id])
+	creatorId    		Int
+	users       		User[]			@relation(name: "GroupsToUsers")
+	topics      		Topic[]
+	createdAt   		DateTime        @default(now())
+	updatedAt   		DateTime        @updatedAt
 }
 
 model Topic {
-  id          		Int      		@id @default(autoincrement())
-  title       		String
-  description 		String
-  author      		User     		@relation(fields: [authorId], references: [id])
-  authorId    		Int
-  group       		Group    		@relation(fields: [groupId], references: [id])
-  groupId     		Int
-  createdAt   		DateTime 		@default(now())
-  updatedAt   		DateTime 		@updatedAt
+	id          		Int      		@id @default(autoincrement())
+	title       		String
+	description 		String
+	author      		User     		@relation(fields: [authorId], references: [id])
+	authorId    		Int
+	group       		Group    		@relation(fields: [groupId], references: [id])
+	groupId     		Int
+	createdAt   		DateTime 		@default(now())
+	updatedAt   		DateTime 		@updatedAt
 }
 
 model User {
-  id        		Int             @id @default(autoincrement())
-  name      		String
-  email     		String          @unique
-  password  		String
-  topics    		Topic[]
-  groupsCreated	    Group[]
-  groups			Group[]			@relation(name: "GroupsToUsers")
-  createdAt 		DateTime        @default(now())
-  updatedAt 		DateTime        @updatedAt
+	id        			Int             @id @default(autoincrement())
+	name      			String
+	email     			String          @unique
+	password  			String
+	topics    			Topic[]
+	groups				Group[]			@relation(name: "GroupsToUsers")
+	groupsCreated	    Group[]
+	createdAt 			DateTime        @default(now())
+	updatedAt 			DateTime        @updatedAt
 }
 
 

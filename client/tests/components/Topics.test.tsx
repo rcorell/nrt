@@ -11,12 +11,12 @@ describe('Topics', () => {
 
     describe('snapshots', () => {
         it('loading', () => {
-            expect(renderComponent(Topics)).toMatchSnapshot();
+            expect(renderComponent(Topics).container).toMatchSnapshot();
         });
 
         it('success', async () => {
             const data: FetchTopicsQuery = {
-                topics: [{ __typename: 'Topic', description: 'test-description', title: 'test-title' }]
+                topics: [{ __typename: 'Topic', id: '88', description: 'test-description', title: 'test-title' }]
             };
 
             renderComponent(Topics, fetchTopicsQueryString, {}, { data });
@@ -31,21 +31,21 @@ describe('Topics', () => {
         it('network error', async () => {
             const networkError = new Error('Network-error');
 
-            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, {}, { error: networkError });
+            const { container } = renderComponent(Topics, fetchTopicsQueryString, {}, { error: networkError });
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
             expect(screen.queryByText('No results')).toBeNull();
 
-            expect(topicsRender).toMatchSnapshot();
+            expect(container).toMatchSnapshot();
         });
 
         it('Malformed results', async () => {
-            const topicsRender = renderComponent(Topics, fetchTopicsQueryString, {}, { data: null });
+            const { container } = renderComponent(Topics, fetchTopicsQueryString, {}, { data: null });
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(topicsRender).toMatchSnapshot();
+            expect(container).toMatchSnapshot();
         });
     });
 });
