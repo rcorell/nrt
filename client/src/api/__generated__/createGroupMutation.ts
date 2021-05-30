@@ -8,16 +8,16 @@
 // ====================================================
 
 export interface CreateGroupMutation_createGroup {
-    __typename: 'Topic';
-    id: string;
-    createdAt: any;
+  __typename: "Topic";
+  id: string;
+  createdAt: any;
 }
 
 export interface CreateGroupMutation {
-    createGroup: CreateGroupMutation_createGroup;
+  createGroup: CreateGroupMutation_createGroup;
 }
 
 export interface CreateGroupMutationVariables {
-    name: string;
-    description?: string | null;
+  name: string;
+  description?: string | null;
 }

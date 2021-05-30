@@ -14,7 +14,31 @@
         "description": null,
         "fields": [
           {
-            "name": "info",
+            "name": "groups",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Group",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ready",
             "description": null,
             "args": [],
             "type": {
@@ -52,30 +76,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "groups",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Group",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -84,18 +84,8 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "String",
-        "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
-        "name": "Topic",
+        "name": "Group",
         "description": null,
         "fields": [
           {
@@ -115,7 +105,7 @@
             "deprecationReason": null
           },
           {
-            "name": "title",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {
@@ -147,7 +137,7 @@
             "deprecationReason": null
           },
           {
-            "name": "author",
+            "name": "creator",
             "description": null,
             "args": [],
             "type": {
@@ -163,16 +153,40 @@
             "deprecationReason": null
           },
           {
-            "name": "group",
+            "name": "users",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Group",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "User",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "topics",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Topic",
+                  "ofType": null
+                }
               }
             },
             "isDeprecated": false,
@@ -220,6 +234,16 @@
         "kind": "SCALAR",
         "name": "ID",
         "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "String",
+        "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -379,7 +403,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Group",
+        "name": "Topic",
         "description": null,
         "fields": [
           {
@@ -399,7 +423,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "title",
             "description": null,
             "args": [],
             "type": {
@@ -431,7 +455,7 @@
             "deprecationReason": null
           },
           {
-            "name": "creator",
+            "name": "author",
             "description": null,
             "args": [],
             "type": {
@@ -447,40 +471,16 @@
             "deprecationReason": null
           },
           {
-            "name": "users",
+            "name": "group",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "User",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "topics",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Topic",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "Group",
+                "ofType": null
               }
             },
             "isDeprecated": false,

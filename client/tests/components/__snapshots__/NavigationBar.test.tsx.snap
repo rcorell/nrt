@@ -27,6 +27,12 @@ exports[`NavigationBar snapshots authenticated 1`] = `
       </a>
        | 
       <a
+        href="/groups"
+      >
+        Groups
+      </a>
+       | 
+      <a
         href="/add-group"
       >
         Add Group

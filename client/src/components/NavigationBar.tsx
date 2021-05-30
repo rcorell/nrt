@@ -27,6 +27,8 @@ export const NavigationBar: React.FC = () => {
                 &nbsp;|&nbsp;
                 <A href={Path.ADD_TOPIC}>Add Topic</A>
                 &nbsp;|&nbsp;
+                <A href={Path.GROUPS}>Groups</A>
+                &nbsp;|&nbsp;
                 <A href={Path.ADD_GROUP}>Add Group</A>
             </>
         );

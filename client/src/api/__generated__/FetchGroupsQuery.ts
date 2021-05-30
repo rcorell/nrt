@@ -4,15 +4,15 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: FetchTopicsQuery
+// GraphQL query operation: FetchGroupsQuery
 // ====================================================
 
-export interface FetchTopicsQuery_topics {
-  __typename: "Topic";
-  title: string;
+export interface FetchGroupsQuery_groups {
+  __typename: "Group";
+  name: string;
   description: string;
 }
 
-export interface FetchTopicsQuery {
-  topics: FetchTopicsQuery_topics[];
+export interface FetchGroupsQuery {
+  groups: FetchGroupsQuery_groups[];
 }

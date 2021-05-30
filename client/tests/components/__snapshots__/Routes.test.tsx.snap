@@ -207,6 +207,41 @@ exports[`Routes routes to /add-topic correctly 1`] = `
 </div>
 `;
 
+exports[`Routes routes to /groups correctly 1`] = `
+<div>
+  <div
+    class="sc-gKckTs gIgbJI"
+  >
+    Top 5 Daily
+  </div>
+  <div
+    class="sc-hKwCoD jDkowu"
+  >
+    <div
+      class="sc-eCImvq"
+    >
+      <a
+        href="/login"
+      >
+        Log in
+      </a>
+       | 
+      <a
+        href="/signup"
+      >
+        Sign up
+      </a>
+    </div>
+    <div
+      class="sc-jRQAMF"
+    />
+  </div>
+  <div>
+    Loading...
+  </div>
+</div>
+`;
+
 exports[`Routes routes to /login correctly 1`] = `
 <div>
   <div

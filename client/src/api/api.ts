@@ -36,6 +36,15 @@ export const setAuthenticationToken = (token: string) => {
     localStorage.setItem(AUTHENTICATION_TOKEN_NAME, token);
 };
 
+export const fetchGroupsQueryString = gql`
+    query FetchGroupsQuery {
+        groups {
+            name
+            description
+        }
+    }
+`;
+
 export const fetchTopicsQueryString = gql`
     query FetchTopicsQuery {
         topics {

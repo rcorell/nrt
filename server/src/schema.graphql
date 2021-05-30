@@ -1,7 +1,7 @@
 type Query {
-	info: String!
-	topics: [Topic!]!
 	groups: [Group!]!
+	ready: String!
+	topics: [Topic!]!
 }
 
 type Mutation {

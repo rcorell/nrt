@@ -70,3 +70,4 @@
 
 ### Update client after migration
 1. npx prisma generate
+

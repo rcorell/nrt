@@ -3,6 +3,7 @@ import React from 'react';
 
 import { AddGroup } from 'src/components/AddGroup';
 import { AddTopic } from 'src/components/AddTopic';
+import { Groups } from 'src/components/Groups';
 import { Home } from 'src/components/Home';
 import { Login } from 'src/components/Login';
 import { NotFound } from 'src/components/NotFound';
@@ -14,6 +15,7 @@ import { NavigationBar } from './NavigationBar';
 export enum Path {
     ADD_GROUP = '/add-group',
     ADD_TOPIC = '/add-topic',
+    GROUPS = '/groups',
     HOME = '/',
     LOGIN = '/login',
     SIGNUP = '/signup',
@@ -24,6 +26,7 @@ export const Routes: React.FC = () => {
     const routes = {
         [Path.ADD_GROUP]: () => <AddGroup />,
         [Path.ADD_TOPIC]: () => <AddTopic />,
+        [Path.GROUPS]: () => <Groups />,
         [Path.HOME]: () => <Home />,
         [Path.LOGIN]: () => <Login />,
         [Path.SIGNUP]: () => <Signup />,

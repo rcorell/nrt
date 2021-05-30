@@ -8,16 +8,16 @@
 // ====================================================
 
 export interface SignupMutation_signup {
-    __typename: 'AuthPayload';
-    token: string | null;
+  __typename: "AuthPayload";
+  token: string | null;
 }
 
 export interface SignupMutation {
-    signup: SignupMutation_signup | null;
+  signup: SignupMutation_signup | null;
 }
 
 export interface SignupMutationVariables {
-    email: string;
-    name: string;
-    password: string;
+  email: string;
+  name: string;
+  password: string;
 }
