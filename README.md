@@ -82,6 +82,7 @@
 	1. npm start
 1. Client
 	1. npm run schema:update
-	1. npm run codegen
 	1. Add query string to src/api/api.ts
+	1. npm run codegen
+	1. Add client call
 	1. Profit

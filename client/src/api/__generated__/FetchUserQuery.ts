@@ -9,12 +9,14 @@
 
 export interface FetchUserQuery_user_groups {
   __typename: "Group";
+  id: string;
   description: string;
   name: string;
 }
 
 export interface FetchUserQuery_user_topics {
   __typename: "Topic";
+  id: string;
   description: string;
   title: string;
 }

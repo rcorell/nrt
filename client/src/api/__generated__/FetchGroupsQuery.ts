@@ -9,6 +9,7 @@
 
 export interface FetchGroupsQuery_groups {
   __typename: "Group";
+  id: string;
   name: string;
   description: string;
 }

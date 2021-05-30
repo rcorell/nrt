@@ -39,6 +39,7 @@ export const setAuthenticationToken = (token: string) => {
 export const fetchGroupsQueryString = gql`
     query FetchGroupsQuery {
         groups {
+            id
             name
             description
         }
@@ -48,6 +49,7 @@ export const fetchGroupsQueryString = gql`
 export const fetchTopicsQueryString = gql`
     query FetchTopicsQuery {
         topics {
+            id
             title
             description
         }
@@ -58,10 +60,12 @@ export const fetchUserQueryString = gql`
     query FetchUserQuery {
         user {
             groups {
+                id
                 description
                 name
             }
             topics {
+                id
                 description
                 title
             }
@@ -100,5 +104,11 @@ export const createTopicMutationString = gql`
             id
             createdAt
         }
+    }
+`;
+
+export const joinGroupMutationString = gql`
+    mutation JoinGroupMutation($groupId: Int!) {
+        joinGroup(groupId: $groupId)
     }
 `;

@@ -56,3 +56,18 @@ export const createGroup = async (_parent, args, context) => {
         }
     });
 };
+
+export const joinGroup = async (_parent, args, context) => {
+    await context.prisma.user.update({
+        data: {
+            groups: {
+                connect: {
+                    id: args.groupId
+                }
+            }
+        },
+        where: { id: context.userId }
+    });
+
+    return args.groupId;
+};

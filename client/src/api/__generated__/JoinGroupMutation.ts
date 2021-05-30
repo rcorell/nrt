@@ -4,16 +4,13 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: FetchTopicsQuery
+// GraphQL mutation operation: JoinGroupMutation
 // ====================================================
 
-export interface FetchTopicsQuery_topics {
-  __typename: "Topic";
-  id: string;
-  title: string;
-  description: string;
+export interface JoinGroupMutation {
+  joinGroup: number | null;
 }
 
-export interface FetchTopicsQuery {
-  topics: FetchTopicsQuery_topics[];
+export interface JoinGroupMutationVariables {
+  groupId: number;
 }
