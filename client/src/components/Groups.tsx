@@ -15,7 +15,7 @@ const COLUMN_DEFINITIONS = [
 export const Groups: React.FC = () => {
     setBrowserTitle('Groups');
 
-    const { data, error, loading } = useQuery<FetchGroupsQuery>(fetchGroupsQueryString);
+    const { data: allGroupsData, error, loading } = useQuery<FetchGroupsQuery>(fetchGroupsQueryString);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -25,7 +25,7 @@ export const Groups: React.FC = () => {
         return <div>Error: {JSON.stringify(error)}</div>;
     }
 
-    const mutableGroups = _.cloneDeep(data!.groups);
+    const mutableGroups = _.cloneDeep(allGroupsData!.groups);
 
     return <MaterialTable title="Topics" columns={COLUMN_DEFINITIONS} data={mutableGroups} />;
 };

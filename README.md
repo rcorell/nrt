@@ -28,12 +28,12 @@
 
 ### Client
 1. Framework: React
-1. State: Redux
-1. Asynch: redux-saga
+1. State: React Context
+1. Asynch: React Hooks
 1. CSS: styled-components
-1. GraphQL Client: graphql-request
+1. GraphQL Client: Apollo
 1. Linting: stylelint
-1. Testing/Coverage: Jest, enzyme
+1. Testing/Coverage: Jest, RTL
 
 ### Server
 1. Framework: GraphQL
@@ -71,3 +71,17 @@
 ### Update client after migration
 1. npx prisma generate
 
+
+
+## Add endpoint and query
+1. Server
+	1. Add query declaration to GraphQL schema (server/src/schema.graphql)
+	1. Add query code to relevant file in server/src/resolvers/
+	1. npm run generatePrismaClient
+	1. npm run build
+	1. npm start
+1. Client
+	1. npm run schema:update
+	1. npm run codegen
+	1. Add query string to src/api/api.ts
+	1. Profit
