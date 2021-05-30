@@ -56,9 +56,15 @@ export const fetchTopicsQueryString = gql`
 
 export const fetchUserQueryString = gql`
     query FetchUserQuery {
-        users {
-            groups
-            topics
+        user {
+            groups {
+                description
+                name
+            }
+            topics {
+                description
+                title
+            }
         }
     }
 `;
