@@ -2,7 +2,6 @@ import { fireEvent, screen } from '@testing-library/react';
 
 import { createGroupMutationString } from 'src/api/api';
 import { AddGroup } from 'src/components/AddGroup';
-
 import { ADD_GROUP, INVALID, VALID } from 'tests/fixtures';
 import { oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
 

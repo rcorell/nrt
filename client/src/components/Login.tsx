@@ -3,11 +3,11 @@ import { navigate } from 'hookrouter';
 import React, { useContext, useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { GlobalContext } from 'src/components/GlobalContextProvider';
-import { loginMutationString } from 'src/api/api';
 import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
-import { setBrowserTitle } from 'src/utils';
+import { loginMutationString } from 'src/api/api';
+import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
+import { setBrowserTitle } from 'src/utils';
 
 export const Login: React.FC = () => {
     const { setAuthenticated } = useContext(GlobalContext);

@@ -2,7 +2,6 @@ import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/r
 
 import { Groups } from 'src/components/Groups';
 import { LOADING_TEXT } from 'src/components/shared';
-
 import { mockFetchGroups, mockFetchGroupsWithNetworkError, mockFetchUser, mockJoinGroup } from 'tests/mocks';
 import { oneTick, renderComponent, renderComponentWithMocks } from 'tests/testHelpers';
 

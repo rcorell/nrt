@@ -1,9 +1,8 @@
-import userEvent from '@testing-library/user-event';
 import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { AddTopic } from 'src/components/AddTopic';
 import { LOADING_TEXT } from 'src/components/shared';
-
 import { ADD_TOPIC, INVALID, VALID } from 'tests/fixtures';
 import { mockCreateTopic, mockFetchUser } from 'tests/mocks';
 import { oneTick, renderComponent, renderComponentWithMocks, setField } from 'tests/testHelpers';

@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
 import { DocumentNode } from '@apollo/client';
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import React, { useContext } from 'react';
 
 import { GlobalContext, GlobalContextProvider } from 'src/components/GlobalContextProvider';
 

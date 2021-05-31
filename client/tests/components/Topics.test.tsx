@@ -3,7 +3,6 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
 import { fetchTopicsQueryString } from 'src/api/api';
 import { Topics } from 'src/components/Topics';
-
 import { renderComponent } from 'tests/testHelpers';
 
 describe('Topics', () => {

@@ -2,10 +2,10 @@ import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { createGroupMutationString } from 'src/api/api';
 import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
-import { setBrowserTitle } from 'src/utils';
+import { createGroupMutationString } from 'src/api/api';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
+import { setBrowserTitle } from 'src/utils';
 
 export const AddGroup: React.FC = () => {
     const [description, setDescription] = useState('');

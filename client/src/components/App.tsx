@@ -3,10 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ApolloProvider } from '@apollo/client';
 import React from 'react';
 
-import { GlobalContextProvider } from 'src/components/GlobalContextProvider';
 import { apolloClient } from 'src/api/api';
+import { GlobalContextProvider } from 'src/components/GlobalContextProvider';
 import { Routes } from 'src/components/Routes';
-
 import { AppHeader, GlobalStyle } from 'src/styles/app';
 
 export const App: React.FC = () => {

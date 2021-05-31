@@ -2,7 +2,6 @@ import { fireEvent, screen } from '@testing-library/react';
 
 import { loginMutationString } from 'src/api/api';
 import { Login } from 'src/components/Login';
-
 import { INVALID, VALID } from 'tests/fixtures';
 import {
     getGlobalContext,

@@ -12,8 +12,8 @@ import _ from 'lodash';
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 
-import { setLastNavigationPath } from 'tests/testHelpers';
 import { GlobalContextProvider } from 'src/components/GlobalContextProvider';
+import { setLastNavigationPath } from 'tests/testHelpers';
 
 jest.mock('hookrouter', () => {
     return {

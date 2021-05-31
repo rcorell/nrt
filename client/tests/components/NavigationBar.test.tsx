@@ -1,10 +1,9 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
 
 import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { NavigationBar } from 'src/components/NavigationBar';
 import { Path } from 'src/components/Routes';
-
 import { lastNavigationPath, oneTick, setLastNavigationPath } from 'tests/testHelpers';
 
 let logoutCalled = false;

@@ -7,11 +7,11 @@ module.exports = {
         node: true
     },
     extends: [
-        'prettier',
         'react-app',
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:react/recommended'
+        'plugin:react/recommended',
+        'prettier'
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -19,7 +19,7 @@ module.exports = {
             jsx: true
         }
     },
-    plugins: ['@typescript-eslint', 'prettier'],
+    plugins: ['@typescript-eslint', 'import', 'prettier'],
     root: true,
     rules: {
         '@typescript-eslint/ban-ts-comment': 'off',
@@ -31,11 +31,27 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_.*' }],
         '@typescript-eslint/no-use-before-define': 'off',
+        'import/order': [
+            'error',
+            {
+                groups: ['builtin', 'external', 'internal'],
+                'newlines-between': 'always',
+                alphabetize: {
+                    order: 'asc',
+                    caseInsensitive: true
+                }
+            }
+        ],
         'prettier/prettier': 2,
         'react/display-name': 'off',
         'react/prop-types': 'off'
     },
     settings: {
+        'import/resolver': {
+            typescript: {
+                project: './tsconfig.json'
+            }
+        },
         react: {
             version: 'detect'
         }

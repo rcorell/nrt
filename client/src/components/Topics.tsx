@@ -1,10 +1,10 @@
-import * as _ from 'lodash';
 import { useQuery } from '@apollo/client';
+import * as _ from 'lodash';
 import MaterialTable from 'material-table';
 import React from 'react';
 
-import { fetchTopicsQueryString } from 'src/api/api';
 import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
+import { fetchTopicsQueryString } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 

@@ -2,7 +2,6 @@ import { fireEvent, screen } from '@testing-library/react';
 
 import { signupMutationString } from 'src/api/api';
 import { Signup } from 'src/components/Signup';
-
 import { INVALID, VALID } from 'tests/fixtures';
 import {
     getGlobalContext,

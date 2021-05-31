@@ -4,7 +4,6 @@ import {
     fetchUserQueryString,
     joinGroupMutationString
 } from 'src/api/api';
-
 import { VALID } from 'tests/fixtures';
 
 export const mockGroup = {

@@ -1,12 +1,12 @@
-import React from 'react';
-import * as _ from 'lodash';
 import { useMutation, useQuery } from '@apollo/client';
+import * as _ from 'lodash';
 import MaterialTable from 'material-table';
+import React from 'react';
 
-import { fetchGroupsQueryString, fetchUserQueryString, joinGroupMutationString } from 'src/api/api';
 import { FetchGroupsQuery } from 'src/api/__generated__/FetchGroupsQuery';
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
+import { fetchGroupsQueryString, fetchUserQueryString, joinGroupMutationString } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
