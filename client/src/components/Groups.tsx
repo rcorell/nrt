@@ -7,6 +7,7 @@ import { fetchGroupsQueryString, fetchUserQueryString, joinGroupMutationString }
 import { FetchGroupsQuery } from 'src/api/__generated__/FetchGroupsQuery';
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
+import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
 const COLUMN_DEFINITIONS = [
@@ -32,7 +33,7 @@ export const Groups: React.FC = () => {
     });
 
     if (allGroups.loading || userQuery.loading) {
-        return <div>Loading...</div>;
+        return <div>{LOADING_TEXT}</div>;
     }
 
     if (allGroups.error || userQuery.error) {

@@ -5,6 +5,7 @@ import React from 'react';
 
 import { fetchTopicsQueryString } from 'src/api/api';
 import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
+import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
 const COLUMN_DEFINITIONS = [
@@ -18,7 +19,7 @@ export const Topics: React.FC = () => {
     const { data, error, loading } = useQuery<FetchTopicsQuery>(fetchTopicsQueryString);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>{LOADING_TEXT}</div>;
     }
 
     if (error) {

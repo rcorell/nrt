@@ -102,7 +102,6 @@ export const createTopicMutationString = gql`
     mutation CreateTopicMutation($groupId: ID!, $title: String!, $description: String) {
         createTopic(groupId: $groupId, title: $title, description: $description) {
             id
-            createdAt
         }
     }
 `;

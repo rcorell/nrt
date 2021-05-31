@@ -5,7 +5,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { createTopicMutationString, fetchUserQueryString } from 'src/api/api';
-
+import { LOADING_TEXT } from 'src/components/shared';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
 
@@ -20,9 +20,6 @@ export const AddTopic: React.FC = () => {
         createTopicMutationString,
         {
             variables: { groupId, title, description },
-            onCompleted: ({ createTopic }) => {
-                createTopic.id += 0;
-            },
             onError: () => {
                 // RTL bug
             }
@@ -50,12 +47,12 @@ export const AddTopic: React.FC = () => {
     setBrowserTitle('Add Topic');
 
     if (userQuery.loading || !userQuery.data) {
-        return <div>Loading...</div>;
+        return <div>{LOADING_TEXT}</div>;
     }
 
     const groupOptions = userQuery.data.user.groups.map((group) => (
         <option key={group!.id} value={group!.id}>
-            {group?.name || ''}
+            {group!.name}
         </option>
     ));
 
