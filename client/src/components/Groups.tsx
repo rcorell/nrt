@@ -9,14 +9,6 @@ import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
 import { setBrowserTitle } from 'src/utils';
 
-// const renderJoinColumn = (rowData: any) => {
-//     if (userGroups.contains(rowData.name)) {
-//         return <p>Joined</p>;
-//     }
-
-//     return <p>Join</p>;
-// };
-
 const COLUMN_DEFINITIONS = [
     { title: 'Name', field: 'name' },
     { title: 'Description', field: 'description' },
@@ -34,12 +26,9 @@ export const Groups: React.FC = () => {
 
     const [joinGroup] = useMutation<JoinGroupMutation, JoinGroupMutationVariables>(joinGroupMutationString, {
         onCompleted: () => {
-            // console.log('woo');
             userQuery.refetch();
         },
-        onError: () => {
-            // https://github.com/apollographql/apollo-client/issues/7167
-        }
+        onError: () => {}
     });
 
     if (allGroups.loading || userQuery.loading) {
@@ -54,7 +43,7 @@ export const Groups: React.FC = () => {
         return group!.id;
     });
 
-    const groups = _.cloneDeep(allGroups.data!.groups).map((group) => {
+    const groups = _.cloneDeep(allGroups!.data!.groups).map((group) => {
         return {
             ...group,
             join: userGroupIds.includes(group.id) ? (

@@ -1,10 +1,85 @@
-import { MockedResponse } from '@apollo/client/testing';
 import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { fetchGroupsQueryString, fetchUserQueryString, joinGroupMutationString } from 'src/api/api';
 import { Groups } from 'src/components/Groups';
 
 import { oneTick, renderComponent, renderComponentWithMocks } from 'tests/testHelpers';
+
+const mockGroup = {
+    __typename: 'Group',
+    id: '42',
+    description: 'test-description',
+    name: 'test-name'
+};
+
+const mockFetchGroups = {
+    request: {
+        query: fetchGroupsQueryString,
+        variables: {}
+    },
+    result: {
+        data: {
+            groups: [mockGroup]
+        }
+    }
+};
+
+const mockFetchGroupsWithNetworkError = {
+    request: {
+        query: fetchGroupsQueryString,
+        variables: {}
+    },
+    error: new Error('network-error')
+};
+
+const mockFetchUser = {
+    userWithNoGroups: {
+        request: {
+            query: fetchUserQueryString,
+            variables: {}
+        },
+        result: {
+            data: {
+                user: {
+                    __typename: 'User',
+                    id: '11',
+                    groups: [],
+                    topics: []
+                }
+            }
+        }
+    },
+    userWithOneGroup: {
+        request: {
+            query: fetchUserQueryString,
+            variables: {}
+        },
+        result: {
+            data: {
+                user: {
+                    __typename: 'User',
+                    id: '11',
+                    groups: [mockGroup],
+                    topics: []
+                }
+            }
+        }
+    }
+};
+
+const mockJoinGroup = {
+    request: {
+        query: joinGroupMutationString,
+        variables: { groupId: 42 }
+    },
+    result: {
+        data: {
+            joinGroup: {
+                id: 42
+            }
+        }
+    }
+};
 
 describe('Groups', () => {
     const LOADING_TEXT = 'Loading...';
@@ -15,9 +90,10 @@ describe('Groups', () => {
         });
 
         it('network error', async () => {
-            const networkError = new Error('Network-error');
-
-            const { container } = renderComponent(Groups, fetchGroupsQueryString, {}, { error: networkError });
+            const { container } = renderComponentWithMocks(Groups, [
+                mockFetchGroupsWithNetworkError,
+                mockFetchUser.userWithNoGroups
+            ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -29,42 +105,7 @@ describe('Groups', () => {
 
     describe('success', () => {
         it('display one group', async () => {
-            const mocks: MockedResponse[] = [
-                {
-                    request: {
-                        query: fetchGroupsQueryString,
-                        variables: {}
-                    },
-                    result: {
-                        data: {
-                            groups: [
-                                {
-                                    __typename: 'Group',
-                                    id: '42',
-                                    description: 'test-description',
-                                    name: 'test-name'
-                                }
-                            ]
-                        }
-                    }
-                },
-                {
-                    request: {
-                        query: fetchUserQueryString,
-                        variables: {}
-                    },
-                    result: {
-                        data: {
-                            user: {
-                                id: '11',
-                                groups: [],
-                                topics: []
-                            }
-                        }
-                    }
-                }
-            ];
-            renderComponentWithMocks(Groups, mocks);
+            renderComponentWithMocks(Groups, [mockFetchGroups, mockFetchUser.userWithNoGroups]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -73,68 +114,13 @@ describe('Groups', () => {
         });
 
         it('join group', async () => {
-            const mocks: MockedResponse[] = [
-                {
-                    request: {
-                        query: fetchGroupsQueryString,
-                        variables: {}
-                    },
-                    result: {
-                        data: {
-                            groups: [
-                                {
-                                    __typename: 'Group',
-                                    id: '42',
-                                    description: 'test-description',
-                                    name: 'test-name'
-                                }
-                            ]
-                        }
-                    }
-                },
-                {
-                    request: {
-                        query: fetchUserQueryString,
-                        variables: {}
-                    },
-                    result: {
-                        data: {
-                            user: {
-                                id: '11',
-                                groups: [],
-                                topics: []
-                            }
-                        }
-                    }
-                },
-                {
-                    request: {
-                        query: joinGroupMutationString,
-                        variables: { groupId: '42' }
-                    },
-                    result: {
-                        data: {
-                            id: '42'
-                        }
-                    }
-                },
-                {
-                    request: {
-                        query: fetchUserQueryString,
-                        variables: {}
-                    },
-                    result: {
-                        data: {
-                            user: {
-                                id: '11',
-                                groups: [{ id: '42', name: 'name', description: 'description' }],
-                                topics: []
-                            }
-                        }
-                    }
-                }
-            ];
-            renderComponentWithMocks(Groups, mocks);
+            renderComponentWithMocks(Groups, [
+                mockFetchGroups,
+                mockFetchUser.userWithNoGroups,
+                mockJoinGroup,
+                mockFetchUser.userWithOneGroup,
+                mockFetchUser.userWithOneGroup
+            ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -144,8 +130,9 @@ describe('Groups', () => {
             const joinButton = screen.getByText('Join!');
             fireEvent.click(joinButton);
             await oneTick();
+            await oneTick();
 
-            // expect(screen.queryByText('Joined')).toBeInTheDocument();
+            expect(screen.queryByText('Joined')).toBeInTheDocument();
         });
     });
 });

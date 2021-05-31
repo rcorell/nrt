@@ -12,7 +12,7 @@ exports[`Groups snapshots network error 1`] = `
 <div>
   <div>
     Error: 
-    {"graphQLErrors":[],"networkError":{},"message":"Network-error"}{"graphQLErrors":[],"networkError":{},"message":"No more mocked responses for the query: query FetchUserQuery {\\n  user {\\n    groups {\\n      id\\n      description\\n      name\\n    }\\n    topics {\\n      id\\n      description\\n      title\\n    }\\n  }\\n}\\n, variables: {}"}
+    {"graphQLErrors":[],"networkError":{},"message":"network-error"}undefined
   </div>
 </div>
 `;

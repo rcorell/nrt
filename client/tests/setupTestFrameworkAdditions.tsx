@@ -24,6 +24,8 @@ jest.mock('hookrouter', () => {
     };
 });
 
+jest.setTimeout(10 * 60 * 1000);
+
 expect.extend({
     toHaveBeenCalledExactlyOnceWith(func, ...args) {
         let pass = true;
