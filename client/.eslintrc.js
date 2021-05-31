@@ -34,12 +34,12 @@ module.exports = {
         'import/order': [
             'error',
             {
-                groups: ['builtin', 'external', 'internal'],
-                'newlines-between': 'always',
                 alphabetize: {
-                    order: 'asc',
-                    caseInsensitive: true
-                }
+                    caseInsensitive: true,
+                    order: 'asc'
+                },
+                groups: ['builtin', 'external', 'internal'],
+                'newlines-between': 'always'
             }
         ],
         'prettier/prettier': 2,

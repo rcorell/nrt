@@ -24,8 +24,8 @@ module.exports = {
     testMatch: ['<rootDir>/tests/**/?(*.)(spec|test).(j|t)s?(x)'],
     testURL: 'http://localhost',
     transform: {
-        '^.+\\.tsx?$': 'ts-jest',
-        '^.+\\.css$': '<rootDir>/tests/cssTransform.js'
+        '^.+\\.css$': '<rootDir>/tests/cssTransform.js',
+        '^.+\\.tsx?$': 'ts-jest'
     },
     transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$']
 };
