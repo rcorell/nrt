@@ -19,7 +19,7 @@ module.exports = {
             jsx: true
         }
     },
-    plugins: ['@typescript-eslint', 'import', 'prettier'],
+    plugins: ['@typescript-eslint', 'import', 'prettier', 'sort-keys-fix'],
     root: true,
     rules: {
         '@typescript-eslint/ban-ts-comment': 'off',
@@ -44,7 +44,8 @@ module.exports = {
         ],
         'prettier/prettier': 2,
         'react/display-name': 'off',
-        'react/prop-types': 'off'
+        'react/prop-types': 'off',
+        'sort-keys-fix/sort-keys-fix': 'error'
     },
     settings: {
         'import/resolver': {

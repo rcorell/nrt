@@ -8,8 +8,8 @@ import { VALID } from 'tests/fixtures';
 
 export const mockGroup = {
     __typename: 'Group',
-    id: '42',
     description: 'test-description',
+    id: '42',
     name: 'test-name'
 };
 
@@ -26,11 +26,11 @@ export const mockFetchGroups = {
 };
 
 export const mockFetchGroupsWithNetworkError = {
+    error: new Error('network-error'),
     request: {
         query: fetchGroupsQueryString,
         variables: {}
-    },
-    error: new Error('network-error')
+    }
 };
 
 export const mockFetchUser = {
@@ -43,8 +43,8 @@ export const mockFetchUser = {
             data: {
                 user: {
                     __typename: 'User',
-                    id: '11',
                     groups: [],
+                    id: '11',
                     topics: []
                 }
             }
@@ -59,8 +59,8 @@ export const mockFetchUser = {
             data: {
                 user: {
                     __typename: 'User',
-                    id: '11',
                     groups: [mockGroup],
+                    id: '11',
                     topics: []
                 }
             }
@@ -84,18 +84,18 @@ export const mockJoinGroup = {
 
 export const mockCreateTopic = {
     networkError: {
+        error: new Error('createTopic: network-error'),
         newData: jest.fn(),
         request: {
             query: createTopicMutationString,
-            variables: { groupId: '42', title: VALID.TOPIC.TITLE, description: VALID.TOPIC.DESCRIPTION }
-        },
-        error: new Error('createTopic: network-error')
+            variables: { description: VALID.TOPIC.DESCRIPTION, groupId: '42', title: VALID.TOPIC.TITLE }
+        }
     },
     success: {
         newData: jest.fn(),
         request: {
             query: createTopicMutationString,
-            variables: { groupId: '42', title: VALID.TOPIC.TITLE, description: VALID.TOPIC.DESCRIPTION }
+            variables: { description: VALID.TOPIC.DESCRIPTION, groupId: '42', title: VALID.TOPIC.TITLE }
         },
         result: {
             data: { createTopic: { id: '777' } }

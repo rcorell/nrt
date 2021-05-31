@@ -15,7 +15,7 @@ describe('Topics', () => {
 
         it('success', async () => {
             const data: FetchTopicsQuery = {
-                topics: [{ __typename: 'Topic', id: '88', description: 'test-description', title: 'test-title' }]
+                topics: [{ __typename: 'Topic', description: 'test-description', id: '88', title: 'test-title' }]
             };
 
             renderComponent(Topics, fetchTopicsQueryString, {}, { data });

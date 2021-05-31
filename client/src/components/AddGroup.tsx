@@ -14,13 +14,13 @@ export const AddGroup: React.FC = () => {
     const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
         createGroupMutationString,
         {
-            variables: { description, name },
             onCompleted: ({ createGroup }) => {
                 createGroup.id += 0;
             },
             onError: () => {
                 // RTL bug
-            }
+            },
+            variables: { description, name }
         }
     );
 

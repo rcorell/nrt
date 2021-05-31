@@ -10,11 +10,11 @@ describe('AddGroup', () => {
         component: AddGroup,
         fields: [
             {
+                invalidValue: INVALID.GROUP.DESCRIPTION,
                 label: ADD_GROUP.DESCRIPTION,
-                validValue: VALID.GROUP.DESCRIPTION,
-                invalidValue: INVALID.GROUP.DESCRIPTION
+                validValue: VALID.GROUP.DESCRIPTION
             },
-            { label: ADD_GROUP.NAME, validValue: VALID.GROUP.NAME, invalidValue: INVALID.GROUP.NAME }
+            { invalidValue: INVALID.GROUP.NAME, label: ADD_GROUP.NAME, validValue: VALID.GROUP.NAME }
         ],
         pageName: ADD_GROUP.PAGE_NAME
     });
@@ -32,7 +32,7 @@ describe('AddGroup', () => {
             renderComponent(
                 AddGroup,
                 createGroupMutationString,
-                { name: VALID.GROUP.NAME, description: VALID.GROUP.DESCRIPTION },
+                { description: VALID.GROUP.DESCRIPTION, name: VALID.GROUP.NAME },
                 {
                     data: { createGroup: { id: '888' } }
                 }
@@ -48,7 +48,7 @@ describe('AddGroup', () => {
             renderComponent(
                 AddGroup,
                 createGroupMutationString,
-                { name: VALID.GROUP.NAME, description: VALID.GROUP.DESCRIPTION },
+                { description: VALID.GROUP.DESCRIPTION, name: VALID.GROUP.NAME },
                 {
                     error: new Error('AddGroup failure')
                 }

@@ -17,7 +17,6 @@ export const Signup: React.FC = () => {
     const [password, setPassword] = useState('');
 
     const [signup, { error }] = useMutation<SignupMutation, SignupMutationVariables>(signupMutationString, {
-        variables: { email, name, password },
         onCompleted: ({ signup }) => {
             localStorage.setItem('token', signup!.token!);
             setAuthenticated(true);
@@ -25,7 +24,8 @@ export const Signup: React.FC = () => {
         },
         onError: () => {
             // RTL bug
-        }
+        },
+        variables: { email, name, password }
     });
 
     setBrowserTitle('Sign Up');

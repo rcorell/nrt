@@ -11,8 +11,8 @@ import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
 const COLUMN_DEFINITIONS = [
-    { title: 'Name', field: 'name' },
-    { title: 'Description', field: 'description' },
+    { field: 'name', title: 'Name' },
+    { field: 'description', title: 'Description' },
     {
         field: 'join',
         title: ''

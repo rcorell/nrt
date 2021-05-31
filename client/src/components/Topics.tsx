@@ -9,8 +9,8 @@ import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
 const COLUMN_DEFINITIONS = [
-    { title: 'Title', field: 'title' },
-    { title: 'Description', field: 'description' }
+    { field: 'title', title: 'Title' },
+    { field: 'description', title: 'Description' }
 ];
 
 export const Topics: React.FC = () => {

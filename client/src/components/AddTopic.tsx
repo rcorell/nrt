@@ -19,10 +19,10 @@ export const AddTopic: React.FC = () => {
     const [createTopic, { error }] = useMutation<CreateTopicMutation, CreateTopicMutationVariables>(
         createTopicMutationString,
         {
-            variables: { groupId, title, description },
             onError: () => {
                 // RTL bug
-            }
+            },
+            variables: { description, groupId, title }
         }
     );
 

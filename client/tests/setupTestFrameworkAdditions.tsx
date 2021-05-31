@@ -42,8 +42,8 @@ expect.extend({
         }
 
         return {
-            pass,
-            message: () => message
+            message: () => message,
+            pass
         };
     },
     toStringifyEqual(received, expected) {
@@ -51,8 +51,8 @@ expect.extend({
         const EXPECTED_AS_STRING: string = JSON.stringify(expected, Object.keys(expected).sort());
 
         return {
-            pass: RECEIVED_AS_STRING === EXPECTED_AS_STRING,
-            message: () => `expected\n ${RECEIVED_AS_STRING}\n to equal\n ${EXPECTED_AS_STRING}`
+            message: () => `expected\n ${RECEIVED_AS_STRING}\n to equal\n ${EXPECTED_AS_STRING}`,
+            pass: RECEIVED_AS_STRING === EXPECTED_AS_STRING
         };
     }
 });

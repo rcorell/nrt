@@ -3,7 +3,7 @@ import fetch from 'cross-fetch';
 
 export const AUTHENTICATION_TOKEN_NAME = 'token';
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000', fetch });
+const httpLink = new HttpLink({ fetch, uri: 'http://localhost:4000' });
 
 export const authHeader = (token: string | null) => (token ? `Bearer ${token}` : '');
 
