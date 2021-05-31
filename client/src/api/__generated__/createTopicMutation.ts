@@ -18,6 +18,7 @@ export interface CreateTopicMutation {
 }
 
 export interface CreateTopicMutationVariables {
+  groupId: string;
   title: string;
   description?: string | null;
 }

@@ -40,6 +40,7 @@ export const createTopic = async (_parent, args, context) => {
         data: {
             author: { connect: { id: userId } },
             description: args.description,
+            group: { connect: { id: Number(args.groupId) } },
             title: args.title
         }
     });

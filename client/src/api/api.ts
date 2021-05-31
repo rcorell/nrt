@@ -99,8 +99,8 @@ export const loginMutationString = gql`
 `;
 
 export const createTopicMutationString = gql`
-    mutation CreateTopicMutation($title: String!, $description: String) {
-        createTopic(title: $title, description: $description) {
+    mutation CreateTopicMutation($groupId: ID!, $title: String!, $description: String) {
+        createTopic(groupId: $groupId, title: $title, description: $description) {
             id
             createdAt
         }
