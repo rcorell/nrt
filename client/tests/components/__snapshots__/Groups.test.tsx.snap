@@ -11,8 +11,9 @@ exports[`Groups snapshots loading 1`] = `
 exports[`Groups snapshots network error 1`] = `
 <div>
   <div>
-    Error: 
-    {"graphQLErrors":[],"networkError":{},"message":"network-error"}undefined
+    {"graphQLErrors":[],"networkError":{},"message":"network-error"}
+    <br />
+    <br />
   </div>
 </div>
 `;

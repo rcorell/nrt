@@ -39,7 +39,7 @@ describe('Groups', () => {
             renderComponentWithMocks(Groups, [
                 mockFetchGroups,
                 mockFetchUser.userWithNoGroups,
-                mockJoinGroup,
+                mockJoinGroup.success,
                 mockFetchUser.userWithOneGroup,
                 mockFetchUser.userWithOneGroup
             ]);
@@ -55,6 +55,30 @@ describe('Groups', () => {
             await oneTick();
 
             expect(screen.queryByText('Joined')).toBeInTheDocument();
+        });
+    });
+
+    describe('failure', () => {
+        it('network error', async () => {
+            renderComponentWithMocks(Groups, [
+                mockFetchGroups,
+                mockFetchUser.userWithNoGroups,
+                mockJoinGroup.networkError,
+                mockFetchUser.userWithOneGroup,
+                mockFetchUser.userWithOneGroup
+            ]);
+
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
+
+            expect(screen.queryByText('test-description')).toBeInTheDocument();
+            expect(screen.queryByText('test-name')).toBeInTheDocument();
+
+            const joinButton = screen.getByText('Join!');
+            fireEvent.click(joinButton);
+            await oneTick();
+            await oneTick();
+
+            expect(screen.queryByText(/joinGroup: network-error/)).toBeInTheDocument();
         });
     });
 });

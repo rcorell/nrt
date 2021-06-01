@@ -25,19 +25,30 @@ export const Groups: React.FC = () => {
     const userQuery = useQuery<FetchUserQuery>(fetchUserQueryString);
     const allGroups = useQuery<FetchGroupsQuery>(fetchGroupsQueryString);
 
-    const [joinGroup] = useMutation<JoinGroupMutation, JoinGroupMutationVariables>(joinGroupMutationString, {
+    const [joinGroup, { loading: joinGroupLoading, error: joinGroupError }] = useMutation<
+        JoinGroupMutation,
+        JoinGroupMutationVariables
+    >(joinGroupMutationString, {
         onCompleted: () => {
             userQuery.refetch();
         },
         onError: () => {}
     });
 
-    if (allGroups.loading || userQuery.loading) {
+    if (allGroups.loading || userQuery.loading || joinGroupLoading) {
         return <div>{LOADING_TEXT}</div>;
     }
 
-    if (allGroups.error || userQuery.error) {
-        return <div>Error: {JSON.stringify(allGroups.error) + JSON.stringify(userQuery.error)}</div>;
+    if (allGroups.error || userQuery.error || joinGroupError) {
+        return (
+            <div>
+                {JSON.stringify(allGroups.error)}
+                <br />
+                {JSON.stringify(userQuery.error)}
+                <br />
+                {JSON.stringify(joinGroupError)}
+            </div>
+        );
     }
 
     const userGroupIds = userQuery!.data!.user.groups.map((group) => {

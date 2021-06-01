@@ -69,14 +69,23 @@ export const mockFetchUser = {
 };
 
 export const mockJoinGroup = {
-    request: {
-        query: joinGroupMutationString,
-        variables: { groupId: 42 }
+    networkError: {
+        error: new Error('joinGroup: network-error'),
+        request: {
+            query: joinGroupMutationString,
+            variables: { groupId: 42 }
+        }
     },
-    result: {
-        data: {
-            joinGroup: {
-                id: 42
+    success: {
+        request: {
+            query: joinGroupMutationString,
+            variables: { groupId: 42 }
+        },
+        result: {
+            data: {
+                joinGroup: {
+                    id: 42
+                }
             }
         }
     }

@@ -1,9 +1,3 @@
-/**
- * This file will be executed after the test framework has been prepared.
- * but before each test file's first describe block,
- *
- * Reference: https://jestjs.io/docs/en/configuration.html#setuptestframeworkscriptfile-string
- **/
 import { MockedProvider } from '@apollo/client/testing';
 import '@testing-library/jest-dom';
 import { shallow } from 'enzyme';
