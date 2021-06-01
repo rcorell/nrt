@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import _ from 'lodash';
-import * as React from 'react';
+import React from 'react';
 import * as renderer from 'react-test-renderer';
 
 import { GlobalContextProvider } from 'src/components/GlobalContextProvider';

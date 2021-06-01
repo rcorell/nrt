@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import MaterialTable from 'material-table';
 import React from 'react';
 
