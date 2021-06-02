@@ -10,7 +10,6 @@
 export interface CreateTopicMutation_createTopic {
   __typename: "Topic";
   id: string;
-  createdAt: any;
 }
 
 export interface CreateTopicMutation {

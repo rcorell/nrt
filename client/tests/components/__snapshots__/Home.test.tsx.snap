@@ -1,7 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home matches snapshot 1`] = `
-<h1>
-  Home
-</h1>
+exports[`Home failure 1`] = `
+<div>
+  <div>
+    {"graphQLErrors":[],"networkError":{},"message":"fetchUserWithGroupTopics - network-error"}
+  </div>
+</div>
+`;
+
+exports[`Home loading 1`] = `
+<div>
+  <b>
+    Loading...
+  </b>
+</div>
+`;
+
+exports[`Home success 1`] = `
+<div>
+  <div>
+    <h2>
+      group1
+    </h2>
+    <ul>
+      <li>
+        g1-t1-title
+      </li>
+      <li>
+        g1-t2-title
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h2>
+      group2
+    </h2>
+    <ul>
+      <li>
+        g2--t2-title
+      </li>
+    </ul>
+  </div>
+</div>
 `;

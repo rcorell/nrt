@@ -2,12 +2,11 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
 import { fetchTopicsQueryString } from 'src/api/api';
+import { LOADING_TEXT } from 'src/components/shared';
 import { Topics } from 'src/components/Topics';
 import { renderComponent } from 'tests/testHelpers';
 
 describe('Topics', () => {
-    const LOADING_TEXT = 'Loading...';
-
     describe('snapshots', () => {
         it('loading', () => {
             expect(renderComponent(Topics).container).toMatchSnapshot();

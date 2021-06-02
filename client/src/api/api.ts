@@ -73,6 +73,28 @@ export const fetchUserQueryString = gql`
     }
 `;
 
+export const fetchUserWithGroupTopicsQueryString = gql`
+    query FetchUserWithGroupTopicsQueryString {
+        user {
+            groups {
+                id
+                description
+                name
+                topics {
+                    id
+                    title
+                    description
+                }
+            }
+            topics {
+                id
+                description
+                title
+            }
+        }
+    }
+`;
+
 export const createGroupMutationString = gql`
     mutation CreateGroupMutation($name: String!, $description: String) {
         createGroup(name: $name, description: $description) {

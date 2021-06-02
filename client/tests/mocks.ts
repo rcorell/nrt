@@ -1,7 +1,11 @@
+import { MockedResponse } from '@apollo/client/testing';
+
+import { FetchUserWithGroupTopicsQueryString } from 'src/api/__generated__/FetchUserWithGroupTopicsQueryString';
 import {
     createTopicMutationString,
     fetchGroupsQueryString,
     fetchUserQueryString,
+    fetchUserWithGroupTopicsQueryString,
     joinGroupMutationString
 } from 'src/api/api';
 import { VALID } from 'tests/fixtures';
@@ -110,4 +114,70 @@ export const mockCreateTopic = {
             data: { createTopic: { id: '777' } }
         }
     }
+};
+
+const fetchUserWithGroupTopicsData: FetchUserWithGroupTopicsQueryString = {
+    user: {
+        __typename: 'User',
+        groups: [
+            {
+                __typename: 'Group',
+                description: 'g1-desc',
+                id: '1',
+                name: 'group1',
+                topics: [
+                    {
+                        __typename: 'Topic',
+                        description: 'g1-t1-desc',
+                        id: '100',
+                        title: 'g1-t1-title'
+                    },
+                    {
+                        __typename: 'Topic',
+                        description: 'g1-t2-desc2',
+                        id: '101',
+                        title: 'g1-t2-title'
+                    }
+                ]
+            },
+            {
+                __typename: 'Group',
+                description: 'g2-desc',
+                id: '2',
+                name: 'group2',
+                topics: [
+                    {
+                        __typename: 'Topic',
+                        description: 'g2-t1-desc',
+                        id: '103',
+                        title: 'g2--t2-title'
+                    }
+                ]
+            }
+        ],
+        topics: []
+    }
+};
+
+const mockFetchUserWithGroupTopics_success: MockedResponse = {
+    request: {
+        query: fetchUserWithGroupTopicsQueryString,
+        variables: {}
+    },
+    result: {
+        data: fetchUserWithGroupTopicsData
+    }
+};
+
+const mockFetchUserWithGroupTopics_networkError: MockedResponse = {
+    error: new Error('fetchUserWithGroupTopics - network-error'),
+    request: {
+        query: fetchUserWithGroupTopicsQueryString,
+        variables: {}
+    }
+};
+
+export const mockFetchUserWithGroupTopics = {
+    networkError: mockFetchUserWithGroupTopics_networkError,
+    success: mockFetchUserWithGroupTopics_success
 };

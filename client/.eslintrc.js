@@ -44,6 +44,7 @@ module.exports = {
         ],
         'prettier/prettier': 2,
         'react/display-name': 'off',
+        'react/jsx-key': 'off',
         'react/prop-types': 'off',
         'sort-keys-fix/sort-keys-fix': 'error'
     },

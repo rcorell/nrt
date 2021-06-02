@@ -1,7 +1,7 @@
 type Query {
 	groups: [Group!]!
 	ready: String!
-	topics: [Topic!]!
+	topics(groupIds: [Int]): [Topic!]!
 	user: User!
 }
 

@@ -36,7 +36,7 @@
 1. Testing/Coverage: Jest, RTL
 
 ### Server
-1. Framework: GraphQL
+1. Framework: Apollo GraphQL
 1. Database: Postgres
 1. ORM: Prisma
 1. Logging: winston, morgan
@@ -77,6 +77,7 @@
 1. Server
 	1. Add query declaration to GraphQL schema (server/src/schema.graphql)
 	1. Add query code to relevant file in server/src/resolvers/
+	1. If you made a new resolver file, include it in the resolver list in index.ts
 	1. npm run generatePrismaClient
 	1. npm run build
 	1. npm start

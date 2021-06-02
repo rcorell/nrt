@@ -29,9 +29,9 @@ exports[`Routes routes to / correctly 1`] = `
       class="sc-jRQAMF"
     />
   </div>
-  <h1>
-    Home
-  </h1>
+  <b>
+    Loading...
+  </b>
 </div>
 `;
 

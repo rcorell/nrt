@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import { typeDefs as scalarTypeDefs, resolvers as scalarResolvers } from 'graphql-scalars';
 import * as path from 'path';
 
+import * as Group from './resolvers/group';
 import * as Mutation from './resolvers/mutations';
 import * as Query from './resolvers/queries';
 import * as Topic from './resolvers/topic';
@@ -25,6 +26,7 @@ const server = new ApolloServer({
         };
     },
     resolvers: {
+        Group,
         Mutation,
         Query,
         Topic,
