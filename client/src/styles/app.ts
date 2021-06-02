@@ -27,3 +27,7 @@ export const AppHeader = styled.div`
 export const AppRule = styled.hr`
     padding: 0;
 `;
+
+export const AppBody = styled.div`
+    padding: 2em;
+`;

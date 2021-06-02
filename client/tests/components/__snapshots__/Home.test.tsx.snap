@@ -18,28 +18,32 @@ exports[`Home loading 1`] = `
 
 exports[`Home success 1`] = `
 <div>
-  <div>
-    <h2>
-      group1
-    </h2>
-    <ul>
-      <li>
-        g1-t1-title
-      </li>
-      <li>
-        g1-t2-title
-      </li>
-    </ul>
-  </div>
-  <div>
-    <h2>
-      group2
-    </h2>
-    <ul>
-      <li>
-        g2--t2-title
-      </li>
-    </ul>
+  <div
+    class="sc-bdvvaa cvCJhh"
+  >
+    <div>
+      <h2>
+        group1
+      </h2>
+      <ul>
+        <li>
+          g1-t1-title
+        </li>
+        <li>
+          g1-t2-title
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2>
+        group2
+      </h2>
+      <ul>
+        <li>
+          g2--t2-title
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 `;

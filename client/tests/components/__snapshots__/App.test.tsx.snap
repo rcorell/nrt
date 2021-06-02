@@ -3,15 +3,15 @@
 exports[`App matches snapshot 1`] = `
 <div>
   <div
-    class="sc-gKckTs gIgbJI"
+    class="sc-eCImvq eFmfDu"
   >
     Top 5 Daily
   </div>
   <div
-    class="sc-hKwCoD jDkowu"
+    class="sc-iCfLBT kRgVyw"
   >
     <div
-      class="sc-eCImvq"
+      class="sc-furvIG"
     >
       <a
         href="/login"
@@ -26,11 +26,15 @@ exports[`App matches snapshot 1`] = `
       </a>
     </div>
     <div
-      class="sc-jRQAMF"
+      class="sc-pVTma"
     />
   </div>
-  <b>
-    Loading...
-  </b>
+  <div
+    class="sc-gKckTs ldzOLX"
+  >
+    <b>
+      Loading...
+    </b>
+  </div>
 </div>
 `;

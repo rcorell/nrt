@@ -3,10 +3,10 @@
 exports[`NavigationBar snapshots authenticated 1`] = `
 <div>
   <div
-    class="sc-hKwCoD jDkowu"
+    class="sc-iCfLBT kRgVyw"
   >
     <div
-      class="sc-eCImvq"
+      class="sc-furvIG"
     >
       <a
         href="/"
@@ -39,7 +39,7 @@ exports[`NavigationBar snapshots authenticated 1`] = `
       </a>
     </div>
     <div
-      class="sc-jRQAMF"
+      class="sc-pVTma"
     >
       <a
         href=""
@@ -53,10 +53,10 @@ exports[`NavigationBar snapshots authenticated 1`] = `
 
 exports[`NavigationBar snapshots unauthenticated 1`] = `
 <div
-  className="sc-hKwCoD jDkowu"
+  className="sc-iCfLBT kRgVyw"
 >
   <div
-    className="sc-eCImvq"
+    className="sc-furvIG"
   >
     <a
       href="/login"
@@ -73,7 +73,7 @@ exports[`NavigationBar snapshots unauthenticated 1`] = `
     </a>
   </div>
   <div
-    className="sc-jRQAMF"
+    className="sc-pVTma"
   />
 </div>
 `;

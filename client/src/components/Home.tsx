@@ -7,6 +7,7 @@ import {
 } from 'src/api/__generated__/FetchUserWithGroupTopicsQueryString';
 import { fetchUserWithGroupTopicsQueryString } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
+import { HomePage } from 'src/styles/home';
 import { setBrowserTitle } from 'src/utils';
 
 export const Home: React.FC = () => {
@@ -25,7 +26,7 @@ export const Home: React.FC = () => {
         return (
             <div key={group!.id}>
                 <h2>{group!.name}</h2>
-                <ul key="wtf">
+                <ul>
                     {group!.topics.map((topic) => (
                         <li key={topic!.id}>{topic!.title}</li>
                     ))}
@@ -34,5 +35,5 @@ export const Home: React.FC = () => {
         );
     };
 
-    return <>{query!.data!.user.groups.map((group) => groupTopics(group))}</>;
+    return <HomePage>{query!.data!.user.groups.map((group) => groupTopics(group))}</HomePage>;
 };

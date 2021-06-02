@@ -9,6 +9,7 @@ import { Login } from 'src/components/Login';
 import { NotFound } from 'src/components/NotFound';
 import { Signup } from 'src/components/Signup';
 import { Topics } from 'src/components/Topics';
+import { AppBody } from 'src/styles/app';
 
 import { NavigationBar } from './NavigationBar';
 
@@ -38,7 +39,7 @@ export const Routes: React.FC = () => {
     return (
         <>
             <NavigationBar />
-            {routeResults || <NotFound />}
+            <AppBody>{routeResults || <NotFound />}</AppBody>
         </>
     );
 };
