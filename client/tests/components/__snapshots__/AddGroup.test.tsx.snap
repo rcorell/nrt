@@ -156,7 +156,64 @@ exports[`AddGroup standard snapshots valid parameters 1`] = `
           aria-labelledby="descriptionLabel"
           class="form-control form-control-lg"
           id="description"
-          value="Bucakroo Banzai's fiercely loyaly and dedicated support team."
+          value="Bucakroo Banzai's fiercely loyal and dedicated support team."
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Add Group
+      </button>
+    </form>
+    <div
+      class="sc-dkPtyc cWQCqc"
+    />
+  </div>
+</div>
+`;
+
+exports[`AddGroup success should create a group 1`] = `
+<div>
+  <div
+    class="sc-bdvvaa hMSAon"
+  >
+    <h1>
+      Add Group
+    </h1>
+    <form
+      class="sc-gsDJrp idIFaR"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="nameLabel"
+        >
+          Name
+        </label>
+        <input
+          aria-labelledby="nameLabel"
+          class="form-control form-control-lg"
+          id="name"
+          value="Blue Blaze Irregulars"
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class="form-label"
+          id="descriptionLabel"
+        >
+          Description
+        </label>
+        <input
+          aria-labelledby="descriptionLabel"
+          class="form-control form-control-lg"
+          id="description"
+          value="Bucakroo Banzai's fiercely loyal and dedicated support team."
         />
       </div>
       <button

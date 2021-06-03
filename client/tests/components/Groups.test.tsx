@@ -2,83 +2,86 @@ import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/r
 
 import { Groups } from 'src/components/Groups';
 import { LOADING_TEXT } from 'src/components/shared';
-import { mockFetchGroups, mockFetchGroupsWithNetworkError, mockFetchUser, mockJoinGroup } from 'tests/mocks';
-import { oneTick, renderComponent, renderComponentWithMocks } from 'tests/testHelpers';
+import { VALID } from 'tests/fixtures';
+import { fetchGroupsMocks, joinGroupMocks } from 'tests/mocks/groupMocks';
+import { fetchUserMocks } from 'tests/mocks/userMocks';
+import { oneTick, renderComponent } from 'tests/testHelpers';
 
 describe('Groups', () => {
-    describe('snapshots', () => {
-        it('loading', () => {
-            expect(renderComponent(Groups).container).toMatchSnapshot();
-        });
-
-        it('network error', async () => {
-            const { container } = renderComponentWithMocks(Groups, [
-                mockFetchGroupsWithNetworkError,
-                mockFetchUser.userWithNoGroups
-            ]);
-
-            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-
-            expect(screen.queryByText('No results')).toBeNull();
-
-            expect(container).toMatchSnapshot();
-        });
+    it('snapshot: loading', () => {
+        expect(renderComponent(Groups).container).toMatchSnapshot();
     });
 
     describe('success', () => {
-        it('display one group', async () => {
-            renderComponentWithMocks(Groups, [mockFetchGroups, mockFetchUser.userWithNoGroups]);
-
-            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-
-            expect(screen.queryByText('test-description')).toBeInTheDocument();
-            expect(screen.queryByText('test-name')).toBeInTheDocument();
-        });
-
-        it('join group', async () => {
-            renderComponentWithMocks(Groups, [
-                mockFetchGroups,
-                mockFetchUser.userWithNoGroups,
-                mockJoinGroup.success,
-                mockFetchUser.userWithOneGroup,
-                mockFetchUser.userWithOneGroup
+        it('displays groups and supports joining a group', async () => {
+            renderComponent(Groups, [
+                fetchUserMocks.success.withoutGroups,
+                fetchGroupsMocks.success,
+                joinGroupMocks.success,
+                fetchUserMocks.success.withGroups
             ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(screen.queryByText('test-description')).toBeInTheDocument();
-            expect(screen.queryByText('test-name')).toBeInTheDocument();
-
-            const joinButton = screen.getByText('Join!');
+            expect(screen.queryByText(VALID.GROUP.DESCRIPTION)).toBeInTheDocument();
+            expect(screen.queryByText(VALID.GROUP.NAME)).toBeInTheDocument();
+            const joinButton = screen.getAllByText('Join!')[0];
             fireEvent.click(joinButton);
             await oneTick();
-            await oneTick();
-
-            expect(screen.queryByText('Joined')).toBeInTheDocument();
+            screen.debug(undefined, 10000);
+            expect(screen.getAllByText(/Joined/).length).toBe(2);
         });
     });
 
     describe('failure', () => {
-        it('network error', async () => {
-            renderComponentWithMocks(Groups, [
-                mockFetchGroups,
-                mockFetchUser.userWithNoGroups,
-                mockJoinGroup.networkError,
-                mockFetchUser.userWithOneGroup,
-                mockFetchUser.userWithOneGroup
+        it('fetchGroups: network error', async () => {
+            renderComponent(Groups, [fetchGroupsMocks.networkError, fetchUserMocks.success.withoutGroups]);
+
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
+
+            expect(screen.queryByText(/fetchGroups: network error/)).toBeInTheDocument();
+        });
+
+        it('fetchGroups: GraphQL error', async () => {
+            renderComponent(Groups, [fetchGroupsMocks.graphQLError, fetchUserMocks.success.withoutGroups]);
+
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
+
+            expect(screen.queryByText(/fetchGroups: GraphQL error/)).toBeInTheDocument();
+        });
+
+        it('joinGroup: network error', async () => {
+            renderComponent(Groups, [
+                fetchUserMocks.success.withoutGroups,
+                fetchGroupsMocks.success,
+                joinGroupMocks.networkError,
+                fetchUserMocks.success.withoutGroups
             ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(screen.queryByText('test-description')).toBeInTheDocument();
-            expect(screen.queryByText('test-name')).toBeInTheDocument();
-
-            const joinButton = screen.getByText('Join!');
+            const joinButton = screen.getAllByText('Join!')[0];
             fireEvent.click(joinButton);
             await oneTick();
+
+            expect(screen.queryByText(/joinGroup: network error/)).toBeInTheDocument();
+        });
+
+        it('joinGroup: GraphQL error', async () => {
+            renderComponent(Groups, [
+                fetchUserMocks.success.withoutGroups,
+                fetchGroupsMocks.success,
+                joinGroupMocks.graphQLError,
+                fetchUserMocks.success.withoutGroups
+            ]);
+
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
+
+            const joinButton = screen.getAllByText('Join!')[0];
+            fireEvent.click(joinButton);
             await oneTick();
 
-            expect(screen.queryByText(/joinGroup: network-error/)).toBeInTheDocument();
+            expect(screen.queryByText(/joinGroup: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

@@ -1,3 +1,5 @@
+import { MockedResponse } from '@apollo/client/testing';
+
 export const INVALID = {
     EMAIL: 'a@a.a',
     GROUP: {
@@ -15,7 +17,7 @@ export const INVALID = {
 export const VALID = {
     EMAIL: 'totally@valid.email',
     GROUP: {
-        DESCRIPTION: "Bucakroo Banzai's fiercely loyaly and dedicated support team.",
+        DESCRIPTION: "Bucakroo Banzai's fiercely loyal and dedicated support team.",
         NAME: 'Blue Blaze Irregulars'
     },
     NAME: 'Buckaroo Banzai',
@@ -36,4 +38,17 @@ export const ADD_TOPIC = {
     DESCRIPTION: 'Description',
     PAGE_NAME: 'Add Topic',
     TITLE: 'Topic'
+};
+
+export const TYPENAME = {
+    AUTH_PAYLOAD: 'AuthPayload',
+    GROUP: 'Group',
+    TOPIC: 'Topic',
+    USER: 'User'
+} as const;
+
+export type StandardMocks<T> = {
+    graphQLError: MockedResponse<T>;
+    networkError: MockedResponse<T>;
+    success: MockedResponse<T>;
 };

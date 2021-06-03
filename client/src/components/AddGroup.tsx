@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client';
+import { ApolloError, useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
@@ -10,6 +10,7 @@ import { setBrowserTitle } from 'src/utils';
 export const AddGroup: React.FC = () => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
+    const [graphQLError, setGraphQLError] = useState(null as null | ApolloError);
 
     const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
         createGroupMutationString,
@@ -17,8 +18,8 @@ export const AddGroup: React.FC = () => {
             onCompleted: ({ createGroup }) => {
                 createGroup.id += 0;
             },
-            onError: () => {
-                // RTL bug
+            onError: (error) => {
+                setGraphQLError(error);
             },
             variables: { description, name }
         }
@@ -35,8 +36,8 @@ export const AddGroup: React.FC = () => {
     };
 
     const errorDisplay = () => {
-        if (error) {
-            return <div>Error: {JSON.stringify(error)}</div>;
+        if (error || graphQLError) {
+            return <div>Error: {JSON.stringify(error) + JSON.stringify(graphQLError)}</div>;
         }
 
         return null;

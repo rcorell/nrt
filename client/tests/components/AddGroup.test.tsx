@@ -1,8 +1,8 @@
 import { fireEvent, screen } from '@testing-library/react';
 
-import { createGroupMutationString } from 'src/api/api';
 import { AddGroup } from 'src/components/AddGroup';
 import { ADD_GROUP, INVALID, VALID } from 'tests/fixtures';
+import { createGroupMocks } from 'tests/mocks/groupMocks';
 import { oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
 
 describe('AddGroup', () => {
@@ -29,33 +29,21 @@ describe('AddGroup', () => {
 
     describe('success', () => {
         it('should create a group', async () => {
-            renderComponent(
-                AddGroup,
-                createGroupMutationString,
-                { description: VALID.GROUP.DESCRIPTION, name: VALID.GROUP.NAME },
-                {
-                    data: { createGroup: { id: '888' } }
-                }
-            );
+            const { container } = renderComponent(AddGroup, [createGroupMocks.success]);
+
             await submitAddGroup();
 
-            expect(true);
+            expect(container).toMatchSnapshot();
         });
     });
 
     describe('failure', () => {
-        it('failed group creation: should display error message', async () => {
-            renderComponent(
-                AddGroup,
-                createGroupMutationString,
-                { description: VALID.GROUP.DESCRIPTION, name: VALID.GROUP.NAME },
-                {
-                    error: new Error('AddGroup failure')
-                }
-            );
+        it('createGroup: network error', async () => {
+            renderComponent(AddGroup, [createGroupMocks.networkError]);
+
             await submitAddGroup();
 
-            expect(screen.queryByText(/AddGroup failure/)).toBeInTheDocument();
+            expect(screen.queryByText(/createGroup: network error/)).toBeInTheDocument();
         });
     });
 });

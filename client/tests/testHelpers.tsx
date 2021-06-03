@@ -22,49 +22,7 @@ export const oneTick = async () => {
     });
 };
 
-export const renderComponent = (
-    component: React.FC,
-    query: DocumentNode | null = null,
-    variables = {},
-    results: any = null
-) => {
-    const mocks: MockedResponse[] = [];
-
-    if (query) {
-        mocks.push({
-            request: {
-                query,
-                variables
-            }
-        });
-
-        if (results?.data) {
-            mocks[0].result = {
-                data: results.data
-            };
-        }
-
-        if (results?.error) {
-            mocks[0].error = results.error;
-        }
-    }
-
-    return render(
-        <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={{
-                mutate: {
-                    errorPolicy: 'all'
-                }
-            }}
-        >
-            {React.createElement(component)}
-        </MockedProvider>
-    );
-};
-
-export const renderComponentWithMocks = (component: React.FC, mocks: MockedResponse[]) => {
+export const renderComponent = (component: React.FC, mocks: MockedResponse[] = []) => {
     return render(
         <MockedProvider
             mocks={mocks}

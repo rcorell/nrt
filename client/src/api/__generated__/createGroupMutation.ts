@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface CreateGroupMutation_createGroup {
-  __typename: "Topic";
+  __typename: "Group";
   id: string;
   createdAt: any;
 }

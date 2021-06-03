@@ -6,7 +6,7 @@ type Query {
 }
 
 type Mutation {
-	createGroup(name: String!, description: String): Topic!
+	createGroup(name: String!, description: String): Group!
 	createTopic(groupId: ID!, title: String!, description: String): Topic!
 	joinGroup(groupId: Int!): Int
 	signup(email: String!, password: String!, name: String!): AuthPayload

@@ -614,7 +614,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Topic",
+                "name": "Group",
                 "ofType": null
               }
             },

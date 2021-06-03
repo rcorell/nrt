@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddTopic failure failed topic creation: should display error message 1`] = `
+exports[`AddTopic failure createTopic: network error 1`] = `
 <div>
   <div
     class="sc-bdvvaa hMSAon"
@@ -10,7 +10,7 @@ exports[`AddTopic failure failed topic creation: should display error message 1`
     </h1>
     <div>
       Error: $
-      {"graphQLErrors":[],"networkError":{},"message":"createTopic: network-error"}
+      {"graphQLErrors":[],"networkError":{},"message":"createTopic: network error"}
     </div>
     <form
       class="sc-gsDJrp idIFaR"
@@ -30,9 +30,14 @@ exports[`AddTopic failure failed topic creation: should display error message 1`
           id="group"
         >
           <option
-            value="42"
+            value="40"
           >
-            test-name
+            Blue Blaze Irregulars
+          </option>
+          <option
+            value="41"
+          >
+            Blue Blaze Irregulars2
           </option>
         </select>
       </div>
@@ -116,9 +121,14 @@ exports[`AddTopic snapshots invalid parameters 1`] = `
           id="group"
         >
           <option
-            value="42"
+            value="40"
           >
-            test-name
+            Blue Blaze Irregulars
+          </option>
+          <option
+            value="41"
+          >
+            Blue Blaze Irregulars2
           </option>
         </select>
       </div>
@@ -195,9 +205,14 @@ exports[`AddTopic snapshots valid parameters 1`] = `
           id="group"
         >
           <option
-            value="42"
+            value="40"
           >
-            test-name
+            Blue Blaze Irregulars
+          </option>
+          <option
+            value="41"
+          >
+            Blue Blaze Irregulars2
           </option>
         </select>
       </div>
@@ -277,9 +292,14 @@ exports[`AddTopic success should create a topic 1`] = `
           id="group"
         >
           <option
-            value="42"
+            value="40"
           >
-            test-name
+            Blue Blaze Irregulars
+          </option>
+          <option
+            value="41"
+          >
+            Blue Blaze Irregulars2
           </option>
         </select>
       </div>

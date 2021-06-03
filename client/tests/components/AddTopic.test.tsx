@@ -4,8 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { AddTopic } from 'src/components/AddTopic';
 import { LOADING_TEXT } from 'src/components/shared';
 import { ADD_TOPIC, INVALID, VALID } from 'tests/fixtures';
-import { mockCreateTopic, mockFetchUser } from 'tests/mocks';
-import { oneTick, renderComponent, renderComponentWithMocks, setField } from 'tests/testHelpers';
+import { createTopicMocks } from 'tests/mocks/topicMocks';
+import { fetchUserMocks } from 'tests/mocks/userMocks';
+import { oneTick, renderComponent, setField } from 'tests/testHelpers';
 
 describe('AddTopic', () => {
     beforeEach(() => {
@@ -18,7 +19,7 @@ describe('AddTopic', () => {
         });
 
         it('invalid parameters', async () => {
-            const { container } = renderComponentWithMocks(AddTopic, [mockFetchUser.userWithOneGroup]);
+            const { container } = renderComponent(AddTopic, [fetchUserMocks.success.withGroups]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -29,7 +30,7 @@ describe('AddTopic', () => {
         });
 
         it('valid parameters', async () => {
-            const { container } = renderComponentWithMocks(AddTopic, [mockFetchUser.userWithOneGroup]);
+            const { container } = renderComponent(AddTopic, [fetchUserMocks.success.withGroups]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -46,7 +47,7 @@ describe('AddTopic', () => {
 
     const submitAddTopic = async () => {
         await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-        userEvent.selectOptions(screen.getByLabelText('Group'), '42');
+        userEvent.selectOptions(screen.getByLabelText('Group'), '40');
         setField(ADD_TOPIC.TITLE, VALID.TOPIC.TITLE);
         setField(ADD_TOPIC.DESCRIPTION, VALID.TOPIC.DESCRIPTION);
         const submitButton = screen.getByRole('button');
@@ -56,30 +57,30 @@ describe('AddTopic', () => {
 
     describe('success', () => {
         it('should create a topic', async () => {
-            const { container } = renderComponentWithMocks(AddTopic, [
-                mockFetchUser.userWithOneGroup,
-                mockCreateTopic.success
+            const { container } = renderComponent(AddTopic, [
+                fetchUserMocks.success.withGroups,
+                createTopicMocks.success
             ]);
 
             await submitAddTopic();
 
             expect(container).toMatchSnapshot();
-            expect(mockCreateTopic.success.newData).toHaveBeenCalledTimes(1);
+            expect(createTopicMocks.success.newData).toHaveBeenCalledTimes(1);
         });
     });
 
     describe('failure', () => {
-        it('failed topic creation: should display error message', async () => {
-            const { container } = renderComponentWithMocks(AddTopic, [
-                mockFetchUser.userWithOneGroup,
-                mockCreateTopic.networkError
+        it('createTopic: network error', async () => {
+            const { container } = renderComponent(AddTopic, [
+                fetchUserMocks.success.withGroups,
+                createTopicMocks.networkError
             ]);
 
             await submitAddTopic();
 
             expect(container).toMatchSnapshot();
-            expect(mockCreateTopic.networkError.newData).toHaveBeenCalledTimes(1);
-            expect(screen.queryByText(/createTopic: network-error/)).toBeInTheDocument();
+            expect(createTopicMocks.networkError.newData).toHaveBeenCalledTimes(1);
+            expect(screen.queryByText(/createTopic: network error/)).toBeInTheDocument();
         });
     });
 });

@@ -1,9 +1,9 @@
 import { App } from 'src/components/App';
-import { mockFetchUserWithGroupTopics } from 'tests/mocks';
-import { renderComponentWithMocks } from 'tests/testHelpers';
+import { fetchUserWithGroupTopicsMocks } from 'tests/mocks/userMocks';
+import { renderComponent } from 'tests/testHelpers';
 
 describe('App', () => {
     it('matches snapshot', () => {
-        expect(renderComponentWithMocks(App, [mockFetchUserWithGroupTopics.success]).container).toMatchSnapshot();
+        expect(renderComponent(App, [fetchUserWithGroupTopicsMocks.success]).container).toMatchSnapshot();
     });
 });

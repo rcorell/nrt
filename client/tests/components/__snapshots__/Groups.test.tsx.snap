@@ -1,19 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Groups snapshots loading 1`] = `
+exports[`Groups snapshot: loading 1`] = `
 <div>
   <div>
     Loading...
-  </div>
-</div>
-`;
-
-exports[`Groups snapshots network error 1`] = `
-<div>
-  <div>
-    {"graphQLErrors":[],"networkError":{},"message":"network-error"}
-    <br />
-    <br />
   </div>
 </div>
 `;

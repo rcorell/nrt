@@ -1,9 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home failure 1`] = `
+exports[`Home failure GraphQL error 1`] = `
 <div>
   <div>
-    {"graphQLErrors":[],"networkError":{},"message":"fetchUserWithGroupTopics - network-error"}
+    {"graphQLErrors":[{"message":"fetchUserWithGroupTopics - GraphQL error"}],"networkError":null,"message":"fetchUserWithGroupTopics - GraphQL error"}
+  </div>
+</div>
+`;
+
+exports[`Home failure network failure 1`] = `
+<div>
+  <div>
+    {"graphQLErrors":[],"networkError":{},"message":"fetchUserWithGroupTopics - network error"}
   </div>
 </div>
 `;
@@ -27,10 +35,10 @@ exports[`Home success 1`] = `
       </h2>
       <ul>
         <li>
-          g1-t1-title
+          t1-title
         </li>
         <li>
-          g1-t2-title
+          t2-title
         </li>
       </ul>
     </div>
@@ -40,7 +48,10 @@ exports[`Home success 1`] = `
       </h2>
       <ul>
         <li>
-          g2--t2-title
+          t1-title
+        </li>
+        <li>
+          t2-title
         </li>
       </ul>
     </div>

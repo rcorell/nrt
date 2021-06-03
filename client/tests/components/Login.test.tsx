@@ -1,8 +1,8 @@
 import { fireEvent, screen } from '@testing-library/react';
 
-import { loginMutationString } from 'src/api/api';
 import { Login } from 'src/components/Login';
 import { INVALID, VALID } from 'tests/fixtures';
+import { loginMocks } from 'tests/mocks/loginMocks';
 import {
     getGlobalContext,
     lastNavigationPath,
@@ -60,14 +60,7 @@ describe('Login', () => {
             expect(getGlobalContext().authenticated).toBeFalsy();
             setLastNavigationPath('initial path');
 
-            renderComponent(
-                Login,
-                loginMutationString,
-                { email: VALID.EMAIL, password: VALID.PASSWORD },
-                {
-                    data: { login: { token: 'tokenValue' } }
-                }
-            );
+            renderComponent(Login, [loginMocks.success]);
             setFields(VALID.EMAIL, VALID.PASSWORD);
             const submitButton = screen.getByRole('button');
             fireEvent.click(submitButton);
@@ -85,14 +78,7 @@ describe('Login', () => {
             expect(getGlobalContext().authenticated).toBeFalsy();
             setLastNavigationPath('initial path');
 
-            renderComponent(
-                Login,
-                loginMutationString,
-                { email: VALID.EMAIL, password: VALID.PASSWORD },
-                {
-                    error: new Error('Login failure')
-                }
-            );
+            renderComponent(Login, [loginMocks.networkError]);
             setFields(VALID.EMAIL, VALID.PASSWORD);
             const submitButton = screen.getByRole('button');
             fireEvent.click(submitButton);
@@ -101,7 +87,7 @@ describe('Login', () => {
             expect(localStorage.getItem('token')).toEqual('');
             expect(getGlobalContext().authenticated).toBeFalsy();
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/Login failure/)).toBeInTheDocument();
+            expect(screen.queryByText(/login: network error/)).toBeInTheDocument();
         });
     });
 });
