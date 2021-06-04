@@ -28,7 +28,6 @@ describe('Groups', () => {
             const joinButton = screen.getAllByText('Join!')[0];
             fireEvent.click(joinButton);
             await oneTick();
-            screen.debug(undefined, 10000);
             expect(screen.getAllByText(/Joined/).length).toBe(2);
         });
     });

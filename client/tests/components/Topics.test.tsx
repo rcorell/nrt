@@ -1,9 +1,8 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
-import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
-import { fetchTopicsQueryString } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { Topics } from 'src/components/Topics';
+import { fetchTopicMocks } from 'tests/mocks/topicMocks';
 import { renderComponent } from 'tests/testHelpers';
 
 describe('Topics', () => {
@@ -13,33 +12,16 @@ describe('Topics', () => {
         });
 
         it('success', async () => {
-            const data: FetchTopicsQuery = {
-                topics: [{ __typename: 'Topic', description: 'test-description', id: '88', title: 'test-title' }]
-            };
-
-            renderComponent(Topics, fetchTopicsQueryString, {}, { data });
+            renderComponent(Topics, [fetchTopicMocks.success]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            // Material UI devs literally hate snapshots
             expect(screen.queryByText('test-description')).toBeInTheDocument();
             expect(screen.queryByText('test-title')).toBeInTheDocument();
         });
 
-        it('network error', async () => {
-            const networkError = new Error('Network-error');
-
-            const { container } = renderComponent(Topics, fetchTopicsQueryString, {}, { error: networkError });
-
-            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-
-            expect(screen.queryByText('No results')).toBeNull();
-
-            expect(container).toMatchSnapshot();
-        });
-
-        it('Malformed results', async () => {
-            const { container } = renderComponent(Topics, fetchTopicsQueryString, {}, { data: null });
+        it('fetchTopics: network error', async () => {
+            const { container } = renderComponent(Topics, [fetchTopicMocks.networkError]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 

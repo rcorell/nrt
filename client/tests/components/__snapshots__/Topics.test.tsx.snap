@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Topics snapshots Malformed results 1`] = `
+exports[`Topics snapshots fetchTopics: network error 1`] = `
 <div>
   <div>
     Error: 
-    {"graphQLErrors":[],"networkError":{},"message":"Mocked response should contain either result or error: {\\"query\\":\\"query FetchTopicsQuery {\\\\n  topics {\\\\n    id\\\\n    title\\\\n    description\\\\n  }\\\\n}\\\\n\\"}"}
+    {"graphQLErrors":[],"networkError":{},"message":"fetchTopics: network error"}
   </div>
 </div>
 `;
@@ -13,15 +13,6 @@ exports[`Topics snapshots loading 1`] = `
 <div>
   <div>
     Loading...
-  </div>
-</div>
-`;
-
-exports[`Topics snapshots network error 1`] = `
-<div>
-  <div>
-    Error: 
-    {"graphQLErrors":[],"networkError":{},"message":"Network-error"}
   </div>
 </div>
 `;

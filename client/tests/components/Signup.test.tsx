@@ -1,8 +1,10 @@
 import { fireEvent, screen } from '@testing-library/react';
+import React from 'react';
 
-import { signupMutationString } from 'src/api/api';
+import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { Signup } from 'src/components/Signup';
 import { INVALID, VALID } from 'tests/fixtures';
+import { signupMocks } from 'tests/mocks/signupMocks';
 import {
     getGlobalContext,
     lastNavigationPath,
@@ -12,6 +14,7 @@ import {
 } from 'tests/testHelpers';
 
 describe('Signup', () => {
+    let setItemMock: jest.SpyInstance;
     let signupContainer: HTMLElement;
 
     const setFields = (email: string, name: string, password: string) => {
@@ -27,6 +30,18 @@ describe('Signup', () => {
     const renderSignup = () => {
         signupContainer = renderComponent(Signup).container;
     };
+
+    beforeAll(() => {
+        setItemMock = jest.spyOn(window.localStorage.__proto__, 'setItem');
+    });
+
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
+
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
 
     describe('snapshots', () => {
         beforeEach(() => {
@@ -58,52 +73,47 @@ describe('Signup', () => {
 
     describe('success', () => {
         it('should set authenticated and navigate to the home page', async () => {
-            localStorage.setItem('token', '');
-            expect(getGlobalContext().authenticated).toBeFalsy();
             setLastNavigationPath('initial path');
-
-            renderComponent(
-                Signup,
-                signupMutationString,
-                { email: VALID.EMAIL, name: VALID.NAME, password: VALID.PASSWORD },
-                {
-                    data: { signup: { token: 'tokenValue' } }
+            const originalUseContext = React.useContext;
+            const setAuthenticatedMock = jest.fn();
+            jest.spyOn(React, 'useContext').mockImplementation((context) => {
+                if (context === GlobalContext) {
+                    return {
+                        setAuthenticated: setAuthenticatedMock
+                    };
                 }
-            );
+                return originalUseContext(context);
+            });
+
+            renderComponent(Signup, [signupMocks.success]);
             setFields(VALID.EMAIL, VALID.NAME, VALID.PASSWORD);
             const submitButton = screen.getByRole('button');
             fireEvent.click(submitButton);
             await oneTick();
+            await oneTick();
 
-            expect(localStorage.getItem('token')).toEqual('tokenValue');
-            expect(getGlobalContext().authenticated).toBeTruthy();
+            expect(setItemMock).toHaveBeenCalledExactlyOnceWith('token', 'signupTokenValue');
+            expect(setAuthenticatedMock).toHaveBeenCalledExactlyOnceWith(true);
             expect(lastNavigationPath).toEqual('/');
+            jest.restoreAllMocks();
         });
     });
 
     describe('failure', () => {
-        it('failed signup: should display error message', async () => {
-            localStorage.setItem('token', '');
+        it('signup: network error', async () => {
             expect(getGlobalContext().authenticated).toBeFalsy();
             setLastNavigationPath('initial path');
 
-            renderComponent(
-                Signup,
-                signupMutationString,
-                { email: VALID.EMAIL, name: VALID.NAME, password: VALID.PASSWORD },
-                {
-                    error: new Error('Signup failure')
-                }
-            );
+            renderComponent(Signup, [signupMocks.networkError]);
             setFields(VALID.EMAIL, VALID.NAME, VALID.PASSWORD);
             const submitButton = screen.getByRole('button');
             fireEvent.click(submitButton);
             await oneTick();
 
-            expect(localStorage.getItem('token')).toEqual('');
+            expect(setItemMock).not.toHaveBeenCalled();
             expect(getGlobalContext().authenticated).toBeFalsy();
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/Signup failure/)).toBeInTheDocument();
+            expect(screen.queryByText(/signup: network error/)).toBeInTheDocument();
         });
     });
 });

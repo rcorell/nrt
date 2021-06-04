@@ -24,17 +24,19 @@ export const oneTick = async () => {
 
 export const renderComponent = (component: React.FC, mocks: MockedResponse[] = []) => {
     return render(
-        <MockedProvider
-            mocks={mocks}
-            addTypename={false}
-            defaultOptions={{
-                mutate: {
-                    errorPolicy: 'all'
-                }
-            }}
-        >
-            {React.createElement(component)}
-        </MockedProvider>
+        <GlobalContextProvider>
+            <MockedProvider
+                mocks={mocks}
+                addTypename={false}
+                defaultOptions={{
+                    mutate: {
+                        errorPolicy: 'all'
+                    }
+                }}
+            >
+                {React.createElement(component)}
+            </MockedProvider>
+        </GlobalContextProvider>
     );
 };
 

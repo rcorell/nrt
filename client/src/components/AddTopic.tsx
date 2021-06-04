@@ -19,7 +19,6 @@ export const AddTopic: React.FC = () => {
     const [createTopic, { error }] = useMutation<CreateTopicMutation, CreateTopicMutationVariables>(
         createTopicMutationString,
         {
-            onCompleted: () => {},
             onError: () => {
                 // RTL bug
             },
