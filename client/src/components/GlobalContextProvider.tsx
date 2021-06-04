@@ -7,7 +7,10 @@ type GlobalContextType = {
     setAuthenticated: (authenticated: boolean) => void;
 };
 
-export const GlobalContext = React.createContext<GlobalContextType | undefined>(undefined);
+export const GlobalContext = React.createContext<GlobalContextType>({
+    authenticated: false,
+    setAuthenticated: () => {}
+});
 
 export const GlobalContextProvider: React.FC = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(isAuthenticated());

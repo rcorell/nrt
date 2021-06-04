@@ -1,18 +1,14 @@
-import { PrismaClient } from '@prisma/client';
+import { Context } from 'prisma';
 
-export const groups = async (_parent, _args, context) => {
-    const prisma: PrismaClient = context.prisma;
-
-    return prisma.group.findMany();
+export const groups = async (_parent, _args, context: Context) => {
+    return context.prisma.group.findMany();
 };
 
 export const ready = () => {
     return 'top-5-daily-server';
 };
 
-export const topics = async (_parent, args, context) => {
-    const prisma: PrismaClient = context.prisma;
-
+export const topics = async (_parent, args, context: Context) => {
     let where;
 
     if (args.groupIds) {
@@ -23,9 +19,9 @@ export const topics = async (_parent, args, context) => {
         };
     }
 
-    return prisma.topic.findMany(where);
+    return context.prisma.topic.findMany(where);
 };
 
-export const user = async (_parent, _args, context) => {
+export const user = async (_parent, _args, context: Context) => {
     return context.prisma.user.findUnique({ where: { id: context.userId } });
 };
