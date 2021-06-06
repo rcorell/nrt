@@ -9,7 +9,7 @@ type GlobalContextType = {
 
 export const GlobalContext = React.createContext<GlobalContextType>({
     authenticated: false,
-    setAuthenticated: () => {}
+    setAuthenticated: /* istanbul ignore next */ () => {}
 });
 
 export const GlobalContextProvider: React.FC = ({ children }) => {

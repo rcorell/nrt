@@ -82,12 +82,13 @@ export type TestFormOptions = {
     pageName: string;
 };
 
-export const testFormSnapshots = (options: TestFormOptions) => {
+export const testFormSnapshots = (options: TestFormOptions, mocks: MockedResponse[] = []) => {
     let container: HTMLElement;
 
     describe('standard snapshots', () => {
-        beforeEach(() => {
-            container = renderComponent(options.component).container;
+        beforeEach(async () => {
+            container = renderComponent(options.component, mocks).container;
+            await oneTick();
         });
 
         it('fresh load', () => {
