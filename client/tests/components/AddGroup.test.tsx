@@ -43,7 +43,7 @@ describe('AddGroup', () => {
 
             await submitAddGroup();
 
-            expect(screen.queryByText(/createGroup: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateGroupMutation: network error/)).toBeInTheDocument();
         });
     });
 });

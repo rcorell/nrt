@@ -5,13 +5,7 @@ import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { Signup } from 'src/components/Signup';
 import { INVALID, VALID } from 'tests/fixtures';
 import { signupMocks } from 'tests/mocks/signupMocks';
-import {
-    getGlobalContext,
-    lastNavigationPath,
-    oneTick,
-    renderComponent,
-    setLastNavigationPath
-} from 'tests/testHelpers';
+import { lastNavigationPath, oneTick, renderComponent, setLastNavigationPath } from 'tests/testHelpers';
 
 describe('Signup', () => {
     let setItemMock: jest.SpyInstance;
@@ -101,7 +95,6 @@ describe('Signup', () => {
 
     describe('failure', () => {
         it('signup: network error', async () => {
-            expect(getGlobalContext().authenticated).toBeFalsy();
             setLastNavigationPath('initial path');
 
             renderComponent(Signup, [signupMocks.networkError]);
@@ -111,7 +104,6 @@ describe('Signup', () => {
             await oneTick();
 
             expect(setItemMock).not.toHaveBeenCalled();
-            expect(getGlobalContext().authenticated).toBeFalsy();
             expect(lastNavigationPath).toEqual('initial path');
             expect(screen.queryByText(/signup: network error/)).toBeInTheDocument();
         });

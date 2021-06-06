@@ -1,12 +1,11 @@
-import { GraphQLError } from 'graphql';
-
-import { CreateGroupMutation } from 'src/api/__generated__/CreateGroupMutation';
-import { FetchGroupsQuery } from 'src/api/__generated__/FetchGroupsQuery';
-import { JoinGroupMutation } from 'src/api/__generated__/JoinGroupMutation';
+import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
+import { FetchGroupsQuery, FetchGroupsQuery_groups } from 'src/api/__generated__/FetchGroupsQuery';
+import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
 import { createGroupMutationString, fetchGroupsQueryString, joinGroupMutationString } from 'src/api/api';
 import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
+import { assembleMocks } from 'tests/testHelpers';
 
-export const mockGroups = [
+export const mockGroups: FetchGroupsQuery_groups[] = [
     {
         __typename: TYPENAME.GROUP,
         description: VALID.GROUP.DESCRIPTION,
@@ -21,96 +20,48 @@ export const mockGroups = [
     }
 ];
 
-export const fetchGroupsMocks: StandardMocks<FetchGroupsQuery> = {
-    graphQLError: {
-        request: {
-            query: fetchGroupsQueryString,
-            variables: {}
-        },
-        result: {
-            errors: [new GraphQLError('fetchGroups: GraphQL error')]
-        }
-    },
-    networkError: {
-        error: new Error('fetchGroups: network error'),
-        request: {
-            query: fetchGroupsQueryString,
-            variables: {}
-        }
-    },
-    success: {
-        request: {
-            query: fetchGroupsQueryString,
-            variables: {}
-        },
-        result: {
-            data: {
-                groups: mockGroups
-            }
-        }
-    }
+/*
+ * fetchGroups
+ */
+const fetchGroupsSuccessData: FetchGroupsQuery = {
+    groups: mockGroups
 };
+export const fetchGroupsMocks: StandardMocks<JoinGroupMutation> = assembleMocks({
+    data: fetchGroupsSuccessData,
+    query: fetchGroupsQueryString
+});
 
-export const joinGroupMocks: StandardMocks<JoinGroupMutation> = {
-    graphQLError: {
-        request: {
-            query: joinGroupMutationString,
-            variables: { groupId: Number(mockGroups[0].id) }
-        },
-        result: {
-            errors: [new GraphQLError('joinGroup: GraphQL error')]
-        }
-    },
-    networkError: {
-        error: new Error('joinGroup: network error'),
-        request: {
-            query: joinGroupMutationString,
-            variables: { groupId: Number(mockGroups[0].id) }
-        }
-    },
-    success: {
-        request: {
-            query: joinGroupMutationString,
-            variables: { groupId: Number(mockGroups[0].id) }
-        },
-        result: {
-            data: {
-                joinGroup: Number(mockGroups[0].id)
-            }
-        }
-    }
+/*
+ * joinGroups
+ */
+const joinGroupsVariables: JoinGroupMutationVariables = {
+    groupId: Number(mockGroups[0].id)
 };
+const joinGroupsSuccessData: JoinGroupMutation = {
+    joinGroup: Number(mockGroups[0].id)
+};
+export const joinGroupMocks: StandardMocks<JoinGroupMutation> = assembleMocks({
+    data: joinGroupsSuccessData,
+    query: joinGroupMutationString,
+    variables: joinGroupsVariables
+});
 
-export const createGroupMocks: StandardMocks<CreateGroupMutation> = {
-    graphQLError: {
-        request: {
-            query: createGroupMutationString,
-            variables: { description: VALID.GROUP.DESCRIPTION, name: VALID.GROUP.NAME }
-        },
-        result: {
-            errors: [new GraphQLError('createGroup: GraphQL error')]
-        }
-    },
-    networkError: {
-        error: new Error('createGroup: network error'),
-        request: {
-            query: createGroupMutationString,
-            variables: { description: VALID.GROUP.DESCRIPTION, name: VALID.GROUP.NAME }
-        }
-    },
-    success: {
-        request: {
-            query: createGroupMutationString,
-            variables: { description: VALID.GROUP.DESCRIPTION, name: VALID.GROUP.NAME }
-        },
-        result: {
-            data: {
-                createGroup: {
-                    __typename: TYPENAME.GROUP,
-                    createdAt: 'time',
-                    id: mockGroups[0].id
-                }
-            }
-        }
+/*
+ * createGroup
+ */
+const createGroupVariables: CreateGroupMutationVariables = {
+    description: VALID.GROUP.DESCRIPTION,
+    name: VALID.GROUP.NAME
+};
+const createGroupSuccessData: CreateGroupMutation = {
+    createGroup: {
+        __typename: TYPENAME.GROUP,
+        createdAt: 'time',
+        id: mockGroups[0].id
     }
 };
+export const createGroupMocks: StandardMocks<CreateGroupMutation> = assembleMocks({
+    data: createGroupSuccessData,
+    query: createGroupMutationString,
+    variables: createGroupVariables
+});

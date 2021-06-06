@@ -3,13 +3,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import { Login } from 'src/components/Login';
 import { INVALID, VALID } from 'tests/fixtures';
 import { loginMocks } from 'tests/mocks/loginMocks';
-import {
-    getGlobalContext,
-    lastNavigationPath,
-    oneTick,
-    renderComponent,
-    setLastNavigationPath
-} from 'tests/testHelpers';
+import { lastNavigationPath, oneTick, renderComponent, setLastNavigationPath } from 'tests/testHelpers';
 
 describe('Login', () => {
     let loginContainer: HTMLElement;
@@ -57,7 +51,6 @@ describe('Login', () => {
     describe('success', () => {
         it('should set authenticated and navigate to the home page', async () => {
             localStorage.setItem('token', '');
-            expect(getGlobalContext().authenticated).toBeFalsy();
             setLastNavigationPath('initial path');
 
             renderComponent(Login, [loginMocks.success]);
@@ -67,7 +60,6 @@ describe('Login', () => {
             await oneTick();
 
             expect(localStorage.getItem('token')).toEqual('tokenValue');
-            expect(getGlobalContext().authenticated).toBeTruthy();
             expect(lastNavigationPath).toEqual('/');
         });
     });
@@ -75,7 +67,6 @@ describe('Login', () => {
     describe('failure', () => {
         it('failed login: should display error message', async () => {
             localStorage.setItem('token', '');
-            expect(getGlobalContext().authenticated).toBeFalsy();
             setLastNavigationPath('initial path');
 
             renderComponent(Login, [loginMocks.networkError]);
@@ -85,7 +76,6 @@ describe('Login', () => {
             await oneTick();
 
             expect(localStorage.getItem('token')).toEqual('');
-            expect(getGlobalContext().authenticated).toBeFalsy();
             expect(lastNavigationPath).toEqual('initial path');
             expect(screen.queryByText(/login: network error/)).toBeInTheDocument();
         });

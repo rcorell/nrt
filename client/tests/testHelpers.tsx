@@ -1,9 +1,11 @@
 import { DocumentNode } from '@apollo/client';
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import React, { useContext } from 'react';
+import { GraphQLError } from 'graphql';
+import { print } from 'graphql/language/printer';
+import React from 'react';
 
-import { GlobalContext, GlobalContextProvider } from 'src/components/GlobalContextProvider';
+import { GlobalContextProvider } from 'src/components/GlobalContextProvider';
 
 export let lastNavigationPath = '';
 
@@ -38,31 +40,6 @@ export const renderComponent = (component: React.FC, mocks: MockedResponse[] = [
             </MockedProvider>
         </GlobalContextProvider>
     );
-};
-
-/*
-    I sincerely hope there's a better way to do this.
-*/
-let globalAuthenticated = false;
-
-const MockComponent: React.FC = (): JSX.Element => {
-    const { authenticated } = useContext(GlobalContext);
-
-    globalAuthenticated = authenticated;
-
-    return <></>;
-};
-
-export const getGlobalContext = () => {
-    render(
-        <GlobalContextProvider>
-            <MockComponent {...{}} />
-        </GlobalContextProvider>
-    );
-
-    return {
-        authenticated: globalAuthenticated
-    };
 };
 
 export const setField = (label: string, value: string) => {
@@ -114,4 +91,42 @@ export const testFormSnapshots = (options: TestFormOptions, mocks: MockedRespons
     it('should have the correct document title', () => {
         expect(window.document.title).toEqual(`Top 5 Daily | ${options.pageName}`);
     });
+};
+
+type MockParameters = {
+    data: any;
+    query: DocumentNode;
+    variables?: any;
+};
+
+export const assembleMocks = ({ data, query, variables = {} }: MockParameters) => {
+    const name = print(query).split(' ')[1].split('(')[0];
+
+    return {
+        graphQLError: {
+            request: {
+                query,
+                variables
+            },
+            result: {
+                errors: [new GraphQLError(`${name}: GraphQL error`)]
+            }
+        },
+        networkError: {
+            error: new Error(`${name}: network error`),
+            request: {
+                query,
+                variables
+            }
+        },
+        success: {
+            request: {
+                query,
+                variables
+            },
+            result: {
+                data
+            }
+        }
+    };
 };
