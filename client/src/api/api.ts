@@ -36,7 +36,7 @@ export const setAuthenticationToken = (token: string) => {
     localStorage.setItem(AUTHENTICATION_TOKEN_NAME, token);
 };
 
-export const fetchGroupsQueryString = gql`
+export const fetchGroupsQuery = gql`
     query FetchGroupsQuery {
         groups {
             id
@@ -46,7 +46,7 @@ export const fetchGroupsQueryString = gql`
     }
 `;
 
-export const fetchTopicsQueryString = gql`
+export const fetchTopicsQuery = gql`
     query FetchTopicsQuery {
         topics {
             id
@@ -56,7 +56,7 @@ export const fetchTopicsQueryString = gql`
     }
 `;
 
-export const fetchUserQueryString = gql`
+export const fetchUserQuery = gql`
     query FetchUserQuery {
         user {
             groups {
@@ -73,7 +73,7 @@ export const fetchUserQueryString = gql`
     }
 `;
 
-export const fetchUserWithGroupTopicsQueryString = gql`
+export const fetchUserWithGroupTopicsQuery = gql`
     query FetchUserWithGroupTopicsQueryString {
         user {
             groups {
@@ -95,7 +95,7 @@ export const fetchUserWithGroupTopicsQueryString = gql`
     }
 `;
 
-export const createGroupMutationString = gql`
+export const createGroupMutation = gql`
     mutation CreateGroupMutation($name: String!, $description: String) {
         createGroup(name: $name, description: $description) {
             id
@@ -104,7 +104,7 @@ export const createGroupMutationString = gql`
     }
 `;
 
-export const signupMutationString = gql`
+export const signupMutation = gql`
     mutation SignupMutation($email: String!, $name: String!, $password: String!) {
         signup(email: $email, name: $name, password: $password) {
             token
@@ -112,7 +112,7 @@ export const signupMutationString = gql`
     }
 `;
 
-export const loginMutationString = gql`
+export const loginMutation = gql`
     mutation LoginMutation($email: String!, $password: String!) {
         login(email: $email, password: $password) {
             token
@@ -120,7 +120,7 @@ export const loginMutationString = gql`
     }
 `;
 
-export const createTopicMutationString = gql`
+export const createTopicMutation = gql`
     mutation CreateTopicMutation($groupId: ID!, $title: String!, $description: String) {
         createTopic(groupId: $groupId, title: $title, description: $description) {
             id
@@ -128,7 +128,7 @@ export const createTopicMutationString = gql`
     }
 `;
 
-export const joinGroupMutationString = gql`
+export const joinGroupMutation = gql`
     mutation JoinGroupMutation($groupId: Int!) {
         joinGroup(groupId: $groupId)
     }

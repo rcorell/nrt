@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
-import { createGroupMutationString } from 'src/api/api';
+import { createGroupMutation } from 'src/api/api';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
 
@@ -13,7 +13,7 @@ export const AddGroup: React.FC = () => {
     const [graphQLError, setGraphQLError] = useState(null as null | ApolloError);
 
     const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
-        createGroupMutationString,
+        createGroupMutation,
         {
             onCompleted: ({ createGroup }) => {
                 createGroup.id += 0;

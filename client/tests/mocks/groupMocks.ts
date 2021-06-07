@@ -1,7 +1,7 @@
 import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
 import { FetchGroupsQuery, FetchGroupsQuery_groups } from 'src/api/__generated__/FetchGroupsQuery';
 import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
-import { createGroupMutationString, fetchGroupsQueryString, joinGroupMutationString } from 'src/api/api';
+import { createGroupMutation, fetchGroupsQuery, joinGroupMutation } from 'src/api/api';
 import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
@@ -27,7 +27,7 @@ const fetchGroupsParams: MockParameters<FetchGroupsQuery> = {
     data: {
         groups: mockGroups
     },
-    query: fetchGroupsQueryString
+    query: fetchGroupsQuery
 };
 export const fetchGroupsMocks: StandardMocks<FetchGroupsQuery> = assembleMocks(fetchGroupsParams);
 
@@ -38,7 +38,7 @@ const joinGroupParams: MockParameters<JoinGroupMutation, JoinGroupMutationVariab
     data: {
         joinGroup: Number(mockGroups[0].id)
     },
-    query: joinGroupMutationString,
+    query: joinGroupMutation,
     variables: {
         groupId: Number(mockGroups[0].id)
     }
@@ -56,7 +56,7 @@ const createGroupParameters: MockParameters<CreateGroupMutation, CreateGroupMuta
             id: mockGroups[0].id
         }
     },
-    query: createGroupMutationString,
+    query: createGroupMutation,
     variables: {
         description: VALID.GROUP.DESCRIPTION,
         name: VALID.GROUP.NAME

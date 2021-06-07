@@ -4,7 +4,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
-import { createTopicMutationString, fetchUserQueryString } from 'src/api/api';
+import { createTopicMutation, fetchUserQuery } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
@@ -14,10 +14,10 @@ export const AddTopic: React.FC = () => {
     const [groupId, setGroupId] = useState('');
     const [title, setTitle] = useState('');
 
-    const userQuery = useQuery<FetchUserQuery>(fetchUserQueryString);
+    const userQuery = useQuery<FetchUserQuery>(fetchUserQuery);
 
     const [createTopic, { error }] = useMutation<CreateTopicMutation, CreateTopicMutationVariables>(
-        createTopicMutationString,
+        createTopicMutation,
         {
             onError: () => {
                 // RTL bug

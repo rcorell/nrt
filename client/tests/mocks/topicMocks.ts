@@ -1,6 +1,6 @@
 import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
 import { FetchTopicsQuery, FetchTopicsQuery_topics } from 'src/api/__generated__/FetchTopicsQuery';
-import { fetchTopicsQueryString, createTopicMutationString } from 'src/api/api';
+import { fetchTopicsQuery, createTopicMutation } from 'src/api/api';
 import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
@@ -28,7 +28,7 @@ export const mockTopics: FetchTopicsQuery_topics[] = [
  */
 const createTopicParams: MockParameters<CreateTopicMutation, CreateTopicMutationVariables> = {
     data: { createTopic: { __typename: TYPENAME.TOPIC, id: '777' } },
-    query: createTopicMutationString,
+    query: createTopicMutation,
     spyOnNewData: true,
     variables: {
         description: VALID.TOPIC.DESCRIPTION,
@@ -45,6 +45,6 @@ const fetchTopicsParams: MockParameters<FetchTopicsQuery> = {
     data: {
         topics: mockTopics
     },
-    query: fetchTopicsQueryString
+    query: fetchTopicsQuery
 };
 export const fetchTopicMocks: StandardMocks<FetchTopicsQuery> = assembleMocks(fetchTopicsParams);

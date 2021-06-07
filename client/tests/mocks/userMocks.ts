@@ -1,6 +1,6 @@
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { FetchUserWithGroupTopicsQueryString } from 'src/api/__generated__/FetchUserWithGroupTopicsQueryString';
-import { fetchUserQueryString, fetchUserWithGroupTopicsQueryString } from 'src/api/api';
+import { fetchUserQuery, fetchUserWithGroupTopicsQuery } from 'src/api/api';
 import { StandardMocks, TYPENAME } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
 import { mockTopics } from 'tests/mocks/topicMocks';
@@ -17,7 +17,7 @@ const fetchUserWithGroupsParams: MockParameters<FetchUserQuery> = {
             topics: []
         }
     },
-    query: fetchUserQueryString
+    query: fetchUserQuery
 };
 export const fetchUserWithGroupsMocks: StandardMocks<FetchUserQuery> = assembleMocks(fetchUserWithGroupsParams);
 
@@ -32,7 +32,7 @@ const fetchUserWithoutGroupsParams: MockParameters<FetchUserQuery> = {
             topics: []
         }
     },
-    query: fetchUserQueryString
+    query: fetchUserQuery
 };
 export const fetchUserWithoutGroupsMocks: StandardMocks<FetchUserQuery> = assembleMocks(
     fetchUserWithoutGroupsParams
@@ -64,7 +64,7 @@ const fetchUserWithGroupTopics: MockParameters<FetchUserWithGroupTopicsQueryStri
             topics: []
         }
     },
-    query: fetchUserWithGroupTopicsQueryString
+    query: fetchUserWithGroupTopicsQuery
 };
 export const fetchUserWithGroupTopicsMocks: StandardMocks<FetchUserWithGroupTopicsQueryString> = assembleMocks(
     fetchUserWithGroupTopics

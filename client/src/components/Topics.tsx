@@ -4,7 +4,7 @@ import MaterialTable from 'material-table';
 import React from 'react';
 
 import { FetchTopicsQuery } from 'src/api/__generated__/FetchTopicsQuery';
-import { fetchTopicsQueryString } from 'src/api/api';
+import { fetchTopicsQuery } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
@@ -16,7 +16,7 @@ const COLUMN_DEFINITIONS = [
 export const Topics: React.FC = () => {
     setBrowserTitle('Topics');
 
-    const { data, error, loading } = useQuery<FetchTopicsQuery>(fetchTopicsQueryString);
+    const { data, error, loading } = useQuery<FetchTopicsQuery>(fetchTopicsQuery);
 
     if (loading) {
         return <div>{LOADING_TEXT}</div>;

@@ -5,13 +5,13 @@ import {
     FetchUserWithGroupTopicsQueryString,
     FetchUserWithGroupTopicsQueryString_user_groups
 } from 'src/api/__generated__/FetchUserWithGroupTopicsQueryString';
-import { fetchUserWithGroupTopicsQueryString } from 'src/api/api';
+import { fetchUserWithGroupTopicsQuery } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { HomePage } from 'src/styles/home';
 import { setBrowserTitle } from 'src/utils';
 
 export const Home: React.FC = () => {
-    const query = useQuery<FetchUserWithGroupTopicsQueryString>(fetchUserWithGroupTopicsQueryString);
+    const query = useQuery<FetchUserWithGroupTopicsQueryString>(fetchUserWithGroupTopicsQuery);
 
     setBrowserTitle('Home');
 

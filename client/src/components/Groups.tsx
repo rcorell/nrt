@@ -6,7 +6,7 @@ import React from 'react';
 import { FetchGroupsQuery } from 'src/api/__generated__/FetchGroupsQuery';
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
-import { fetchGroupsQueryString, fetchUserQueryString, joinGroupMutationString } from 'src/api/api';
+import { fetchGroupsQuery, fetchUserQuery, joinGroupMutation } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
@@ -22,13 +22,13 @@ const COLUMN_DEFINITIONS = [
 export const Groups: React.FC = () => {
     setBrowserTitle('Groups');
 
-    const userQuery = useQuery<FetchUserQuery>(fetchUserQueryString);
-    const allGroups = useQuery<FetchGroupsQuery>(fetchGroupsQueryString);
+    const userQuery = useQuery<FetchUserQuery>(fetchUserQuery);
+    const allGroups = useQuery<FetchGroupsQuery>(fetchGroupsQuery);
 
     const [joinGroup, { loading: joinGroupLoading, error: joinGroupError }] = useMutation<
         JoinGroupMutation,
         JoinGroupMutationVariables
-    >(joinGroupMutationString, {
+    >(joinGroupMutation, {
         onCompleted: () => {
             userQuery.refetch();
         },

@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
-import { loginMutationString } from 'src/api/api';
+import { loginMutation } from 'src/api/api';
 import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
@@ -15,7 +15,7 @@ export const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [login, { error }] = useMutation<LoginMutation, LoginMutationVariables>(loginMutationString, {
+    const [login, { error }] = useMutation<LoginMutation, LoginMutationVariables>(loginMutation, {
         onCompleted: ({ login }) => {
             localStorage.setItem('token', login!.token!);
             setAuthenticated(true);

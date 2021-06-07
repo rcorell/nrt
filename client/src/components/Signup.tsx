@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { SignupMutation, SignupMutationVariables } from 'src/api/__generated__/SignupMutation';
-import { signupMutationString } from 'src/api/api';
+import { signupMutation } from 'src/api/api';
 import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
@@ -16,7 +16,7 @@ export const Signup: React.FC = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
 
-    const [signup, { error }] = useMutation<SignupMutation, SignupMutationVariables>(signupMutationString, {
+    const [signup, { error }] = useMutation<SignupMutation, SignupMutationVariables>(signupMutation, {
         onCompleted: ({ signup }) => {
             localStorage.setItem('token', signup!.token!);
             setAuthenticated(true);
