@@ -7,7 +7,7 @@ import { LOADING_TEXT } from 'src/components/shared';
 import { ADD_TOPIC, INVALID, VALID } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
 import { createTopicMocks } from 'tests/mocks/topicMocks';
-import { fetchUserMocks } from 'tests/mocks/userMocks';
+import { fetchUserWithGroupsMocks } from 'tests/mocks/userMocks';
 import { oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
 
 describe('AddTopic', () => {
@@ -28,7 +28,7 @@ describe('AddTopic', () => {
             ],
             pageName: ADD_TOPIC.PAGE_NAME
         },
-        [fetchUserMocks.success.withGroups]
+        [fetchUserWithGroupsMocks.success]
     );
 
     const submitAddTopic = async (mocks: MockedResponse[]) => {
@@ -47,7 +47,7 @@ describe('AddTopic', () => {
 
     describe('success', () => {
         it('should create a topic', async () => {
-            const container = await submitAddTopic([fetchUserMocks.success.withGroups, createTopicMocks.success]);
+            const container = await submitAddTopic([fetchUserWithGroupsMocks.success, createTopicMocks.success]);
 
             expect(container).toMatchSnapshot();
             expect(createTopicMocks.success.newData).toHaveBeenCalledTimes(1);
@@ -57,7 +57,7 @@ describe('AddTopic', () => {
     describe('failure', () => {
         it('createTopic: network error', async () => {
             const container = await submitAddTopic([
-                fetchUserMocks.success.withGroups,
+                fetchUserWithGroupsMocks.success,
                 createTopicMocks.networkError
             ]);
 

@@ -3,7 +3,7 @@
 exports[`Home failure GraphQL error 1`] = `
 <div>
   <div>
-    {"graphQLErrors":[{"message":"fetchUserWithGroupTopics - GraphQL error"}],"networkError":null,"message":"fetchUserWithGroupTopics - GraphQL error"}
+    {"graphQLErrors":[{"message":"FetchUserWithGroupTopicsQueryString: GraphQL error"}],"networkError":null,"message":"FetchUserWithGroupTopicsQueryString: GraphQL error"}
   </div>
 </div>
 `;
@@ -11,7 +11,7 @@ exports[`Home failure GraphQL error 1`] = `
 exports[`Home failure network failure 1`] = `
 <div>
   <div>
-    {"graphQLErrors":[],"networkError":{},"message":"fetchUserWithGroupTopics - network error"}
+    {"graphQLErrors":[],"networkError":{},"message":"FetchUserWithGroupTopicsQueryString: network error"}
   </div>
 </div>
 `;

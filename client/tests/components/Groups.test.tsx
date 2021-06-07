@@ -4,7 +4,7 @@ import { Groups } from 'src/components/Groups';
 import { LOADING_TEXT } from 'src/components/shared';
 import { VALID } from 'tests/fixtures';
 import { fetchGroupsMocks, joinGroupMocks } from 'tests/mocks/groupMocks';
-import { fetchUserMocks } from 'tests/mocks/userMocks';
+import { fetchUserWithGroupsMocks, fetchUserWithoutGroupsMocks } from 'tests/mocks/userMocks';
 import { oneTick, renderComponent } from 'tests/testHelpers';
 
 describe('Groups', () => {
@@ -14,11 +14,11 @@ describe('Groups', () => {
 
     describe('success', () => {
         it('displays groups and supports joining a group', async () => {
-            renderComponent(Groups, [
-                fetchUserMocks.success.withoutGroups,
+            const { container } = renderComponent(Groups, [
+                fetchUserWithoutGroupsMocks.success,
                 fetchGroupsMocks.success,
                 joinGroupMocks.success,
-                fetchUserMocks.success.withGroups
+                fetchUserWithGroupsMocks.success
             ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
@@ -35,7 +35,7 @@ describe('Groups', () => {
 
     describe('failure', () => {
         it('fetchGroups: network error', async () => {
-            renderComponent(Groups, [fetchGroupsMocks.networkError, fetchUserMocks.success.withoutGroups]);
+            renderComponent(Groups, [fetchGroupsMocks.networkError, fetchUserWithoutGroupsMocks.success]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -43,7 +43,7 @@ describe('Groups', () => {
         });
 
         it('fetchGroups: GraphQL error', async () => {
-            renderComponent(Groups, [fetchGroupsMocks.graphQLError, fetchUserMocks.success.withoutGroups]);
+            renderComponent(Groups, [fetchGroupsMocks.graphQLError, fetchUserWithoutGroupsMocks.success]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -52,10 +52,10 @@ describe('Groups', () => {
 
         it('joinGroup: network error', async () => {
             renderComponent(Groups, [
-                fetchUserMocks.success.withoutGroups,
+                fetchUserWithoutGroupsMocks.success,
                 fetchGroupsMocks.success,
                 joinGroupMocks.networkError,
-                fetchUserMocks.success.withoutGroups
+                fetchUserWithoutGroupsMocks.success
             ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
@@ -69,10 +69,10 @@ describe('Groups', () => {
 
         it('joinGroup: GraphQL error', async () => {
             renderComponent(Groups, [
-                fetchUserMocks.success.withoutGroups,
+                fetchUserWithoutGroupsMocks.success,
                 fetchGroupsMocks.success,
                 joinGroupMocks.graphQLError,
-                fetchUserMocks.success.withoutGroups
+                fetchUserWithoutGroupsMocks.success
             ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));

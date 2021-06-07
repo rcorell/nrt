@@ -1,120 +1,71 @@
-import { MockedResponse } from '@apollo/client/testing';
-import { GraphQLError } from 'graphql';
-
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { FetchUserWithGroupTopicsQueryString } from 'src/api/__generated__/FetchUserWithGroupTopicsQueryString';
 import { fetchUserQueryString, fetchUserWithGroupTopicsQueryString } from 'src/api/api';
 import { StandardMocks, TYPENAME } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
 import { mockTopics } from 'tests/mocks/topicMocks';
+import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
-interface FetchUserMocks {
-    graphQLError: MockedResponse<FetchUserQuery>;
-    networkError: MockedResponse<FetchUserQuery>;
-    success: {
-        withGroups: MockedResponse<FetchUserQuery>;
-        withoutGroups: MockedResponse<FetchUserQuery>;
-    };
-}
-
-export const fetchUserMocks: FetchUserMocks = {
-    graphQLError: {
-        request: {
-            query: fetchUserQueryString,
-            variables: {}
-        },
-        result: {
-            errors: [new GraphQLError('fetchUser - GraphQL error')]
+/**
+ * fetchUserWithGroups
+ */
+const fetchUserWithGroupsParams: MockParameters<FetchUserQuery> = {
+    data: {
+        user: {
+            __typename: TYPENAME.USER,
+            groups: mockGroups,
+            topics: []
         }
     },
-    networkError: {
-        error: new Error('fetchUser - network error'),
-        request: {
-            query: fetchUserQueryString,
-            variables: {}
-        }
-    },
-    success: {
-        withGroups: {
-            request: {
-                query: fetchUserQueryString,
-                variables: {}
-            },
-            result: {
-                data: {
-                    user: {
-                        __typename: TYPENAME.USER,
-                        groups: mockGroups,
-                        topics: []
-                    }
-                }
-            }
-        },
-        withoutGroups: {
-            request: {
-                query: fetchUserQueryString,
-                variables: {}
-            },
-            result: {
-                data: {
-                    user: {
-                        __typename: TYPENAME.USER,
-                        groups: [],
-                        topics: []
-                    }
-                }
-            }
-        }
-    }
+    query: fetchUserQueryString
 };
+export const fetchUserWithGroupsMocks: StandardMocks<FetchUserQuery> = assembleMocks(fetchUserWithGroupsParams);
 
-export const fetchUserWithGroupTopicsMocks: StandardMocks<FetchUserWithGroupTopicsQueryString> = {
-    graphQLError: {
-        request: {
-            query: fetchUserWithGroupTopicsQueryString,
-            variables: {}
-        },
-        result: {
-            errors: [new GraphQLError('fetchUserWithGroupTopics - GraphQL error')]
+/**
+ * fetchUserWithoutGroups
+ */
+const fetchUserWithoutGroupsParams: MockParameters<FetchUserQuery> = {
+    data: {
+        user: {
+            __typename: TYPENAME.USER,
+            groups: [],
+            topics: []
         }
     },
-
-    networkError: {
-        error: new Error('fetchUserWithGroupTopics - network error'),
-        request: {
-            query: fetchUserWithGroupTopicsQueryString,
-            variables: {}
-        }
-    },
-
-    success: {
-        request: {
-            query: fetchUserWithGroupTopicsQueryString,
-            variables: {}
-        },
-        result: {
-            data: {
-                user: {
-                    __typename: TYPENAME.USER,
-                    groups: [
-                        {
-                            __typename: TYPENAME.GROUP,
-                            description: 'g1-desc',
-                            id: '1',
-                            name: 'group1',
-                            topics: mockTopics
-                        },
-                        {
-                            __typename: TYPENAME.GROUP,
-                            description: 'g2-desc',
-                            id: '2',
-                            name: 'group2',
-                            topics: mockTopics
-                        }
-                    ],
-                    topics: []
-                }
-            }
-        }
-    }
+    query: fetchUserQueryString
 };
+export const fetchUserWithoutGroupsMocks: StandardMocks<FetchUserQuery> = assembleMocks(
+    fetchUserWithoutGroupsParams
+);
+
+/**
+ * fetchUserWithGroupTopics
+ */
+const fetchUserWithGroupTopics: MockParameters<FetchUserWithGroupTopicsQueryString> = {
+    data: {
+        user: {
+            __typename: TYPENAME.USER,
+            groups: [
+                {
+                    __typename: TYPENAME.GROUP,
+                    description: 'g1-desc',
+                    id: '1',
+                    name: 'group1',
+                    topics: mockTopics
+                },
+                {
+                    __typename: TYPENAME.GROUP,
+                    description: 'g2-desc',
+                    id: '2',
+                    name: 'group2',
+                    topics: mockTopics
+                }
+            ],
+            topics: []
+        }
+    },
+    query: fetchUserWithGroupTopicsQueryString
+};
+export const fetchUserWithGroupTopicsMocks: StandardMocks<FetchUserWithGroupTopicsQueryString> = assembleMocks(
+    fetchUserWithGroupTopics
+);
