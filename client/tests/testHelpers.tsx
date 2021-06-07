@@ -93,13 +93,14 @@ export const testFormSnapshots = (options: TestFormOptions, mocks: MockedRespons
     });
 };
 
-type MockParameters = {
-    data: any;
+export type MockParameters<DataType, VariablesType = never> = {
+    data: DataType;
     query: DocumentNode;
-    variables?: any;
+    spyOnNewData?: boolean;
+    variables?: VariablesType;
 };
 
-export const assembleMocks = ({ data, query, variables = {} }: MockParameters) => {
+export const assembleMocks = ({ data, query, spyOnNewData = false, variables = {} }: MockParameters<any, any>) => {
     const name = print(query).split(' ')[1].split('(')[0];
 
     return {
@@ -120,6 +121,7 @@ export const assembleMocks = ({ data, query, variables = {} }: MockParameters) =
             }
         },
         success: {
+            newData: spyOnNewData ? jest.fn(() => ({ data })) : undefined,
             request: {
                 query,
                 variables

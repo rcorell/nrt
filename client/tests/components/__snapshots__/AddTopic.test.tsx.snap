@@ -10,7 +10,7 @@ exports[`AddTopic failure createTopic: network error 1`] = `
     </h1>
     <div>
       Error: $
-      {"graphQLErrors":[],"networkError":{},"message":"createTopic: network error"}
+      {"graphQLErrors":[],"networkError":{},"message":"CreateTopicMutation: network error"}
     </div>
     <form
       class="sc-gsDJrp idIFaR"

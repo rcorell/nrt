@@ -3,7 +3,7 @@ import { FetchGroupsQuery, FetchGroupsQuery_groups } from 'src/api/__generated__
 import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
 import { createGroupMutationString, fetchGroupsQueryString, joinGroupMutationString } from 'src/api/api';
 import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
-import { assembleMocks } from 'tests/testHelpers';
+import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
 export const mockGroups: FetchGroupsQuery_groups[] = [
     {
@@ -23,45 +23,43 @@ export const mockGroups: FetchGroupsQuery_groups[] = [
 /*
  * fetchGroups
  */
-const fetchGroupsSuccessData: FetchGroupsQuery = {
-    groups: mockGroups
-};
-export const fetchGroupsMocks: StandardMocks<JoinGroupMutation> = assembleMocks({
-    data: fetchGroupsSuccessData,
+const fetchGroupsParams: MockParameters<FetchGroupsQuery> = {
+    data: {
+        groups: mockGroups
+    },
     query: fetchGroupsQueryString
-});
+};
+export const fetchGroupsMocks: StandardMocks<FetchGroupsQuery> = assembleMocks(fetchGroupsParams);
 
 /*
  * joinGroups
  */
-const joinGroupsVariables: JoinGroupMutationVariables = {
-    groupId: Number(mockGroups[0].id)
-};
-const joinGroupsSuccessData: JoinGroupMutation = {
-    joinGroup: Number(mockGroups[0].id)
-};
-export const joinGroupMocks: StandardMocks<JoinGroupMutation> = assembleMocks({
-    data: joinGroupsSuccessData,
+const joinGroupParams: MockParameters<JoinGroupMutation, JoinGroupMutationVariables> = {
+    data: {
+        joinGroup: Number(mockGroups[0].id)
+    },
     query: joinGroupMutationString,
-    variables: joinGroupsVariables
-});
+    variables: {
+        groupId: Number(mockGroups[0].id)
+    }
+};
+export const joinGroupMocks: StandardMocks<JoinGroupMutation> = assembleMocks(joinGroupParams);
 
 /*
  * createGroup
  */
-const createGroupVariables: CreateGroupMutationVariables = {
-    description: VALID.GROUP.DESCRIPTION,
-    name: VALID.GROUP.NAME
-};
-const createGroupSuccessData: CreateGroupMutation = {
-    createGroup: {
-        __typename: TYPENAME.GROUP,
-        createdAt: 'time',
-        id: mockGroups[0].id
+const createGroupParameters: MockParameters<CreateGroupMutation, CreateGroupMutationVariables> = {
+    data: {
+        createGroup: {
+            __typename: TYPENAME.GROUP,
+            createdAt: 'time',
+            id: mockGroups[0].id
+        }
+    },
+    query: createGroupMutationString,
+    variables: {
+        description: VALID.GROUP.DESCRIPTION,
+        name: VALID.GROUP.NAME
     }
 };
-export const createGroupMocks: StandardMocks<CreateGroupMutation> = assembleMocks({
-    data: createGroupSuccessData,
-    query: createGroupMutationString,
-    variables: createGroupVariables
-});
+export const createGroupMocks: StandardMocks<CreateGroupMutation> = assembleMocks(createGroupParameters);

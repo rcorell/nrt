@@ -4,7 +4,7 @@ exports[`Topics snapshots fetchTopics: network error 1`] = `
 <div>
   <div>
     Error: 
-    {"graphQLErrors":[],"networkError":{},"message":"fetchTopics: network error"}
+    {"graphQLErrors":[],"networkError":{},"message":"FetchTopicsQuery: network error"}
   </div>
 </div>
 `;

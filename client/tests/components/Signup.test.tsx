@@ -105,7 +105,7 @@ describe('Signup', () => {
 
             expect(setItemMock).not.toHaveBeenCalled();
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/signup: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/SignupMutation: network error/)).toBeInTheDocument();
         });
     });
 });

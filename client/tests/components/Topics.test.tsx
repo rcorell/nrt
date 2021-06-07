@@ -6,6 +6,8 @@ import { fetchTopicMocks } from 'tests/mocks/topicMocks';
 import { renderComponent } from 'tests/testHelpers';
 
 describe('Topics', () => {
+    beforeEach(jest.resetAllMocks);
+
     describe('snapshots', () => {
         it('loading', () => {
             expect(renderComponent(Topics).container).toMatchSnapshot();
@@ -16,8 +18,8 @@ describe('Topics', () => {
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(screen.queryByText('test-description')).toBeInTheDocument();
-            expect(screen.queryByText('test-title')).toBeInTheDocument();
+            expect(screen.queryByText('t2-desc')).toBeInTheDocument();
+            expect(screen.queryByText('t2-title')).toBeInTheDocument();
         });
 
         it('fetchTopics: network error', async () => {
@@ -25,6 +27,7 @@ describe('Topics', () => {
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
+            expect(screen.queryByText(/FetchTopicsQuery: network error/)).toBeInTheDocument();
             expect(container).toMatchSnapshot();
         });
     });

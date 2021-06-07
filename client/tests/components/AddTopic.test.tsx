@@ -62,8 +62,7 @@ describe('AddTopic', () => {
             ]);
 
             expect(container).toMatchSnapshot();
-            expect(createTopicMocks.networkError.newData).toHaveBeenCalledTimes(1);
-            expect(screen.queryByText(/createTopic: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateTopicMutation: network error/)).toBeInTheDocument();
         });
     });
 });

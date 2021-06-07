@@ -77,7 +77,7 @@ describe('Login', () => {
 
             expect(localStorage.getItem('token')).toEqual('');
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/login: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/LoginMutation: network error/)).toBeInTheDocument();
         });
     });
 });
