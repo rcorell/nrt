@@ -17,10 +17,12 @@ export const Signup: React.FC = () => {
     const [password, setPassword] = useState('');
 
     const [signup, { error }] = useMutation<SignupMutation, SignupMutationVariables>(signupMutation, {
-        onCompleted: ({ signup }) => {
-            localStorage.setItem('token', signup!.token!);
-            setAuthenticated(true);
-            navigate('/');
+        onCompleted: (result) => {
+            if (result?.signup) {
+                localStorage.setItem('token', result.signup.token!);
+                setAuthenticated(true);
+                navigate('/');
+            }
         },
         onError: () => {
             // RTL bug

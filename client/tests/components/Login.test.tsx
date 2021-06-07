@@ -20,6 +20,13 @@ describe('Login', () => {
         loginContainer = renderComponent(Login).container;
     };
 
+    const submitForm = async () => {
+        setFields(VALID.EMAIL, VALID.PASSWORD);
+        const submitButton = screen.getByRole('button');
+        fireEvent.click(submitButton);
+        await oneTick();
+    };
+
     describe('snapshots', () => {
         beforeEach(() => {
             renderLogin();
@@ -54,10 +61,7 @@ describe('Login', () => {
             setLastNavigationPath('initial path');
 
             renderComponent(Login, [loginMocks.success]);
-            setFields(VALID.EMAIL, VALID.PASSWORD);
-            const submitButton = screen.getByRole('button');
-            fireEvent.click(submitButton);
-            await oneTick();
+            await submitForm();
 
             expect(localStorage.getItem('token')).toEqual('tokenValue');
             expect(lastNavigationPath).toEqual('/');
@@ -65,19 +69,28 @@ describe('Login', () => {
     });
 
     describe('failure', () => {
-        it('failed login: should display error message', async () => {
+        it('login: network error', async () => {
             localStorage.setItem('token', '');
             setLastNavigationPath('initial path');
 
             renderComponent(Login, [loginMocks.networkError]);
-            setFields(VALID.EMAIL, VALID.PASSWORD);
-            const submitButton = screen.getByRole('button');
-            fireEvent.click(submitButton);
-            await oneTick();
+            await submitForm();
 
             expect(localStorage.getItem('token')).toEqual('');
             expect(lastNavigationPath).toEqual('initial path');
             expect(screen.queryByText(/LoginMutation: network error/)).toBeInTheDocument();
+        });
+
+        it('login: GraphQL error', async () => {
+            localStorage.setItem('token', '');
+            setLastNavigationPath('initial path');
+
+            renderComponent(Login, [loginMocks.graphQLError]);
+            await submitForm();
+
+            expect(localStorage.getItem('token')).toEqual('');
+            expect(lastNavigationPath).toEqual('initial path');
+            expect(screen.queryByText(/LoginMutation: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

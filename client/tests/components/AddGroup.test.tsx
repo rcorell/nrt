@@ -45,5 +45,13 @@ describe('AddGroup', () => {
 
             expect(screen.queryByText(/CreateGroupMutation: network error/)).toBeInTheDocument();
         });
+
+        it('createGroup: GraphQL error', async () => {
+            renderComponent(AddGroup, [createGroupMocks.graphQLError]);
+
+            await submitAddGroup();
+
+            expect(screen.queryByText(/CreateGroupMutation: GraphQL error/)).toBeInTheDocument();
+        });
     });
 });

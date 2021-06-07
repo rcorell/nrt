@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Topics snapshots fetchTopics: GraphQL error 1`] = `
+<div>
+  <div>
+    Error: 
+    {"graphQLErrors":[{"message":"FetchTopicsQuery: GraphQL error"}],"networkError":null,"message":"FetchTopicsQuery: GraphQL error"}
+  </div>
+</div>
+`;
+
 exports[`Topics snapshots fetchTopics: network error 1`] = `
 <div>
   <div>

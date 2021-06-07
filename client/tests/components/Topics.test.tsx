@@ -30,5 +30,14 @@ describe('Topics', () => {
             expect(screen.queryByText(/FetchTopicsQuery: network error/)).toBeInTheDocument();
             expect(container).toMatchSnapshot();
         });
+
+        it('fetchTopics: GraphQL error', async () => {
+            const { container } = renderComponent(Topics, [fetchTopicMocks.graphQLError]);
+
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
+
+            expect(screen.queryByText(/FetchTopicsQuery: GraphQL error/)).toBeInTheDocument();
+            expect(container).toMatchSnapshot();
+        });
     });
 });

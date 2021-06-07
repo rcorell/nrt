@@ -25,6 +25,13 @@ describe('Signup', () => {
         signupContainer = renderComponent(Signup).container;
     };
 
+    const submitForm = async () => {
+        setFields(VALID.EMAIL, VALID.NAME, VALID.PASSWORD);
+        const submitButton = screen.getByRole('button');
+        fireEvent.click(submitButton);
+        await oneTick();
+    };
+
     beforeAll(() => {
         setItemMock = jest.spyOn(window.localStorage.__proto__, 'setItem');
     });
@@ -80,11 +87,7 @@ describe('Signup', () => {
             });
 
             renderComponent(Signup, [signupMocks.success]);
-            setFields(VALID.EMAIL, VALID.NAME, VALID.PASSWORD);
-            const submitButton = screen.getByRole('button');
-            fireEvent.click(submitButton);
-            await oneTick();
-            await oneTick();
+            await submitForm();
 
             expect(setItemMock).toHaveBeenCalledExactlyOnceWith('token', 'signupTokenValue');
             expect(setAuthenticatedMock).toHaveBeenCalledExactlyOnceWith(true);
@@ -98,14 +101,22 @@ describe('Signup', () => {
             setLastNavigationPath('initial path');
 
             renderComponent(Signup, [signupMocks.networkError]);
-            setFields(VALID.EMAIL, VALID.NAME, VALID.PASSWORD);
-            const submitButton = screen.getByRole('button');
-            fireEvent.click(submitButton);
-            await oneTick();
+            await submitForm();
 
             expect(setItemMock).not.toHaveBeenCalled();
             expect(lastNavigationPath).toEqual('initial path');
             expect(screen.queryByText(/SignupMutation: network error/)).toBeInTheDocument();
+        });
+
+        it('signup: GraphQL error', async () => {
+            setLastNavigationPath('initial path');
+
+            renderComponent(Signup, [signupMocks.graphQLError]);
+            await submitForm();
+
+            expect(setItemMock).not.toHaveBeenCalled();
+            expect(lastNavigationPath).toEqual('initial path');
+            expect(screen.queryByText(/SignupMutation: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

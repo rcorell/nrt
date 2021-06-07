@@ -64,5 +64,15 @@ describe('AddTopic', () => {
             expect(container).toMatchSnapshot();
             expect(screen.queryByText(/CreateTopicMutation: network error/)).toBeInTheDocument();
         });
+
+        it('createTopic: GraphQL error', async () => {
+            const container = await submitAddTopic([
+                fetchUserWithGroupsMocks.success,
+                createTopicMocks.graphQLError
+            ]);
+
+            expect(container).toMatchSnapshot();
+            expect(screen.queryByText(/CreateTopicMutation: GraphQL error/)).toBeInTheDocument();
+        });
     });
 });

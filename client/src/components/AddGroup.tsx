@@ -15,9 +15,7 @@ export const AddGroup: React.FC = () => {
     const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
         createGroupMutation,
         {
-            onCompleted: ({ createGroup }) => {
-                createGroup.id += 0;
-            },
+            onCompleted: () => {},
             onError: (error) => {
                 setGraphQLError(error);
             },
