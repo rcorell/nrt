@@ -14,7 +14,7 @@ describe('Groups', () => {
 
     describe('success', () => {
         it('displays groups and supports joining a group', async () => {
-            const { container } = renderComponent(Groups, [
+            renderComponent(Groups, [
                 fetchUserWithoutGroupsMocks.success,
                 fetchGroupsMocks.success,
                 joinGroupMocks.success,
