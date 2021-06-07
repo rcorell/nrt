@@ -32,13 +32,13 @@ describe('API', () => {
             expect(authHeader('')).toEqual('');
         });
 
-        it('returns bearer string for empty string', () => {
+        it('returns bearer string for valid string', () => {
             expect(authHeader('foo')).toEqual('Bearer foo');
         });
     });
 
     describe('isAuthenticated()', () => {
-        it('return boolean cast of localstorage token', () => {
+        it('return boolean cast of localStorage token', () => {
             getItemMock.mockImplementation(() => 'token');
 
             const result = isAuthenticated();
