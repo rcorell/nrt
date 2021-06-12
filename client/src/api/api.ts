@@ -129,7 +129,7 @@ export const createTopicMutation = gql`
 `;
 
 export const joinGroupMutation = gql`
-    mutation JoinGroupMutation($groupId: Int!) {
+    mutation JoinGroupMutation($groupId: ID!) {
         joinGroup(groupId: $groupId)
     }
 `;

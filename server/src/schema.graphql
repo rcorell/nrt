@@ -1,14 +1,14 @@
 type Query {
 	groups: [Group!]!
 	ready: String!
-	topics(groupIds: [Int]): [Topic!]!
+	topics(groupIds: [ID]): [Topic!]!
 	user: User!
 }
 
 type Mutation {
 	createGroup(name: String!, description: String): Group!
 	createTopic(groupId: ID!, title: String!, description: String): Topic!
-	joinGroup(groupId: Int!): Int
+	joinGroup(groupId: ID!): ID
 	signup(email: String!, password: String!, name: String!): AuthPayload
 	login(email: String!, password: String!): AuthPayload
 }

@@ -8,9 +8,9 @@
 // ====================================================
 
 export interface JoinGroupMutation {
-  joinGroup: number | null;
+  joinGroup: string | null;
 }
 
 export interface JoinGroupMutationVariables {
-  groupId: number;
+  groupId: string;
 }

@@ -1,3 +1,4 @@
+import { Prisma, PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 import * as jsonwebtoken from 'jsonwebtoken';
 
@@ -59,16 +60,24 @@ export const createGroup = async (_parent, args, context) => {
 };
 
 export const joinGroup = async (_parent, args, context) => {
-    await context.prisma.user.update({
-        data: {
-            groups: {
-                connect: {
-                    id: args.groupId
+    const prisma: PrismaClient = context.prisma;
+
+    const data = {
+        groups: {
+            connect: [
+                {
+                    id: Number(args.groupId)
                 }
-            }
-        },
+            ]
+        }
+    };
+
+    const updateInfo: Prisma.UserUpdateArgs = {
+        data,
         where: { id: context.userId }
-    });
+    };
+
+    await prisma.user.update(updateInfo);
 
     return args.groupId;
 };

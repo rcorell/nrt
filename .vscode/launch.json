@@ -4,6 +4,7 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
+
 		{
 			"type": "node",
 			"name": "Client tests",
@@ -24,17 +25,20 @@
 			"protocol": "inspector",
 			"env": { "CI": "true" }
 		},
-		{
-			"type": "pwa-node",
-			"request": "launch",
-			"name": "Server",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/server/dist/index.js",
-			"outFiles": [
-				"${workspaceFolder}/**/*.js"
-			]
-		}
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "NRT Server",
+            "program": "${workspaceFolder}/server/src/index.ts",
+            "env": {
+                "LOCAL_DEV": "true"
+            },
+            "envFile": "${workspaceFolder}/server/.env",
+            "outFiles": [
+                "${workspaceFolder}/server/dist/**/*.js"
+            ],
+            "preLaunchTask": "tsc: build - server/tsconfig.json",
+			"sourceMaps": true
+        },
 	]
 }

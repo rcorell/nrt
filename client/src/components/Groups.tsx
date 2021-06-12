@@ -61,7 +61,7 @@ export const Groups: React.FC = () => {
             join: userGroupIds.includes(group.id) ? (
                 'Joined'
             ) : (
-                <button onClick={() => joinGroup({ variables: { groupId: Number(group.id) } })}>Join!</button>
+                <button onClick={() => joinGroup({ variables: { groupId: group.id } })}>Join!</button>
             )
         };
     });

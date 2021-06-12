@@ -36,11 +36,11 @@ export const fetchGroupsMocks: StandardMocks<FetchGroupsQuery> = assembleMocks(f
  */
 const joinGroupParams: MockParameters<JoinGroupMutation, JoinGroupMutationVariables> = {
     data: {
-        joinGroup: Number(mockGroups[0].id)
+        joinGroup: mockGroups[0].id
     },
     query: joinGroupMutation,
     variables: {
-        groupId: Number(mockGroups[0].id)
+        groupId: mockGroups[0].id
     }
 };
 export const joinGroupMocks: StandardMocks<JoinGroupMutation> = assembleMocks(joinGroupParams);
