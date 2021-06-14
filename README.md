@@ -71,6 +71,8 @@
 ### Update client after migration
 1. npx prisma generate
 
+### Create new db from schema
+1. npx prisma db push
 
 
 ## Add endpoint and query

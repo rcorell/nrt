@@ -67,7 +67,7 @@ export const joinGroup = async (_parent, args, context) => {
             groups: {
                 connect: [
                     {
-                        id: args.groupId
+                        id: Number(args.groupId)
                     }
                 ]
             }
