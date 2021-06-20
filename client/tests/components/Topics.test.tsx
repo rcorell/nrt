@@ -6,8 +6,6 @@ import { fetchTopicMocks } from 'tests/mocks/topicMocks';
 import { renderComponent } from 'tests/testHelpers';
 
 describe('Topics', () => {
-    beforeEach(jest.resetAllMocks);
-
     describe('snapshots', () => {
         it('loading', () => {
             expect(renderComponent(Topics).container).toMatchSnapshot();

@@ -3,18 +3,15 @@ import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/r
 import userEvent from '@testing-library/user-event';
 
 import { AddTopic } from 'src/components/AddTopic';
+import { Path } from 'src/components/Routes';
 import { LOADING_TEXT } from 'src/components/shared';
 import { ADD_TOPIC, INVALID, VALID } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
 import { createTopicMocks } from 'tests/mocks/topicMocks';
-import { fetchUserWithGroupsMocks } from 'tests/mocks/userMocks';
-import { oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
+import { fetchUserWithGroupsMocks, fetchUserWithoutGroupsMocks } from 'tests/mocks/userMocks';
+import { lastNavigationPath, oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
 
 describe('AddTopic', () => {
-    beforeEach(() => {
-        jest.resetAllMocks();
-    });
-
     testFormSnapshots(
         {
             component: AddTopic,
@@ -46,11 +43,25 @@ describe('AddTopic', () => {
     };
 
     describe('success', () => {
-        it('should create a topic', async () => {
-            const container = await submitAddTopic([fetchUserWithGroupsMocks.success, createTopicMocks.success]);
+        describe('with groups', () => {
+            it('should create a topic and navigate to the topics page', async () => {
+                const container = await submitAddTopic([
+                    fetchUserWithGroupsMocks.success,
+                    createTopicMocks.success
+                ]);
 
-            expect(container).toMatchSnapshot();
-            expect(createTopicMocks.success.newData).toHaveBeenCalledTimes(1);
+                expect(container).toMatchSnapshot();
+                expect(createTopicMocks.success.newData).toHaveBeenCalledTimes(1);
+                expect(lastNavigationPath).toEqual(Path.TOPICS);
+            });
+        });
+
+        describe('without groups', () => {
+            it('should show a helpful message', async () => {
+                const { container } = renderComponent(AddTopic, [fetchUserWithoutGroupsMocks.success]);
+
+                expect(container).toMatchSnapshot();
+            });
         });
     });
 

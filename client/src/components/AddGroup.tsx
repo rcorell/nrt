@@ -1,9 +1,11 @@
 import { ApolloError, useMutation } from '@apollo/client';
+import { navigate } from 'hookrouter';
 import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
 import { createGroupMutation } from 'src/api/api';
+import { Path } from 'src/components/Routes';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
 
@@ -15,7 +17,9 @@ export const AddGroup: React.FC = () => {
     const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
         createGroupMutation,
         {
-            onCompleted: () => {},
+            onCompleted: () => {
+                navigate(Path.GROUPS);
+            },
             onError: (error) => {
                 setGraphQLError(error);
             },

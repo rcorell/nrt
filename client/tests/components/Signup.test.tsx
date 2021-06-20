@@ -5,10 +5,15 @@ import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { Signup } from 'src/components/Signup';
 import { INVALID, VALID } from 'tests/fixtures';
 import { signupMocks } from 'tests/mocks/signupMocks';
-import { lastNavigationPath, oneTick, renderComponent, setLastNavigationPath } from 'tests/testHelpers';
+import {
+    lastNavigationPath,
+    localStorageMocks,
+    oneTick,
+    renderComponent,
+    setLastNavigationPath
+} from 'tests/testHelpers';
 
 describe('Signup', () => {
-    let setItemMock: jest.SpyInstance;
     let signupContainer: HTMLElement;
 
     const setFields = (email: string, name: string, password: string) => {
@@ -31,18 +36,6 @@ describe('Signup', () => {
         fireEvent.click(submitButton);
         await oneTick();
     };
-
-    beforeAll(() => {
-        setItemMock = jest.spyOn(window.localStorage.__proto__, 'setItem');
-    });
-
-    afterEach(() => {
-        jest.resetAllMocks();
-    });
-
-    afterAll(() => {
-        jest.restoreAllMocks();
-    });
 
     describe('snapshots', () => {
         beforeEach(() => {
@@ -89,10 +82,9 @@ describe('Signup', () => {
             renderComponent(Signup, [signupMocks.success]);
             await submitForm();
 
-            expect(setItemMock).toHaveBeenCalledExactlyOnceWith('token', 'signupTokenValue');
+            expect(localStorageMocks.setItemMock).toHaveBeenCalledExactlyOnceWith('token', 'signupTokenValue');
             expect(setAuthenticatedMock).toHaveBeenCalledExactlyOnceWith(true);
             expect(lastNavigationPath).toEqual('/');
-            jest.restoreAllMocks();
         });
     });
 
@@ -103,7 +95,7 @@ describe('Signup', () => {
             renderComponent(Signup, [signupMocks.networkError]);
             await submitForm();
 
-            expect(setItemMock).not.toHaveBeenCalled();
+            expect(localStorageMocks.setItemMock).not.toHaveBeenCalled();
             expect(lastNavigationPath).toEqual('initial path');
             expect(screen.queryByText(/SignupMutation: network error/)).toBeInTheDocument();
         });
@@ -114,7 +106,7 @@ describe('Signup', () => {
             renderComponent(Signup, [signupMocks.graphQLError]);
             await submitForm();
 
-            expect(setItemMock).not.toHaveBeenCalled();
+            expect(localStorageMocks.setItemMock).not.toHaveBeenCalled();
             expect(lastNavigationPath).toEqual('initial path');
             expect(screen.queryByText(/SignupMutation: GraphQL error/)).toBeInTheDocument();
         });

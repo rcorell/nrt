@@ -1,9 +1,10 @@
 import { fireEvent, screen } from '@testing-library/react';
 
 import { AddGroup } from 'src/components/AddGroup';
+import { Path } from 'src/components/Routes';
 import { ADD_GROUP, INVALID, VALID } from 'tests/fixtures';
 import { createGroupMocks } from 'tests/mocks/groupMocks';
-import { oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
+import { lastNavigationPath, oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
 
 describe('AddGroup', () => {
     testFormSnapshots({
@@ -28,12 +29,13 @@ describe('AddGroup', () => {
     };
 
     describe('success', () => {
-        it('should create a group', async () => {
+        it('should create a group and navigate to the groups page', async () => {
             const { container } = renderComponent(AddGroup, [createGroupMocks.success]);
 
             await submitAddGroup();
 
             expect(container).toMatchSnapshot();
+            expect(lastNavigationPath).toEqual(Path.GROUPS);
         });
     });
 

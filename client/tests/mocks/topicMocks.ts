@@ -21,8 +21,6 @@ export const mockTopics: FetchTopicsQuery_topics[] = [
     }
 ];
 
-// Fiure out newData!
-
 /*
  * createTopic
  */

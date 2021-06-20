@@ -59,6 +59,7 @@ export const fetchTopicsQuery = gql`
 export const fetchUserQuery = gql`
     query FetchUserQuery {
         user {
+            id
             groups {
                 id
                 description
@@ -74,8 +75,9 @@ export const fetchUserQuery = gql`
 `;
 
 export const fetchUserWithGroupTopicsQuery = gql`
-    query FetchUserWithGroupTopicsQueryString {
+    query FetchUserWithGroupTopicsQuery {
         user {
+            id
             groups {
                 id
                 description
@@ -85,11 +87,6 @@ export const fetchUserWithGroupTopicsQuery = gql`
                     title
                     description
                 }
-            }
-            topics {
-                id
-                description
-                title
             }
         }
     }

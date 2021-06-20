@@ -1,4 +1,5 @@
 module.exports = {
+    clearMocks: true,
     collectCoverageFrom: ['<rootDir>/src/**/*.{js,jsx,ts,tsx}', '!<rootDir>/src/**/*.d.ts'],
     coverageThreshold: {
         global: {

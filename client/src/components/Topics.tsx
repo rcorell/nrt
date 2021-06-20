@@ -16,7 +16,7 @@ const COLUMN_DEFINITIONS = [
 export const Topics: React.FC = () => {
     setBrowserTitle('Topics');
 
-    const { data, error, loading } = useQuery<FetchTopicsQuery>(fetchTopicsQuery);
+    const { data, error, loading } = useQuery<FetchTopicsQuery>(fetchTopicsQuery, { fetchPolicy: 'network-only' });
 
     if (loading) {
         return <div>{LOADING_TEXT}</div>;

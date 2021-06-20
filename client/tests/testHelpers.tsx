@@ -1,5 +1,6 @@
-import { DocumentNode } from '@apollo/client';
-import { MockedProvider, MockedResponse } from '@apollo/client/testing';
+import { ApolloLink, DocumentNode } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { MockedProvider, MockedResponse, MockLink } from '@apollo/client/testing';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { GraphQLError } from 'graphql';
 import { print } from 'graphql/language/printer';
@@ -24,10 +25,49 @@ export const oneTick = async () => {
     });
 };
 
+export const localStorageMocks = {
+    getItemMock: jest.spyOn(window.localStorage.__proto__, 'getItem'),
+    setItemMock: jest.spyOn(window.localStorage.__proto__, 'setItem')
+};
+
 export const renderComponent = (component: React.FC, mocks: MockedResponse[] = []) => {
+    const reportErrors = !mocks.some((mock: any) => mock?.error || mock?.result?.errors);
+
+    const cleanedMocks = mocks.map((mock) => {
+        const query = JSON.parse(JSON.stringify(mock.request.query.definitions[0]));
+        return {
+            error: mock.error,
+            newData: mock?.newData?.toString(),
+            request: {
+                query: query.name.value,
+                variables: mock.request.variables
+            },
+            result: mock.result
+        };
+    });
+    const mockLink = new MockLink(mocks);
+    const errorLoggingLink = onError(({ graphQLErrors, networkError }) => {
+        if (!reportErrors) {
+            return;
+        }
+
+        console.log('MOCKS:', JSON.stringify(cleanedMocks, null, 4));
+
+        if (graphQLErrors)
+            graphQLErrors.map(({ message, locations, path }) =>
+                console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+            );
+
+        if (networkError) {
+            console.log(`[Network error]: ${networkError}`);
+        }
+    });
+    const link = ApolloLink.from([errorLoggingLink, mockLink]);
+
     return render(
         <GlobalContextProvider>
             <MockedProvider
+                link={link}
                 mocks={mocks}
                 addTypename={false}
                 defaultOptions={{

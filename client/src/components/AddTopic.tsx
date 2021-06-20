@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from '@apollo/client';
+import { navigate } from 'hookrouter';
 import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
 import { createTopicMutation, fetchUserQuery } from 'src/api/api';
+import { Path } from 'src/components/Routes';
 import { LOADING_TEXT } from 'src/components/shared';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
@@ -14,11 +16,14 @@ export const AddTopic: React.FC = () => {
     const [groupId, setGroupId] = useState('');
     const [title, setTitle] = useState('');
 
-    const userQuery = useQuery<FetchUserQuery>(fetchUserQuery);
+    const userQuery = useQuery<FetchUserQuery>(fetchUserQuery, { fetchPolicy: 'network-only' });
 
     const [createTopic, { error }] = useMutation<CreateTopicMutation, CreateTopicMutationVariables>(
         createTopicMutation,
         {
+            onCompleted: () => {
+                navigate(Path.TOPICS);
+            },
             onError: () => {
                 // RTL bug
             },
@@ -50,11 +55,19 @@ export const AddTopic: React.FC = () => {
         return <div>{LOADING_TEXT}</div>;
     }
 
+    if (userQuery.data.user.groups.length === 0) {
+        return <div>You must join a group to add topics.</div>;
+    }
+
     const groupOptions = userQuery.data.user.groups.map((group) => (
         <option key={group!.id} value={group!.id}>
             {group!.name}
         </option>
     ));
+
+    if (groupId === '') {
+        setGroupId(userQuery.data.user.groups[0]!.id);
+    }
 
     return (
         <FormContainer>
@@ -66,8 +79,11 @@ export const AddTopic: React.FC = () => {
                     <Form.Control
                         as="select"
                         aria-labelledby="groupLabel"
+                        defaultValue={groupId}
                         id="group"
-                        onChange={(e) => setGroupId(e.target.value)}
+                        onChange={(e) => {
+                            setGroupId(e.target.value);
+                        }}
                         size="lg"
                     >
                         {groupOptions}

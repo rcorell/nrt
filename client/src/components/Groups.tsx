@@ -23,7 +23,9 @@ export const Groups: React.FC = () => {
     setBrowserTitle('Groups');
 
     const userQuery = useQuery<FetchUserQuery>(fetchUserQuery);
-    const allGroups = useQuery<FetchGroupsQuery>(fetchGroupsQuery);
+    const allGroups = useQuery<FetchGroupsQuery>(fetchGroupsQuery, {
+        fetchPolicy: 'network-only'
+    });
 
     const [joinGroup, { loading: joinGroupLoading, error: joinGroupError }] = useMutation<
         JoinGroupMutation,

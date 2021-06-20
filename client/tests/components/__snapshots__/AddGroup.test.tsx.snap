@@ -173,7 +173,7 @@ exports[`AddGroup standard snapshots valid parameters 1`] = `
 </div>
 `;
 
-exports[`AddGroup success should create a group 1`] = `
+exports[`AddGroup success should create a group and navigate to the groups page 1`] = `
 <div>
   <div
     class="sc-bdvvaa hMSAon"

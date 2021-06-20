@@ -23,6 +23,7 @@ export interface FetchUserQuery_user_topics {
 
 export interface FetchUserQuery_user {
   __typename: "User";
+  id: string;
   groups: (FetchUserQuery_user_groups | null)[];
   topics: (FetchUserQuery_user_topics | null)[];
 }

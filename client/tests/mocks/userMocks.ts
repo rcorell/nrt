@@ -14,6 +14,7 @@ const fetchUserWithGroupsParams: MockParameters<FetchUserQuery> = {
         user: {
             __typename: TYPENAME.USER,
             groups: mockGroups,
+            id: '100',
             topics: []
         }
     },
@@ -29,6 +30,7 @@ const fetchUserWithoutGroupsParams: MockParameters<FetchUserQuery> = {
         user: {
             __typename: TYPENAME.USER,
             groups: [],
+            id: '100',
             topics: []
         }
     },
@@ -61,7 +63,7 @@ const fetchUserWithGroupTopics: MockParameters<FetchUserWithGroupTopicsQueryStri
                     topics: mockTopics
                 }
             ],
-            topics: []
+            id: '100'
         }
     },
     query: fetchUserWithGroupTopicsQuery
