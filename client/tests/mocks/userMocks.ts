@@ -1,5 +1,5 @@
 import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
-import { FetchUserWithGroupTopicsQueryString } from 'src/api/__generated__/FetchUserWithGroupTopicsQueryString';
+import { FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/FetchUserWithGroupTopicsQuery';
 import { fetchUserQuery, fetchUserWithGroupTopicsQuery } from 'src/api/api';
 import { StandardMocks, TYPENAME } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
@@ -43,7 +43,7 @@ export const fetchUserWithoutGroupsMocks: StandardMocks<FetchUserQuery> = assemb
 /**
  * fetchUserWithGroupTopics
  */
-const fetchUserWithGroupTopics: MockParameters<FetchUserWithGroupTopicsQueryString> = {
+const fetchUserWithGroupTopics: MockParameters<FetchUserWithGroupTopicsQuery> = {
     data: {
         user: {
             __typename: TYPENAME.USER,
@@ -68,6 +68,6 @@ const fetchUserWithGroupTopics: MockParameters<FetchUserWithGroupTopicsQueryStri
     },
     query: fetchUserWithGroupTopicsQuery
 };
-export const fetchUserWithGroupTopicsMocks: StandardMocks<FetchUserWithGroupTopicsQueryString> = assembleMocks(
+export const fetchUserWithGroupTopicsMocks: StandardMocks<FetchUserWithGroupTopicsQuery> = assembleMocks(
     fetchUserWithGroupTopics
 );

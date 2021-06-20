@@ -52,6 +52,10 @@ export const fetchTopicsQuery = gql`
             id
             title
             description
+            group {
+                id
+                name
+            }
         }
     }
 `;

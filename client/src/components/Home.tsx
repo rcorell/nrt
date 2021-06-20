@@ -2,16 +2,16 @@ import { useQuery } from '@apollo/client';
 import React from 'react';
 
 import {
-    FetchUserWithGroupTopicsQueryString,
-    FetchUserWithGroupTopicsQueryString_user_groups
-} from 'src/api/__generated__/FetchUserWithGroupTopicsQueryString';
+    FetchUserWithGroupTopicsQuery,
+    FetchUserWithGroupTopicsQuery_user_groups
+} from 'src/api/__generated__/FetchUserWithGroupTopicsQuery';
 import { fetchUserWithGroupTopicsQuery } from 'src/api/api';
 import { LOADING_TEXT } from 'src/components/shared';
 import { HomePage } from 'src/styles/home';
 import { setBrowserTitle } from 'src/utils';
 
 export const Home: React.FC = () => {
-    const query = useQuery<FetchUserWithGroupTopicsQueryString>(fetchUserWithGroupTopicsQuery);
+    const query = useQuery<FetchUserWithGroupTopicsQuery>(fetchUserWithGroupTopicsQuery);
 
     setBrowserTitle('Home');
 
@@ -22,7 +22,7 @@ export const Home: React.FC = () => {
         return <div>{JSON.stringify(query.error)}</div>;
     }
 
-    const groupTopics = (group: FetchUserWithGroupTopicsQueryString_user_groups | null) => {
+    const groupTopics = (group: FetchUserWithGroupTopicsQuery_user_groups | null) => {
         return (
             <div key={group!.id}>
                 <h2>{group!.name}</h2>

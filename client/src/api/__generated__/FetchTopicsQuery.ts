@@ -7,11 +7,18 @@
 // GraphQL query operation: FetchTopicsQuery
 // ====================================================
 
+export interface FetchTopicsQuery_topics_group {
+  __typename: "Group";
+  id: string;
+  name: string;
+}
+
 export interface FetchTopicsQuery_topics {
   __typename: "Topic";
   id: string;
   title: string;
   description: string;
+  group: FetchTopicsQuery_topics_group;
 }
 
 export interface FetchTopicsQuery {

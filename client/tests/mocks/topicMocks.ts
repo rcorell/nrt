@@ -10,12 +10,14 @@ export const mockTopics: FetchTopicsQuery_topics[] = [
     {
         __typename: TYPENAME.TOPIC,
         description: 't1-desc',
+        group: { __typename: TYPENAME.GROUP, id: '200', name: 'group1' },
         id: '100',
         title: 't1-title'
     },
     {
         __typename: TYPENAME.TOPIC,
         description: 't2-desc',
+        group: { __typename: TYPENAME.GROUP, id: '201', name: 'group2' },
         id: '101',
         title: 't2-title'
     }

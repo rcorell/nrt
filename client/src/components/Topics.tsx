@@ -10,7 +10,8 @@ import { setBrowserTitle } from 'src/utils';
 
 const COLUMN_DEFINITIONS = [
     { field: 'title', title: 'Title' },
-    { field: 'description', title: 'Description' }
+    { field: 'description', title: 'Description' },
+    { field: 'group', title: 'Group' }
 ];
 
 export const Topics: React.FC = () => {
@@ -26,7 +27,17 @@ export const Topics: React.FC = () => {
         return <div>Error: {JSON.stringify(error)}</div>;
     }
 
-    const mutableTopics = _.cloneDeep(data!.topics);
+    const topics = _.cloneDeep(data!.topics).map((topic) => ({ ...topic, group: topic.group.name }));
 
-    return <MaterialTable title="Topics" columns={COLUMN_DEFINITIONS} data={mutableTopics} />;
+    return (
+        <MaterialTable
+            title="Topics"
+            columns={COLUMN_DEFINITIONS}
+            data={topics}
+            options={{
+                pageSize: 20,
+                pageSizeOptions: [20, 50, 100]
+            }}
+        />
+    );
 };
