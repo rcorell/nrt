@@ -68,5 +68,15 @@ export const Groups: React.FC = () => {
         };
     });
 
-    return <MaterialTable title="Groups" columns={COLUMN_DEFINITIONS} data={groups} />;
+    return (
+        <MaterialTable
+            title="Groups"
+            columns={COLUMN_DEFINITIONS}
+            data={groups}
+            options={{
+                pageSize: 20,
+                pageSizeOptions: [20, 50, 100]
+            }}
+        />
+    );
 };
