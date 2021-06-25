@@ -23,8 +23,8 @@ type Group {
 	name: String!
 	description: String!
 	creator: User!
-	users: [User]!
-	topics: [Topic]!
+	users: [User!]!
+	topics: [Topic!]!
 	createdAt: DateTime!
 	updatedAt: DateTime!
 }
@@ -43,9 +43,9 @@ type User {
 	id: ID!
 	name: String!
 	email: String!
-	topics: [Topic]!
-	groupsCreated: [Group]!
-	groups: [Group]!
+	topics: [Topic!]!
+	groupsCreated: [Group!]!
+	groups: [Group!]!
 	createdAt: DateTime!
 	updatedAt: DateTime!
 }

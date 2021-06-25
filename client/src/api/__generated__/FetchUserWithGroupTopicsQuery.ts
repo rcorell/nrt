@@ -19,13 +19,13 @@ export interface FetchUserWithGroupTopicsQuery_user_groups {
   id: string;
   description: string;
   name: string;
-  topics: (FetchUserWithGroupTopicsQuery_user_groups_topics | null)[];
+  topics: FetchUserWithGroupTopicsQuery_user_groups_topics[];
 }
 
 export interface FetchUserWithGroupTopicsQuery_user {
   __typename: "User";
   id: string;
-  groups: (FetchUserWithGroupTopicsQuery_user_groups | null)[];
+  groups: FetchUserWithGroupTopicsQuery_user_groups[];
 }
 
 export interface FetchUserWithGroupTopicsQuery {

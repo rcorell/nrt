@@ -18,17 +18,22 @@ export const Home: React.FC = () => {
     if (query.loading) {
         return <b>{LOADING_TEXT}</b>;
     }
+
     if (query.error) {
         return <div>{JSON.stringify(query.error)}</div>;
     }
 
-    const groupTopics = (group: FetchUserWithGroupTopicsQuery_user_groups | null) => {
+    if (query.data?.user.groups.length === 0) {
+        return <div>Please join a group!</div>;
+    }
+
+    const groupTopics = (group: FetchUserWithGroupTopicsQuery_user_groups) => {
         return (
-            <div key={group!.id}>
-                <h2>{group!.name}</h2>
+            <div key={group.id}>
+                <h2>{group.name}</h2>
                 <ul>
-                    {group!.topics.map((topic) => (
-                        <li key={topic!.id}>{topic!.title}</li>
+                    {group.topics.map((topic) => (
+                        <li key={topic.id}>{topic.title}</li>
                     ))}
                 </ul>
             </div>
