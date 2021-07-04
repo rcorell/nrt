@@ -2,7 +2,7 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { Home } from 'src/components/Home';
 import { LOADING_TEXT } from 'src/components/shared';
-import { fetchUserWithGroupTopicsMocks } from 'tests/mocks/userMocks';
+import { fetchUserWithGroupTopicsMocks, fetchUserWithGroupTopicsButNoGroupsMocks } from 'tests/mocks/userMocks';
 import { renderComponent } from 'tests/testHelpers';
 
 describe('Home', () => {
@@ -10,12 +10,22 @@ describe('Home', () => {
         expect(renderComponent(Home, [fetchUserWithGroupTopicsMocks.success]).container).toMatchSnapshot();
     });
 
-    it('success', async () => {
-        const { container } = renderComponent(Home, [fetchUserWithGroupTopicsMocks.success]);
+    describe('success', () => {
+        it('with groups', async () => {
+            const { container } = renderComponent(Home, [fetchUserWithGroupTopicsMocks.success]);
 
-        await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-        expect(container).toMatchSnapshot();
+            expect(container).toMatchSnapshot();
+        });
+
+        it('without groups', async () => {
+            const { container } = renderComponent(Home, [fetchUserWithGroupTopicsButNoGroupsMocks.success]);
+
+            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
+
+            expect(container).toMatchSnapshot();
+        });
     });
 
     describe('failure', () => {

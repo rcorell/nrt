@@ -81,3 +81,20 @@ const fetchUserWithGroupTopics: MockParameters<FetchUserWithGroupTopicsQuery> = 
 export const fetchUserWithGroupTopicsMocks: StandardMocks<FetchUserWithGroupTopicsQuery> = assembleMocks(
     fetchUserWithGroupTopics
 );
+
+/**
+ * fetchUserWithGroupTopicsButHasNoGroups
+ */
+const fetchUserWithGroupTopicsButHasNoGroups: MockParameters<FetchUserWithGroupTopicsQuery> = {
+    data: {
+        user: {
+            __typename: TYPENAME.USER,
+            groups: [],
+            id: '100'
+        }
+    },
+    query: fetchUserWithGroupTopicsQuery
+};
+export const fetchUserWithGroupTopicsButNoGroupsMocks: StandardMocks<FetchUserWithGroupTopicsQuery> = assembleMocks(
+    fetchUserWithGroupTopicsButHasNoGroups
+);

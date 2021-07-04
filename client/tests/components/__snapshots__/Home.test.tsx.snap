@@ -24,7 +24,7 @@ exports[`Home loading 1`] = `
 </div>
 `;
 
-exports[`Home success 1`] = `
+exports[`Home success with groups 1`] = `
 <div>
   <div
     class="sc-bdvvaa cvCJhh"
@@ -55,6 +55,14 @@ exports[`Home success 1`] = `
         </li>
       </ul>
     </div>
+  </div>
+</div>
+`;
+
+exports[`Home success without groups 1`] = `
+<div>
+  <div>
+    Please join a group!
   </div>
 </div>
 `;

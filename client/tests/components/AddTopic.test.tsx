@@ -60,6 +60,8 @@ describe('AddTopic', () => {
             it('should show a helpful message', async () => {
                 const { container } = renderComponent(AddTopic, [fetchUserWithoutGroupsMocks.success]);
 
+                await oneTick();
+
                 expect(container).toMatchSnapshot();
             });
         });
