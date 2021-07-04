@@ -23,7 +23,7 @@ export const Home: React.FC = () => {
         return <div>{JSON.stringify(query.error)}</div>;
     }
 
-    if (query.data?.user.groups.length === 0) {
+    if (query.data!.user.groups.length === 0) {
         return <div>Please join a group!</div>;
     }
 
@@ -40,5 +40,5 @@ export const Home: React.FC = () => {
         );
     };
 
-    return <HomePage>{query!.data!.user.groups.map((group) => groupTopics(group))}</HomePage>;
+    return <HomePage>{query.data!.user.groups.map((group) => groupTopics(group))}</HomePage>;
 };

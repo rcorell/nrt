@@ -35,11 +35,6 @@ exports[`AddTopic failure createTopic: GraphQL error 1`] = `
           >
             Blue Blaze Irregulars
           </option>
-          <option
-            value="41"
-          >
-            Blue Blaze Irregulars2
-          </option>
         </select>
       </div>
       <div
@@ -123,11 +118,6 @@ exports[`AddTopic failure createTopic: network error 1`] = `
           >
             Blue Blaze Irregulars
           </option>
-          <option
-            value="41"
-          >
-            Blue Blaze Irregulars2
-          </option>
         </select>
       </div>
       <div
@@ -206,11 +196,6 @@ exports[`AddTopic standard snapshots fresh load 1`] = `
             value="40"
           >
             Blue Blaze Irregulars
-          </option>
-          <option
-            value="41"
-          >
-            Blue Blaze Irregulars2
           </option>
         </select>
       </div>
@@ -292,11 +277,6 @@ exports[`AddTopic standard snapshots invalid parameters 1`] = `
           >
             Blue Blaze Irregulars
           </option>
-          <option
-            value="41"
-          >
-            Blue Blaze Irregulars2
-          </option>
         </select>
       </div>
       <div
@@ -377,11 +357,6 @@ exports[`AddTopic standard snapshots valid parameters 1`] = `
           >
             Blue Blaze Irregulars
           </option>
-          <option
-            value="41"
-          >
-            Blue Blaze Irregulars2
-          </option>
         </select>
       </div>
       <div
@@ -460,11 +435,6 @@ exports[`AddTopic success with groups should create a topic and navigate to the 
             value="40"
           >
             Blue Blaze Irregulars
-          </option>
-          <option
-            value="41"
-          >
-            Blue Blaze Irregulars2
           </option>
         </select>
       </div>

@@ -448,6 +448,45 @@ exports[`Routes routes to /topics correctly 1`] = `
 </div>
 `;
 
+exports[`Routes routes to /user-profile correctly 1`] = `
+<div>
+  <div
+    class="sc-eCImvq eFmfDu"
+  >
+    Top 5 Daily
+  </div>
+  <div
+    class="sc-iCfLBT kRgVyw"
+  >
+    <div
+      class="sc-furvIG"
+    >
+      <a
+        href="/login"
+      >
+        Log in
+      </a>
+       | 
+      <a
+        href="/signup"
+      >
+        Sign up
+      </a>
+    </div>
+    <div
+      class="sc-pVTma"
+    />
+  </div>
+  <div
+    class="sc-gKckTs ldzOLX"
+  >
+    <b>
+      Loading...
+    </b>
+  </div>
+</div>
+`;
+
 exports[`Routes routes to not found correctly 1`] = `
 <div>
   <div

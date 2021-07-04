@@ -9,6 +9,7 @@ describe('Routes', () => {
         // @ts-ignore
         delete window.location;
 
+        // @ts-ignore
         window.location = Object.defineProperties(
             {},
             {

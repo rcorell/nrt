@@ -25,12 +25,12 @@ describe('Groups', () => {
 
             expect(screen.queryByText(VALID.GROUP.DESCRIPTION)).toBeInTheDocument();
             expect(screen.queryByText(VALID.GROUP.NAME)).toBeInTheDocument();
+
             const joinButton = screen.getAllByText('Join!')[0];
             fireEvent.click(joinButton);
             await oneTick();
-            await oneTick();
 
-            expect(screen.getAllByText('Joined').length).toBe(2);
+            expect(screen.getAllByText('Joined').length).toBe(1);
         });
     });
 

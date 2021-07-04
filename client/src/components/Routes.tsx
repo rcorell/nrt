@@ -9,6 +9,7 @@ import { Login } from 'src/components/Login';
 import { NotFound } from 'src/components/NotFound';
 import { Signup } from 'src/components/Signup';
 import { Topics } from 'src/components/Topics';
+import { UserProfile } from 'src/components/UserProfile';
 import { AppBody } from 'src/styles/app';
 
 import { NavigationBar } from './NavigationBar';
@@ -20,7 +21,8 @@ export enum Path {
     HOME = '/',
     LOGIN = '/login',
     SIGNUP = '/signup',
-    TOPICS = '/topics'
+    TOPICS = '/topics',
+    USER_PROFILE = '/user-profile'
 }
 
 export const Routes: React.FC = () => {
@@ -31,7 +33,8 @@ export const Routes: React.FC = () => {
         [Path.HOME]: () => <Home />,
         [Path.LOGIN]: () => <Login />,
         [Path.SIGNUP]: () => <Signup />,
-        [Path.TOPICS]: () => <Topics />
+        [Path.TOPICS]: () => <Topics />,
+        [Path.USER_PROFILE]: () => <UserProfile />
     };
 
     const routeResults = useRoutes(routes);

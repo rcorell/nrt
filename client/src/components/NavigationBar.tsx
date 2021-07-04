@@ -33,9 +33,13 @@ export const NavigationBar: React.FC = () => {
             </>
         );
         rightNavBar = (
-            <A href="" onClick={logoutAndGoToLoginPage}>
-                Logout
-            </A>
+            <>
+                <A href={Path.USER_PROFILE}>Profile</A>
+                &nbsp;|&nbsp;
+                <A href="" onClick={logoutAndGoToLoginPage}>
+                    Logout
+                </A>
+            </>
         );
     } else {
         leftNavBar = (

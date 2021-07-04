@@ -64,7 +64,14 @@ export const fetchUserQuery = gql`
     query FetchUserQuery {
         user {
             id
+            name
+            email
             groups {
+                id
+                description
+                name
+            }
+            groupsCreated {
                 id
                 description
                 name

@@ -42,6 +42,12 @@ exports[`NavigationBar snapshots authenticated 1`] = `
       class="sc-pVTma"
     >
       <a
+        href="/user-profile"
+      >
+        Profile
+      </a>
+       | 
+      <a
         href=""
       >
         Logout

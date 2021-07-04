@@ -14,6 +14,13 @@ export interface FetchUserQuery_user_groups {
   name: string;
 }
 
+export interface FetchUserQuery_user_groupsCreated {
+  __typename: "Group";
+  id: string;
+  description: string;
+  name: string;
+}
+
 export interface FetchUserQuery_user_topics {
   __typename: "Topic";
   id: string;
@@ -24,7 +31,10 @@ export interface FetchUserQuery_user_topics {
 export interface FetchUserQuery_user {
   __typename: "User";
   id: string;
+  name: string;
+  email: string;
   groups: FetchUserQuery_user_groups[];
+  groupsCreated: FetchUserQuery_user_groupsCreated[];
   topics: FetchUserQuery_user_topics[];
 }
 
