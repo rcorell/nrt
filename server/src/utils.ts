@@ -1,3 +1,4 @@
+import { Request } from 'express-serve-static-core';
 import jsonwebtoken from 'jsonwebtoken';
 
 export const APP_SECRET = 'INSECURE stub for app secret';
@@ -6,7 +7,7 @@ export const getTokenPayload = (token: string): any => {
     return jsonwebtoken.verify(token, APP_SECRET);
 };
 
-export const getUserId = (req, authToken = null) => {
+export const getUserId = (req: Request, authToken = null) => {
     if (req) {
         const authHeader = req.headers.authorization;
 
@@ -19,12 +20,12 @@ export const getUserId = (req, authToken = null) => {
 
             const { userId } = getTokenPayload(token);
 
-            return userId;
+            return Number(userId);
         }
     } else if (authToken) {
         const { userId } = getTokenPayload(authToken!);
 
-        return userId;
+        return Number(userId);
     }
 
     throw new Error('Not authenticated');
