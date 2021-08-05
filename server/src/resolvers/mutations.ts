@@ -68,12 +68,12 @@ export const joinGroup: Resolver = async (_parent, args, context) => {
             groups: {
                 connect: [
                     {
-                        id: Number(args.groupId)
+                        id: args.groupId
                     }
                 ]
             }
         },
-        where: { id: Number(context.userId) }
+        where: { id: context.userId }
     });
 
     return args.groupId;

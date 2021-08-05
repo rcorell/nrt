@@ -9,7 +9,7 @@ export const ready = () => {
 };
 
 export const topics: Resolver = (_parent, args, context) => {
-    let where;
+    let where = {};
 
     if (args.groupIds) {
         where = {
@@ -23,5 +23,5 @@ export const topics: Resolver = (_parent, args, context) => {
 };
 
 export const user: Resolver = (_parent, _args, context) => {
-    return context.prisma.user.findUnique({ where: { id: Number(context.userId) } });
+    return context.prisma.user.findUnique({ where: { id: context.userId } });
 };
