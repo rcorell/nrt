@@ -5,14 +5,19 @@
 ## Setup
 1. Clone repo
 1. Run server
-	1. cd <repo>/server
-	1. npm install
-	1. npm run build
-	1. npm start
+	1. `cd server`
+	1. `npm install`
+	1. `npm run build`
+	1. create a postgres database
+	1. set the database connection string on the `.env` file
+	1. create tables with `npx prisma migrate dev`
+	1. `npm start`
 1. Run client
-	1. cd <repo>/client
-	1. npm install
-	1. npm start
+	1. `cd client`
+	1. `npm install`
+	1. `npm run schema:update` to download the latest graphql schema
+	1. `npm run codegen` to generate the typings for the graphql queries
+	1. `npm start`
 	1. This should open a browser to the site
 1. Click on "Sign Up" from navbar
 1. Fill out form, click "Sign Up"
