@@ -8,10 +8,10 @@
 		1. `brew install postgresql`
 		1. `brew services start postgresql`
 		1. `createuser nrtuser`
-		1. `createdb nrt`
 		1. `psql postgres`
 			1. `ALTER ROLE nrtuser CREATEDB;`
 			1. `\q`
+		1. `createdb -U nrtuser nrt`
 1. **Clone repo**
 	1. `git clone https://github.com/rcorell/nrt.git`
 1. **Server**
