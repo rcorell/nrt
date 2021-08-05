@@ -8,7 +8,7 @@ import { Home } from 'src/components/Home/Home';
 import { Login } from 'src/components/Login/Login';
 import { NotFound } from 'src/components/NotFound';
 import { Signup } from 'src/components/Signup';
-import { Topics } from 'src/components/Topics';
+import { Topics } from 'src/components/Topics/Topics';
 import { UserProfile } from 'src/components/UserProfile';
 import { AppBody } from 'src/styles/app';
 

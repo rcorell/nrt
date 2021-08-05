@@ -1,35 +1,20 @@
-import { useMutation, useQuery } from '@apollo/client';
-import { navigate } from 'hookrouter';
 import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { CreateTopicMutation, CreateTopicMutationVariables } from 'src/api/__generated__/CreateTopicMutation';
-import { FetchUserQuery } from 'src/api/__generated__/FetchUserQuery';
-import { createTopicMutation, fetchUserQuery } from 'src/api/api';
-import { Path } from 'src/components/Routes';
 import { LOADING_TEXT } from 'src/components/shared';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
+import { useUserWithGroupTopics } from '../Home/Home.hook';
+import { useAddTopic } from './AddTopic.hook';
 
 export const AddTopic: React.FC = () => {
     const [description, setDescription] = useState('');
     const [groupId, setGroupId] = useState('');
     const [title, setTitle] = useState('');
 
-    const userQuery = useQuery<FetchUserQuery>(fetchUserQuery, { fetchPolicy: 'network-only' });
+    const userHook = useUserWithGroupTopics();
 
-    const [createTopic, { error }] = useMutation<CreateTopicMutation, CreateTopicMutationVariables>(
-        createTopicMutation,
-        {
-            onCompleted: () => {
-                navigate(Path.TOPICS);
-            },
-            onError: () => {
-                // RTL bug
-            },
-            variables: { description, groupId, title }
-        }
-    );
+    const addTopicHook = useAddTopic();
 
     const isFormInvalid = () => {
         return title.length < 1;
@@ -38,12 +23,12 @@ export const AddTopic: React.FC = () => {
     const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
 
-        createTopic();
+        addTopicHook.addTopic(groupId, title, description);
     };
 
     const errorStatus = () => {
-        if (error) {
-            return <div>Error: ${JSON.stringify(error)}</div>;
+        if (addTopicHook.error) {
+            return <div>Error: ${JSON.stringify(addTopicHook.error)}</div>;
         }
 
         return null;
@@ -51,22 +36,22 @@ export const AddTopic: React.FC = () => {
 
     setBrowserTitle('Add Topic');
 
-    if (userQuery.loading || !userQuery.data) {
+    if (userHook.loading || !userHook.user) {
         return <div>{LOADING_TEXT}</div>;
     }
 
-    if (userQuery.data.user.groups.length === 0) {
+    if (userHook.user.groups.length === 0) {
         return <div>You must join a group to add topics.</div>;
     }
 
-    const groupOptions = userQuery.data.user.groups.map((group) => (
+    const groupOptions = userHook.user.groups.map((group) => (
         <option key={group!.id} value={group!.id}>
             {group!.name}
         </option>
     ));
 
     if (groupId === '') {
-        setGroupId(userQuery.data.user.groups[0]!.id);
+        setGroupId(userHook.user.groups[0]!.id);
     }
 
     return (

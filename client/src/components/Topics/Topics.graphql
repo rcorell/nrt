@@ -1,0 +1,11 @@
+query FetchTopics {
+        topics {
+            id
+            title
+            description
+            group {
+                id
+                name
+            }
+        }
+    }

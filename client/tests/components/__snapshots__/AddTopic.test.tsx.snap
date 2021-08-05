@@ -10,7 +10,7 @@ exports[`AddTopic failure createTopic: GraphQL error 1`] = `
     </h1>
     <div>
       Error: $
-      {"graphQLErrors":[{"message":"CreateTopicMutation: GraphQL error"}],"networkError":null,"message":"CreateTopicMutation: GraphQL error"}
+      {"graphQLErrors":[{"message":"CreateTopic: GraphQL error"}],"networkError":null,"message":"CreateTopic: GraphQL error"}
     </div>
     <form
       class="sc-gsDJrp idIFaR"
@@ -93,7 +93,7 @@ exports[`AddTopic failure createTopic: network error 1`] = `
     </h1>
     <div>
       Error: $
-      {"graphQLErrors":[],"networkError":{},"message":"CreateTopicMutation: network error"}
+      {"graphQLErrors":[],"networkError":{},"message":"CreateTopic: network error"}
     </div>
     <form
       class="sc-gsDJrp idIFaR"

@@ -75,7 +75,7 @@ describe('AddTopic', () => {
             ]);
 
             expect(container).toMatchSnapshot();
-            expect(screen.queryByText(/CreateTopicMutation: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateTopic: network error/)).toBeInTheDocument();
         });
 
         it('createTopic: GraphQL error', async () => {
@@ -85,7 +85,7 @@ describe('AddTopic', () => {
             ]);
 
             expect(container).toMatchSnapshot();
-            expect(screen.queryByText(/CreateTopicMutation: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateTopic: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

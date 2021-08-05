@@ -261,6 +261,14 @@ export type CreateGroupMutation = {
     createGroup: { __typename?: 'Group'; id: string; createdAt: any };
 };
 
+export type CreateTopicMutationVariables = Exact<{
+    groupId: Scalars['ID'];
+    title: Scalars['String'];
+    description?: Maybe<Scalars['String']>;
+}>;
+
+export type CreateTopicMutation = { __typename?: 'Mutation'; createTopic: { __typename?: 'Topic'; id: string } };
+
 export type FetchGroupsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FetchGroupsQuery = {
@@ -316,6 +324,19 @@ export type LoginMutation = {
     login?: Maybe<{ __typename?: 'AuthPayload'; token?: Maybe<string> }>;
 };
 
+export type FetchTopicsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FetchTopicsQuery = {
+    __typename?: 'Query';
+    topics: Array<{
+        __typename?: 'Topic';
+        id: string;
+        title: string;
+        description: string;
+        group: { __typename?: 'Group'; id: string; name: string };
+    }>;
+};
+
 export const CreateGroupDocument = gql`
     mutation CreateGroup($name: String!, $description: String) {
         createGroup(name: $name, description: $description) {
@@ -355,6 +376,46 @@ export type CreateGroupMutationResult = Apollo.MutationResult<CreateGroupMutatio
 export type CreateGroupMutationOptions = Apollo.BaseMutationOptions<
     CreateGroupMutation,
     CreateGroupMutationVariables
+>;
+export const CreateTopicDocument = gql`
+    mutation CreateTopic($groupId: ID!, $title: String!, $description: String) {
+        createTopic(groupId: $groupId, title: $title, description: $description) {
+            id
+        }
+    }
+`;
+export type CreateTopicMutationFn = Apollo.MutationFunction<CreateTopicMutation, CreateTopicMutationVariables>;
+
+/**
+ * __useCreateTopicMutation__
+ *
+ * To run a mutation, you first call `useCreateTopicMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTopicMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTopicMutation, { data, loading, error }] = useCreateTopicMutation({
+ *   variables: {
+ *      groupId: // value for 'groupId'
+ *      title: // value for 'title'
+ *      description: // value for 'description'
+ *   },
+ * });
+ */
+export function useCreateTopicMutation(
+    baseOptions?: Apollo.MutationHookOptions<CreateTopicMutation, CreateTopicMutationVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<CreateTopicMutation, CreateTopicMutationVariables>(CreateTopicDocument, options);
+}
+export type CreateTopicMutationHookResult = ReturnType<typeof useCreateTopicMutation>;
+export type CreateTopicMutationResult = Apollo.MutationResult<CreateTopicMutation>;
+export type CreateTopicMutationOptions = Apollo.BaseMutationOptions<
+    CreateTopicMutation,
+    CreateTopicMutationVariables
 >;
 export const FetchGroupsDocument = gql`
     query FetchGroups {
@@ -573,3 +634,47 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const FetchTopicsDocument = gql`
+    query FetchTopics {
+        topics {
+            id
+            title
+            description
+            group {
+                id
+                name
+            }
+        }
+    }
+`;
+
+/**
+ * __useFetchTopicsQuery__
+ *
+ * To run a query within a React component, call `useFetchTopicsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchTopicsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchTopicsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFetchTopicsQuery(
+    baseOptions?: Apollo.QueryHookOptions<FetchTopicsQuery, FetchTopicsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<FetchTopicsQuery, FetchTopicsQueryVariables>(FetchTopicsDocument, options);
+}
+export function useFetchTopicsLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<FetchTopicsQuery, FetchTopicsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<FetchTopicsQuery, FetchTopicsQueryVariables>(FetchTopicsDocument, options);
+}
+export type FetchTopicsQueryHookResult = ReturnType<typeof useFetchTopicsQuery>;
+export type FetchTopicsLazyQueryHookResult = ReturnType<typeof useFetchTopicsLazyQuery>;
+export type FetchTopicsQueryResult = Apollo.QueryResult<FetchTopicsQuery, FetchTopicsQueryVariables>;

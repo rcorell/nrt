@@ -17,7 +17,7 @@ const TEST_USER_WITHOUT_GROUPS = {
 const TEST_USER_WITH_GROUPS = {
     __typename: TYPENAME.USER,
     email: 'bbanzai@blueblazers.org',
-    groups: [{ ...mockGroups[0], topics: [] }],
+    groups: [{ ...mockGroups[0], topics: [...(mockTopics[0] as any)] }],
     groupsCreated: [],
     id: '100',
     name: 'Buckaroo Banzai',
