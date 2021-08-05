@@ -1,6 +1,6 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
-import { Home } from 'src/components/Home';
+import { Home } from 'src/components/Home/Home';
 import { LOADING_TEXT } from 'src/components/shared';
 import { fetchUserWithGroupTopicsMocks, fetchUserWithGroupTopicsButNoGroupsMocks } from 'tests/mocks/userMocks';
 import { renderComponent } from 'tests/testHelpers';

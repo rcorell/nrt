@@ -6,7 +6,7 @@ import { Path } from '../Routes';
 
 export const useAddGroup = () => {
     const [graphQLError, setGraphQLError] = useState(null as null | ApolloError);
-    const [createGroup, { error }] = useCreateGroupMutation({
+    const [callMutation, { error }] = useCreateGroupMutation({
         onCompleted: () => {
             navigate(Path.GROUPS);
         },
@@ -14,7 +14,7 @@ export const useAddGroup = () => {
     });
 
     const addGroup = (name: string, description: string) => {
-        createGroup({
+        callMutation({
             variables: {
                 description,
                 name

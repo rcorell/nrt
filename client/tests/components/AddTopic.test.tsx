@@ -2,7 +2,7 @@ import { MockedResponse } from '@apollo/client/testing';
 import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AddTopic } from 'src/components/AddTopic';
+import { AddTopic } from 'src/components/AddTopic/AddTopic';
 import { Path } from 'src/components/Routes';
 import { LOADING_TEXT } from 'src/components/shared';
 import { ADD_TOPIC, INVALID, VALID } from 'tests/fixtures';

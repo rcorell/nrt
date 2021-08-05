@@ -1,0 +1,15 @@
+query FetchUserWithGroupTopics {
+    user {
+        id
+        groups {
+            id
+            description
+            name
+            topics {
+                id
+                title
+                description
+            }
+        }
+    }
+}

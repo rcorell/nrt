@@ -268,9 +268,9 @@ export type FetchGroupsQuery = {
     groups: Array<{ __typename?: 'Group'; id: string; name: string; description: string }>;
 };
 
-export type FetchUserQueryQueryVariables = Exact<{ [key: string]: never }>;
+export type FetchUserQueryVariables = Exact<{ [key: string]: never }>;
 
-export type FetchUserQueryQuery = {
+export type FetchUserQuery = {
     __typename?: 'Query';
     user: {
         __typename?: 'User';
@@ -288,6 +288,33 @@ export type JoinGroupMutationVariables = Exact<{
 }>;
 
 export type JoinGroupMutation = { __typename?: 'Mutation'; joinGroup?: Maybe<string> };
+
+export type FetchUserWithGroupTopicsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FetchUserWithGroupTopicsQuery = {
+    __typename?: 'Query';
+    user: {
+        __typename?: 'User';
+        id: string;
+        groups: Array<{
+            __typename?: 'Group';
+            id: string;
+            description: string;
+            name: string;
+            topics: Array<{ __typename?: 'Topic'; id: string; title: string; description: string }>;
+        }>;
+    };
+};
+
+export type LoginMutationVariables = Exact<{
+    email: Scalars['String'];
+    password: Scalars['String'];
+}>;
+
+export type LoginMutation = {
+    __typename?: 'Mutation';
+    login?: Maybe<{ __typename?: 'AuthPayload'; token?: Maybe<string> }>;
+};
 
 export const CreateGroupDocument = gql`
     mutation CreateGroup($name: String!, $description: String) {
@@ -369,8 +396,8 @@ export function useFetchGroupsLazyQuery(
 export type FetchGroupsQueryHookResult = ReturnType<typeof useFetchGroupsQuery>;
 export type FetchGroupsLazyQueryHookResult = ReturnType<typeof useFetchGroupsLazyQuery>;
 export type FetchGroupsQueryResult = Apollo.QueryResult<FetchGroupsQuery, FetchGroupsQueryVariables>;
-export const FetchUserQueryDocument = gql`
-    query FetchUserQuery {
+export const FetchUserDocument = gql`
+    query FetchUser {
         user {
             id
             name
@@ -395,35 +422,33 @@ export const FetchUserQueryDocument = gql`
 `;
 
 /**
- * __useFetchUserQueryQuery__
+ * __useFetchUserQuery__
  *
- * To run a query within a React component, call `useFetchUserQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useFetchUserQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFetchUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFetchUserQueryQuery({
+ * const { data, loading, error } = useFetchUserQuery({
  *   variables: {
  *   },
  * });
  */
-export function useFetchUserQueryQuery(
-    baseOptions?: Apollo.QueryHookOptions<FetchUserQueryQuery, FetchUserQueryQueryVariables>
+export function useFetchUserQuery(baseOptions?: Apollo.QueryHookOptions<FetchUserQuery, FetchUserQueryVariables>) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<FetchUserQuery, FetchUserQueryVariables>(FetchUserDocument, options);
+}
+export function useFetchUserLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<FetchUserQuery, FetchUserQueryVariables>
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useQuery<FetchUserQueryQuery, FetchUserQueryQueryVariables>(FetchUserQueryDocument, options);
+    return Apollo.useLazyQuery<FetchUserQuery, FetchUserQueryVariables>(FetchUserDocument, options);
 }
-export function useFetchUserQueryLazyQuery(
-    baseOptions?: Apollo.LazyQueryHookOptions<FetchUserQueryQuery, FetchUserQueryQueryVariables>
-) {
-    const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useLazyQuery<FetchUserQueryQuery, FetchUserQueryQueryVariables>(FetchUserQueryDocument, options);
-}
-export type FetchUserQueryQueryHookResult = ReturnType<typeof useFetchUserQueryQuery>;
-export type FetchUserQueryLazyQueryHookResult = ReturnType<typeof useFetchUserQueryLazyQuery>;
-export type FetchUserQueryQueryResult = Apollo.QueryResult<FetchUserQueryQuery, FetchUserQueryQueryVariables>;
+export type FetchUserQueryHookResult = ReturnType<typeof useFetchUserQuery>;
+export type FetchUserLazyQueryHookResult = ReturnType<typeof useFetchUserLazyQuery>;
+export type FetchUserQueryResult = Apollo.QueryResult<FetchUserQuery, FetchUserQueryVariables>;
 export const JoinGroupDocument = gql`
     mutation JoinGroup($groupId: ID!) {
         joinGroup(groupId: $groupId)
@@ -457,3 +482,94 @@ export function useJoinGroupMutation(
 export type JoinGroupMutationHookResult = ReturnType<typeof useJoinGroupMutation>;
 export type JoinGroupMutationResult = Apollo.MutationResult<JoinGroupMutation>;
 export type JoinGroupMutationOptions = Apollo.BaseMutationOptions<JoinGroupMutation, JoinGroupMutationVariables>;
+export const FetchUserWithGroupTopicsDocument = gql`
+    query FetchUserWithGroupTopics {
+        user {
+            id
+            groups {
+                id
+                description
+                name
+                topics {
+                    id
+                    title
+                    description
+                }
+            }
+        }
+    }
+`;
+
+/**
+ * __useFetchUserWithGroupTopicsQuery__
+ *
+ * To run a query within a React component, call `useFetchUserWithGroupTopicsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchUserWithGroupTopicsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchUserWithGroupTopicsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFetchUserWithGroupTopicsQuery(
+    baseOptions?: Apollo.QueryHookOptions<FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsQueryVariables>(
+        FetchUserWithGroupTopicsDocument,
+        options
+    );
+}
+export function useFetchUserWithGroupTopicsLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsQueryVariables>(
+        FetchUserWithGroupTopicsDocument,
+        options
+    );
+}
+export type FetchUserWithGroupTopicsQueryHookResult = ReturnType<typeof useFetchUserWithGroupTopicsQuery>;
+export type FetchUserWithGroupTopicsLazyQueryHookResult = ReturnType<typeof useFetchUserWithGroupTopicsLazyQuery>;
+export type FetchUserWithGroupTopicsQueryResult = Apollo.QueryResult<
+    FetchUserWithGroupTopicsQuery,
+    FetchUserWithGroupTopicsQueryVariables
+>;
+export const LoginDocument = gql`
+    mutation Login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+            token
+        }
+    }
+`;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
+}
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;

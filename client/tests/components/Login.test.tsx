@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 
-import { Login } from 'src/components/Login';
+import { Login } from 'src/components/Login/Login';
 import { INVALID, VALID } from 'tests/fixtures';
 import { loginMocks } from 'tests/mocks/loginMocks';
 import { lastNavigationPath, oneTick, renderComponent, setLastNavigationPath } from 'tests/testHelpers';
@@ -78,7 +78,7 @@ describe('Login', () => {
 
             expect(localStorage.getItem('token')).toEqual('');
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/LoginMutation: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/Login: network error/)).toBeInTheDocument();
         });
 
         it('login: GraphQL error', async () => {
@@ -90,7 +90,7 @@ describe('Login', () => {
 
             expect(localStorage.getItem('token')).toEqual('');
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/LoginMutation: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/Login: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

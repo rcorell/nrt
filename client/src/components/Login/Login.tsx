@@ -1,33 +1,15 @@
-import { useMutation } from '@apollo/client';
-import { navigate } from 'hookrouter';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { LoginMutation, LoginMutationVariables } from 'src/api/__generated__/LoginMutation';
-import { loginMutation } from 'src/api/api';
-import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
+import { useLogin } from './Login.hook';
 
 export const Login: React.FC = () => {
-    const { setAuthenticated } = useContext(GlobalContext);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [login, { error }] = useMutation<LoginMutation, LoginMutationVariables>(loginMutation, {
-        onCompleted: (result) => {
-            if (result?.login) {
-                localStorage.setItem('token', result.login.token!);
-                setAuthenticated(true);
-                navigate('/');
-            }
-        },
-        onError: () => {
-            // https://github.com/apollographql/apollo-client/issues/7167
-        },
-        variables: { email, password }
-    });
+    const loginHook = useLogin();
 
     setBrowserTitle('Login');
 
@@ -38,12 +20,12 @@ export const Login: React.FC = () => {
     const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
 
-        login();
+        loginHook.login(email, password);
     };
 
     const authStatus = () => {
-        if (error) {
-            return <AppError>Error: {error.message}</AppError>;
+        if (loginHook.error) {
+            return <AppError>Error: {loginHook.error.message}</AppError>;
         }
 
         return null;

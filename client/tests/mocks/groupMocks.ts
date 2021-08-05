@@ -1,15 +1,17 @@
-import { FetchGroupsQuery, FetchGroupsQuery_groups } from 'src/api/__generated__/FetchGroupsQuery';
-import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
-import { fetchGroupsQuery, joinGroupMutation } from 'src/api/api';
 import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 import {
     CreateGroupDocument,
     CreateGroupMutation,
-    CreateGroupMutationVariables
+    CreateGroupMutationVariables,
+    FetchGroupsDocument,
+    FetchGroupsQuery,
+    JoinGroupDocument,
+    JoinGroupMutation,
+    JoinGroupMutationVariables
 } from 'src/api/__generated__/types';
 
-export const mockGroups: FetchGroupsQuery_groups[] = [
+export const mockGroups: FetchGroupsQuery['groups'] = [
     {
         __typename: TYPENAME.GROUP,
         description: VALID.GROUP.DESCRIPTION,
@@ -31,7 +33,7 @@ const fetchGroupsParams: MockParameters<FetchGroupsQuery> = {
     data: {
         groups: mockGroups
     },
-    query: fetchGroupsQuery
+    query: FetchGroupsDocument
 };
 export const fetchGroupsMocks: StandardMocks<FetchGroupsQuery> = assembleMocks(fetchGroupsParams);
 
@@ -42,7 +44,7 @@ const joinGroupParams: MockParameters<JoinGroupMutation, JoinGroupMutationVariab
     data: {
         joinGroup: mockGroups[0].id
     },
-    query: joinGroupMutation,
+    query: JoinGroupDocument,
     variables: {
         groupId: mockGroups[0].id
     }
