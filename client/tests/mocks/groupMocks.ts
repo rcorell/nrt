@@ -1,9 +1,13 @@
-import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
 import { FetchGroupsQuery, FetchGroupsQuery_groups } from 'src/api/__generated__/FetchGroupsQuery';
 import { JoinGroupMutation, JoinGroupMutationVariables } from 'src/api/__generated__/JoinGroupMutation';
-import { createGroupMutation, fetchGroupsQuery, joinGroupMutation } from 'src/api/api';
+import { fetchGroupsQuery, joinGroupMutation } from 'src/api/api';
 import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
+import {
+    CreateGroupDocument,
+    CreateGroupMutation,
+    CreateGroupMutationVariables
+} from 'src/api/__generated__/types';
 
 export const mockGroups: FetchGroupsQuery_groups[] = [
     {
@@ -56,7 +60,7 @@ const createGroupParameters: MockParameters<CreateGroupMutation, CreateGroupMuta
             id: mockGroups[0].id
         }
     },
-    query: createGroupMutation,
+    query: CreateGroupDocument,
     variables: {
         description: VALID.GROUP.DESCRIPTION,
         name: VALID.GROUP.NAME

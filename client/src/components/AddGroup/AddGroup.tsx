@@ -9,7 +9,7 @@ export const AddGroup: React.FC = () => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
 
-    const { addGroup, error } = useAddGroup();
+    const addGroupHook = useAddGroup();
 
     const isFormInvalid = () => {
         return name.length < 1;
@@ -18,12 +18,12 @@ export const AddGroup: React.FC = () => {
     const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
 
-        addGroup(name, description);
+        addGroupHook.addGroup(name, description);
     };
 
     const errorDisplay = () => {
-        if (error) {
-            return <div>Error: {JSON.stringify(error)}</div>;
+        if (addGroupHook.error) {
+            return <div>Error: {JSON.stringify(addGroupHook.error)}</div>;
         }
 
         return null;

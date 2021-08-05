@@ -44,8 +44,7 @@ describe('AddGroup', () => {
             renderComponent(AddGroup, [createGroupMocks.networkError]);
 
             await submitAddGroup();
-
-            expect(screen.queryByText(/CreateGroupMutation: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateGroup: network error/)).toBeInTheDocument();
         });
 
         it('createGroup: GraphQL error', async () => {
@@ -53,7 +52,7 @@ describe('AddGroup', () => {
 
             await submitAddGroup();
 
-            expect(screen.queryByText(/CreateGroupMutation: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateGroup: GraphQL error/)).toBeInTheDocument();
         });
     });
 });
