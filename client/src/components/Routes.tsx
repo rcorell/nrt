@@ -1,9 +1,9 @@
 import { useRoutes } from 'hookrouter';
 import React from 'react';
 
-import { AddGroup } from 'src/components/AddGroup';
+import { AddGroup } from 'src/components/AddGroup/AddGroup';
 import { AddTopic } from 'src/components/AddTopic';
-import { Groups } from 'src/components/Groups';
+import { Groups } from 'src/components/Groups/Groups';
 import { Home } from 'src/components/Home';
 import { Login } from 'src/components/Login';
 import { NotFound } from 'src/components/NotFound';

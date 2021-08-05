@@ -1,31 +1,15 @@
-import { ApolloError, useMutation } from '@apollo/client';
-import { navigate } from 'hookrouter';
 import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { CreateGroupMutation, CreateGroupMutationVariables } from 'src/api/__generated__/CreateGroupMutation';
-import { createGroupMutation } from 'src/api/api';
-import { Path } from 'src/components/Routes';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
+import { useAddGroup } from './AddGroup.hook';
 
 export const AddGroup: React.FC = () => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
-    const [graphQLError, setGraphQLError] = useState(null as null | ApolloError);
 
-    const [createGroup, { error }] = useMutation<CreateGroupMutation, CreateGroupMutationVariables>(
-        createGroupMutation,
-        {
-            onCompleted: () => {
-                navigate(Path.GROUPS);
-            },
-            onError: (error) => {
-                setGraphQLError(error);
-            },
-            variables: { description, name }
-        }
-    );
+    const { addGroup, error } = useAddGroup();
 
     const isFormInvalid = () => {
         return name.length < 1;
@@ -34,12 +18,12 @@ export const AddGroup: React.FC = () => {
     const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
 
-        createGroup();
+        addGroup(name, description);
     };
 
     const errorDisplay = () => {
-        if (error || graphQLError) {
-            return <div>Error: {JSON.stringify(error) + JSON.stringify(graphQLError)}</div>;
+        if (error) {
+            return <div>Error: {JSON.stringify(error)}</div>;
         }
 
         return null;

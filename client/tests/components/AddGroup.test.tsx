@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 
-import { AddGroup } from 'src/components/AddGroup';
+import { AddGroup } from 'src/components/AddGroup/AddGroup';
 import { Path } from 'src/components/Routes';
 import { ADD_GROUP, INVALID, VALID } from 'tests/fixtures';
 import { createGroupMocks } from 'tests/mocks/groupMocks';
