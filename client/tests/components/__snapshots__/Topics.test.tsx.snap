@@ -4,7 +4,7 @@ exports[`Topics snapshots fetchTopics: GraphQL error 1`] = `
 <div>
   <div>
     Error: 
-    {"graphQLErrors":[{"message":"FetchTopicsQuery: GraphQL error"}],"networkError":null,"message":"FetchTopicsQuery: GraphQL error"}
+    {"graphQLErrors":[{"message":"FetchTopics: GraphQL error"}],"networkError":null,"message":"FetchTopics: GraphQL error"}
   </div>
 </div>
 `;
@@ -13,7 +13,7 @@ exports[`Topics snapshots fetchTopics: network error 1`] = `
 <div>
   <div>
     Error: 
-    {"graphQLErrors":[],"networkError":{},"message":"FetchTopicsQuery: network error"}
+    {"graphQLErrors":[],"networkError":{},"message":"FetchTopics: network error"}
   </div>
 </div>
 `;

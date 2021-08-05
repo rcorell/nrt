@@ -1,7 +1,7 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { LOADING_TEXT } from 'src/components/shared';
-import { Topics } from 'src/components/Topics';
+import { Topics } from 'src/components/Topics/Topics';
 import { fetchTopicMocks } from 'tests/mocks/topicMocks';
 import { renderComponent } from 'tests/testHelpers';
 
@@ -25,7 +25,7 @@ describe('Topics', () => {
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(screen.queryByText(/FetchTopicsQuery: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/FetchTopics: network error/)).toBeInTheDocument();
             expect(container).toMatchSnapshot();
         });
 
@@ -34,7 +34,7 @@ describe('Topics', () => {
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(screen.queryByText(/FetchTopicsQuery: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/FetchTopics: GraphQL error/)).toBeInTheDocument();
             expect(container).toMatchSnapshot();
         });
     });
