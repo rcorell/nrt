@@ -3,8 +3,9 @@ import * as bcrypt from 'bcryptjs';
 import * as jsonwebtoken from 'jsonwebtoken';
 
 import { APP_SECRET } from '../utils';
+import { Resolver } from './resolverTypes';
 
-export const signup = async (_parent, args, context) => {
+export const signup: Resolver = async (_parent, args, context) => {
     const password = await bcrypt.hash(args.password, 10);
     const user = await context.prisma.user.create({ data: { ...args, password } });
     const token = jsonwebtoken.sign({ userId: user.id }, APP_SECRET);
@@ -15,7 +16,7 @@ export const signup = async (_parent, args, context) => {
     };
 };
 
-export const login = async (_parent, args, context) => {
+export const login: Resolver = async (_parent, args, context) => {
     const user = await context.prisma.user.findUnique({ where: { email: args.email } });
     if (!user) {
         throw new Error('No such user found');
@@ -34,7 +35,7 @@ export const login = async (_parent, args, context) => {
     };
 };
 
-export const createTopic = async (_parent, args, context) => {
+export const createTopic: Resolver = async (_parent, args, context) => {
     const { userId } = context;
 
     return await context.prisma.topic.create({
@@ -47,7 +48,7 @@ export const createTopic = async (_parent, args, context) => {
     });
 };
 
-export const createGroup = async (_parent, args, context) => {
+export const createGroup: Resolver = async (_parent, args, context) => {
     const { userId } = context;
 
     return await context.prisma.group.create({
@@ -59,7 +60,7 @@ export const createGroup = async (_parent, args, context) => {
     });
 };
 
-export const joinGroup = async (_parent, args, context) => {
+export const joinGroup: Resolver = async (_parent, args, context) => {
     const prisma: PrismaClient = context.prisma;
 
     await prisma.user.update({
@@ -72,7 +73,7 @@ export const joinGroup = async (_parent, args, context) => {
                 ]
             }
         },
-        where: { id: context.userId }
+        where: { id: Number(context.userId) }
     });
 
     return args.groupId;

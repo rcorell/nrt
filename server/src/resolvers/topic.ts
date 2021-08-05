@@ -1,11 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { Resolver } from './resolverTypes';
 
-export const author = (parent, _args, context) => {
+export const author: Resolver = (parent, _args, context) => {
     return context.prisma.topic.findUnique({ where: { id: parent.id } }).author();
 };
 
-export const group = (parent, _args, context) => {
-    const prisma: PrismaClient = context.prisma;
-
-    return prisma.topic.findUnique({ where: { id: parent.id } }).group();
+export const group: Resolver = (parent, _args, context) => {
+    return context.prisma.topic.findUnique({ where: { id: parent.id } }).group();
 };
