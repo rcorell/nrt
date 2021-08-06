@@ -2,7 +2,7 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { LOADING_TEXT } from 'src/components/shared';
 import { Topics } from 'src/components/Topics/Topics';
-import { fetchTopicMocks } from 'tests/mocks/topicMocks';
+import { fetchTopicMocks } from './Topics.mocks';
 import { renderComponent } from 'tests/testHelpers';
 
 describe('Topics', () => {

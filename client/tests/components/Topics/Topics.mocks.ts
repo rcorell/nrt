@@ -1,7 +1,6 @@
 import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
-import { mockGroups } from './groupMocks';
 import {
     CreateTopicDocument,
     CreateTopicMutation,
@@ -27,6 +26,12 @@ export const mockTopics: FetchTopicsQuery['topics'] = [
     }
 ];
 
+export const mockCreateTopicMutationVariables: CreateTopicMutationVariables = {
+    description: VALID.TOPIC.DESCRIPTION,
+    groupId: '40',
+    title: VALID.TOPIC.TITLE
+};
+
 /*
  * createTopic
  */
@@ -34,11 +39,7 @@ const createTopicParams: MockParameters<CreateTopicMutation, CreateTopicMutation
     data: { createTopic: { __typename: TYPENAME.TOPIC, id: '777' } },
     query: CreateTopicDocument,
     spyOnNewData: true,
-    variables: {
-        description: VALID.TOPIC.DESCRIPTION,
-        groupId: mockGroups[0].id,
-        title: VALID.TOPIC.TITLE
-    }
+    variables: mockCreateTopicMutationVariables
 };
 export const createTopicMocks: StandardMocks<CreateTopicMutation> = assembleMocks(createTopicParams);
 
