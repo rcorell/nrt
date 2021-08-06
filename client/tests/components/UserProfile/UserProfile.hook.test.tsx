@@ -1,41 +1,45 @@
+import { FetchUserQuery } from 'src/api/__generated__/types';
 import { useUser } from 'src/components/UserProfile/UserProfile.hook';
-import { createHookMockingWrapper } from 'tests/testHelpers';
+import { createHookMockingWrapper, CustomHookResult } from 'tests/testHelpers';
 import { fetchUserMocks } from './UserProfile.mocks';
 
 describe('useUser custom hook', () => {
+    const checkInitialState = (state: CustomHookResult<FetchUserQuery>) => {
+        expect(state.loading).toBeTruthy();
+        expect(state.user).toBeUndefined();
+        expect(state.error).toBeUndefined();
+    };
+
+    const checkErrorState = (state: CustomHookResult<FetchUserQuery>) => {
+        expect(state.loading).toBeFalsy();
+        expect(state.user).toBeUndefined();
+        expect(state.error).not.toBeUndefined();
+    };
+
+    const checkSuccessState = (state: CustomHookResult<FetchUserQuery>) => {
+        expect(state.loading).toBeFalsy();
+        expect(state.error).toBeUndefined();
+        expect(state.user!.name).toBe('Buckaroo Banzai');
+    };
+
     it('should return a user', async () => {
         const { result, waitForNextUpdate } = createHookMockingWrapper(useUser, fetchUserMocks.success);
-        expect(result.current.loading).toBeTruthy();
-        expect(result.current.error).toBeUndefined();
-        expect(result.current.user).toBeUndefined();
-
+        checkInitialState(result.current);
         await waitForNextUpdate();
-        expect(result.current.loading).toBeFalsy();
-        expect(result.current.user!.name).toBe('Buckaroo Banzai');
-        expect(result.current.error).toBeUndefined();
+        checkSuccessState(result.current);
     });
 
     it('should fail with graphQLError', async () => {
         const { result, waitForNextUpdate } = createHookMockingWrapper(useUser, fetchUserMocks.graphQLError);
-        expect(result.current.loading).toBeTruthy();
-        expect(result.current.error).toBeUndefined();
-        expect(result.current.user).toBeUndefined();
-
+        checkInitialState(result.current);
         await waitForNextUpdate();
-        expect(result.current.loading).toBeFalsy();
-        expect(result.current.user).toBeUndefined();
-        expect(result.current.error).not.toBeUndefined();
+        checkErrorState(result.current);
     });
 
     it('should fail with network error', async () => {
         const { result, waitForNextUpdate } = createHookMockingWrapper(useUser, fetchUserMocks.networkError);
-        expect(result.current.loading).toBeTruthy();
-        expect(result.current.error).toBeUndefined();
-        expect(result.current.user).toBeUndefined();
-
+        checkInitialState(result.current);
         await waitForNextUpdate();
-        expect(result.current.loading).toBeFalsy();
-        expect(result.current.user).toBeUndefined();
-        expect(result.current.error).not.toBeUndefined();
+        checkErrorState(result.current);
     });
 });

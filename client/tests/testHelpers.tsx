@@ -1,7 +1,7 @@
 import { ApolloLink, DocumentNode } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { MockedProvider, MockedResponse, MockLink, mockSingleLink } from '@apollo/client/testing';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, Query, render, screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { GraphQLError } from 'graphql';
 import { print } from 'graphql/language/printer';
@@ -211,10 +211,13 @@ export const testComponent = (component: React.FC, mocks: MockType) => {
         });
     });
 };
-export type CustomHookResult<T> = Partial<T> & {
+
+export type CustomHookWithoutResult = Query & {
     loading: boolean;
     error?: any;
 };
+
+export type CustomHookResult<T> = Partial<T> & CustomHookWithoutResult;
 
 export function createHookMockingWrapper<T>(hook: () => any, mock: MockedResponse<T>) {
     const wrapper = ({ children }: { children: any }) => (
