@@ -1,49 +1,15 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-
 import { UserProfile } from 'src/components/UserProfile/UserProfile';
-import { useUser } from 'src/components/UserProfile/UserProfile.hook';
 
-let mockState: 'loading' | 'success' | 'failure' = 'loading';
+import { createComponentMocks, testComponent } from 'tests/testHelpers';
+
+const mocks = createComponentMocks({
+    user: {
+        name: 'Buckaroo Banzai'
+    }
+});
 
 jest.mock('src/components/UserProfile/UserProfile.hook', () => ({
-    useUser: () => {
-        switch (mockState) {
-            case 'loading':
-                return {
-                    loading: true
-                };
-
-            case 'success':
-                return {
-                    loading: false,
-                    user: {
-                        name: 'Buckaroo Banzai'
-                    }
-                };
-
-            case 'failure':
-                return {
-                    error: 'useUser hook error',
-                    loading: false
-                };
-        }
-    }
+    useUser: () => mocks[mocks.mockState]
 }));
 
-describe('UserProfile', () => {
-    it('loading', () => {
-        mockState = 'loading';
-        expect(render(<UserProfile />).container).toMatchSnapshot();
-    });
-
-    it('failure', async () => {
-        mockState = 'failure';
-        expect(render(<UserProfile />).container).toMatchSnapshot();
-    });
-
-    it('success', async () => {
-        mockState = 'success';
-        expect(render(<UserProfile />).container).toMatchSnapshot();
-    });
-});
+testComponent(UserProfile, mocks);

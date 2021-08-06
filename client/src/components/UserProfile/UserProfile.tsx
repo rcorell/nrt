@@ -19,3 +19,5 @@ export const UserProfile: React.FC = () => {
 
     return <h2>{userHook.user!.name}</h2>;
 };
+
+UserProfile.displayName = 'UserProfile';

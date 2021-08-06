@@ -3,7 +3,7 @@
 exports[`UserProfile failure 1`] = `
 <div>
   <div>
-    "useUser hook error"
+    "Error"
   </div>
 </div>
 `;
