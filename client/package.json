@@ -71,7 +71,8 @@
 		"prettier": "prettier --config .prettierrc.json --write 'src/**/*.{ts,tsx}'",
 		"schema:update": "npx apollo service:download --endpoint=http://localhost:4000/ graphql-schema.json",
 		"start": "react-scripts start",
-		"test": "jest --env=jsdom"
+		"test": "jest --env=jsdom",
+		"graphql-codegen": "graphql-codegen --config codegen.yml"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -95,5 +96,14 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "2.0.1",
+		"@graphql-codegen/introspection": "2.0.0",
+		"@graphql-codegen/near-operation-file-preset": "^2.0.0",
+		"@graphql-codegen/typescript": "2.0.0",
+		"@graphql-codegen/typescript-operations": "2.0.1",
+		"@graphql-codegen/typescript-react-apollo": "3.0.0",
+		"@testing-library/react-hooks": "^7.0.1"
 	}
 }

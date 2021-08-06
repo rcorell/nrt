@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home failure 1`] = `
+<div>
+  <div>
+    "Error"
+  </div>
+</div>
+`;
+
+exports[`Home loading 1`] = `
+<div>
+  <b>
+    Loading...
+  </b>
+</div>
+`;
+
+exports[`Home success 1`] = `
+<div>
+  <div
+    class="sc-bdvvaa cvCJhh"
+  >
+    <div>
+      <h2>
+        Blue Blaze Irregulars
+      </h2>
+      <ul>
+        <li>
+          t1-title
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2>
+        Blue Blaze Irregulars2
+      </h2>
+      <ul>
+        <li>
+          t2-title
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`shows "join a group" if user has no groups 1`] = `
+<div>
+  <div>
+    Please join a group!
+  </div>
+</div>
+`;
+
+exports[`shows "join a group" if user has not groups 1`] = `
+<div>
+  <div>
+    Please join a group!
+  </div>
+</div>
+`;

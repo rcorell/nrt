@@ -1,6 +1,7 @@
 module.exports = {
     clearMocks: true,
     collectCoverageFrom: ['<rootDir>/src/**/*.{js,jsx,ts,tsx}', '!<rootDir>/src/**/*.d.ts'],
+    coveragePathIgnorePatterns: ['types.ts'],
     coverageThreshold: {
         global: {
             branches: 100,

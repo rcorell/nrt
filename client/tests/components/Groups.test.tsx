@@ -1,6 +1,6 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
 
-import { Groups } from 'src/components/Groups';
+import { Groups } from 'src/components/Groups/Groups';
 import { LOADING_TEXT } from 'src/components/shared';
 import { VALID } from 'tests/fixtures';
 import { fetchGroupsMocks, joinGroupMocks } from 'tests/mocks/groupMocks';
@@ -22,13 +22,14 @@ describe('Groups', () => {
             ]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-
+            console.log(screen.debug());
             expect(screen.queryByText(VALID.GROUP.DESCRIPTION)).toBeInTheDocument();
             expect(screen.queryByText(VALID.GROUP.NAME)).toBeInTheDocument();
 
             const joinButton = screen.getAllByText('Join!')[0];
             fireEvent.click(joinButton);
             await oneTick();
+            console.log(screen.debug());
 
             expect(screen.getAllByText('Joined').length).toBe(1);
         });
@@ -40,7 +41,7 @@ describe('Groups', () => {
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(screen.queryByText(/FetchGroupsQuery: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/FetchGroups: network error/)).toBeInTheDocument();
         });
 
         it('fetchGroups: GraphQL error', async () => {
@@ -48,7 +49,7 @@ describe('Groups', () => {
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
-            expect(screen.queryByText(/FetchGroupsQuery: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/FetchGroups: GraphQL error/)).toBeInTheDocument();
         });
 
         it('joinGroup: network error', async () => {
@@ -65,7 +66,7 @@ describe('Groups', () => {
             fireEvent.click(joinButton);
             await oneTick();
 
-            expect(screen.queryByText(/JoinGroupMutation: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/JoinGroup: network error/)).toBeInTheDocument();
         });
 
         it('joinGroup: GraphQL error', async () => {
@@ -82,7 +83,7 @@ describe('Groups', () => {
             fireEvent.click(joinButton);
             await oneTick();
 
-            expect(screen.queryByText(/JoinGroupMutation: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/JoinGroup: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

@@ -1,15 +1,15 @@
 import { useRoutes } from 'hookrouter';
 import React from 'react';
 
-import { AddGroup } from 'src/components/AddGroup';
-import { AddTopic } from 'src/components/AddTopic';
-import { Groups } from 'src/components/Groups';
-import { Home } from 'src/components/Home';
-import { Login } from 'src/components/Login';
+import { AddGroup } from 'src/components/AddGroup/AddGroup';
+import { AddTopic } from 'src/components/AddTopic/AddTopic';
+import { Groups } from 'src/components/Groups/Groups';
+import { Home } from 'src/components/Home/Home';
+import { Login } from 'src/components/Login/Login';
 import { NotFound } from 'src/components/NotFound';
-import { Signup } from 'src/components/Signup';
-import { Topics } from 'src/components/Topics';
-import { UserProfile } from 'src/components/UserProfile';
+import { Signup } from 'src/components/Signup/Signup';
+import { Topics } from 'src/components/Topics/Topics';
+import { UserProfile } from 'src/components/UserProfile/UserProfile';
 import { AppBody } from 'src/styles/app';
 
 import { NavigationBar } from './NavigationBar';

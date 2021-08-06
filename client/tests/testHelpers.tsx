@@ -2,6 +2,7 @@ import { ApolloLink, DocumentNode } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { MockedProvider, MockedResponse, MockLink } from '@apollo/client/testing';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 import { GraphQLError } from 'graphql';
 import { print } from 'graphql/language/printer';
 import React from 'react';
@@ -172,3 +173,60 @@ export const assembleMocks = ({ data, query, spyOnNewData = false, variables = {
         }
     };
 };
+
+type MockType = { [key: string]: any };
+
+export function createComponentMocks<T>(data: T): MockType {
+    return {
+        error: {
+            error: `Error`,
+            loading: false
+        },
+        loading: {
+            loading: true
+        },
+        mockState: 'loading',
+        success: {
+            loading: false,
+            ...data
+        }
+    };
+}
+
+export const testComponent = (component: React.FC, mocks: MockType) => {
+    describe(component.displayName || 'No displayName', () => {
+        it('loading', () => {
+            mocks.mockState = 'loading';
+            expect(render(React.createElement(component)).container).toMatchSnapshot();
+        });
+
+        it('failure', async () => {
+            mocks.mockState = 'error';
+            expect(render(React.createElement(component)).container).toMatchSnapshot();
+        });
+
+        it('success', async () => {
+            mocks.mockState = 'success';
+            expect(render(React.createElement(component)).container).toMatchSnapshot();
+        });
+    });
+};
+
+export type CustomHookWithoutResult = {
+    loading: boolean;
+    error?: any;
+};
+
+export type CustomHookResult<T> = Partial<T> & CustomHookWithoutResult;
+
+export function createHookMockingWrapper<T>(hook: () => any, mock: MockedResponse<T>) {
+    const wrapper = ({ children }: { children: any }) => (
+        <MockedProvider mocks={[mock]} addTypename={false}>
+            {children}
+        </MockedProvider>
+    );
+    const { result, waitForNextUpdate } = renderHook<any, CustomHookResult<T>>(() => hook(), {
+        wrapper
+    });
+    return { result: result, waitForNextUpdate };
+}

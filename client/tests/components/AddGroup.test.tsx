@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 
-import { AddGroup } from 'src/components/AddGroup';
+import { AddGroup } from 'src/components/AddGroup/AddGroup';
 import { Path } from 'src/components/Routes';
 import { ADD_GROUP, INVALID, VALID } from 'tests/fixtures';
 import { createGroupMocks } from 'tests/mocks/groupMocks';
@@ -44,8 +44,7 @@ describe('AddGroup', () => {
             renderComponent(AddGroup, [createGroupMocks.networkError]);
 
             await submitAddGroup();
-
-            expect(screen.queryByText(/CreateGroupMutation: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateGroup: network error/)).toBeInTheDocument();
         });
 
         it('createGroup: GraphQL error', async () => {
@@ -53,7 +52,7 @@ describe('AddGroup', () => {
 
             await submitAddGroup();
 
-            expect(screen.queryByText(/CreateGroupMutation: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateGroup: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

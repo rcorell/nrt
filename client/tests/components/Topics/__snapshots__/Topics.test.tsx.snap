@@ -1,0 +1,506 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`No displayName failure 1`] = `
+<div>
+  <div>
+    Error: 
+    "Error"
+  </div>
+</div>
+`;
+
+exports[`No displayName loading 1`] = `
+<div>
+  <div>
+    Loading...
+  </div>
+</div>
+`;
+
+exports[`No displayName success 1`] = `
+<div>
+  <div
+    class="MuiPaper-root MuiPaper-elevation2 MuiPaper-rounded"
+    style="position: relative;"
+  >
+    <div
+      class="MuiToolbar-root MuiToolbar-regular MTableToolbar-root-5 MuiToolbar-gutters"
+    >
+      <div
+        class="MTableToolbar-title-9"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6"
+          style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+        >
+          Topics
+        </h6>
+      </div>
+      <div
+        class="MTableToolbar-spacer-7"
+      />
+      <div
+        class="MuiFormControl-root MuiTextField-root MTableToolbar-searchField-10"
+      >
+        <div
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedStart MuiInputBase-adornedEnd"
+        >
+          <div
+            class="MuiInputAdornment-root MuiInputAdornment-positionStart"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+              title="Search"
+            >
+              search
+            </span>
+          </div>
+          <input
+            aria-invalid="false"
+            aria-label="Search"
+            class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd"
+            placeholder="Search"
+            type="text"
+            value=""
+          />
+          <div
+            class="MuiInputAdornment-root MuiInputAdornment-positionEnd"
+          >
+            <button
+              aria-label="Clear Search"
+              class="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span
+                  aria-hidden="true"
+                  aria-label="clear"
+                  class="material-icons MuiIcon-root MuiIcon-fontSizeSmall"
+                >
+                  clear
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MTableToolbar-actions-8"
+      >
+        <div>
+          <div>
+            <span />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Component-horizontalScrollContainer-12"
+      style="overflow-x: auto; position: relative;"
+    >
+      <div>
+        <div
+          style="overflow-y: auto;"
+        >
+          <div>
+            <table
+              class="MuiTable-root"
+              style="table-layout: auto;"
+            >
+              <thead
+                class="MuiTableHead-root"
+              >
+                <tr
+                  class="MuiTableRow-root MuiTableRow-head"
+                >
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head MTableHeader-header-13 MuiTableCell-alignLeft"
+                    scope="col"
+                    style="box-sizing: border-box;"
+                  >
+                    <span
+                      aria-disabled="false"
+                      class="MuiButtonBase-root MuiTableSortLabel-root"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <div
+                        aria-describedby="rbd-hidden-text-0-hidden-text-0"
+                        data-rbd-drag-handle-context-id="0"
+                        data-rbd-drag-handle-draggable-id="0"
+                        data-rbd-draggable-context-id="0"
+                        data-rbd-draggable-id="0"
+                        draggable="false"
+                        role="button"
+                        tabindex="0"
+                      >
+                        Title
+                      </div>
+                      <span
+                        aria-hidden="true"
+                        class="material-icons MuiIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                      >
+                        arrow_downward
+                      </span>
+                    </span>
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head MTableHeader-header-13 MuiTableCell-alignLeft"
+                    scope="col"
+                    style="box-sizing: border-box;"
+                  >
+                    <span
+                      aria-disabled="false"
+                      class="MuiButtonBase-root MuiTableSortLabel-root"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <div
+                        aria-describedby="rbd-hidden-text-0-hidden-text-0"
+                        data-rbd-drag-handle-context-id="0"
+                        data-rbd-drag-handle-draggable-id="1"
+                        data-rbd-draggable-context-id="0"
+                        data-rbd-draggable-id="1"
+                        draggable="false"
+                        role="button"
+                        tabindex="0"
+                      >
+                        Description
+                      </div>
+                      <span
+                        aria-hidden="true"
+                        class="material-icons MuiIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                      >
+                        arrow_downward
+                      </span>
+                    </span>
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head MTableHeader-header-13 MuiTableCell-alignLeft"
+                    scope="col"
+                    style="box-sizing: border-box;"
+                  >
+                    <span
+                      aria-disabled="false"
+                      class="MuiButtonBase-root MuiTableSortLabel-root"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <div
+                        aria-describedby="rbd-hidden-text-0-hidden-text-0"
+                        data-rbd-drag-handle-context-id="0"
+                        data-rbd-drag-handle-draggable-id="2"
+                        data-rbd-draggable-context-id="0"
+                        data-rbd-draggable-id="2"
+                        draggable="false"
+                        role="button"
+                        tabindex="0"
+                      >
+                        Group
+                      </div>
+                      <span
+                        aria-hidden="true"
+                        class="material-icons MuiIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc"
+                      >
+                        arrow_downward
+                      </span>
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root"
+                  index="0"
+                  level="0"
+                  path="0"
+                  style="transition: all ease 300ms;"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft"
+                    style="box-sizing: border-box; font-family: inherit; font-weight: inherit;"
+                    value="t1"
+                  >
+                    t1
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft"
+                    style="box-sizing: border-box; font-family: inherit; font-weight: inherit;"
+                    value="d1"
+                  >
+                    d1
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft"
+                    style="box-sizing: border-box; font-family: inherit; font-weight: inherit;"
+                    value="g1"
+                  >
+                    g1
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 49px;"
+                />
+                <tr
+                  class="MuiTableRow-root"
+                  style="height: 1px;"
+                />
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table
+      class="MuiTable-root"
+    >
+      <tfoot
+        class="MuiTableFooter-root"
+        style="display: grid;"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-footer"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-footer MuiTablePagination-root Component-paginationRoot-1"
+            colspan="3"
+            icons="[object Object]"
+            style="float: right; overflow-x: auto;"
+          >
+            <div
+              class="MuiToolbar-root MuiToolbar-regular MuiTablePagination-toolbar Component-paginationToolbar-2 MuiToolbar-gutters"
+            >
+              <div
+                class="MuiTablePagination-spacer"
+              />
+              <p
+                class="MuiTypography-root MuiTablePagination-caption Component-paginationCaption-3 MuiTypography-body2 MuiTypography-colorInherit"
+                id="mui-95685"
+              >
+                Rows per page:
+              </p>
+              <div
+                class="MuiInputBase-root MuiTablePagination-input MuiTablePagination-selectRoot Component-paginationSelectRoot-4"
+              >
+                <div
+                  aria-haspopup="listbox"
+                  aria-labelledby="mui-95685 mui-89939"
+                  class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
+                  id="mui-89939"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    style="padding: 0px 5px;"
+                  >
+                    20 rows 
+                  </div>
+                </div>
+                <input
+                  aria-hidden="true"
+                  class="MuiSelect-nativeInput"
+                  tabindex="-1"
+                  value="20"
+                />
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSelect-icon MuiTablePagination-selectIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M7 10l5 5 5-5z"
+                  />
+                </svg>
+              </div>
+              <p
+                class="MuiTypography-root MuiTablePagination-caption Component-paginationCaption-3 MuiTypography-body2 MuiTypography-colorInherit"
+              >
+                1-1 of 1
+              </p>
+              <div
+                class="MTablePaginationInner-root-14"
+              >
+                <span
+                  class=""
+                  title="First Page"
+                >
+                  <button
+                    class="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+                    disabled=""
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="material-icons MuiIcon-root"
+                      >
+                        first_page
+                      </span>
+                    </span>
+                  </button>
+                </span>
+                <span
+                  class=""
+                  title="Previous Page"
+                >
+                  <button
+                    class="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+                    disabled=""
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="material-icons MuiIcon-root"
+                      >
+                        chevron_left
+                      </span>
+                    </span>
+                  </button>
+                </span>
+                <span
+                  class="MuiTypography-root MuiTypography-caption"
+                  style="flex: 1; text-align: center; align-self: center; flex-basis: inherit;"
+                >
+                  1-1 of 1
+                </span>
+                <span
+                  class=""
+                  title="Next Page"
+                >
+                  <button
+                    class="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+                    disabled=""
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="material-icons MuiIcon-root"
+                      >
+                        chevron_right
+                      </span>
+                    </span>
+                  </button>
+                </span>
+                <span
+                  class=""
+                  title="Last Page"
+                >
+                  <button
+                    class="MuiButtonBase-root MuiIconButton-root Mui-disabled Mui-disabled"
+                    disabled=""
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span
+                        aria-hidden="true"
+                        class="material-icons MuiIcon-root"
+                      >
+                        last_page
+                      </span>
+                    </span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+`;

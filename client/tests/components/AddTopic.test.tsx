@@ -2,14 +2,15 @@ import { MockedResponse } from '@apollo/client/testing';
 import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AddTopic } from 'src/components/AddTopic';
+import { AddTopic } from 'src/components/AddTopic/AddTopic';
 import { Path } from 'src/components/Routes';
 import { LOADING_TEXT } from 'src/components/shared';
 import { ADD_TOPIC, INVALID, VALID } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
-import { createTopicMocks } from 'tests/mocks/topicMocks';
+
 import { fetchUserWithGroupsMocks, fetchUserWithoutGroupsMocks } from 'tests/mocks/userMocks';
 import { lastNavigationPath, oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
+import { createTopicMocks } from './Topics/Topics.mocks';
 
 describe('AddTopic', () => {
     testFormSnapshots(
@@ -75,7 +76,7 @@ describe('AddTopic', () => {
             ]);
 
             expect(container).toMatchSnapshot();
-            expect(screen.queryByText(/CreateTopicMutation: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateTopic: network error/)).toBeInTheDocument();
         });
 
         it('createTopic: GraphQL error', async () => {
@@ -85,7 +86,7 @@ describe('AddTopic', () => {
             ]);
 
             expect(container).toMatchSnapshot();
-            expect(screen.queryByText(/CreateTopicMutation: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/CreateTopic: GraphQL error/)).toBeInTheDocument();
         });
     });
 });
