@@ -20,8 +20,6 @@ describe('useUser custom hook', () => {
 
         await waitForNextUpdate();
 
-        console.log(result.current);
-
         expect(result.current.loading).toBeFalsy();
         expect(result.current.user!.id).toBe('100');
         expect(result.current.user!.groups).toBeTruthy();
