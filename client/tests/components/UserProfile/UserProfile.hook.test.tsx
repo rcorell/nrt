@@ -1,6 +1,6 @@
-import { fetchUserMocks } from 'tests/mocks/userMocks';
 import { useUser } from 'src/components/UserProfile/UserProfile.hook';
 import { createHookMockingWrapper } from 'tests/testHelpers';
+import { fetchUserMocks } from './UserProfile.mocks';
 
 describe('useUser custom hook', () => {
     it('should return a user', async () => {
@@ -11,7 +11,7 @@ describe('useUser custom hook', () => {
 
         await waitForNextUpdate();
         expect(result.current.loading).toBeFalsy();
-        expect(result.current.user!.name).toBe('Buckaroo Banzai');
+        expect(result.current.user.name).toBe('Buckaroo Banzai');
         expect(result.current.error).toBeUndefined();
     });
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import { UserProfile } from 'src/components/UserProfile/UserProfile';
-import { useUser } from 'src/components/UserProfile/UserProfile.hook';
 
 let mockState: 'loading' | 'success' | 'failure' = 'loading';
 

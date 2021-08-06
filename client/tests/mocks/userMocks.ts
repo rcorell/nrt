@@ -2,12 +2,7 @@ import { StandardMocks, TYPENAME } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
 import { mockTopics } from 'tests/components/Topics/Topics.mocks';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
-import {
-    FetchUserWithGroupTopicsQuery,
-    FetchUserWithGroupTopicsDocument,
-    FetchUserDocument,
-    FetchUserQuery
-} from 'src/api/__generated__/types';
+import { FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsDocument } from 'src/api/__generated__/types';
 
 const TEST_USER_WITHOUT_GROUPS = {
     __typename: TYPENAME.USER,
@@ -28,24 +23,6 @@ const TEST_USER_WITH_GROUPS = {
     name: 'Buckaroo Banzai',
     topics: []
 };
-
-const TEST_USER = {
-    __typename: TYPENAME.USER,
-    id: '100',
-    name: 'Buckaroo Banzai'
-};
-
-/**
- * fetchUser
- */
-
-const fetchUserParams: MockParameters<FetchUserQuery> = {
-    data: {
-        user: TEST_USER
-    },
-    query: FetchUserDocument
-};
-export const fetchUserMocks: StandardMocks<FetchUserQuery> = assembleMocks(fetchUserParams);
 
 /**
  * fetchUserWithGroups
