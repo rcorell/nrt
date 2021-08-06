@@ -1,17 +1,17 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { LOADING_TEXT } from 'src/components/shared';
-import { UserProfile } from 'src/components/UserProfile';
-import { fetchUserWithGroupsMocks } from 'tests/mocks/userMocks';
+import { UserProfile } from 'src/components/UserProfile/UserProfile';
+import { fetchUserMocks } from 'tests/mocks/userMocks';
 import { renderComponent } from 'tests/testHelpers';
 
 describe('UserProfile', () => {
     it('loading', () => {
-        expect(renderComponent(UserProfile, [fetchUserWithGroupsMocks.success]).container).toMatchSnapshot();
+        expect(renderComponent(UserProfile, [fetchUserMocks.success]).container).toMatchSnapshot();
     });
 
     it('success', async () => {
-        const { container } = renderComponent(UserProfile, [fetchUserWithGroupsMocks.success]);
+        const { container } = renderComponent(UserProfile, [fetchUserMocks.success]);
 
         await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -20,7 +20,7 @@ describe('UserProfile', () => {
 
     describe('failure', () => {
         it('GraphQL error', async () => {
-            const { container } = renderComponent(UserProfile, [fetchUserWithGroupsMocks.graphQLError]);
+            const { container } = renderComponent(UserProfile, [fetchUserMocks.graphQLError]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 
@@ -28,7 +28,7 @@ describe('UserProfile', () => {
         });
 
         it('network failure', async () => {
-            const { container } = renderComponent(UserProfile, [fetchUserWithGroupsMocks.networkError]);
+            const { container } = renderComponent(UserProfile, [fetchUserMocks.networkError]);
 
             await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
 

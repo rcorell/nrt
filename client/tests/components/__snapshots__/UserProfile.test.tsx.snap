@@ -3,7 +3,7 @@
 exports[`UserProfile failure GraphQL error 1`] = `
 <div>
   <div>
-    {"graphQLErrors":[{"message":"FetchUserQuery: GraphQL error"}],"networkError":null,"message":"FetchUserQuery: GraphQL error"}
+    {"graphQLErrors":[{"message":"FetchUser: GraphQL error"}],"networkError":null,"message":"FetchUser: GraphQL error"}
   </div>
 </div>
 `;
@@ -11,7 +11,7 @@ exports[`UserProfile failure GraphQL error 1`] = `
 exports[`UserProfile failure network failure 1`] = `
 <div>
   <div>
-    {"graphQLErrors":[],"networkError":{},"message":"FetchUserQuery: network error"}
+    {"graphQLErrors":[],"networkError":{},"message":"FetchUser: network error"}
   </div>
 </div>
 `;
