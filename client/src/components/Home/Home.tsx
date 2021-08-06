@@ -40,3 +40,5 @@ export const Home: React.FC = () => {
 
     return <HomePage>{userWithGroupTopicsHook.user!.groups.map((group) => groupTopics(group))}</HomePage>;
 };
+
+Home.displayName = 'Home';

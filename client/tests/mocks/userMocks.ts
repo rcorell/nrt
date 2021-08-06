@@ -4,7 +4,7 @@ import { mockTopics } from 'tests/components/Topics/Topics.mocks';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 import { FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsDocument } from 'src/api/__generated__/types';
 
-const TEST_USER_WITHOUT_GROUPS = {
+export const TEST_USER_WITHOUT_GROUPS = {
     __typename: TYPENAME.USER,
     email: 'bbanzai@blueblazers.org',
     groups: [],
@@ -14,7 +14,7 @@ const TEST_USER_WITHOUT_GROUPS = {
     topics: []
 };
 
-const TEST_USER_WITH_GROUPS = {
+export const TEST_USER_WITH_GROUPS = {
     __typename: TYPENAME.USER,
     email: 'bbanzai@blueblazers.org',
     groups: [{ ...mockGroups[0], topics: [...(mockTopics[0] as any)] }],
