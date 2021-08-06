@@ -1,6 +1,7 @@
 import React from 'react';
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
+
 import { useUser } from './UserProfile.hook';
 
 export const UserProfile: React.FC = () => {
