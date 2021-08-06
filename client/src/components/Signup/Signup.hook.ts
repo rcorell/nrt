@@ -5,7 +5,7 @@ import { GlobalContext } from '../GlobalContextProvider';
 
 export const useSignup = () => {
     const { setAuthenticated } = useContext(GlobalContext);
-    const [callMutation, { error }] = useSignupMutation({
+    const [callMutation, { error, loading }] = useSignupMutation({
         onCompleted: (result) => {
             if (result?.signup) {
                 localStorage.setItem('token', result.signup.token!);
@@ -28,5 +28,5 @@ export const useSignup = () => {
         });
     };
 
-    return { error, signup };
+    return { error, loading, signup };
 };
