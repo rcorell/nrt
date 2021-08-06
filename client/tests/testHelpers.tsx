@@ -211,10 +211,13 @@ export const testComponent = (component: React.FC, mocks: MockType) => {
         });
     });
 };
-export type CustomHookResult<T> = Partial<T> & {
+
+export type CustomHookWithoutResult = {
     loading: boolean;
     error?: any;
 };
+
+export type CustomHookResult<T> = Partial<T> & CustomHookWithoutResult;
 
 export function createHookMockingWrapper<T>(hook: () => any, mock: MockedResponse<T>) {
     const wrapper = ({ children }: { children: any }) => (

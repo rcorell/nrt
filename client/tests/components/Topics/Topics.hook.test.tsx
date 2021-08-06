@@ -1,41 +1,45 @@
+import { FetchTopicsQuery } from 'src/api/__generated__/types';
 import { useTopics } from 'src/components/Topics/Topics.hook';
-import { createHookMockingWrapper } from 'tests/testHelpers';
+import { createHookMockingWrapper, CustomHookResult } from 'tests/testHelpers';
 import { fetchTopicMocks } from './Topics.mocks';
 
-describe('useUser custom hook', () => {
+describe('useTopics custom hook', () => {
+    const checkInitialState = (state: CustomHookResult<FetchTopicsQuery>) => {
+        expect(state.loading).toBeTruthy();
+        expect(state.topics).toBeUndefined();
+        expect(state.error).toBeUndefined();
+    };
+
+    const checkErrorState = (state: CustomHookResult<FetchTopicsQuery>) => {
+        expect(state.loading).toBeFalsy();
+        expect(state.topics).toBeUndefined();
+        expect(state.error).not.toBeUndefined();
+    };
+
+    const checkSuccessState = (state: CustomHookResult<FetchTopicsQuery>) => {
+        expect(state.loading).toBeFalsy();
+        expect(state.error).toBeUndefined();
+        expect(state.topics![0].title).toBe('t1-title');
+    };
+
     it('should return a user', async () => {
         const { result, waitForNextUpdate } = createHookMockingWrapper(useTopics, fetchTopicMocks.success);
-        expect(result.current.loading).toBeTruthy();
-        expect(result.current.error).toBeUndefined();
-        expect(result.current.topics).toBeUndefined();
-
+        checkInitialState(result.current);
         await waitForNextUpdate();
-        expect(result.current.loading).toBeFalsy();
-        expect(result.current.topics![0].title).toBe('t1-title');
-        expect(result.current.error).toBeUndefined();
+        checkSuccessState(result.current);
     });
 
     it('should fail with graphQLError', async () => {
         const { result, waitForNextUpdate } = createHookMockingWrapper(useTopics, fetchTopicMocks.graphQLError);
-        expect(result.current.loading).toBeTruthy();
-        expect(result.current.error).toBeUndefined();
-        expect(result.current.topics).toBeUndefined();
-
+        checkInitialState(result.current);
         await waitForNextUpdate();
-        expect(result.current.loading).toBeFalsy();
-        expect(result.current.topics).toBeUndefined();
-        expect(result.current.error).not.toBeUndefined();
+        checkErrorState(result.current);
     });
 
     it('should fail with network error', async () => {
         const { result, waitForNextUpdate } = createHookMockingWrapper(useTopics, fetchTopicMocks.networkError);
-        expect(result.current.loading).toBeTruthy();
-        expect(result.current.error).toBeUndefined();
-        expect(result.current.topics).toBeUndefined();
-
+        checkInitialState(result.current);
         await waitForNextUpdate();
-        expect(result.current.loading).toBeFalsy();
-        expect(result.current.topics).toBeUndefined();
-        expect(result.current.error).not.toBeUndefined();
+        checkErrorState(result.current);
     });
 });
