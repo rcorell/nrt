@@ -3,7 +3,7 @@ import { StandardMocks } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 import { TYPENAME, VALID } from 'tests/fixtures';
 
-export const mockTopics = [
+export const MOCK_TOPICS = [
     {
         __typename: TYPENAME.TOPIC,
         description: 't1-desc',
@@ -18,26 +18,26 @@ export const mockTopics = [
     }
 ];
 
-export const mockGroups = [
+export const MOCK_GROUPS = [
     {
         __typename: TYPENAME.GROUP,
         description: VALID.GROUP.DESCRIPTION,
         id: '40',
         name: VALID.GROUP.NAME,
-        topics: [mockTopics[0]]
+        topics: [MOCK_TOPICS[0]]
     },
     {
         __typename: TYPENAME.GROUP,
         description: VALID.GROUP.DESCRIPTION + '2',
         id: '41',
         name: VALID.GROUP.NAME + '2',
-        topics: [mockTopics[1]]
+        topics: [MOCK_TOPICS[1]]
     }
 ];
 
 export const TEST_USER_WITH_GROUPS: FetchUserWithGroupTopicsQuery['user'] = {
     __typename: TYPENAME.USER,
-    groups: mockGroups,
+    groups: MOCK_GROUPS,
     id: '100'
 };
 
