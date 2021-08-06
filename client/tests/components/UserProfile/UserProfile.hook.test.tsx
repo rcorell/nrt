@@ -11,7 +11,7 @@ describe('useUser custom hook', () => {
 
         await waitForNextUpdate();
         expect(result.current.loading).toBeFalsy();
-        expect(result.current.user.name).toBe('Buckaroo Banzai');
+        expect(result.current.user!.name).toBe('Buckaroo Banzai');
         expect(result.current.error).toBeUndefined();
     });
 

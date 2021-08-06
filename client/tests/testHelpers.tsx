@@ -174,7 +174,7 @@ export const assembleMocks = ({ data, query, spyOnNewData = false, variables = {
     };
 };
 
-export type CustomHookResult<T> = T & {
+export type CustomHookResult<T> = Partial<T> & {
     loading: boolean;
     error?: any;
 };
