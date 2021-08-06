@@ -176,7 +176,7 @@ export const assembleMocks = ({ data, query, spyOnNewData = false, variables = {
 
 type MockType = { [key: string]: any };
 
-export const createComponentMocks = (data: any): MockType => {
+export function createComponentMocks<T>(data: T): MockType {
     return {
         error: {
             error: `Error`,
@@ -191,7 +191,7 @@ export const createComponentMocks = (data: any): MockType => {
             ...data
         }
     };
-};
+}
 
 export const testComponent = (component: React.FC, mocks: MockType) => {
     describe(component.displayName || 'No displayName', () => {
