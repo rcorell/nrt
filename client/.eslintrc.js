@@ -31,6 +31,17 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_.*' }],
         '@typescript-eslint/no-use-before-define': 'off',
+        'import/order': [
+            'error',
+            {
+                alphabetize: {
+                    caseInsensitive: true,
+                    order: 'asc'
+                },
+                groups: ['builtin', 'external', 'internal'],
+                'newlines-between': 'always'
+            }
+        ],
         'prettier/prettier': 2,
         'react/display-name': 'off',
         'react/jsx-key': 'off',

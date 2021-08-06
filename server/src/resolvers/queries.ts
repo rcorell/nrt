@@ -1,4 +1,6 @@
-export const groups = async (_parent, _args, context) => {
+import { Resolver } from './resolverTypes';
+
+export const groups: Resolver = (_parent, _args, context) => {
     return context.prisma.group.findMany();
 };
 
@@ -6,8 +8,8 @@ export const ready = () => {
     return 'top-5-daily-server';
 };
 
-export const topics = async (_parent, args, context) => {
-    let where;
+export const topics: Resolver = (_parent, args, context) => {
+    let where = {};
 
     if (args.groupIds) {
         where = {
@@ -20,6 +22,6 @@ export const topics = async (_parent, args, context) => {
     return context.prisma.topic.findMany(where);
 };
 
-export const user = async (_parent, _args, context) => {
+export const user: Resolver = (_parent, _args, context) => {
     return context.prisma.user.findUnique({ where: { id: context.userId } });
 };
