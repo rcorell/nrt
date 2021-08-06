@@ -1,4 +1,4 @@
-import { FetchUserWithGroupsAndTopicsDocument, FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/types';
+import { FetchUserWithGroupsAndTopicsDocument, FetchUserWithGroupTopicsDocument, FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/types';
 import { StandardMocks } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 import { TYPENAME, VALID } from 'tests/fixtures';
@@ -45,6 +45,6 @@ const fetchUserParams: MockParameters<FetchUserWithGroupTopicsQuery> = {
     data: {
         user: TEST_USER_WITH_GROUPS
     },
-    query: FetchUserWithGroupsAndTopicsDocument
+    query: FetchUserWithGroupTopicsDocument
 };
 export const fetchUserMocks: StandardMocks<FetchUserWithGroupTopicsQuery> = assembleMocks(fetchUserParams);
