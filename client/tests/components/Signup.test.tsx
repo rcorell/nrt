@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 
 import { GlobalContext } from 'src/components/GlobalContextProvider';
-import { Signup } from 'src/components/Signup';
+import { Signup } from 'src/components/Signup/Signup';
 import { INVALID, VALID } from 'tests/fixtures';
 import { signupMocks } from 'tests/mocks/signupMocks';
 import {
@@ -97,7 +97,7 @@ describe('Signup', () => {
 
             expect(localStorageMocks.setItemMock).not.toHaveBeenCalled();
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/SignupMutation: network error/)).toBeInTheDocument();
+            expect(screen.queryByText(/Signup: network error/)).toBeInTheDocument();
         });
 
         it('signup: GraphQL error', async () => {
@@ -108,7 +108,7 @@ describe('Signup', () => {
 
             expect(localStorageMocks.setItemMock).not.toHaveBeenCalled();
             expect(lastNavigationPath).toEqual('initial path');
-            expect(screen.queryByText(/SignupMutation: GraphQL error/)).toBeInTheDocument();
+            expect(screen.queryByText(/Signup: GraphQL error/)).toBeInTheDocument();
         });
     });
 });

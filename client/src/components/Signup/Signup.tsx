@@ -1,34 +1,16 @@
-import { useMutation } from '@apollo/client';
-import { navigate } from 'hookrouter';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormControlProps } from 'react-bootstrap';
 
-import { SignupMutation, SignupMutationVariables } from 'src/api/__generated__/SignupMutation';
-import { signupMutation } from 'src/api/api';
-import { GlobalContext } from 'src/components/GlobalContextProvider';
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
+import { useSignup } from './Signup.hook';
 
 export const Signup: React.FC = () => {
-    const { setAuthenticated } = useContext(GlobalContext);
-
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
 
-    const [signup, { error }] = useMutation<SignupMutation, SignupMutationVariables>(signupMutation, {
-        onCompleted: (result) => {
-            if (result?.signup) {
-                localStorage.setItem('token', result.signup.token!);
-                setAuthenticated(true);
-                navigate('/');
-            }
-        },
-        onError: () => {
-            // RTL bug
-        },
-        variables: { email, name, password }
-    });
+    const signupHook = useSignup();
 
     setBrowserTitle('Sign Up');
 
@@ -37,8 +19,8 @@ export const Signup: React.FC = () => {
     };
 
     const signupStatus = () => {
-        if (error) {
-            return <AppError>Error: {error.message}</AppError>;
+        if (signupHook.error) {
+            return <AppError>Error: {signupHook.error.message}</AppError>;
         }
 
         return null;
@@ -47,7 +29,7 @@ export const Signup: React.FC = () => {
     const handleSubmit = (event: React.FormEvent<FormControlProps>) => {
         event.preventDefault();
 
-        signup();
+        signupHook.signup(email, name, password);
     };
 
     return (

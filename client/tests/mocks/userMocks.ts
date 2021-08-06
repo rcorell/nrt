@@ -1,6 +1,6 @@
 import { StandardMocks, TYPENAME } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
-import { mockTopics } from 'tests/mocks/topicMocks';
+import { mockTopics } from 'tests/components/Topics/Topics.mocks';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 import {
     FetchUserWithGroupTopicsQuery,

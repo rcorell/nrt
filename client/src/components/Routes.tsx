@@ -7,9 +7,9 @@ import { Groups } from 'src/components/Groups/Groups';
 import { Home } from 'src/components/Home/Home';
 import { Login } from 'src/components/Login/Login';
 import { NotFound } from 'src/components/NotFound';
-import { Signup } from 'src/components/Signup';
+import { Signup } from 'src/components/Signup/Signup';
 import { Topics } from 'src/components/Topics/Topics';
-import { UserProfile } from 'src/components/UserProfile';
+import { UserProfile } from 'src/components/UserProfile/UserProfile';
 import { AppBody } from 'src/styles/app';
 
 import { NavigationBar } from './NavigationBar';
