@@ -25,7 +25,21 @@ exports[`Home success 1`] = `
       <h2>
         Blue Blaze Irregulars
       </h2>
-      <ul />
+      <ul>
+        <li>
+          t1-title
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h2>
+        Blue Blaze Irregulars2
+      </h2>
+      <ul>
+        <li>
+          t2-title
+        </li>
+      </ul>
     </div>
   </div>
 </div>

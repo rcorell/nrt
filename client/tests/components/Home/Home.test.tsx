@@ -3,7 +3,7 @@ import { FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/types';
 import { Home } from 'src/components/Home/Home';
 import { render } from '@testing-library/react';
 
-import { TEST_USER_WITH_GROUPS } from 'tests/mocks/userMocks';
+import { TEST_USER_WITH_GROUPS } from './Home.mocks';
 import { createComponentMocks, testComponent } from 'tests/testHelpers';
 
 const mocks = createComponentMocks<FetchUserWithGroupTopicsQuery>({
