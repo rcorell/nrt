@@ -1,6 +1,6 @@
 import { ApolloLink, DocumentNode } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { MockedProvider, MockedResponse, MockLink, mockSingleLink } from '@apollo/client/testing';
+import { MockedProvider, MockedResponse, MockLink } from '@apollo/client/testing';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { GraphQLError } from 'graphql';
