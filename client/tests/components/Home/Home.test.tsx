@@ -22,7 +22,7 @@ jest.mock('src/components/Home/Home.hook', () => ({
 
 testComponent(Home, mocks);
 
-it('shows "join a group" if user has not groups', () => {
+it('shows "join a group" if user has no groups', () => {
     mocks.mockState = 'noGroups';
     expect(render(<Home />).container).toMatchSnapshot();
 });
