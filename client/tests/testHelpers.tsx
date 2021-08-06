@@ -1,7 +1,7 @@
 import { ApolloLink, DocumentNode } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { MockedProvider, MockedResponse, MockLink, mockSingleLink } from '@apollo/client/testing';
-import { act, fireEvent, Query, render, screen } from '@testing-library/react';
+import { MockedProvider, MockedResponse, MockLink } from '@apollo/client/testing';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { GraphQLError } from 'graphql';
 import { print } from 'graphql/language/printer';
@@ -212,7 +212,7 @@ export const testComponent = (component: React.FC, mocks: MockType) => {
     });
 };
 
-export type CustomHookWithoutResult = Query & {
+export type CustomHookWithoutResult = {
     loading: boolean;
     error?: any;
 };
