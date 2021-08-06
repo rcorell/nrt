@@ -1,4 +1,4 @@
-import { FetchUserWithGroupsAndTopicsDocument, FetchUserWithGroupTopicsDocument, FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/types';
+import { FetchUserWithGroupTopicsDocument, FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/types';
 import { StandardMocks } from 'tests/fixtures';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 import { TYPENAME, VALID } from 'tests/fixtures';
