@@ -1,41 +1,40 @@
-import * as React from 'react';
-import { MockedProvider, MockedResponse } from '@apollo/client/testing';
-import { renderHook } from '@testing-library/react-hooks';
 import { fetchUserMocks } from 'tests/mocks/userMocks';
 import { useUser } from 'src/components/UserProfile/UserProfile.hook';
+import { createHookMockingWrapper } from 'tests/testHelpers';
 
 describe('useUser custom hook', () => {
-    function getWrapper<T>(mock: MockedResponse<T>) {
-        const wrapper = ({ children }: { children: any }) => (
-            <MockedProvider mocks={[mock]} addTypename={false}>
-                {children}
-            </MockedProvider>
-        );
-        const { result, waitForNextUpdate } = renderHook(() => useUser(), {
-            wrapper
-        });
-        return { result, waitForNextUpdate };
-    }
-
     it('should return a user', async () => {
-        const { result, waitForNextUpdate } = getWrapper(fetchUserMocks.success);
+        const { result, waitForNextUpdate } = createHookMockingWrapper(useUser, fetchUserMocks.success);
         expect(result.current.loading).toBeTruthy();
         expect(result.current.error).toBeUndefined();
         expect(result.current.user).toBeUndefined();
 
         await waitForNextUpdate();
-
+        expect(result.current.loading).toBeFalsy();
         expect(result.current.user!.name).toBe('Buckaroo Banzai');
+        expect(result.current.error).toBeUndefined();
     });
 
-    it('should fail', async () => {
-        const { result, waitForNextUpdate } = getWrapper(fetchUserMocks.graphQLError);
+    it('should fail with graphQLError', async () => {
+        const { result, waitForNextUpdate } = createHookMockingWrapper(useUser, fetchUserMocks.graphQLError);
         expect(result.current.loading).toBeTruthy();
         expect(result.current.error).toBeUndefined();
         expect(result.current.user).toBeUndefined();
 
         await waitForNextUpdate();
+        expect(result.current.loading).toBeFalsy();
+        expect(result.current.user).toBeUndefined();
+        expect(result.current.error).not.toBeUndefined();
+    });
 
+    it('should fail with network error', async () => {
+        const { result, waitForNextUpdate } = createHookMockingWrapper(useUser, fetchUserMocks.networkError);
+        expect(result.current.loading).toBeTruthy();
+        expect(result.current.error).toBeUndefined();
+        expect(result.current.user).toBeUndefined();
+
+        await waitForNextUpdate();
+        expect(result.current.loading).toBeFalsy();
         expect(result.current.user).toBeUndefined();
         expect(result.current.error).not.toBeUndefined();
     });

@@ -2,6 +2,7 @@ import { ApolloLink, DocumentNode } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { MockedProvider, MockedResponse, MockLink } from '@apollo/client/testing';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 import { GraphQLError } from 'graphql';
 import { print } from 'graphql/language/printer';
 import React from 'react';
@@ -172,3 +173,20 @@ export const assembleMocks = ({ data, query, spyOnNewData = false, variables = {
         }
     };
 };
+
+export type CustomHookResult<T> = T & {
+    loading: boolean;
+    error?: any;
+};
+
+export function createHookMockingWrapper<T>(hook: () => any, mock: MockedResponse<T>) {
+    const wrapper = ({ children }: { children: any }) => (
+        <MockedProvider mocks={[mock]} addTypename={false}>
+            {children}
+        </MockedProvider>
+    );
+    const { result, waitForNextUpdate } = renderHook<any, CustomHookResult<T>>(() => hook(), {
+        wrapper
+    });
+    return { result: result, waitForNextUpdate };
+}
