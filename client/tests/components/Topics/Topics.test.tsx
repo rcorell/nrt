@@ -1,41 +1,24 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
-
-import { LOADING_TEXT } from 'src/components/shared';
+import { FetchTopicsQuery } from 'src/api/__generated__/types';
 import { Topics } from 'src/components/Topics/Topics';
-import { fetchTopicMocks } from './Topics.mocks';
-import { renderComponent } from 'tests/testHelpers';
 
-describe('Topics', () => {
-    describe('snapshots', () => {
-        it('loading', () => {
-            expect(renderComponent(Topics).container).toMatchSnapshot();
-        });
+import { createComponentMocks, testComponent } from 'tests/testHelpers';
 
-        it('success', async () => {
-            renderComponent(Topics, [fetchTopicMocks.success]);
-
-            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-
-            expect(screen.queryByText('t2-desc')).toBeInTheDocument();
-            expect(screen.queryByText('t2-title')).toBeInTheDocument();
-        });
-
-        it('fetchTopics: network error', async () => {
-            const { container } = renderComponent(Topics, [fetchTopicMocks.networkError]);
-
-            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-
-            expect(screen.queryByText(/FetchTopics: network error/)).toBeInTheDocument();
-            expect(container).toMatchSnapshot();
-        });
-
-        it('fetchTopics: GraphQL error', async () => {
-            const { container } = renderComponent(Topics, [fetchTopicMocks.graphQLError]);
-
-            await waitForElementToBeRemoved(() => screen.getByText(LOADING_TEXT));
-
-            expect(screen.queryByText(/FetchTopics: GraphQL error/)).toBeInTheDocument();
-            expect(container).toMatchSnapshot();
-        });
-    });
+const mocks = createComponentMocks<FetchTopicsQuery>({
+    topics: [
+        {
+            description: 'd1',
+            group: {
+                id: '1',
+                name: 'g1'
+            },
+            id: '1',
+            title: 't1'
+        }
+    ]
 });
+
+jest.mock('src/components/Topics/Topics.hook', () => ({
+    useTopics: () => mocks[mocks.mockState]
+}));
+
+testComponent(Topics, mocks);
