@@ -30,3 +30,11 @@ exports[`Home success 1`] = `
   </div>
 </div>
 `;
+
+exports[`shows "join a group" if user has not groups 1`] = `
+<div>
+  <div>
+    Please join a group!
+  </div>
+</div>
+`;
