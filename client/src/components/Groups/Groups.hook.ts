@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
-import { useFetchGroupsQuery, useFetchUserQuery, useJoinGroupMutation } from 'src/api/__generated__/types';
+import {
+    useFetchGroupsQuery,
+    useFetchUserWithGroupsAndTopicsQuery,
+    useJoinGroupMutation
+} from 'src/api/__generated__/types';
 
 export const useGroups = () => {
     const { data, error, loading } = useFetchGroupsQuery({
@@ -10,7 +14,7 @@ export const useGroups = () => {
 };
 
 export const useUser = () => {
-    const { data, error, loading, refetch } = useFetchUserQuery({
+    const { data, error, loading, refetch } = useFetchUserWithGroupsAndTopicsQuery({
         fetchPolicy: 'network-only'
     });
 
