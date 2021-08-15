@@ -1,6 +1,3 @@
-import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
-import { assembleMocks, MockParameters } from 'tests/testHelpers';
-
 import {
     CreateTopicDocument,
     CreateTopicMutation,
@@ -8,6 +5,8 @@ import {
     FetchTopicsDocument,
     FetchTopicsQuery
 } from 'src/api/__generated__/types';
+import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
+import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
 export const mockTopics: FetchTopicsQuery['topics'] = [
     {

@@ -1,9 +1,10 @@
 import React from 'react';
-import { FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/types';
 
+import { FetchUserWithGroupTopicsQuery } from 'src/api/__generated__/types';
 import { LOADING_TEXT } from 'src/components/shared';
 import { HomePage } from 'src/styles/home';
 import { setBrowserTitle } from 'src/utils';
+
 import { useUserWithGroupTopics } from './Home.hook';
 
 type Group = FetchUserWithGroupTopicsQuery['user']['groups'][number];

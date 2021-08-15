@@ -1,6 +1,5 @@
 import { FetchUserQuery } from 'src/api/__generated__/types';
 import { UserProfile } from 'src/components/UserProfile/UserProfile';
-
 import { createComponentMocks, testComponent } from 'tests/testHelpers';
 
 const mocks = createComponentMocks<FetchUserQuery>({

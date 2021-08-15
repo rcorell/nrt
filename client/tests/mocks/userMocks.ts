@@ -1,8 +1,8 @@
+import { FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsDocument } from 'src/api/__generated__/types';
+import { mockTopics } from 'tests/components/Topics/Topics.mocks';
 import { StandardMocks, TYPENAME } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
-import { mockTopics } from 'tests/components/Topics/Topics.mocks';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
-import { FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsDocument } from 'src/api/__generated__/types';
 
 export const TEST_USER_WITHOUT_GROUPS = {
     __typename: TYPENAME.USER,

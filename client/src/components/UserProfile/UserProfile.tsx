@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 

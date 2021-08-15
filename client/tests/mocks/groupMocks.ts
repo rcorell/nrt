@@ -1,5 +1,3 @@
-import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
-import { assembleMocks, MockParameters } from 'tests/testHelpers';
 import {
     CreateGroupDocument,
     CreateGroupMutation,
@@ -10,6 +8,8 @@ import {
     JoinGroupMutation,
     JoinGroupMutationVariables
 } from 'src/api/__generated__/types';
+import { StandardMocks, TYPENAME, VALID } from 'tests/fixtures';
+import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
 export const mockGroups: FetchGroupsQuery['groups'] = [
     {

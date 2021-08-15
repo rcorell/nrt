@@ -3,6 +3,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
+
 import { useSignup } from './Signup.hook';
 
 export const Signup: React.FC = () => {

@@ -7,9 +7,9 @@ import { Path } from 'src/components/Routes';
 import { LOADING_TEXT } from 'src/components/shared';
 import { ADD_TOPIC, INVALID, VALID } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
-
 import { fetchUserWithGroupsMocks, fetchUserWithoutGroupsMocks } from 'tests/mocks/userMocks';
 import { lastNavigationPath, oneTick, renderComponent, setField, testFormSnapshots } from 'tests/testHelpers';
+
 import { createTopicMocks } from './Topics/Topics.mocks';
 
 describe('AddTopic', () => {

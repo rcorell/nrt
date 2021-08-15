@@ -1,6 +1,8 @@
 import { navigate } from 'hookrouter';
 import { useContext } from 'react';
+
 import { useSignupMutation } from 'src/api/__generated__/types';
+
 import { GlobalContext } from '../GlobalContextProvider';
 
 export const useSignup = () => {
