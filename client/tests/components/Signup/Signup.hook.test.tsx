@@ -1,10 +1,11 @@
 import { MockedProvider } from '@apollo/client/testing';
-import { signupMocks } from 'tests/mocks/signupMocks';
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
+import { act } from 'react-test-renderer';
+
 import { useSignup } from 'src/components/Signup/Signup.hook';
 import { VALID } from 'tests/fixtures';
-import { act } from 'react-test-renderer';
+import { signupMocks } from 'tests/mocks/signupMocks';
 
 describe('useTopics custom hook', () => {
     it('should succeed', async () => {

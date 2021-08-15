@@ -1,6 +1,7 @@
 import { FetchTopicsQuery } from 'src/api/__generated__/types';
 import { useTopics } from 'src/components/Topics/Topics.hook';
 import { createHookMockingWrapper, CustomHookResult } from 'tests/testHelpers';
+
 import { fetchTopicMocks } from './Topics.mocks';
 
 describe('useTopics custom hook', () => {

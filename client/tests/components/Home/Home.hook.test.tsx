@@ -1,5 +1,4 @@
 import { useUserWithGroupTopics } from 'src/components/Home/Home.hook';
-
 import { createHookMockingWrapper } from 'tests/testHelpers';
 
 import { fetchUserMocks } from './Home.mocks';

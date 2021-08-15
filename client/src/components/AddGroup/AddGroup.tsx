@@ -3,6 +3,7 @@ import { Button, Form, FormControlProps } from 'react-bootstrap';
 
 import { AppError, AppForm, FormContainer } from 'src/styles/form';
 import { setBrowserTitle } from 'src/utils';
+
 import { useAddGroup } from './AddGroup.hook';
 
 export const AddGroup: React.FC = () => {

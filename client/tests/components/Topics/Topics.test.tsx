@@ -1,6 +1,5 @@
 import { FetchTopicsQuery } from 'src/api/__generated__/types';
 import { Topics } from 'src/components/Topics/Topics';
-
 import { createComponentMocks, testComponent } from 'tests/testHelpers';
 
 const mocks = createComponentMocks<FetchTopicsQuery>({

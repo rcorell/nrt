@@ -4,6 +4,7 @@ import React from 'react';
 
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
+
 import { useGroups, useJoinGroup, useUser } from './Groups.hook';
 
 const COLUMN_DEFINITIONS = [

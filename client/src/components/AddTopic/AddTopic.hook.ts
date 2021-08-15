@@ -1,5 +1,7 @@
 import { navigate } from 'hookrouter';
+
 import { useCreateTopicMutation } from 'src/api/__generated__/types';
+
 import { Path } from '../Routes';
 
 export const useAddTopic = () => {

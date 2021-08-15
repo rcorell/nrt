@@ -1,6 +1,7 @@
 import { FetchUserQuery } from 'src/api/__generated__/types';
 import { useUser } from 'src/components/UserProfile/UserProfile.hook';
 import { createHookMockingWrapper, CustomHookResult } from 'tests/testHelpers';
+
 import { fetchUserMocks } from './UserProfile.mocks';
 
 describe('useUser custom hook', () => {
