@@ -53,7 +53,7 @@ export const createGroup: Resolver = async (_parent, args, context) => {
 
     return await context.prisma.group.create({
         data: {
-            creator: { connect: { id: userId } },
+            creator: { connect: { id: Number(userId) } },
             description: args.description,
             name: args.name
         }
@@ -68,12 +68,12 @@ export const joinGroup: Resolver = async (_parent, args, context) => {
             groups: {
                 connect: [
                     {
-                        id: args.groupId
+                        id: Number(args.groupId)
                     }
                 ]
             }
         },
-        where: { id: context.userId }
+        where: { id: Number(context.userId) }
     });
 
     return args.groupId;
