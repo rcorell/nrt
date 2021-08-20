@@ -355,7 +355,7 @@ exports[`No displayName success 1`] = `
               />
               <p
                 class="MuiTypography-root MuiTablePagination-caption Component-paginationCaption-3 MuiTypography-body2 MuiTypography-colorInherit"
-                id="mui-95685"
+                id="mui-89163"
               >
                 Rows per page:
               </p>
@@ -364,9 +364,9 @@ exports[`No displayName success 1`] = `
               >
                 <div
                   aria-haspopup="listbox"
-                  aria-labelledby="mui-95685 mui-89939"
+                  aria-labelledby="mui-89163 mui-21665"
                   class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
-                  id="mui-89939"
+                  id="mui-21665"
                   role="button"
                   tabindex="0"
                 >

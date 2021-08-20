@@ -33,6 +33,7 @@ export const localStorageMocks = {
 
 export const renderComponent = (component: React.FC, mocks: MockedResponse[] = []) => {
     const reportErrors = !mocks.some((mock: any) => mock?.error || mock?.result?.errors);
+    console.log('reportErrors ', reportErrors);
 
     const cleanedMocks = mocks.map((mock) => {
         const query = JSON.parse(JSON.stringify(mock.request.query.definitions[0]));
@@ -58,11 +59,11 @@ export const renderComponent = (component: React.FC, mocks: MockedResponse[] = [
             graphQLErrors.map(({ message, locations, path }) =>
                 console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
             );
-
         if (networkError) {
             console.log(`[Network error]: ${networkError}`);
         }
     });
+    console.log('report errors: ', reportErrors);
     const link = ApolloLink.from([errorLoggingLink, mockLink]);
 
     return render(

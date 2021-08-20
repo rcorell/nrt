@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import {
     useFetchGroupsQuery,
-    useFetchUserWithGroupsAndTopicsQuery,
+    useFetchUserWithGroupIdsQuery,
     useJoinGroupMutation
 } from 'src/api/__generated__/types';
 
@@ -15,7 +15,7 @@ export const useGroups = () => {
 };
 
 export const useUser = () => {
-    const { data, error, loading, refetch } = useFetchUserWithGroupsAndTopicsQuery({
+    const { data, error, loading, refetch } = useFetchUserWithGroupIdsQuery({
         fetchPolicy: 'network-only'
     });
 
@@ -24,13 +24,21 @@ export const useUser = () => {
 
 export const useJoinGroup = () => {
     const useUserHook = useUser();
-    const [joinGroup, { loading, error, data: result }] = useJoinGroupMutation();
+    const [callMutation, { loading, error, data: result }] = useJoinGroupMutation();
 
     useEffect(() => {
         if (result) {
             useUserHook.refetch();
         }
     }, [result, useUserHook]);
+
+    const joinGroup = (groupId: string) => {
+        callMutation({
+            variables: {
+                groupId
+            }
+        });
+    };
 
     return { error, joinGroup, loading, result };
 };
