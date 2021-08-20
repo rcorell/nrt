@@ -58,7 +58,6 @@ export const renderComponent = (component: React.FC, mocks: MockedResponse[] = [
             graphQLErrors.map(({ message, locations, path }) =>
                 console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
             );
-
         if (networkError) {
             console.log(`[Network error]: ${networkError}`);
         }

@@ -1,23 +1,26 @@
-import { FetchUserWithGroupTopicsQuery, FetchUserWithGroupTopicsDocument } from 'src/api/__generated__/types';
+import {
+    FetchUserWithGroupTopicsQuery,
+    FetchUserWithGroupTopicsDocument,
+    FetchUserWithGroupIdsQuery,
+    FetchUserWithGroupIdsDocument
+} from 'src/api/__generated__/types';
 import { mockTopics } from 'tests/components/Topics/Topics.mocks';
 import { StandardMocks, TYPENAME } from 'tests/fixtures';
 import { mockGroups } from 'tests/mocks/groupMocks';
 import { assembleMocks, MockParameters } from 'tests/testHelpers';
 
-export const TEST_USER_WITHOUT_GROUPS = {
+export const TEST_USER_WITHOUT_GROUP_IDS = {
     __typename: TYPENAME.USER,
     email: 'bbanzai@blueblazers.org',
     groups: [],
-    groupsCreated: [],
     id: '100',
-    name: 'Buckaroo Banzai',
-    topics: []
+    name: 'Buckaroo Banzai'
 };
 
-export const TEST_USER_WITH_GROUPS = {
+export const TEST_USER_WITH_GROUP_IDS = {
     __typename: TYPENAME.USER,
     email: 'bbanzai@blueblazers.org',
-    groups: [{ ...mockGroups[0], topics: [...(mockTopics[0] as any)] }],
+    groups: [{ id: mockGroups[1].id }],
     groupsCreated: [],
     id: '100',
     name: 'Buckaroo Banzai',
@@ -25,29 +28,29 @@ export const TEST_USER_WITH_GROUPS = {
 };
 
 /**
- * fetchUserWithGroups
+ * fetchUserWithGroupIds
  */
-const fetchUserWithGroupsParams: MockParameters<FetchUserWithGroupTopicsQuery> = {
+const fetchUserWithGroupIdsParams: MockParameters<FetchUserWithGroupIdsQuery> = {
     data: {
-        user: TEST_USER_WITH_GROUPS
+        user: TEST_USER_WITH_GROUP_IDS
     },
-    query: FetchUserWithGroupTopicsDocument
+    query: FetchUserWithGroupIdsDocument
 };
-export const fetchUserWithGroupsMocks: StandardMocks<FetchUserWithGroupTopicsQuery> = assembleMocks(
-    fetchUserWithGroupsParams
+export const fetchUserWithGroupIdsMocks: StandardMocks<FetchUserWithGroupIdsQuery> = assembleMocks(
+    fetchUserWithGroupIdsParams
 );
 
 /**
- * fetchUserWithoutGroups
+ * fetchUserWithoutGroupIds
  */
-const fetchUserWithoutGroupsParams: MockParameters<FetchUserWithGroupTopicsQuery> = {
+const fetchUserWithoutGroupIdsParams: MockParameters<FetchUserWithGroupIdsQuery> = {
     data: {
-        user: TEST_USER_WITHOUT_GROUPS
+        user: TEST_USER_WITHOUT_GROUP_IDS
     },
-    query: FetchUserWithGroupTopicsDocument
+    query: FetchUserWithGroupIdsDocument
 };
-export const fetchUserWithoutGroupsMocks: StandardMocks<FetchUserWithGroupTopicsQuery> = assembleMocks(
-    fetchUserWithoutGroupsParams
+export const fetchUserWithoutGroupIdsMocks: StandardMocks<FetchUserWithGroupIdsQuery> = assembleMocks(
+    fetchUserWithoutGroupIdsParams
 );
 
 /**

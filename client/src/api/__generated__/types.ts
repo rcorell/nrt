@@ -276,18 +276,16 @@ export type FetchGroupsQuery = {
     groups: Array<{ __typename?: 'Group'; id: string; name: string; description: string }>;
 };
 
-export type FetchUserWithGroupsAndTopicsQueryVariables = Exact<{ [key: string]: never }>;
+export type FetchUserWithGroupIdsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type FetchUserWithGroupsAndTopicsQuery = {
+export type FetchUserWithGroupIdsQuery = {
     __typename?: 'Query';
     user: {
         __typename?: 'User';
         id: string;
         name: string;
         email: string;
-        groups: Array<{ __typename?: 'Group'; id: string; description: string; name: string }>;
-        groupsCreated: Array<{ __typename?: 'Group'; id: string; description: string; name: string }>;
-        topics: Array<{ __typename?: 'Topic'; id: string; description: string; title: string }>;
+        groups: Array<{ __typename?: 'Group'; id: string }>;
     };
 };
 
@@ -472,77 +470,57 @@ export function useFetchGroupsLazyQuery(
 export type FetchGroupsQueryHookResult = ReturnType<typeof useFetchGroupsQuery>;
 export type FetchGroupsLazyQueryHookResult = ReturnType<typeof useFetchGroupsLazyQuery>;
 export type FetchGroupsQueryResult = Apollo.QueryResult<FetchGroupsQuery, FetchGroupsQueryVariables>;
-export const FetchUserWithGroupsAndTopicsDocument = gql`
-    query FetchUserWithGroupsAndTopics {
+export const FetchUserWithGroupIdsDocument = gql`
+    query FetchUserWithGroupIds {
         user {
             id
             name
             email
             groups {
                 id
-                description
-                name
-            }
-            groupsCreated {
-                id
-                description
-                name
-            }
-            topics {
-                id
-                description
-                title
             }
         }
     }
 `;
 
 /**
- * __useFetchUserWithGroupsAndTopicsQuery__
+ * __useFetchUserWithGroupIdsQuery__
  *
- * To run a query within a React component, call `useFetchUserWithGroupsAndTopicsQuery` and pass it any options that fit your needs.
- * When your component renders, `useFetchUserWithGroupsAndTopicsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFetchUserWithGroupIdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchUserWithGroupIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFetchUserWithGroupsAndTopicsQuery({
+ * const { data, loading, error } = useFetchUserWithGroupIdsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useFetchUserWithGroupsAndTopicsQuery(
-    baseOptions?: Apollo.QueryHookOptions<
-        FetchUserWithGroupsAndTopicsQuery,
-        FetchUserWithGroupsAndTopicsQueryVariables
-    >
+export function useFetchUserWithGroupIdsQuery(
+    baseOptions?: Apollo.QueryHookOptions<FetchUserWithGroupIdsQuery, FetchUserWithGroupIdsQueryVariables>
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useQuery<FetchUserWithGroupsAndTopicsQuery, FetchUserWithGroupsAndTopicsQueryVariables>(
-        FetchUserWithGroupsAndTopicsDocument,
+    return Apollo.useQuery<FetchUserWithGroupIdsQuery, FetchUserWithGroupIdsQueryVariables>(
+        FetchUserWithGroupIdsDocument,
         options
     );
 }
-export function useFetchUserWithGroupsAndTopicsLazyQuery(
-    baseOptions?: Apollo.LazyQueryHookOptions<
-        FetchUserWithGroupsAndTopicsQuery,
-        FetchUserWithGroupsAndTopicsQueryVariables
-    >
+export function useFetchUserWithGroupIdsLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<FetchUserWithGroupIdsQuery, FetchUserWithGroupIdsQueryVariables>
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useLazyQuery<FetchUserWithGroupsAndTopicsQuery, FetchUserWithGroupsAndTopicsQueryVariables>(
-        FetchUserWithGroupsAndTopicsDocument,
+    return Apollo.useLazyQuery<FetchUserWithGroupIdsQuery, FetchUserWithGroupIdsQueryVariables>(
+        FetchUserWithGroupIdsDocument,
         options
     );
 }
-export type FetchUserWithGroupsAndTopicsQueryHookResult = ReturnType<typeof useFetchUserWithGroupsAndTopicsQuery>;
-export type FetchUserWithGroupsAndTopicsLazyQueryHookResult = ReturnType<
-    typeof useFetchUserWithGroupsAndTopicsLazyQuery
->;
-export type FetchUserWithGroupsAndTopicsQueryResult = Apollo.QueryResult<
-    FetchUserWithGroupsAndTopicsQuery,
-    FetchUserWithGroupsAndTopicsQueryVariables
+export type FetchUserWithGroupIdsQueryHookResult = ReturnType<typeof useFetchUserWithGroupIdsQuery>;
+export type FetchUserWithGroupIdsLazyQueryHookResult = ReturnType<typeof useFetchUserWithGroupIdsLazyQuery>;
+export type FetchUserWithGroupIdsQueryResult = Apollo.QueryResult<
+    FetchUserWithGroupIdsQuery,
+    FetchUserWithGroupIdsQueryVariables
 >;
 export const JoinGroupDocument = gql`
     mutation JoinGroup($groupId: ID!) {

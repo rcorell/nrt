@@ -27,7 +27,6 @@ export const Groups: React.FC = () => {
     if (groupsHook.loading || userHook.loading || joinGroupHook.loading) {
         return <div>{LOADING_TEXT}</div>;
     }
-
     if (groupsHook.error || userHook.error || joinGroupHook.error) {
         return (
             <div>
@@ -50,7 +49,7 @@ export const Groups: React.FC = () => {
             join: userGroupIds.includes(group.id) ? (
                 'Joined'
             ) : (
-                <button onClick={() => joinGroupHook.joinGroup({ variables: { groupId: group.id } })}>Join!</button>
+                <button onClick={() => joinGroupHook.joinGroup(group.id)}>Join!</button>
             )
         };
     });
