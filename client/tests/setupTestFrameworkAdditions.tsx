@@ -18,6 +18,8 @@ jest.mock('hookrouter', () => {
     };
 });
 
+jest.mock('@material-ui/core/utils/unstable_useId', () => jest.fn().mockReturnValue('mui-test-id'));
+
 jest.setTimeout(10 * 60 * 1000);
 
 expect.extend({
