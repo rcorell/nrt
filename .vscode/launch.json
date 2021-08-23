@@ -4,10 +4,28 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-
 		{
 			"type": "node",
-			"name": "Client tests",
+			"name": "Client - Current File",
+			"request": "launch",
+			"runtimeExecutable": "${workspaceFolder}/client/node_modules/.bin/jest",
+			"args": [
+				"${workspaceFolder}/${relativeFile}",
+				"--env=jsdom",
+				"--no-cache",
+				"--runInBand",
+				"--watchAll=false"
+			],
+			"env": { "NODE_ENV": "test" },
+			"cwd": "${workspaceFolder}/client",
+			"console": "integratedTerminal",
+			"protocol": "inspector",
+			"internalConsoleOptions": "neverOpen",
+			"disableOptimisticBPs": true
+		},
+		{
+			"type": "node",
+			"name": "Client - All Tests",
 			"request": "launch",
 			"program": "${workspaceFolder}/client/node_modules/.bin/jest",
 			"args": [
@@ -28,7 +46,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "NRT Server",
+            "name": "Server",
             "program": "${workspaceFolder}/server/src/index.ts",
             "env": {
                 "LOCAL_DEV": "true"
