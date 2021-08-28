@@ -5,7 +5,7 @@ import React from 'react';
 import { LOADING_TEXT } from 'src/components/shared';
 import { setBrowserTitle } from 'src/utils';
 
-import { useGroups, useJoinGroup, useUser } from './Groups.hook';
+import { hooks } from './Groups.hook';
 
 const COLUMN_DEFINITIONS = [
     { field: 'name', title: 'Name' },
@@ -17,12 +17,11 @@ const COLUMN_DEFINITIONS = [
 ];
 
 export const Groups: React.FC = () => {
+    const groupsHook = hooks.useGroups();
+    const joinGroupHook = hooks.useJoinGroup();
+    const userHook = hooks.useUser();
+
     setBrowserTitle('Groups');
-
-    const userHook = useUser();
-    const groupsHook = useGroups();
-
-    const joinGroupHook = useJoinGroup();
 
     if (groupsHook.loading || userHook.loading || joinGroupHook.loading) {
         return <div>{LOADING_TEXT}</div>;
@@ -43,7 +42,7 @@ export const Groups: React.FC = () => {
         return group!.id;
     });
 
-    const groups = _.cloneDeep(groupsHook!.allGroups!).map((group) => {
+    const groups = _.cloneDeep(groupsHook!.groups!).map((group) => {
         return {
             ...group,
             join: userGroupIds.includes(group.id) ? (
