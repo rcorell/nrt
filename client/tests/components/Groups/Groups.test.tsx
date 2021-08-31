@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import React from 'react';
 
 import { Groups } from 'src/components/Groups/Groups';
@@ -6,7 +6,7 @@ import { hooks } from 'src/components/Groups/Groups.hook';
 import { LOADING_TEXT } from 'src/components/shared';
 import { VALID } from 'tests/fixtures';
 import { fetchUserWithGroupIdsMocks, fetchUserWithoutGroupIdsMocks } from 'tests/mocks/userMocks';
-import { renderComponent } from 'tests/testHelpers';
+import { oneTick, renderComponent } from 'tests/testHelpers';
 
 import { fetchGroupsMocks, groupsMocks, joinGroupMocks } from './Groups.mocks';
 
@@ -111,6 +111,8 @@ describe('Groups', () => {
                     fetchUserWithoutGroupIdsMocks.success,
                     fetchGroupsMocks.success,
                     joinGroupMocks.success,
+                    fetchUserWithGroupIdsMocks.success,
+                    fetchUserWithGroupIdsMocks.success,
                     fetchUserWithGroupIdsMocks.success
                 ]);
 
@@ -118,6 +120,13 @@ describe('Groups', () => {
 
                 expect(screen.queryByText(VALID.GROUP.DESCRIPTION)).toBeInTheDocument();
                 expect(screen.queryByText(VALID.GROUP.NAME)).toBeInTheDocument();
+                expect(screen.queryByText('Joined')).not.toBeInTheDocument();
+
+                const joinButton = screen.getAllByText('Join!')[0];
+                fireEvent.click(joinButton);
+                await oneTick();
+
+                expect(screen.queryByText('Joined')).toBeInTheDocument();
             });
         });
     });
