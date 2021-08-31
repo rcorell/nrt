@@ -3,7 +3,7 @@ import MaterialTable from 'material-table';
 import React from 'react';
 
 import { LOADING_TEXT } from 'src/components/shared';
-import { setBrowserTitle } from 'src/utils';
+import { setBrowserTitle, useMountEffect } from 'src/utils';
 
 import { hooks } from './Groups.hook';
 
@@ -21,7 +21,9 @@ export const Groups: React.FC = () => {
     const joinGroupHook = hooks.useJoinGroup();
     const userHook = hooks.useUser();
 
-    setBrowserTitle('Groups');
+    useMountEffect(() => {
+        setBrowserTitle('Groups');
+    });
 
     if (groupsHook.loading || userHook.loading || joinGroupHook.loading) {
         return <div>{LOADING_TEXT}</div>;
